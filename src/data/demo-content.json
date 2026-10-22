@@ -1,0 +1,1001 @@
+{
+  "version": 5,
+  "recipes": [
+    {
+      "id": "recipe-html",
+      "title": "HTML",
+      "output": "html",
+      "color": "dye_orange",
+      "special": "plank",
+      "bookCount": 1,
+      "colorCount": 1,
+      "specialCount": 1,
+      "amount": 1,
+      "requires": [],
+      "note": "A book, orange dye, and an oak plank: the structure of a page.",
+      "resultModel": "skill_html"
+    },
+    {
+      "id": "recipe-css",
+      "title": "CSS",
+      "output": "css",
+      "color": "dye_blue",
+      "special": "shield",
+      "bookCount": 1,
+      "colorCount": 1,
+      "specialCount": 1,
+      "amount": 1,
+      "requires": [
+        "html"
+      ],
+      "note": "A book, blue dye, and a layout shield: give the structure a visual style.",
+      "resultModel": "skill_css"
+    },
+    {
+      "id": "recipe-javascript",
+      "title": "JavaScript",
+      "output": "javascript",
+      "color": "dye_yellow",
+      "special": "redstone",
+      "bookCount": 1,
+      "colorCount": 1,
+      "specialCount": 1,
+      "amount": 1,
+      "requires": [
+        "html",
+        "css"
+      ],
+      "note": "A book, yellow dye, and redstone: add logic and behavior.",
+      "resultModel": "skill_javascript"
+    },
+    {
+      "id": "recipe-react",
+      "title": "React",
+      "output": "react",
+      "color": "dye_cyan",
+      "special": "pearl",
+      "bookCount": 1,
+      "colorCount": 1,
+      "specialCount": 1,
+      "amount": 1,
+      "requires": [
+        "html",
+        "css",
+        "javascript"
+      ],
+      "note": "A book, cyan dye, and a component pearl: build reusable interfaces.",
+      "resultModel": "skill_react"
+    },
+    {
+      "id": "recipe-sql",
+      "title": "SQL",
+      "output": "sql",
+      "color": "dye_green",
+      "special": "iron",
+      "bookCount": 1,
+      "colorCount": 1,
+      "specialCount": 1,
+      "amount": 1,
+      "requires": [],
+      "note": "A book, green dye, and an ingot: give your data a strong structure.",
+      "resultModel": "skill_sql"
+    },
+    {
+      "id": "recipe-api",
+      "title": "API integration",
+      "output": "api",
+      "color": "dye_purple",
+      "special": "compass",
+      "bookCount": 1,
+      "colorCount": 1,
+      "specialCount": 1,
+      "amount": 1,
+      "requires": [
+        "javascript"
+      ],
+      "note": "A book, purple dye, and a routing compass: connect systems.",
+      "resultModel": "skill_api"
+    }
+  ],
+  "startingInventory": [
+    {
+      "id": "start-book",
+      "title": "Blank book",
+      "item": "book",
+      "quantity": 24
+    },
+    {
+      "id": "start-dye_orange",
+      "title": "Orange dye",
+      "item": "dye_orange",
+      "quantity": 8
+    },
+    {
+      "id": "start-dye_blue",
+      "title": "Blue dye",
+      "item": "dye_blue",
+      "quantity": 8
+    },
+    {
+      "id": "start-dye_yellow",
+      "title": "Yellow dye",
+      "item": "dye_yellow",
+      "quantity": 8
+    },
+    {
+      "id": "start-dye_cyan",
+      "title": "Cyan dye",
+      "item": "dye_cyan",
+      "quantity": 8
+    },
+    {
+      "id": "start-dye_green",
+      "title": "Green dye",
+      "item": "dye_green",
+      "quantity": 8
+    },
+    {
+      "id": "start-dye_purple",
+      "title": "Purple dye",
+      "item": "dye_purple",
+      "quantity": 8
+    },
+    {
+      "id": "start-plank",
+      "title": "Oak plank",
+      "item": "plank",
+      "quantity": 8
+    },
+    {
+      "id": "start-shield",
+      "title": "Layout shield",
+      "item": "shield",
+      "quantity": 8
+    },
+    {
+      "id": "start-redstone",
+      "title": "Redstone",
+      "item": "redstone",
+      "quantity": 8
+    },
+    {
+      "id": "start-pearl",
+      "title": "Component pearl",
+      "item": "pearl",
+      "quantity": 8
+    },
+    {
+      "id": "start-iron",
+      "title": "Iron ingot",
+      "item": "iron",
+      "quantity": 8
+    },
+    {
+      "id": "start-compass",
+      "title": "Routing compass",
+      "item": "compass",
+      "quantity": 8
+    }
+  ],
+  "actualSkills": [
+    {
+      "id": "actual-html",
+      "recipeId": "html",
+      "title": "HTML",
+      "category": "Web foundations",
+      "symbol": "diamond_pickaxe",
+      "description": "Semantic structure and accessible page content.",
+      "level": "Working knowledge",
+      "projectId": "",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "actual-css",
+      "recipeId": "css",
+      "title": "CSS",
+      "category": "Web foundations",
+      "symbol": "potion",
+      "description": "Responsive layouts, visual hierarchy, and styling.",
+      "level": "Working knowledge",
+      "projectId": "",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "actual-javascript",
+      "recipeId": "javascript",
+      "title": "JavaScript",
+      "category": "Programming",
+      "symbol": "redstone",
+      "description": "Browser interactions and application logic.",
+      "level": "Working knowledge",
+      "projectId": "",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "actual-react",
+      "recipeId": "react",
+      "title": "React",
+      "category": "Interfaces",
+      "symbol": "ender_pearl",
+      "description": "Component-based interfaces and state.",
+      "level": "Working knowledge",
+      "projectId": "",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "actual-sql",
+      "recipeId": "sql",
+      "title": "SQL",
+      "category": "Data & systems",
+      "symbol": "furnace",
+      "description": "Structured data and relational queries.",
+      "level": "Working knowledge",
+      "projectId": "",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "actual-api",
+      "recipeId": "api",
+      "title": "API integration",
+      "category": "Data & systems",
+      "symbol": "compass",
+      "description": "Connecting interfaces to data and services.",
+      "level": "Working knowledge",
+      "projectId": "",
+      "evidence": "",
+      "sample": true
+    }
+  ],
+  "settings": {
+    "name": "Jon Vincent Din",
+    "tagline": "Ideas become experiments. Experiments become things worth exploring.",
+    "heroLabel": "WELCOME TO MY LITTLE CORNER OF THE OVERWORLD",
+    "github": "",
+    "linkedin": "",
+    "introTitle": "A world built one idea at a time.",
+    "aboutTitle": "The person behind the player.",
+    "bio": "I like turning ideas into things you can use. This is a space for projects, experiments, and the lessons collected along the way.",
+    "portrait": "",
+    "portraitPosition": 50,
+    "contactTitle": "Let’s write the next chapter.",
+    "contactCopy": "A collaboration, a question, or simply a hello. There’s a page for that."
+  },
+  "highlights": [
+    {
+      "id": "h1",
+      "title": "Crafted with curiosity",
+      "body": "One block at a time"
+    },
+    {
+      "id": "h2",
+      "title": "Explore at your pace",
+      "body": "Seven different chapters"
+    }
+  ],
+  "journal": [
+    {
+      "id": "a1",
+      "title": "What I build",
+      "body": "Interfaces, tools, and small experiments. Replace this sample text with your personal story."
+    },
+    {
+      "id": "a2",
+      "title": "What I explore",
+      "body": "Describe the tools, ideas, and topics you are currently exploring."
+    },
+    {
+      "id": "a3",
+      "title": "What comes next",
+      "body": "Add a real learning goal or your next project idea."
+    }
+  ],
+  "projects": [
+    {
+      "id": "project-diamond_pickaxe",
+      "symbol": "diamond_pickaxe",
+      "title": "Atlas — dashboard concept",
+      "category": "Tools",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-diamond_pickaxe-photo-1",
+          "src": "assets/demos/project-1-1.svg",
+          "alt": "Illustrative overview screen for Diamond pickaxe",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-diamond_pickaxe-photo-2",
+          "src": "assets/demos/project-1-2.svg",
+          "alt": "Illustrative detail screen for Diamond pickaxe",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-diamond_sword",
+      "symbol": "diamond_sword",
+      "title": "Fieldnotes — reading concept",
+      "category": "Tools",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-diamond_sword-photo-1",
+          "src": "assets/demos/project-2-1.svg",
+          "alt": "Illustrative overview screen for Diamond sword",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-diamond_sword-photo-2",
+          "src": "assets/demos/project-2-2.svg",
+          "alt": "Illustrative detail screen for Diamond sword",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-bow",
+      "symbol": "bow",
+      "title": "Pulse — taskboard concept",
+      "category": "Tools",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-bow-photo-1",
+          "src": "assets/demos/project-3-1.svg",
+          "alt": "Illustrative overview screen for Bow",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-bow-photo-2",
+          "src": "assets/demos/project-3-2.svg",
+          "alt": "Illustrative detail screen for Bow",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-compass",
+      "symbol": "compass",
+      "title": "Navigation & discovery concept",
+      "category": "Devices",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-compass-photo-1",
+          "src": "assets/demos/project-1-1.svg",
+          "alt": "Illustrative overview screen for Compass",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-compass-photo-2",
+          "src": "assets/demos/project-1-2.svg",
+          "alt": "Illustrative detail screen for Compass",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-clock",
+      "symbol": "clock",
+      "title": "Planning & productivity concept",
+      "category": "Devices",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-clock-photo-1",
+          "src": "assets/demos/project-2-1.svg",
+          "alt": "Illustrative overview screen for Clock",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-clock-photo-2",
+          "src": "assets/demos/project-2-2.svg",
+          "alt": "Illustrative detail screen for Clock",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-potion",
+      "symbol": "potion",
+      "title": "Experiments concept",
+      "category": "Magic",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-potion-photo-1",
+          "src": "assets/demos/project-3-1.svg",
+          "alt": "Illustrative overview screen for Potion",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-potion-photo-2",
+          "src": "assets/demos/project-3-2.svg",
+          "alt": "Illustrative detail screen for Potion",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-enchanted_book",
+      "symbol": "enchanted_book",
+      "title": "Learning platforms concept",
+      "category": "Magic",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-enchanted_book-photo-1",
+          "src": "assets/demos/project-1-1.svg",
+          "alt": "Illustrative overview screen for Enchanted book",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-enchanted_book-photo-2",
+          "src": "assets/demos/project-1-2.svg",
+          "alt": "Illustrative detail screen for Enchanted book",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-redstone",
+      "symbol": "redstone",
+      "title": "Automation concept",
+      "category": "Materials",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-redstone-photo-1",
+          "src": "assets/demos/project-2-1.svg",
+          "alt": "Illustrative overview screen for Redstone",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-redstone-photo-2",
+          "src": "assets/demos/project-2-2.svg",
+          "alt": "Illustrative detail screen for Redstone",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-furnace",
+      "symbol": "furnace",
+      "title": "Processing & services concept",
+      "category": "Blocks",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-furnace-photo-1",
+          "src": "assets/demos/project-3-1.svg",
+          "alt": "Illustrative overview screen for Furnace",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-furnace-photo-2",
+          "src": "assets/demos/project-3-2.svg",
+          "alt": "Illustrative detail screen for Furnace",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-grass_block",
+      "symbol": "grass_block",
+      "title": "Worlds & environments concept",
+      "category": "Blocks",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-grass_block-photo-1",
+          "src": "assets/demos/project-1-1.svg",
+          "alt": "Illustrative overview screen for Grass block",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-grass_block-photo-2",
+          "src": "assets/demos/project-1-2.svg",
+          "alt": "Illustrative detail screen for Grass block",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-lantern",
+      "symbol": "lantern",
+      "title": "Guidance & utilities concept",
+      "category": "Devices",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-lantern-photo-1",
+          "src": "assets/demos/project-2-1.svg",
+          "alt": "Illustrative overview screen for Lantern",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-lantern-photo-2",
+          "src": "assets/demos/project-2-2.svg",
+          "alt": "Illustrative detail screen for Lantern",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-emerald",
+      "symbol": "emerald",
+      "title": "Commerce & value concept",
+      "category": "Materials",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-emerald-photo-1",
+          "src": "assets/demos/project-3-1.svg",
+          "alt": "Illustrative overview screen for Emerald",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-emerald-photo-2",
+          "src": "assets/demos/project-3-2.svg",
+          "alt": "Illustrative detail screen for Emerald",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-shield",
+      "symbol": "shield",
+      "title": "Security & reliability concept",
+      "category": "Tools",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-shield-photo-1",
+          "src": "assets/demos/project-1-1.svg",
+          "alt": "Illustrative overview screen for Shield",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-shield-photo-2",
+          "src": "assets/demos/project-1-2.svg",
+          "alt": "Illustrative detail screen for Shield",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    },
+    {
+      "id": "project-ender_pearl",
+      "symbol": "ender_pearl",
+      "title": "Connected applications concept",
+      "category": "Magic",
+      "summary": "An editable example project. Replace this story with your actual work.",
+      "status": "Concept",
+      "sample": true,
+      "role": "Your role",
+      "date": "",
+      "stack": "Add your tools",
+      "overview": "Introduce the project and who it helps.",
+      "problem": "What problem were you trying to solve?",
+      "solution": "Explain the approach and how it works.",
+      "features": "Add a feature\nAdd another feature",
+      "process": "Research → prototype → build → test",
+      "outcome": "Describe a real outcome or lesson learned.",
+      "liveUrl": "",
+      "sourceUrl": "",
+      "photos": [
+        {
+          "id": "project-ender_pearl-photo-1",
+          "src": "assets/demos/project-2-1.svg",
+          "alt": "Illustrative overview screen for Ender pearl",
+          "caption": "Demo artwork — replace with your actual project image."
+        },
+        {
+          "id": "project-ender_pearl-photo-2",
+          "src": "assets/demos/project-2-2.svg",
+          "alt": "Illustrative detail screen for Ender pearl",
+          "caption": "Demo artwork — replace with your actual project image."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "s1",
+      "title": "Interfaces",
+      "tools": "HTML, CSS, JavaScript",
+      "outcome": "A responsive experience",
+      "body": "Structure, visual design, and interaction come together in the browser.",
+      "symbol": "diamond_pickaxe",
+      "projectId": ""
+    },
+    {
+      "id": "s2",
+      "title": "Connected systems",
+      "tools": "API, SQL, Logic",
+      "outcome": "Data that works together",
+      "body": "A sample skill grouping for connecting information and application behavior.",
+      "symbol": "redstone",
+      "projectId": ""
+    },
+    {
+      "id": "s3",
+      "title": "Design & prototypes",
+      "tools": "UI, UX, Prototyping",
+      "outcome": "An idea you can explore",
+      "body": "A sample grouping for testing a direction before building the complete experience.",
+      "symbol": "enchanted_book",
+      "projectId": ""
+    }
+  ],
+  "characters": [
+    {
+      "id": "professional",
+      "name": "Professional",
+      "label": "Work & collaboration",
+      "intro": "The work, the people, and the things I helped bring to life."
+    },
+    {
+      "id": "student",
+      "name": "School uniform",
+      "label": "Education & coursework",
+      "intro": "A chapter for learning foundations and putting ideas into practice."
+    },
+    {
+      "id": "casual",
+      "name": "Casual",
+      "label": "Personal projects",
+      "intro": "The things I build because an idea is too interesting to leave alone."
+    },
+    {
+      "id": "builder",
+      "name": "Builder",
+      "label": "Team projects",
+      "intro": "Shared goals, different strengths, and something built together."
+    },
+    {
+      "id": "explorer",
+      "name": "Explorer",
+      "label": "Learning & community",
+      "intro": "New tools, new perspectives, and paths worth following."
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-professional",
+      "character": "professional",
+      "title": "Add your work & collaboration",
+      "organization": "Organization or context",
+      "start": "",
+      "end": "",
+      "description": "Add internships, employment, freelance work, or professional collaborations.",
+      "contribution": "Explain your role and contribution.",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "exp-student",
+      "character": "student",
+      "title": "Add your education & coursework",
+      "organization": "Organization or context",
+      "start": "",
+      "end": "",
+      "description": "Add your school, program, coursework, and academic activities.",
+      "contribution": "Explain your role and contribution.",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "exp-casual",
+      "character": "casual",
+      "title": "Add your personal projects",
+      "organization": "Organization or context",
+      "start": "",
+      "end": "",
+      "description": "Add side projects, creative experiments, and independent practice.",
+      "contribution": "Explain your role and contribution.",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "exp-builder",
+      "character": "builder",
+      "title": "Add your team projects",
+      "organization": "Organization or context",
+      "start": "",
+      "end": "",
+      "description": "Add team projects and describe your own contribution clearly.",
+      "contribution": "Explain your role and contribution.",
+      "evidence": "",
+      "sample": true
+    },
+    {
+      "id": "exp-explorer",
+      "character": "explorer",
+      "title": "Add your learning & community",
+      "organization": "Organization or context",
+      "start": "",
+      "end": "",
+      "description": "Add workshops, community involvement, or self-directed learning.",
+      "contribution": "Explain your role and contribution.",
+      "evidence": "",
+      "sample": true
+    }
+  ],
+  "achievements": [
+    {
+      "id": "ach1",
+      "title": "First chapter",
+      "description": "Add a genuine first milestone in your journey.",
+      "date": "",
+      "issuer": "",
+      "evidence": "",
+      "symbol": "grass_block",
+      "parent": "",
+      "x": 100,
+      "y": 210,
+      "sample": true
+    },
+    {
+      "id": "ach2",
+      "title": "A build worth sharing",
+      "description": "Add a completed project and the story behind it.",
+      "date": "",
+      "issuer": "",
+      "evidence": "",
+      "symbol": "diamond_pickaxe",
+      "parent": "ach1",
+      "x": 350,
+      "y": 110,
+      "sample": true
+    },
+    {
+      "id": "ach3",
+      "title": "Built together",
+      "description": "Add a team contribution and credit the people involved.",
+      "date": "",
+      "issuer": "",
+      "evidence": "",
+      "symbol": "shield",
+      "parent": "ach1",
+      "x": 350,
+      "y": 310,
+      "sample": true
+    },
+    {
+      "id": "ach4",
+      "title": "A proud moment",
+      "description": "Add a verified award or a meaningful milestone.",
+      "date": "",
+      "issuer": "",
+      "evidence": "",
+      "symbol": "emerald",
+      "parent": "ach2",
+      "x": 620,
+      "y": 110,
+      "sample": true
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert1",
+      "title": "Learning foundations",
+      "description": "Add the actual certification title, issuer, and date.",
+      "date": "",
+      "issuer": "Issuer not provided",
+      "evidence": "",
+      "symbol": "enchanted_book",
+      "parent": "",
+      "x": 100,
+      "y": 210,
+      "sample": true
+    },
+    {
+      "id": "cert2",
+      "title": "Technical certification",
+      "description": "Add a credential and its verification URL.",
+      "date": "",
+      "issuer": "Issuer not provided",
+      "evidence": "",
+      "symbol": "compass",
+      "parent": "cert1",
+      "x": 350,
+      "y": 110,
+      "sample": true
+    },
+    {
+      "id": "cert3",
+      "title": "Specialist pathway",
+      "description": "Add another verified credential.",
+      "date": "",
+      "issuer": "Issuer not provided",
+      "evidence": "",
+      "symbol": "ender_pearl",
+      "parent": "cert1",
+      "x": 350,
+      "y": 310,
+      "sample": true
+    }
+  ],
+  "contacts": [
+    {
+      "id": "contact1",
+      "title": "Email",
+      "url": "",
+      "body": "Add your email address or contact URL."
+    }
+  ]
+}

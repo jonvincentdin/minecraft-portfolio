@@ -1,0 +1,1 @@
+Pure recipe, inventory and tree algorithms will be migrated in M03/M04. The existing reference/check-crafting.mjs and reference/check-trees.mjs remain immutable migration specifications. Visitor play state must never mutate PortfolioContent.actualSkills.
