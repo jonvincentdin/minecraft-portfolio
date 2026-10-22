@@ -1,0 +1,505 @@
+{
+  "sourceCommit": "47d8b1ca11b05db6791adaf9bf33a5cf9bd946ca",
+  "assets": [
+    {
+      "path": "assets/demos/project-1-1.svg",
+      "bytes": 2431,
+      "sha256": "2bca7d130fc0dfbd2d37423eb2d3de4924ff885e0c2050bdd823e112830cc570"
+    },
+    {
+      "path": "assets/demos/project-1-2.svg",
+      "bytes": 3352,
+      "sha256": "ba2a78d4e590b5d3953dbe1dd89c01005b03079c0a04347add7eacc43bc285ea"
+    },
+    {
+      "path": "assets/demos/project-2-1.svg",
+      "bytes": 2428,
+      "sha256": "45bdf7d69b5e5310bd80d3941150a9243790f70ae51d0de66ac1cec81c953a0f"
+    },
+    {
+      "path": "assets/demos/project-2-2.svg",
+      "bytes": 3349,
+      "sha256": "dd1f9ab449f165672d1a34039e7005b9514325df25101e95f1973a02f37c2b0a"
+    },
+    {
+      "path": "assets/demos/project-3-1.svg",
+      "bytes": 2427,
+      "sha256": "82eb9120ceee7471a732a963910f70928973e74a79a229ba0d9d0c912bdc125d"
+    },
+    {
+      "path": "assets/demos/project-3-2.svg",
+      "bytes": 3348,
+      "sha256": "f14809e7293c4e70a80931aab37729ffed3c98a61a800827f36c7a76686e7f38"
+    },
+    {
+      "path": "assets/fonts/JVDPixel.ttf",
+      "bytes": 5268,
+      "sha256": "9aadbd7edf76eabc546dc4103aa963e28ed8a0cc4f07cb19413d3bb39848eb6d"
+    },
+    {
+      "path": "assets/fonts/JVDPixel.woff",
+      "bytes": 1976,
+      "sha256": "0b3a0e949d3ebf20b62b6a94d81b6d6646f3dcc9fa7465357d5b483031e7a19d"
+    },
+    {
+      "path": "assets/fonts/LICENSE.txt",
+      "bytes": 268,
+      "sha256": "30e2524df3e082ce3f716a3ec89c66e582c00c35a533c6534303bd0e4ee66654"
+    },
+    {
+      "path": "assets/models/character_builder.glb",
+      "bytes": 53144,
+      "sha256": "21aeee3902fcc00fe5115978b1b4565c260ec6f2c76a4ac58446a65febdc9275"
+    },
+    {
+      "path": "assets/models/character_casual.glb",
+      "bytes": 49048,
+      "sha256": "399645816902e40973a757e39bfd746cf9117425df4df6127512a3b1d0a2857c"
+    },
+    {
+      "path": "assets/models/character_explorer.glb",
+      "bytes": 49592,
+      "sha256": "5f3995b0e74c7bf2a94b97940fc9ad4fa885408d3f780c3d778b84abcb3317e9"
+    },
+    {
+      "path": "assets/models/character_professional.glb",
+      "bytes": 46748,
+      "sha256": "446e8470644bae231aa8734bce1a2d1f6b49117010e0855bb23b5655552f49e6"
+    },
+    {
+      "path": "assets/models/character_student.glb",
+      "bytes": 59116,
+      "sha256": "be8fd2a811f069f14c9b784d946ac7e3bf7e43b32e967beac2b79133cd7a5210"
+    },
+    {
+      "path": "assets/models/chest.glb",
+      "bytes": 3968,
+      "sha256": "958f212aa78b86a65ab0621c7b2eca7f9c9eb70438c9cb8d5ccae923731dc1b0"
+    },
+    {
+      "path": "assets/models/contact_portal.glb",
+      "bytes": 6320,
+      "sha256": "bbe70c665faba78b66af5db4e6f3c352eda3548e341003f1722f7c799febc46f"
+    },
+    {
+      "path": "assets/models/crafting_table.glb",
+      "bytes": 174620,
+      "sha256": "cf121f5b264534f88cf23ffabce9b7420c1174c9c7a22613561c4087b7b72d69"
+    },
+    {
+      "path": "assets/models/dye_cyan.glb",
+      "bytes": 7576,
+      "sha256": "81ee15140c9c2872d591375f8728731e390d2aa53205e2db7096235ff8a568a0"
+    },
+    {
+      "path": "assets/models/dye_green.glb",
+      "bytes": 7576,
+      "sha256": "f535bc0304f146f4c8c08f74cffc597c19ab315ece7f6d74846c17a633151dc8"
+    },
+    {
+      "path": "assets/models/dye_orange.glb",
+      "bytes": 7576,
+      "sha256": "da2721a34badfdc366fa9f61a40a21782dada367812ef1da3a647c371186e185"
+    },
+    {
+      "path": "assets/models/dye_purple.glb",
+      "bytes": 7576,
+      "sha256": "2b833bd4b471a53f4bf8287225255427de7bdd814efd6719042be7cb81442c2c"
+    },
+    {
+      "path": "assets/models/dye_yellow.glb",
+      "bytes": 7576,
+      "sha256": "48a945b053fbc7eb3a86319cc57299ade7581b8b8ba1994ef7647a2d9d392ff1"
+    },
+    {
+      "path": "assets/models/expansion-manifest.json",
+      "bytes": 5766,
+      "sha256": "7ea8f462f5edcf220e615abf918aa9f80cf8ccc15f6e5dffda6df4ee317bd175"
+    },
+    {
+      "path": "assets/models/home_landscape.glb",
+      "bytes": 33260,
+      "sha256": "200bd1df11f10c7fdae8bab3c39d1954294251fe5b608c737fa642bd05536aab"
+    },
+    {
+      "path": "assets/models/item_bow.glb",
+      "bytes": 23708,
+      "sha256": "aad382e4ea2cf568573bdc149791780e36fd7934f1e6024d3e58cea936336df0"
+    },
+    {
+      "path": "assets/models/item_clock.glb",
+      "bytes": 28656,
+      "sha256": "e0a263af647fb036e6b390bf8176a5259f6ddedbf48052f58b64bec553c54a9c"
+    },
+    {
+      "path": "assets/models/item_compass.glb",
+      "bytes": 34728,
+      "sha256": "9b6f24f9ce4c0bbed5d07088729fa3b1e834a65316c65bc7e11958f9ebdb95d4"
+    },
+    {
+      "path": "assets/models/item_diamond_pickaxe.glb",
+      "bytes": 22712,
+      "sha256": "835f99031ce6c565c226083ead74b7fc81849669c7aaf8c868acd2cce974eb67"
+    },
+    {
+      "path": "assets/models/item_diamond_sword.glb",
+      "bytes": 22568,
+      "sha256": "207d633fbf475c3358262f05ce235336f34c419c550c1718cfc209b72dcd51ee"
+    },
+    {
+      "path": "assets/models/item_emerald.glb",
+      "bytes": 21408,
+      "sha256": "fa9d7f04d1f771280de197d53c75f7a8984021eb6c7df8647ebaa818b70afe3e"
+    },
+    {
+      "path": "assets/models/item_enchanted_book.glb",
+      "bytes": 11316,
+      "sha256": "2d8432a4e8178dece86751ec87168392258df841593b7beec67a6001717c6df2"
+    },
+    {
+      "path": "assets/models/item_ender_pearl.glb",
+      "bytes": 21868,
+      "sha256": "f3cccbad0fe16d9c7c67b3b6af1c9d47d0d6dc565389e2094280e077db844df5"
+    },
+    {
+      "path": "assets/models/item_furnace.glb",
+      "bytes": 11608,
+      "sha256": "e96c8edc87f9a41a3c2b45a0943fbdbe1f59ec1788596803d71ede708a403082"
+    },
+    {
+      "path": "assets/models/item_grass_block.glb",
+      "bytes": 19368,
+      "sha256": "cb4f0c6cff6e57c0e185d3d912d36a3f077f5ec1ad151e20c08c665678a3e93e"
+    },
+    {
+      "path": "assets/models/item_lantern.glb",
+      "bytes": 17180,
+      "sha256": "a00363254334e8820861ffbbcffcb17e2d20d9cb40b9a3adc8897673287bff2e"
+    },
+    {
+      "path": "assets/models/item_potion.glb",
+      "bytes": 9784,
+      "sha256": "6e11344067d8482e6153b8cdaf0b8188599d5d5468d82b0f68a3f365c1b5833b"
+    },
+    {
+      "path": "assets/models/item_redstone.glb",
+      "bytes": 18120,
+      "sha256": "69238c5447c3fa2ad5a29cf979e7a679d475dd05d5a47d3da47ea1643529b093"
+    },
+    {
+      "path": "assets/models/item_shield.glb",
+      "bytes": 21600,
+      "sha256": "cdcc9e3a8d917e55e32e588367b2014278108cbaf2782087246d4c11e8610fff"
+    },
+    {
+      "path": "assets/models/manifest.json",
+      "bytes": 1963,
+      "sha256": "24dbc11552d6c3e10e523b4c48be45f54f083be6e781ee1ed9d0c0f1a44af66d"
+    },
+    {
+      "path": "assets/models/material_book.glb",
+      "bytes": 10384,
+      "sha256": "1ec2ca353ab81d13b79916656a1b969816a6e21dd88bb1e0fdb5399ff10bb426"
+    },
+    {
+      "path": "assets/models/material_fiber.glb",
+      "bytes": 30364,
+      "sha256": "5f1907d46cfb99b270364747ac9ed92840917c2203c81d87b00afa68f4ee03a0"
+    },
+    {
+      "path": "assets/models/material_iron.glb",
+      "bytes": 5988,
+      "sha256": "78964377cd0eb32bba2d1debc34be9a8cffe9ab65e4aa360f252444e2e52494f"
+    },
+    {
+      "path": "assets/models/material_paper.glb",
+      "bytes": 6808,
+      "sha256": "831e3eb5edd2e7d3a2289a90cc1a8b1bef0fcf119b014d1a5488d6eda6d6524d"
+    },
+    {
+      "path": "assets/models/material_pigment.glb",
+      "bytes": 7584,
+      "sha256": "73164132c440cca9360b1e2f7076064ba2ad2e256feca30c9aa610bbc2d632d8"
+    },
+    {
+      "path": "assets/models/material_plank.glb",
+      "bytes": 11856,
+      "sha256": "59c90eacf2bda4c3837d761a33b1965ce16754d20196b95cfd6d78b2563afa8d"
+    },
+    {
+      "path": "assets/models/material_stick.glb",
+      "bytes": 20040,
+      "sha256": "d1b79337e76430dc94d7fb9bfa91e8dd6652a3e8e244d016b44936bb9b9bc8be"
+    },
+    {
+      "path": "assets/models/material_string.glb",
+      "bytes": 49068,
+      "sha256": "1651ff194d2ab31dc5163519e089b4e6aedfac0019fc0804837b34d00f2e7d9e"
+    },
+    {
+      "path": "assets/models/open_book.glb",
+      "bytes": 5504,
+      "sha256": "883317d762801585d82aa293e195a3037e49ea31d6d2d70e5ee7a0df9720504e"
+    },
+    {
+      "path": "assets/models/player_avatar.glb",
+      "bytes": 4320,
+      "sha256": "951a32ce0228441a276528249231ea13c14d065beb37a55c4eeffd9f92eea87c"
+    },
+    {
+      "path": "assets/models/project_book.glb",
+      "bytes": 4428,
+      "sha256": "80cbddf95ef1b29026ab2ba33db5a8d60f723a8e7a37fa9ba0d6879f8aeedeba"
+    },
+    {
+      "path": "assets/models/project_crystal.glb",
+      "bytes": 3392,
+      "sha256": "b0d24b50adb0b1ce4365684605cf2a6af7e8e5c73a2a075ab511e476d566fc77"
+    },
+    {
+      "path": "assets/models/project_device.glb",
+      "bytes": 4416,
+      "sha256": "a11bb3a4f9fd03ac492bbc9b7c63df59a60457a428e65501a139dc6571dae5e5"
+    },
+    {
+      "path": "assets/models/scene-data.json",
+      "bytes": 3609548,
+      "sha256": "c5c638e09b64d7fa79224bfb5faa7baacb6bee2b2953b4496f47928474e7056b"
+    },
+    {
+      "path": "assets/models/skill_api.glb",
+      "bytes": 10984,
+      "sha256": "d80a6896ca336310c6cfa531873a9e2b3fba39f19ff8ba6025b0a1d39f0c2b68"
+    },
+    {
+      "path": "assets/models/skill_css.glb",
+      "bytes": 29948,
+      "sha256": "1d7a3c1452e52b0bebef5f149affcdee00966e7260ddcaf0366c17fbada784ba"
+    },
+    {
+      "path": "assets/models/skill_html.glb",
+      "bytes": 27932,
+      "sha256": "f15e3a913c3330d786d7a7c56443e63d50eb8c8339c8bcc102341ad96fda1816"
+    },
+    {
+      "path": "assets/models/skill_javascript.glb",
+      "bytes": 30964,
+      "sha256": "a2af161b16ab7bb9a7bf5ca1faaa77bbca9ee0848a05484c6966eabb99690051"
+    },
+    {
+      "path": "assets/models/skill_react.glb",
+      "bytes": 125220,
+      "sha256": "1a20b566e67da22655836db1ac24f302496de4f5536c052e7df8394a0df767f6"
+    },
+    {
+      "path": "assets/models/skill_sql.glb",
+      "bytes": 12424,
+      "sha256": "228adcf48e807abf44317839ddb08dbe8c393b469fca4dfe42b9e2a77ca5e1b2"
+    },
+    {
+      "path": "assets/models/topology-report.json",
+      "bytes": 6080,
+      "sha256": "91f635af482e3be43daaf62b32b436cc8b427bb1434174b7a3aa79520b0551f4"
+    },
+    {
+      "path": "assets/models/tree.glb",
+      "bytes": 2484,
+      "sha256": "30a1ea1e837d015fde068c2fb56b74368f2b96a4f80a1ece4878b61fc5a7f0a6"
+    },
+    {
+      "path": "assets/thumbs/character_builder.png",
+      "bytes": 4795,
+      "sha256": "5bab787b83aefec91ee3698ddb77424e01e0e6dcef97e6a9da4e962ae47fa2dd"
+    },
+    {
+      "path": "assets/thumbs/character_casual.png",
+      "bytes": 4571,
+      "sha256": "667786a3e0985e2c7ff53c99b69d44801978a437af3ca4fbf28f40656f55f09c"
+    },
+    {
+      "path": "assets/thumbs/character_explorer.png",
+      "bytes": 4554,
+      "sha256": "d503f0751e36d44a97ca0cff79210d385a0323c10f87e98eb011551c056ec3f3"
+    },
+    {
+      "path": "assets/thumbs/character_professional.png",
+      "bytes": 4677,
+      "sha256": "564d3e78eedbbb8953594589f55784eb1e4dc7821f4c1064c992fbe1f59d93ba"
+    },
+    {
+      "path": "assets/thumbs/character_student.png",
+      "bytes": 4686,
+      "sha256": "c36b2a4126dcf8ac1eef6ccf42aebcd28f03f248d08368a6620e090f26068097"
+    },
+    {
+      "path": "assets/thumbs/crafting_table.png",
+      "bytes": 13161,
+      "sha256": "d398218e03ae443bae8ab18eb8437987eab06a13dce0dad04af19e2f7b192a3f"
+    },
+    {
+      "path": "assets/thumbs/dye_cyan.png",
+      "bytes": 3131,
+      "sha256": "a64146ad0479e754057992ae615491f72b00e9217eb04c20ecd300a9b0278ffc"
+    },
+    {
+      "path": "assets/thumbs/dye_green.png",
+      "bytes": 3137,
+      "sha256": "adf6c8c6ebc286b32ce154313954bd99d3a46d7c47b013153d3a9d50bf3866ea"
+    },
+    {
+      "path": "assets/thumbs/dye_orange.png",
+      "bytes": 3139,
+      "sha256": "0a1eb1dfe5cd340082247056702cb9b75071491f6dd73f1abe7dee566d8f63dc"
+    },
+    {
+      "path": "assets/thumbs/dye_purple.png",
+      "bytes": 3138,
+      "sha256": "cfc44f8da23f44f888c554a549e6616e07d2ecad028c03f868e2034978682005"
+    },
+    {
+      "path": "assets/thumbs/dye_yellow.png",
+      "bytes": 3130,
+      "sha256": "00c5b9aa41cb72073ad3d3b1cecd8cd30bc573aef0125e6d8b321618f315c158"
+    },
+    {
+      "path": "assets/thumbs/item_bow.png",
+      "bytes": 4638,
+      "sha256": "4b5e46b73ab5753a1eed18b76dc9d12397eb9a33b0a5dfdab7b9e95fb8a91944"
+    },
+    {
+      "path": "assets/thumbs/item_clock.png",
+      "bytes": 4132,
+      "sha256": "5a75b465c324b988668f0915d42c97c1a807cf2f709fe7039f9fd6e47155eac0"
+    },
+    {
+      "path": "assets/thumbs/item_compass.png",
+      "bytes": 4812,
+      "sha256": "b12d49881c4448fb011d238bf43f66b8192b40ce7e36ac4f3cdfeb3a633af5e5"
+    },
+    {
+      "path": "assets/thumbs/item_diamond_pickaxe.png",
+      "bytes": 4614,
+      "sha256": "4db49a75b6b2dc53a045c63ea021ba47c1574f1b50b6ef2ba9d93bef35ed496e"
+    },
+    {
+      "path": "assets/thumbs/item_diamond_sword.png",
+      "bytes": 4547,
+      "sha256": "e9bc711f86f49d337734b1be78604a3aeb8c4bd4dda467bea04b22211ac5a5da"
+    },
+    {
+      "path": "assets/thumbs/item_emerald.png",
+      "bytes": 4449,
+      "sha256": "4f6f06bc3c63a26ba28945eae47fb94d4db9ecbe4e1896528cf604a664d0b7fd"
+    },
+    {
+      "path": "assets/thumbs/item_enchanted_book.png",
+      "bytes": 4408,
+      "sha256": "cd6258cd597681ca326f85d8ad5a32785d46c8e7c234a658bc4cfc9a776fc25e"
+    },
+    {
+      "path": "assets/thumbs/item_ender_pearl.png",
+      "bytes": 4068,
+      "sha256": "d4945d1cfaa2ec15986890411475f001c7ed446f68b4d2a53d933eae6de34855"
+    },
+    {
+      "path": "assets/thumbs/item_furnace.png",
+      "bytes": 5036,
+      "sha256": "6af7a5356b09b16f4cab27410c60a5649deab82882b1c4a19386a8f38521928c"
+    },
+    {
+      "path": "assets/thumbs/item_grass_block.png",
+      "bytes": 4749,
+      "sha256": "83f5737f32ea4dd9808532a2788854f83ddbacb694f0aceb215d9ff4fb9fa1ab"
+    },
+    {
+      "path": "assets/thumbs/item_lantern.png",
+      "bytes": 4658,
+      "sha256": "e53e1dde0134f5711541a9a14e8076d6ad16cce9d32e25747212f0ff4dbf774b"
+    },
+    {
+      "path": "assets/thumbs/item_potion.png",
+      "bytes": 4229,
+      "sha256": "0fd7bfac8b10aaa145854f6568581c376ebd9070b638746346b2f376cac14178"
+    },
+    {
+      "path": "assets/thumbs/item_redstone.png",
+      "bytes": 3814,
+      "sha256": "5a6776fe235660b5aa9e7de979f995dc7e829833b5a0f24de16f5088b95270eb"
+    },
+    {
+      "path": "assets/thumbs/item_shield.png",
+      "bytes": 3620,
+      "sha256": "3896651abf12bf495ff44fecba3669bac5f849ed661f3ba6a0d1e3a2992bc08e"
+    },
+    {
+      "path": "assets/thumbs/material_book.png",
+      "bytes": 3611,
+      "sha256": "3fe32e2a9bb26f2d03052c07b620356703d315ba3717c239a850ab34de9b6174"
+    },
+    {
+      "path": "assets/thumbs/material_fiber.png",
+      "bytes": 3725,
+      "sha256": "dc38a96f60f032466f5530a174d0e0dd05b2354bb1017fc696cc3392c6702fc7"
+    },
+    {
+      "path": "assets/thumbs/material_iron.png",
+      "bytes": 3360,
+      "sha256": "94d98a1d080e62fd382008cd5bad00ab9bf01d272da06af70db422ad3f064490"
+    },
+    {
+      "path": "assets/thumbs/material_paper.png",
+      "bytes": 3189,
+      "sha256": "eb3c17863e1d9270bf5f4b11fcc2207b95bdab4fef3f8faf56417aa165156241"
+    },
+    {
+      "path": "assets/thumbs/material_pigment.png",
+      "bytes": 3139,
+      "sha256": "a7c7511a7f70cdafeb1c9ffa88807c29b86bb760a55654463fbddb87cee43b83"
+    },
+    {
+      "path": "assets/thumbs/material_plank.png",
+      "bytes": 4169,
+      "sha256": "2c910a570b619faa5833a6ade64b5c88167cc8fe2559b9e9a2b1bf3291848085"
+    },
+    {
+      "path": "assets/thumbs/material_stick.png",
+      "bytes": 4564,
+      "sha256": "a09328b8b1e483cf23be91518f7fc387ae5d55b5fe6926a75ec7e113f38e1f82"
+    },
+    {
+      "path": "assets/thumbs/material_string.png",
+      "bytes": 4480,
+      "sha256": "0129b7a6aaf90d82378e9a94eb8b739f3360d4098df82a7382dcbad573166777"
+    },
+    {
+      "path": "assets/thumbs/skill_api.png",
+      "bytes": 3994,
+      "sha256": "5c00c1c6cb4a9b35b79842e33205e43c9b12c6d7fbbee8b7b10bfcb6f6416dbf"
+    },
+    {
+      "path": "assets/thumbs/skill_css.png",
+      "bytes": 4485,
+      "sha256": "7d5a922c1cc309adabadc77f412a8f0cfeebb4b0232f4be545b816c8634b81a7"
+    },
+    {
+      "path": "assets/thumbs/skill_html.png",
+      "bytes": 4324,
+      "sha256": "a92b5d963397fb57d39b2fb5b164f7b854a571eca9b1506dc84b68e202804f21"
+    },
+    {
+      "path": "assets/thumbs/skill_javascript.png",
+      "bytes": 4540,
+      "sha256": "78e6b1e92260ef7e1e8e5b052077a0bb0113e405b969ad73faa40fe43c8e3cce"
+    },
+    {
+      "path": "assets/thumbs/skill_react.png",
+      "bytes": 7106,
+      "sha256": "ec494d7a712411244514273d3c17aa33d4c082d986c47bfbd403aa70162bcb3b"
+    },
+    {
+      "path": "assets/thumbs/skill_sql.png",
+      "bytes": 4870,
+      "sha256": "4634c584c9c9f56e6f224785fa41ccd2fa085e04182def6dd18cf8588ae6d092"
+    }
+  ]
+}

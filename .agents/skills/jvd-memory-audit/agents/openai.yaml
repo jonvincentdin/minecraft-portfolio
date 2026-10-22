@@ -1,0 +1,4 @@
+interface:
+  display_name: "JVD Memory Audit"
+  short_description: "Review stale and conflicting project memories"
+  default_prompt: "Use $jvd-memory-audit. Audit project memory and propose evidence-based cleanup."

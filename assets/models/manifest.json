@@ -1,0 +1,101 @@
+{
+  "owner": "Jon Vincent Din",
+  "revision": 2,
+  "format": "glTF 2.0 binary",
+  "units": "one unit is one block; crafting table is 2 units wide",
+  "models": [
+    {
+      "file": "home_landscape.glb",
+      "boxes": 228,
+      "triangles": 2736,
+      "animations": [
+        "distant_cloud_0_loop",
+        "distant_cloud_1_loop",
+        "distant_cloud_2_loop",
+        "distant_cloud_3_loop",
+        "distant_cloud_4_loop",
+        "distant_cloud_5_loop"
+      ],
+      "bytes": 33260
+    },
+    {
+      "file": "player_avatar.glb",
+      "boxes": 9,
+      "triangles": 108,
+      "animations": [
+        "builder_loop"
+      ],
+      "bytes": 4320
+    },
+    {
+      "file": "project_device.glb",
+      "boxes": 7,
+      "triangles": 84,
+      "animations": [
+        "project_item_loop"
+      ],
+      "bytes": 4416
+    },
+    {
+      "file": "project_book.glb",
+      "boxes": 7,
+      "triangles": 84,
+      "animations": [
+        "project_item_loop"
+      ],
+      "bytes": 4428
+    },
+    {
+      "file": "project_crystal.glb",
+      "boxes": 5,
+      "triangles": 60,
+      "animations": [
+        "project_item_loop"
+      ],
+      "bytes": 3392
+    },
+    {
+      "file": "crafting_table.glb",
+      "boxes": 202,
+      "triangles": 2424,
+      "animations": [
+        "crafting_table_loop"
+      ],
+      "bytes": 26104
+    },
+    {
+      "file": "open_book.glb",
+      "boxes": 17,
+      "triangles": 204,
+      "animations": [
+        "open_book_loop"
+      ],
+      "bytes": 5504
+    },
+    {
+      "file": "contact_portal.glb",
+      "boxes": 20,
+      "triangles": 240,
+      "animations": [
+        "portal_core_loop"
+      ],
+      "bytes": 6320
+    },
+    {
+      "file": "tree.glb",
+      "boxes": 5,
+      "triangles": 60,
+      "animations": [],
+      "bytes": 2484
+    },
+    {
+      "file": "chest.glb",
+      "boxes": 5,
+      "triangles": 60,
+      "animations": [
+        "chest_lid_loop"
+      ],
+      "bytes": 3968
+    }
+  ]
+}

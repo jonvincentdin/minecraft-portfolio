@@ -1,0 +1,295 @@
+{
+  "owner": "Jon Vincent Din",
+  "revision": 4,
+  "characters": [
+    {
+      "id": "professional",
+      "label": "Professional",
+      "category": "Work & collaboration",
+      "color": "#97bcae"
+    },
+    {
+      "id": "student",
+      "label": "School uniform",
+      "category": "Education & coursework",
+      "color": "#86b8df"
+    },
+    {
+      "id": "casual",
+      "label": "Casual",
+      "category": "Personal projects",
+      "color": "#b2ce86"
+    },
+    {
+      "id": "builder",
+      "label": "Builder",
+      "category": "Team projects",
+      "color": "#edbd72"
+    },
+    {
+      "id": "explorer",
+      "label": "Explorer",
+      "category": "Learning & community",
+      "color": "#c6a5dd"
+    }
+  ],
+  "items": [
+    {
+      "id": "diamond_pickaxe",
+      "label": "Diamond pickaxe",
+      "meaning": "Engineering",
+      "category": "Tools"
+    },
+    {
+      "id": "diamond_sword",
+      "label": "Diamond sword",
+      "meaning": "Problem solving",
+      "category": "Tools"
+    },
+    {
+      "id": "bow",
+      "label": "Bow",
+      "meaning": "Interactive experiences",
+      "category": "Tools"
+    },
+    {
+      "id": "compass",
+      "label": "Compass",
+      "meaning": "Navigation & discovery",
+      "category": "Devices"
+    },
+    {
+      "id": "clock",
+      "label": "Clock",
+      "meaning": "Planning & productivity",
+      "category": "Devices"
+    },
+    {
+      "id": "potion",
+      "label": "Potion",
+      "meaning": "Experiments",
+      "category": "Magic"
+    },
+    {
+      "id": "enchanted_book",
+      "label": "Enchanted book",
+      "meaning": "Learning platforms",
+      "category": "Magic"
+    },
+    {
+      "id": "redstone",
+      "label": "Redstone",
+      "meaning": "Automation",
+      "category": "Materials"
+    },
+    {
+      "id": "furnace",
+      "label": "Furnace",
+      "meaning": "Processing & services",
+      "category": "Blocks"
+    },
+    {
+      "id": "grass_block",
+      "label": "Grass block",
+      "meaning": "Worlds & environments",
+      "category": "Blocks"
+    },
+    {
+      "id": "lantern",
+      "label": "Lantern",
+      "meaning": "Guidance & utilities",
+      "category": "Devices"
+    },
+    {
+      "id": "emerald",
+      "label": "Emerald",
+      "meaning": "Commerce & value",
+      "category": "Materials"
+    },
+    {
+      "id": "shield",
+      "label": "Shield",
+      "meaning": "Security & reliability",
+      "category": "Tools"
+    },
+    {
+      "id": "ender_pearl",
+      "label": "Ender pearl",
+      "meaning": "Connected applications",
+      "category": "Magic"
+    }
+  ],
+  "models": [
+    {
+      "file": "character_professional.glb",
+      "boxes": 31,
+      "triangles": 372,
+      "animations": [
+        "idle_loop"
+      ],
+      "bytes": 10032
+    },
+    {
+      "file": "character_student.glb",
+      "boxes": 38,
+      "triangles": 456,
+      "animations": [
+        "idle_loop"
+      ],
+      "bytes": 10440
+    },
+    {
+      "file": "character_casual.glb",
+      "boxes": 32,
+      "triangles": 384,
+      "animations": [
+        "idle_loop"
+      ],
+      "bytes": 9584
+    },
+    {
+      "file": "character_builder.glb",
+      "boxes": 32,
+      "triangles": 384,
+      "animations": [
+        "idle_loop"
+      ],
+      "bytes": 9904
+    },
+    {
+      "file": "character_explorer.glb",
+      "boxes": 32,
+      "triangles": 384,
+      "animations": [
+        "idle_loop"
+      ],
+      "bytes": 10128
+    },
+    {
+      "file": "item_diamond_pickaxe.glb",
+      "boxes": 35,
+      "triangles": 420,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 6700
+    },
+    {
+      "file": "item_diamond_sword.glb",
+      "boxes": 32,
+      "triangles": 384,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 6784
+    },
+    {
+      "file": "item_bow.glb",
+      "boxes": 25,
+      "triangles": 300,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 5516
+    },
+    {
+      "file": "item_compass.glb",
+      "boxes": 77,
+      "triangles": 924,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 10664
+    },
+    {
+      "file": "item_clock.glb",
+      "boxes": 71,
+      "triangles": 852,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 9840
+    },
+    {
+      "file": "item_potion.glb",
+      "boxes": 6,
+      "triangles": 72,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 4896
+    },
+    {
+      "file": "item_enchanted_book.glb",
+      "boxes": 7,
+      "triangles": 84,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 4676
+    },
+    {
+      "file": "item_redstone.glb",
+      "boxes": 34,
+      "triangles": 408,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 6500
+    },
+    {
+      "file": "item_furnace.glb",
+      "boxes": 7,
+      "triangles": 84,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 4712
+    },
+    {
+      "file": "item_grass_block.glb",
+      "boxes": 11,
+      "triangles": 132,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 4920
+    },
+    {
+      "file": "item_lantern.glb",
+      "boxes": 11,
+      "triangles": 132,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 5140
+    },
+    {
+      "file": "item_emerald.glb",
+      "boxes": 39,
+      "triangles": 468,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 6860
+    },
+    {
+      "file": "item_shield.glb",
+      "boxes": 44,
+      "triangles": 528,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 7744
+    },
+    {
+      "file": "item_ender_pearl.glb",
+      "boxes": 44,
+      "triangles": 528,
+      "animations": [
+        "showcase_loop"
+      ],
+      "bytes": 7340
+    }
+  ]
+}

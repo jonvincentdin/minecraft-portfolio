@@ -1,0 +1,581 @@
+[
+  {
+    "id": "character_builder",
+    "path": "assets/models/character_builder.glb",
+    "bytes": 53144,
+    "sha256": "21aeee3902fcc00fe5115978b1b4565c260ec6f2c76a4ac58446a65febdc9275",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/character_builder.png",
+    "animations": [
+      "idle_loop"
+    ]
+  },
+  {
+    "id": "character_casual",
+    "path": "assets/models/character_casual.glb",
+    "bytes": 49048,
+    "sha256": "399645816902e40973a757e39bfd746cf9117425df4df6127512a3b1d0a2857c",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/character_casual.png",
+    "animations": [
+      "idle_loop"
+    ]
+  },
+  {
+    "id": "character_explorer",
+    "path": "assets/models/character_explorer.glb",
+    "bytes": 49592,
+    "sha256": "5f3995b0e74c7bf2a94b97940fc9ad4fa885408d3f780c3d778b84abcb3317e9",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/character_explorer.png",
+    "animations": [
+      "idle_loop"
+    ]
+  },
+  {
+    "id": "character_professional",
+    "path": "assets/models/character_professional.glb",
+    "bytes": 46748,
+    "sha256": "446e8470644bae231aa8734bce1a2d1f6b49117010e0855bb23b5655552f49e6",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/character_professional.png",
+    "animations": [
+      "idle_loop"
+    ]
+  },
+  {
+    "id": "character_student",
+    "path": "assets/models/character_student.glb",
+    "bytes": 59116,
+    "sha256": "be8fd2a811f069f14c9b784d946ac7e3bf7e43b32e967beac2b79133cd7a5210",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/character_student.png",
+    "animations": [
+      "idle_loop"
+    ]
+  },
+  {
+    "id": "chest",
+    "path": "assets/models/chest.glb",
+    "bytes": 3968,
+    "sha256": "958f212aa78b86a65ab0621c7b2eca7f9c9eb70438c9cb8d5ccae923731dc1b0",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "chest_lid_loop"
+    ]
+  },
+  {
+    "id": "contact_portal",
+    "path": "assets/models/contact_portal.glb",
+    "bytes": 6320,
+    "sha256": "bbe70c665faba78b66af5db4e6f3c352eda3548e341003f1722f7c799febc46f",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "portal_core_loop"
+    ]
+  },
+  {
+    "id": "crafting_table",
+    "path": "assets/models/crafting_table.glb",
+    "bytes": 174620,
+    "sha256": "cf121f5b264534f88cf23ffabce9b7420c1174c9c7a22613561c4087b7b72d69",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/crafting_table.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "dye_cyan",
+    "path": "assets/models/dye_cyan.glb",
+    "bytes": 7576,
+    "sha256": "81ee15140c9c2872d591375f8728731e390d2aa53205e2db7096235ff8a568a0",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/dye_cyan.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "dye_green",
+    "path": "assets/models/dye_green.glb",
+    "bytes": 7576,
+    "sha256": "f535bc0304f146f4c8c08f74cffc597c19ab315ece7f6d74846c17a633151dc8",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/dye_green.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "dye_orange",
+    "path": "assets/models/dye_orange.glb",
+    "bytes": 7576,
+    "sha256": "da2721a34badfdc366fa9f61a40a21782dada367812ef1da3a647c371186e185",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/dye_orange.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "dye_purple",
+    "path": "assets/models/dye_purple.glb",
+    "bytes": 7576,
+    "sha256": "2b833bd4b471a53f4bf8287225255427de7bdd814efd6719042be7cb81442c2c",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/dye_purple.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "dye_yellow",
+    "path": "assets/models/dye_yellow.glb",
+    "bytes": 7576,
+    "sha256": "48a945b053fbc7eb3a86319cc57299ade7581b8b8ba1994ef7647a2d9d392ff1",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/dye_yellow.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "home_landscape",
+    "path": "assets/models/home_landscape.glb",
+    "bytes": 33260,
+    "sha256": "200bd1df11f10c7fdae8bab3c39d1954294251fe5b608c737fa642bd05536aab",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "distant_cloud_0_loop",
+      "distant_cloud_1_loop",
+      "distant_cloud_2_loop",
+      "distant_cloud_3_loop",
+      "distant_cloud_4_loop",
+      "distant_cloud_5_loop"
+    ]
+  },
+  {
+    "id": "item_bow",
+    "path": "assets/models/item_bow.glb",
+    "bytes": 23708,
+    "sha256": "aad382e4ea2cf568573bdc149791780e36fd7934f1e6024d3e58cea936336df0",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_bow.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_clock",
+    "path": "assets/models/item_clock.glb",
+    "bytes": 28656,
+    "sha256": "e0a263af647fb036e6b390bf8176a5259f6ddedbf48052f58b64bec553c54a9c",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_clock.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_compass",
+    "path": "assets/models/item_compass.glb",
+    "bytes": 34728,
+    "sha256": "9b6f24f9ce4c0bbed5d07088729fa3b1e834a65316c65bc7e11958f9ebdb95d4",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_compass.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_diamond_pickaxe",
+    "path": "assets/models/item_diamond_pickaxe.glb",
+    "bytes": 22712,
+    "sha256": "835f99031ce6c565c226083ead74b7fc81849669c7aaf8c868acd2cce974eb67",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_diamond_pickaxe.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_diamond_sword",
+    "path": "assets/models/item_diamond_sword.glb",
+    "bytes": 22568,
+    "sha256": "207d633fbf475c3358262f05ce235336f34c419c550c1718cfc209b72dcd51ee",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_diamond_sword.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_emerald",
+    "path": "assets/models/item_emerald.glb",
+    "bytes": 21408,
+    "sha256": "fa9d7f04d1f771280de197d53c75f7a8984021eb6c7df8647ebaa818b70afe3e",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_emerald.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_enchanted_book",
+    "path": "assets/models/item_enchanted_book.glb",
+    "bytes": 11316,
+    "sha256": "2d8432a4e8178dece86751ec87168392258df841593b7beec67a6001717c6df2",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_enchanted_book.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_ender_pearl",
+    "path": "assets/models/item_ender_pearl.glb",
+    "bytes": 21868,
+    "sha256": "f3cccbad0fe16d9c7c67b3b6af1c9d47d0d6dc565389e2094280e077db844df5",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_ender_pearl.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_furnace",
+    "path": "assets/models/item_furnace.glb",
+    "bytes": 11608,
+    "sha256": "e96c8edc87f9a41a3c2b45a0943fbdbe1f59ec1788596803d71ede708a403082",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_furnace.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_grass_block",
+    "path": "assets/models/item_grass_block.glb",
+    "bytes": 19368,
+    "sha256": "cb4f0c6cff6e57c0e185d3d912d36a3f077f5ec1ad151e20c08c665678a3e93e",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_grass_block.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_lantern",
+    "path": "assets/models/item_lantern.glb",
+    "bytes": 17180,
+    "sha256": "a00363254334e8820861ffbbcffcb17e2d20d9cb40b9a3adc8897673287bff2e",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_lantern.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_potion",
+    "path": "assets/models/item_potion.glb",
+    "bytes": 9784,
+    "sha256": "6e11344067d8482e6153b8cdaf0b8188599d5d5468d82b0f68a3f365c1b5833b",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_potion.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_redstone",
+    "path": "assets/models/item_redstone.glb",
+    "bytes": 18120,
+    "sha256": "69238c5447c3fa2ad5a29cf979e7a679d475dd05d5a47d3da47ea1643529b093",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_redstone.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "item_shield",
+    "path": "assets/models/item_shield.glb",
+    "bytes": 21600,
+    "sha256": "cdcc9e3a8d917e55e32e588367b2014278108cbaf2782087246d4c11e8610fff",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/item_shield.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_book",
+    "path": "assets/models/material_book.glb",
+    "bytes": 10384,
+    "sha256": "1ec2ca353ab81d13b79916656a1b969816a6e21dd88bb1e0fdb5399ff10bb426",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_book.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_fiber",
+    "path": "assets/models/material_fiber.glb",
+    "bytes": 30364,
+    "sha256": "5f1907d46cfb99b270364747ac9ed92840917c2203c81d87b00afa68f4ee03a0",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_fiber.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_iron",
+    "path": "assets/models/material_iron.glb",
+    "bytes": 5988,
+    "sha256": "78964377cd0eb32bba2d1debc34be9a8cffe9ab65e4aa360f252444e2e52494f",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_iron.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_paper",
+    "path": "assets/models/material_paper.glb",
+    "bytes": 6808,
+    "sha256": "831e3eb5edd2e7d3a2289a90cc1a8b1bef0fcf119b014d1a5488d6eda6d6524d",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_paper.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_pigment",
+    "path": "assets/models/material_pigment.glb",
+    "bytes": 7584,
+    "sha256": "73164132c440cca9360b1e2f7076064ba2ad2e256feca30c9aa610bbc2d632d8",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_pigment.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_plank",
+    "path": "assets/models/material_plank.glb",
+    "bytes": 11856,
+    "sha256": "59c90eacf2bda4c3837d761a33b1965ce16754d20196b95cfd6d78b2563afa8d",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_plank.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_stick",
+    "path": "assets/models/material_stick.glb",
+    "bytes": 20040,
+    "sha256": "d1b79337e76430dc94d7fb9bfa91e8dd6652a3e8e244d016b44936bb9b9bc8be",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_stick.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "material_string",
+    "path": "assets/models/material_string.glb",
+    "bytes": 49068,
+    "sha256": "1651ff194d2ab31dc5163519e089b4e6aedfac0019fc0804837b34d00f2e7d9e",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/material_string.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "open_book",
+    "path": "assets/models/open_book.glb",
+    "bytes": 5504,
+    "sha256": "883317d762801585d82aa293e195a3037e49ea31d6d2d70e5ee7a0df9720504e",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "open_book_loop"
+    ]
+  },
+  {
+    "id": "player_avatar",
+    "path": "assets/models/player_avatar.glb",
+    "bytes": 4320,
+    "sha256": "951a32ce0228441a276528249231ea13c14d065beb37a55c4eeffd9f92eea87c",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "builder_loop"
+    ]
+  },
+  {
+    "id": "project_book",
+    "path": "assets/models/project_book.glb",
+    "bytes": 4428,
+    "sha256": "80cbddf95ef1b29026ab2ba33db5a8d60f723a8e7a37fa9ba0d6879f8aeedeba",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "project_item_loop"
+    ]
+  },
+  {
+    "id": "project_crystal",
+    "path": "assets/models/project_crystal.glb",
+    "bytes": 3392,
+    "sha256": "b0d24b50adb0b1ce4365684605cf2a6af7e8e5c73a2a075ab511e476d566fc77",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "project_item_loop"
+    ]
+  },
+  {
+    "id": "project_device",
+    "path": "assets/models/project_device.glb",
+    "bytes": 4416,
+    "sha256": "a11bb3a4f9fd03ac492bbc9b7c63df59a60457a428e65501a139dc6571dae5e5",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": [
+      "project_item_loop"
+    ]
+  },
+  {
+    "id": "skill_api",
+    "path": "assets/models/skill_api.glb",
+    "bytes": 10984,
+    "sha256": "d80a6896ca336310c6cfa531873a9e2b3fba39f19ff8ba6025b0a1d39f0c2b68",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/skill_api.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "skill_css",
+    "path": "assets/models/skill_css.glb",
+    "bytes": 29948,
+    "sha256": "1d7a3c1452e52b0bebef5f149affcdee00966e7260ddcaf0366c17fbada784ba",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/skill_css.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "skill_html",
+    "path": "assets/models/skill_html.glb",
+    "bytes": 27932,
+    "sha256": "f15e3a913c3330d786d7a7c56443e63d50eb8c8339c8bcc102341ad96fda1816",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/skill_html.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "skill_javascript",
+    "path": "assets/models/skill_javascript.glb",
+    "bytes": 30964,
+    "sha256": "a2af161b16ab7bb9a7bf5ca1faaa77bbca9ee0848a05484c6966eabb99690051",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/skill_javascript.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "skill_react",
+    "path": "assets/models/skill_react.glb",
+    "bytes": 125220,
+    "sha256": "1a20b566e67da22655836db1ac24f302496de4f5536c052e7df8394a0df767f6",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/skill_react.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "skill_sql",
+    "path": "assets/models/skill_sql.glb",
+    "bytes": 12424,
+    "sha256": "228adcf48e807abf44317839ddb08dbe8c393b469fca4dfe42b9e2a77ca5e1b2",
+    "refined": true,
+    "sceneData": true,
+    "thumbnail": "assets/thumbs/skill_sql.png",
+    "animations": [
+      "showcase_loop"
+    ]
+  },
+  {
+    "id": "tree",
+    "path": "assets/models/tree.glb",
+    "bytes": 2484,
+    "sha256": "30a1ea1e837d015fde068c2fb56b74368f2b96a4f80a1ece4878b61fc5a7f0a6",
+    "refined": false,
+    "sceneData": true,
+    "thumbnail": null,
+    "animations": []
+  }
+]

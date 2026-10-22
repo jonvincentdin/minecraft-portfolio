@@ -1,0 +1,4 @@
+interface:
+  display_name: "JVD Project Facts"
+  short_description: "Save verified milestone facts and next steps"
+  default_prompt: "Use $jvd-project-facts. Update the project facts from the current repository."

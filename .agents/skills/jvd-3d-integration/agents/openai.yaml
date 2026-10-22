@@ -1,0 +1,4 @@
+interface:
+  display_name: "JVD 3D Integration"
+  short_description: "Preserve existing models during React migration"
+  default_prompt: "Use $jvd-3d-integration. Integrate the existing models while preserving reference behavior."

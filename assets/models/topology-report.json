@@ -1,0 +1,278 @@
+{
+  "method": "Covered face subtraction, matching-attribute vertex welding, flat unit normals, unique rectangle edges; no triangle diagonals in wireframe",
+  "models": {
+    "character_professional": {
+      "boxes": 33,
+      "vertices": 1035,
+      "triangles": 582,
+      "visible_patches": 291,
+      "unique_edges": 841
+    },
+    "character_student": {
+      "boxes": 40,
+      "vertices": 1322,
+      "triangles": 752,
+      "visible_patches": 376,
+      "unique_edges": 1123
+    },
+    "character_casual": {
+      "boxes": 34,
+      "vertices": 1089,
+      "triangles": 612,
+      "visible_patches": 306,
+      "unique_edges": 884
+    },
+    "character_builder": {
+      "boxes": 34,
+      "vertices": 1179,
+      "triangles": 682,
+      "visible_patches": 341,
+      "unique_edges": 1017
+    },
+    "character_explorer": {
+      "boxes": 34,
+      "vertices": 1099,
+      "triangles": 626,
+      "visible_patches": 313,
+      "unique_edges": 902
+    },
+    "item_diamond_pickaxe": {
+      "boxes": 35,
+      "vertices": 440,
+      "triangles": 340,
+      "visible_patches": 170,
+      "unique_edges": 452
+    },
+    "item_diamond_sword": {
+      "boxes": 32,
+      "vertices": 440,
+      "triangles": 328,
+      "visible_patches": 164,
+      "unique_edges": 422
+    },
+    "item_bow": {
+      "boxes": 25,
+      "vertices": 480,
+      "triangles": 304,
+      "visible_patches": 152,
+      "unique_edges": 428
+    },
+    "item_compass": {
+      "boxes": 77,
+      "vertices": 698,
+      "triangles": 568,
+      "visible_patches": 284,
+      "unique_edges": 620
+    },
+    "item_clock": {
+      "boxes": 71,
+      "vertices": 556,
+      "triangles": 488,
+      "visible_patches": 244,
+      "unique_edges": 498
+    },
+    "item_potion": {
+      "boxes": 6,
+      "vertices": 164,
+      "triangles": 92,
+      "visible_patches": 46,
+      "unique_edges": 131
+    },
+    "item_enchanted_book": {
+      "boxes": 7,
+      "vertices": 200,
+      "triangles": 112,
+      "visible_patches": 56,
+      "unique_edges": 162
+    },
+    "item_redstone": {
+      "boxes": 34,
+      "vertices": 326,
+      "triangles": 300,
+      "visible_patches": 150,
+      "unique_edges": 358
+    },
+    "item_furnace": {
+      "boxes": 7,
+      "vertices": 208,
+      "triangles": 112,
+      "visible_patches": 56,
+      "unique_edges": 144
+    },
+    "item_grass_block": {
+      "boxes": 11,
+      "vertices": 386,
+      "triangles": 224,
+      "visible_patches": 112,
+      "unique_edges": 345
+    },
+    "item_lantern": {
+      "boxes": 11,
+      "vertices": 336,
+      "triangles": 192,
+      "visible_patches": 96,
+      "unique_edges": 284
+    },
+    "item_emerald": {
+      "boxes": 39,
+      "vertices": 404,
+      "triangles": 340,
+      "visible_patches": 170,
+      "unique_edges": 410
+    },
+    "item_shield": {
+      "boxes": 44,
+      "vertices": 400,
+      "triangles": 368,
+      "visible_patches": 184,
+      "unique_edges": 428
+    },
+    "item_ender_pearl": {
+      "boxes": 44,
+      "vertices": 406,
+      "triangles": 372,
+      "visible_patches": 186,
+      "unique_edges": 428
+    },
+    "crafting_table": {
+      "boxes": 202,
+      "vertices": 3996,
+      "triangles": 2332,
+      "visible_patches": 1166,
+      "unique_edges": 2912
+    },
+    "material_plank": {
+      "boxes": 9,
+      "vertices": 216,
+      "triangles": 108,
+      "visible_patches": 54,
+      "unique_edges": 108
+    },
+    "material_fiber": {
+      "boxes": 11,
+      "vertices": 642,
+      "triangles": 372,
+      "visible_patches": 186,
+      "unique_edges": 580
+    },
+    "material_string": {
+      "boxes": 39,
+      "vertices": 1080,
+      "triangles": 616,
+      "visible_patches": 308,
+      "unique_edges": 930
+    },
+    "material_stick": {
+      "boxes": 14,
+      "vertices": 406,
+      "triangles": 220,
+      "visible_patches": 110,
+      "unique_edges": 326
+    },
+    "material_paper": {
+      "boxes": 4,
+      "vertices": 96,
+      "triangles": 48,
+      "visible_patches": 24,
+      "unique_edges": 48
+    },
+    "material_pigment": {
+      "boxes": 4,
+      "vertices": 112,
+      "triangles": 64,
+      "visible_patches": 32,
+      "unique_edges": 95
+    },
+    "material_iron": {
+      "boxes": 3,
+      "vertices": 76,
+      "triangles": 40,
+      "visible_patches": 20,
+      "unique_edges": 48
+    },
+    "skill_html": {
+      "boxes": 24,
+      "vertices": 596,
+      "triangles": 308,
+      "visible_patches": 154,
+      "unique_edges": 340
+    },
+    "skill_css": {
+      "boxes": 26,
+      "vertices": 644,
+      "triangles": 332,
+      "visible_patches": 166,
+      "unique_edges": 364
+    },
+    "skill_javascript": {
+      "boxes": 27,
+      "vertices": 668,
+      "triangles": 344,
+      "visible_patches": 172,
+      "unique_edges": 376
+    },
+    "skill_react": {
+      "boxes": 110,
+      "vertices": 2850,
+      "triangles": 1652,
+      "visible_patches": 826,
+      "unique_edges": 2430
+    },
+    "skill_sql": {
+      "boxes": 9,
+      "vertices": 228,
+      "triangles": 120,
+      "visible_patches": 60,
+      "unique_edges": 144
+    },
+    "skill_api": {
+      "boxes": 7,
+      "vertices": 192,
+      "triangles": 108,
+      "visible_patches": 54,
+      "unique_edges": 152
+    },
+    "material_book": {
+      "boxes": 6,
+      "vertices": 178,
+      "triangles": 100,
+      "visible_patches": 50,
+      "unique_edges": 144
+    },
+    "dye_orange": {
+      "boxes": 4,
+      "vertices": 112,
+      "triangles": 64,
+      "visible_patches": 32,
+      "unique_edges": 95
+    },
+    "dye_yellow": {
+      "boxes": 4,
+      "vertices": 112,
+      "triangles": 64,
+      "visible_patches": 32,
+      "unique_edges": 95
+    },
+    "dye_cyan": {
+      "boxes": 4,
+      "vertices": 112,
+      "triangles": 64,
+      "visible_patches": 32,
+      "unique_edges": 95
+    },
+    "dye_green": {
+      "boxes": 4,
+      "vertices": 112,
+      "triangles": 64,
+      "visible_patches": 32,
+      "unique_edges": 95
+    },
+    "dye_purple": {
+      "boxes": 4,
+      "vertices": 112,
+      "triangles": 64,
+      "visible_patches": 32,
+      "unique_edges": 95
+    }
+  }
+}

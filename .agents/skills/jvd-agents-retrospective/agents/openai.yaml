@@ -1,0 +1,4 @@
+interface:
+  display_name: "JVD Retrospective"
+  short_description: "Turn repeated mistakes into reviewed rules"
+  default_prompt: "Use $jvd-agents-retrospective. Review repeated mistakes and propose a focused AGENTS.md fix."
