@@ -1,6 +1,6 @@
 # M03 — Actual skills and workshop
 
-Status: not started in this handoff.
+Status: implemented and functionally verified 2026-10-23 (Asia/Singapore), on feat/m03-crafting-skills. See ../M03_VERIFICATION.md for evidence and minor dialog capture differences. Not merged or deployed.
 
 Dependency: M02.
 

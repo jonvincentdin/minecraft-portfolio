@@ -1,0 +1,21 @@
+{
+  "errors": [],
+  "viewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "checks": [
+    "four routes",
+    "portrait/avatar/journal",
+    "case study/gallery/Escape/focus restoration",
+    "move/swap/drag/filter/reset/persistence",
+    "keyboard rearrangement",
+    "five character models and controls",
+    "two chapter comparison",
+    "three zero-resource route teardowns",
+    "unsent contact review preserves fields",
+    "emulated touch rearrangement",
+    "blocked storage notice",
+    "model thumbnail fallback"
+  ]
+}

@@ -1,6 +1,6 @@
 # M02 — Content routes
 
-Status: not started in this handoff.
+Status: implemented and verified 2026-10-23 (Asia/Singapore), on feat/m02-public-routes. See ../M02_VERIFICATION.md and ../evidence/m02. Not merged or deployed.
 
 Dependency: M01.
 

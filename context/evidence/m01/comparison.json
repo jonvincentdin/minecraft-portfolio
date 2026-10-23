@@ -1,0 +1,86 @@
+{
+  "intro-desktop": {
+    "dimensions": [
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "differentPixels": 0,
+    "fraction": 0
+  },
+  "home-desktop": {
+    "dimensions": [
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "differentPixels": 0,
+    "fraction": 0
+  },
+  "home-390": {
+    "dimensions": [
+      [
+        390,
+        1014
+      ],
+      [
+        390,
+        1014
+      ]
+    ],
+    "differentPixels": 0,
+    "fraction": 0
+  },
+  "home-1366": {
+    "dimensions": [
+      [
+        1366,
+        832
+      ],
+      [
+        1366,
+        832
+      ]
+    ],
+    "differentPixels": 0,
+    "fraction": 0
+  },
+  "home-1024": {
+    "dimensions": [
+      [
+        1024,
+        832
+      ],
+      [
+        1024,
+        832
+      ]
+    ],
+    "differentPixels": 0,
+    "fraction": 0
+  },
+  "home-768": {
+    "dimensions": [
+      [
+        768,
+        1024
+      ],
+      [
+        768,
+        1024
+      ]
+    ],
+    "differentPixels": 0,
+    "fraction": 0
+  }
+}

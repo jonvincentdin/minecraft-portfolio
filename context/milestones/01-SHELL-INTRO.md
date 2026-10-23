@@ -1,6 +1,6 @@
 # M01 — Visual shell and entry
 
-Status: not started in this handoff.
+Status: implemented and verified 2026-10-23 (Asia/Singapore). See ../M01_VERIFICATION.md; delivery is a draft PR pending merge.
 
 Dependency: M00.
 
