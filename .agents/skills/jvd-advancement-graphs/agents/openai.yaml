@@ -1,0 +1,4 @@
+interface:
+  display_name: "JVD Advancement Graphs"
+  short_description: "Port the two advancement trees and their path glow"
+  default_prompt: "Use $jvd-advancement-graphs. Implement the M04 advancement trees with reference parity."

@@ -29,7 +29,7 @@ These are capabilities exposed in this session, not promises that every name app
 
 ## Included project skills
 
-Four focused skills now exist under `.agents/skills/`: `jvd-memory-audit`, `jvd-project-facts`, `jvd-agents-retrospective`, and `jvd-3d-integration`. See [MEMORY_WORKFLOW.md](MEMORY_WORKFLOW.md) for invocation and scope. The 3D skill supports both the current asset integration and future explicitly requested model creation; it does not require an MCP.
+Seven focused skills now exist under `.agents/skills/`: `jvd-memory-audit`, `jvd-project-facts`, `jvd-agents-retrospective`, `jvd-3d-integration`, and, added for M04 on 2026-10-23, `jvd-advancement-graphs`, `jvd-motion-choreography` and `jvd-parity-qa`. Each also has a pointer under `.claude/skills/<name>/SKILL.md` so Claude Code discovers it; the pointer defers to the `.agents` file, which remains the single source of truth. See [MEMORY_WORKFLOW.md](MEMORY_WORKFLOW.md) for invocation and scope. The 3D skill supports both the current asset integration and future explicitly requested model creation; it does not require an MCP.
 
 See [THREE_D_TOOL_VERIFICATION.md](THREE_D_TOOL_VERIFICATION.md) for the checked third-party sources. None of those tools was installed by this update.
 
@@ -42,16 +42,13 @@ The following are **suggested custom skill names**, not claimed marketplace list
 | jvd-reference-parity | Port or compare any public screen; prevent redesign | DESIGN_SYSTEM, corresponding feature, reference source | Matched layout and documented visual diff |
 | jvd-react-migration | Convert imperative source to React components/hooks | ARCHITECTURE, CURRENT_STATE | Typed components, cleanup, successful build |
 | jvd-voxel-rendering | Canvas lifecycle, pointer rotation, wireframe or fallback work | MODELS, source renderer, asset hashes | GPU check, orientation and resource cleanup |
-| jvd-motion-choreography | Intro, route, panel, item flight or path animation edits | MOTION, USER_FLOWS | Real timing, cancellation and reduced-motion checks |
 | jvd-crafting-engine | Recipe/grid/inventory logic or configuration changes | Skills feature, engine and recipe data | Quantity/prerequisite/refund invariants pass |
-| jvd-advancement-graphs | Node links/layout or glowing path work | Advancements feature, tree algorithms | Cycle and shortest-route checks pass |
 | jvd-content-editor | Owner CRUD, galleries, draft previews or import/export | EDITOR, DATA_MODEL | Field matrix covered; errors preserve input |
 | jvd-supabase-content | Database/Auth/Storage integration | SUPABASE, DATA_MODEL | Migrations and positive/negative RLS tests |
 | jvd-accessibility-responsive | Keyboard, focus, mobile, reduced-motion work | DESIGN_SYSTEM, TESTING | Manual keyboard/touch checks and overflow review |
-| jvd-parity-qa | Milestone acceptance, screenshots and regression checks | TESTING, relevant milestone | Actual checks and mismatch report |
 | jvd-release | Final environment/build/deployment documentation | MILESTONES, PROGRESS | Reproducible build and honest release notes |
 
-Use the four included skills where relevant. Keep the remaining workflows as context instructions until a repeated task justifies another skill. Do not install this entire suggested list.
+Use the seven included skills where relevant. Keep the remaining workflows as context instructions until a repeated task justifies another skill. Do not install this entire suggested list.
 
 ## Optional connected tools
 

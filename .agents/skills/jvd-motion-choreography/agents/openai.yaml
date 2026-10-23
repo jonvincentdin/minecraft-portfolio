@@ -1,0 +1,4 @@
+interface:
+  display_name: "JVD Motion Choreography"
+  short_description: "Port motion with real timing and clean cancellation"
+  default_prompt: "Use $jvd-motion-choreography. Complete M04 shared motion parity and verify cancellation."
