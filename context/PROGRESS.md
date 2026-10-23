@@ -10,7 +10,7 @@
 ## React/Supabase implementation status
 
 - [x] M00 Baseline and scaffold
-- [ ] M01 Visual shell and entry
+- [x] M01 Visual shell and entry
 - [ ] M02 Public content routes
 - [ ] M03 Crafting and skills
 - [ ] M04 Advancements and motion parity
@@ -40,3 +40,13 @@ An initial typecheck identified missing ImportMetaEnv declarations; fixed and re
 M01 remains unstarted. Physical touch, feature parity, backend/RLS and real owner content remain later work. No merge, deployment, database operation or repository-permission change. This request is delivered as local commits; no push or PR was performed.
 
 Finalization: scaffold commit 49f5ed3 is retained. Added checkout-safe attributes for the exact renderer/CSS/seed copies and removed test EOF whitespace. Five foundation tests and diff checks passed again after the interrupted approval attempt. The approval service previously hit a usage limit; no blocked Git command executed.
+
+## 2026-10-23 (Asia/Singapore): M00 merge and M01 completion
+
+M00 merged through PR #1 at e6d1347 following explicit owner authorization. Main was bootstrapped from the preserved handoff checkpoint because the remote had no main. Default branch is now main; both M00 feature branches were deleted after merge verification. No production deployment was performed.
+
+M01 implementation commit 729f932 adds the reference React shell and home, real readiness, explicit enter/replay, shuffled eight-strip exit, focus/inert state, reduced-motion interruption, cancellable hash navigation and original footer downloads. No canonical/reference changes.
+
+Passed: assets:verify (100), build/typecheck, npm test (5), test:browser, targeted shader failure fallback, git diff --check, and six zero-difference matched screenshot comparisons. GPU: Edge/NVIDIA RTX 4060. Browser checks include a 10-second ready wait, two replays, rapid hash navigation, reduced-motion changes during exit and three resource-clean teardown cycles. Details: M01_VERIFICATION.md.
+
+Initial browser failure exposed the motion button losing its accessible name when reference CSS hides its text; explicit aria-label fixed it. Capture differences from progress settling/hover were resolved by matching test state. M02 remains unstarted. M01 is being delivered as a draft PR; M00 merge authorization is not extended to it.

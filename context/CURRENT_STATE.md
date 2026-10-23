@@ -1,5 +1,9 @@
 # Current implementation versus planned work
 
+## React implementation update - 2026-10-23 (Asia/Singapore)
+
+M00 is merged to main. M01 now implements the React shell, Spawn and explicit intro/replay on feat/m01-shell-entry. Other public routes/editor remain placeholders and Supabase is still an unavailable boundary. See PROJECT_FACTS.md and M01_VERIFICATION.md for current evidence. The sections below describe the original supplied vanilla reference, not completed React features.
+
 ## Already present in the baseline
 
 Seven public routes; cinematic loading scene with explicit Enter world gate and randomized upward exit; home social-link slots; about journal and portrait frame; draggable project inventory and gallery case studies; crafting scene and recipe workshop; visible actual-skills loadout; five experience characters; separate Achievements and Certifications trees; editor forms; JSON import/export; WebGL rendering and thumbnails; motion pause; new navigation/reveal/hover/pixel/panel animations.

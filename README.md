@@ -1,6 +1,6 @@
 # Jon Vincent Din — React + Supabase rebuild handoff
 
-M00 now provides a runnable React + TypeScript + Vite foundation. Public routes are explicit placeholders; the supplied vanilla implementation remains the immutable reference. Supabase is a declared boundary for M06, not an active backend.
+M00 provides the React + TypeScript + Vite foundation. M01 adds the reference shell, Spawn and explicit entry/replay. Other public routes are placeholders; the supplied vanilla implementation remains the immutable reference. Supabase is a declared boundary for M06, not an active backend.
 
 
 ## Run the M00 foundation
@@ -34,7 +34,7 @@ No environment file is needed for demo mode. Optional .env.local uses only the p
 
 The reference CSS is copied with root-relative font URLs. The custom renderer is copied exactly; a React effect manages its lifetime. Runtime assets are generated and ignored. The version-5 demo seed has a dedicated runtime copy, checked against the canonical seed by tests.
 
-See context/M00_VERIFICATION.md for checks, screenshots and limitations. Historical handoff instructions below describe the original ZIP; M00 completion supersedes their setup step. Stop before M01.
+See context/M00_VERIFICATION.md for checks, screenshots and limitations. Historical handoff instructions below describe the original ZIP; M00 completion supersedes their setup step. M01 evidence is in context/M01_VERIFICATION.md. Stop before M02.
 
 ## Original handoff starting instructions
 

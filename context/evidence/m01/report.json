@@ -1,0 +1,18 @@
+{
+  "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "errors": [],
+  "entryDurationMs": 1858,
+  "checks": [
+    "ready waits 10 seconds",
+    "focus trap and inert shell",
+    "two replays",
+    "8 exit strips",
+    "reduced motion mid-exit",
+    "rapid hash changes",
+    "three renderer teardown cycles",
+    "WebGL and thumbnail fallback",
+    "scene fetch failure",
+    "downloads",
+    "five responsive sizes"
+  ]
+}
