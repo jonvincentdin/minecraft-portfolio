@@ -19,7 +19,8 @@
     "test": "tsx --test tests/unit/*.test.ts",
     "test:browser": "node tests/e2e/smoke.mjs",
     "test:m02": "node tests/e2e/m02.mjs && node tests/e2e/m02-pointer.mjs",
-    "test:m03": "node tests/e2e/m03.mjs && node tests/e2e/m03-config.mjs"
+    "test:m03": "node tests/e2e/m03.mjs && node tests/e2e/m03-config.mjs",
+    "test:m04": "node tests/e2e/m04.mjs"
   },
   "dependencies": {
     "react": "19.3.1",

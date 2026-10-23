@@ -1,6 +1,6 @@
 # Jon Vincent Din — React + Supabase rebuild handoff
 
-M00 provides the React + TypeScript + Vite foundation. M01 adds the reference shell, Spawn and explicit entry/replay. M02 adds About, project inventory/gallery, Experience and Contact. M03 adds the actual-skills loadout and crafting workshop. Advancements and editor remain placeholders; the supplied vanilla implementation remains the immutable reference. Supabase is a declared boundary for M06, not an active backend.
+M00 provides the React + TypeScript + Vite foundation. M01 adds the reference shell, Spawn and explicit entry/replay. M02 adds About, project inventory/gallery, Experience and Contact. M03 adds the actual-skills loadout and crafting workshop. M04 adds both advancement trees and shared motion parity. The editor remains a placeholder; the supplied vanilla implementation remains the immutable reference. Supabase is a declared boundary for M06, not an active backend.
 
 
 ## Run the React portfolio
@@ -27,6 +27,7 @@ Immutable reference: http://127.0.0.1:4174.
 | npm.cmd run preview | Serve production build on port 4173 |
 | npm.cmd run assets:sync | Exact runtime copies under public/assets |
 | npm.cmd run assets:verify | Check 100 supplied original hashes |
+| npm.cmd run test:m04 | Advancement trees, glow routes and shared motion parity against the reference (both servers running) |
 | npm.cmd run test:m03 | Crafting, cancellation and edited-config browser checks (both servers running) |
 | npm.cmd run test:m02 | M02 browser interactions and pointer controls (both servers running) |
 | npm.cmd test | Repository behavior and copy integrity (sync assets first) |
@@ -36,7 +37,7 @@ No environment file is needed for demo mode. Optional .env.local uses only the p
 
 The reference CSS is copied with root-relative font URLs. The custom renderer is copied exactly; a React effect manages its lifetime. Runtime assets are generated and ignored. The version-5 demo seed has a dedicated runtime copy, checked against the canonical seed by tests.
 
-See context/M00_VERIFICATION.md for checks, screenshots and limitations. Historical handoff instructions below describe the original ZIP; M00 completion supersedes their setup step. M01 evidence is in context/M01_VERIFICATION.md. M02 evidence is in context/M02_VERIFICATION.md. M03 evidence and visual limits are in context/M03_VERIFICATION.md. Stop before M04.
+See context/M00_VERIFICATION.md for checks, screenshots and limitations. Historical handoff instructions below describe the original ZIP; M00 completion supersedes their setup step. M01 evidence is in context/M01_VERIFICATION.md. M02 evidence is in context/M02_VERIFICATION.md. M03 evidence and visual limits are in context/M03_VERIFICATION.md. M04 evidence is in context/M04_VERIFICATION.md. Stop before M05.
 
 ## Original handoff starting instructions
 

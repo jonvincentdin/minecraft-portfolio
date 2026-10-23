@@ -1,0 +1,14 @@
+export function rootPath(nodes,id){const path=[],seen=new Set();let n=nodes.find(x=>x.id===id);while(n&&!seen.has(n.id)){seen.add(n.id);path.unshift(n.id);n=nodes.find(x=>x.id===n.parent)}return path;}
+// A parent tree has one shortest route: retract to the common ancestor, then descend.
+export function routeBetween(nodes,from,to){const a=rootPath(nodes,from),b=rootPath(nodes,to);let common=0;while(common<a.length&&common<b.length&&a[common]===b[common])common++;return {oldPath:a,newPath:b,shared:a.slice(0,common),retract:a.slice(Math.max(1,common)).reverse(),extend:b.slice(Math.max(1,common)),disconnected:!!a.length&&!!b.length&&!common};}
+export function canConnect(nodes,parent,child){if(parent===child||!nodes.some(x=>x.id===child)||parent&&!nodes.some(x=>x.id===parent))return false;return !parent||!rootPath(nodes,parent).includes(child);}
+export function treeLine(parent,child){const middle=(Number(parent.x)+Number(child.x))/2;return `M${Number(parent.x)} ${Number(parent.y)} H${middle} V${Number(child.y)} H${Number(child.x)}`;}
+export function createPathAnimator(world,nodes,paused){let current=null,revision=0;const running=new Set();
+ const edge=id=>Array.from(world.querySelectorAll('[data-glow-edge]')).find(x=>x.dataset.glowEdge===id);
+ const node=id=>Array.from(world.querySelectorAll('[data-node]')).find(x=>x.dataset.node===id);
+ function settle(id){const path=rootPath(nodes,id);world.querySelectorAll('[data-glow-edge]').forEach(el=>el.style.strokeDashoffset=path.includes(el.dataset.glowEdge)?'0':'1');world.querySelectorAll('[data-node]').forEach(el=>el.classList.toggle('path-lit',path.includes(el.dataset.node)));}
+ function cancel(){revision++;for(const a of running)a.cancel();running.clear();}
+ async function animateEdge(id,reverse,token){const el=edge(id);if(!el)return;const start=reverse?'0':'1',end=reverse?'1':'0';el.style.strokeDashoffset=start;const a=el.animate([{strokeDashoffset:start},{strokeDashoffset:end}],{duration:280,easing:'ease-in-out',fill:'forwards'});running.add(a);try{await a.finished}catch{}running.delete(a);if(token!==revision)return;el.style.strokeDashoffset=end;a.cancel();node(id)?.classList.toggle('path-lit',!reverse);if(!reverse&&node(id)){const p=node(id).animate([{filter:'brightness(1)'},{filter:'brightness(1.8)'},{filter:'brightness(1)'}],{duration:400});running.add(p);p.finished.catch(()=>{}).finally(()=>running.delete(p));}}
+ async function select(id){cancel();const token=revision,previous=current;settle(previous);current=id;if(paused()){settle(id);return}const route=routeBetween(nodes,previous,id);for(const child of route.retract){await animateEdge(child,true,token);if(token!==revision)return}if(route.disconnected)settle(null);if(route.newPath[0])node(route.newPath[0])?.classList.add('path-lit');for(const child of route.extend){await animateEdge(child,false,token);if(token!==revision)return}settle(id);}
+ return {select,destroy:cancel};
+}
