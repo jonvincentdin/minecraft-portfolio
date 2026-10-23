@@ -99,3 +99,9 @@ Implementation 6c1caeb on feat/m05-editor, based on main 4c06561.
 Passed: build/typecheck, 29 unit tests (validator parity with the reference on 24 cases), 100 asset hashes, smoke/M02/M03/M04 regressions, and test:m05 (13 checks; three consecutive runs green after fixing a test-side toast race). The field coverage matrix is in M05_VERIFICATION.md. Of 12 editor screenshot pairs, 3 are identical; the other differences are confined to the intended topbar, notice and help-text regions, or are antialiasing.
 
 Not done (M06): sign-in, server authorization, shared drafts, Storage uploads, atomic server publish, RLS. Not verified: physical touch tree dragging, other engines. No dependencies, migrations or deployment. M06 remains unstarted.
+
+## 2026-10-24 (Asia/Singapore): M05 merged to main
+
+Under the user's standing authorization, PR #9 (head c22121d) was squash-merged into main as 048ec692450b6282fe1cfcafe295cabba6f58ee0. Main has no branch protection, CI workflow or deploy hook. No deployment occurred. M06 remains unstarted.
+
+Process note: the M05 implementation commit was first made on local main by mistake. It was moved to feat/m05-editor before anything was pushed, and local main was reset to origin/main. No published history changed.
