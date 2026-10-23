@@ -2,7 +2,7 @@
 
 Updated: 2026-10-22 (UTC).
 
-The four project skills in `.agents/skills/` are actual instruction files, not marketplace suggestions. Open this extracted project root in Codex/VS Code. If the client does not discover them, start a fresh session and inspect its skill list; you can always ask Codex to read the relevant SKILL.md directly. These files do not install an MCP, change personal ChatGPT memory, or schedule a background job.
+The seven project skills in `.agents/skills/` are actual instruction files, with Claude Code pointers in `.claude/skills/`, not marketplace suggestions. Open this extracted project root in Codex/VS Code. If the client does not discover them, start a fresh session and inspect its skill list; you can always ask Codex to read the relevant SKILL.md directly. These files do not install an MCP, change personal ChatGPT memory, or schedule a background job.
 
 | Skill | Use | Invocation |
 | --- | --- | --- |
@@ -10,6 +10,9 @@ The four project skills in `.agents/skills/` are actual instruction files, not m
 | `jvd-project-facts` | Record verified state at a milestone/handoff | `Use $jvd-project-facts to update the current snapshot from the repository and checks.` |
 | `jvd-agents-retrospective` | Turn evidenced recurring mistakes into a reviewed rule | `Use $jvd-agents-retrospective to analyze these two incidents and propose an AGENTS.md diff.` |
 | `jvd-3d-integration` | Preserve current models, troubleshoot rendering, or create a specifically requested new model | `Use $jvd-3d-integration for the crafting-table React wrapper; preserve canonical assets.` |
+| `jvd-advancement-graphs` | Port or change the two advancement trees, route glow, pan/zoom/list and inspector | `Use $jvd-advancement-graphs to implement the M04 trees with reference parity.` |
+| `jvd-motion-choreography` | Port or change shared motion with real timing, cancellation and reduced-motion settling | `Use $jvd-motion-choreography to complete M04 motion parity.` |
+| `jvd-parity-qa` | Run milestone acceptance: reference screenshots, comparisons, evidence and draft PR | `Use $jvd-parity-qa to verify the current milestone and record evidence.` |
 
 ## What goes where
 
