@@ -1,0 +1,25 @@
+{
+  "errors": [],
+  "viewports": [
+    1440,
+    390,
+    1366,
+    1024,
+    768
+  ],
+  "checks": [
+    "always-visible skills",
+    "all six paths",
+    "exact reservation and consumption",
+    "double click and collection",
+    "translated manual placement and drag",
+    "keyboard return",
+    "filters and restart confirmation",
+    "persistence and owner-content separation",
+    "close/route/pause cancellation",
+    "three single-unit flights",
+    "focus containment/restoration",
+    "three zero-resource teardowns",
+    "emulated touch and blocked storage"
+  ]
+}

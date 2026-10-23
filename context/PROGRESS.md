@@ -12,7 +12,7 @@
 - [x] M00 Baseline and scaffold
 - [x] M01 Visual shell and entry
 - [x] M02 Public content routes
-- [ ] M03 Crafting and skills
+- [x] M03 Crafting and skills
 - [ ] M04 Advancements and motion parity
 - [ ] M05 Editor parity
 - [ ] M06 Supabase persistence and authorization
@@ -60,3 +60,11 @@ Passed: build/typecheck, eight unit tests, all 100 asset hashes, M01 shell brows
 Comparison found and fixed an extra scene set() on first mount and label glyph spacing from split React text nodes. The existing smoke test was updated to use the non-model Crafting placeholder for teardown and the actual Contact heading. Canonical assets, renderer implementation, reference and CSS were preserved.
 
 Browser emulation covers touch arrangement, not physical hardware. Other browser engines, full motion parity, editor/backend authorization and real owner content remain later work. Contact sends nothing. No new dependencies, remote publication, database operation or deployment. M03 remains unstarted; M02 is delivered on its feature branch as a dependent draft PR targeting main, with merge still requiring authorization.
+
+## 2026-10-23 (Asia/Singapore): M03 crafting and skills completed
+
+Implementation 56f3acf on feat/m03-crafting-skills, based on M02 32c263a. Ported the engine/data byte-for-byte with declarations; added React loadout, table, workshop, exact-quantity flights, recipe/ingredient controls, explicit collection, discoveries and fingerprinted visitor persistence. Portfolio skills remain independent of play. Close/navigation/reload refunds unfinished ingredients; pause settles flights. Native backward-tab boundary behavior required explicit focus wrapping.
+
+Passed: build/typecheck, 14 tests, all 100 asset hashes, shell regression, full six-path browser crafting, duplicate activation, manual/keyboard/tap/drag, cancellation, zero-resource teardown and StrictMode edited-config tests. All five skills-page comparisons and two dialog comparisons are exact. Four dialog captures retain small differences confined to the top header/close/backdrop region; maximum 0.513%. See M03_VERIFICATION.md and evidence/m03.
+
+No canonical/reference changes, new dependencies, migrations, authorization or publication. Physical touch and other engines remain unverified. M03 is delivered as a dependent feature-branch draft PR targeting main, without merge or deployment. M04 remains unstarted.

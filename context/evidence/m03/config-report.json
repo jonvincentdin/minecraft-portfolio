@@ -1,0 +1,14 @@
+{
+  "errors": [],
+  "checks": [
+    "StrictMode fixture",
+    "three stacks 64/64/2",
+    "six exact-unit flights",
+    "420ms duration and 90ms stagger",
+    "two outputs",
+    "model override",
+    "configuration change resets play",
+    "table drag -0.27 radians",
+    "wireframe/reset"
+  ]
+}
