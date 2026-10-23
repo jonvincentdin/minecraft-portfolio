@@ -4,3 +4,5 @@ src/components/three/renderer.js -text
 src/styles/reference.css -text
 src/data/demo-content.json -text
 context/content-seed.json -text
+src/domain/crafting-data.js -text
+src/domain/crafting-engine.js -text

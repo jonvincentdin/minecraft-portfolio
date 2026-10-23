@@ -12,7 +12,7 @@ export function ProjectsPage({content,scenes,paused,notify}:{content:PortfolioCo
  const ids=useMemo(()=>content.projects.map(item=>item.id),[content.projects]);
  const [layout,setLayout]=useState<Layout>(()=>{let saved:unknown;try{saved=JSON.parse(localStorage.getItem(storageKey)||'null');}catch{saved=null;}return reconcileLayout(saved,ids);});
  const [filter,setFilter]=useState('All'),[query,setQuery]=useState(''),[arrange,setArrange]=useState(false),[picked,setPicked]=useState<number|null>(null);
- const [selected,setSelected]=useState(ids[0]),[modal,setModal]=useState<Project|null>(null),[focused,setFocused]=useState(0);
+ const [selected,setSelected]=useState(()=>{const id=location.hash.split('/')[1];return ids.includes(id)?id:ids[0];}),[modal,setModal]=useState<Project|null>(null),[focused,setFocused]=useState(0);
  const [status,setStatus]=useState('Drag an item onto any slot to move it. Drop onto another item to swap.');
  const drag=useRef<number|null>(null),slots=useRef<(HTMLButtonElement|null)[]>([]);
  useEffect(()=>{setLayout(value=>reconcileLayout(value,ids));setSelected(value=>ids.includes(value)?value:ids[0]);},[ids]);
