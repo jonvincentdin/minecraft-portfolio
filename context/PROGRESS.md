@@ -68,3 +68,7 @@ Implementation 56f3acf on feat/m03-crafting-skills, based on M02 32c263a. Ported
 Passed: build/typecheck, 14 tests, all 100 asset hashes, shell regression, full six-path browser crafting, duplicate activation, manual/keyboard/tap/drag, cancellation, zero-resource teardown and StrictMode edited-config tests. All five skills-page comparisons and two dialog comparisons are exact. Four dialog captures retain small differences confined to the top header/close/backdrop region; maximum 0.513%. See M03_VERIFICATION.md and evidence/m03.
 
 No canonical/reference changes, new dependencies, migrations, authorization or publication. Physical touch and other engines remain unverified. M03 is delivered as a dependent feature-branch draft PR targeting main, without merge or deployment. M04 remains unstarted.
+
+## 2026-10-23 (Asia/Singapore): M01-M03 merged to main
+
+On the user's explicit authorization, PR #4 (feat/m03-crafting-skills, head 0e9bf9f) was marked ready and merged into main with a merge commit, e505c63e54e078e566e47dfacc2710f5fc13d70e. The branch contained M01 and M02, so GitHub closed PRs #2 and #3 as merged. Before the merge, build/typecheck, 14 unit tests and 100 asset hashes were re-run and passed. Main has no branch protection or CI workflow; the only status was CodeRabbit, which skipped the draft. No deployment is configured or occurred. M04 remains unstarted.

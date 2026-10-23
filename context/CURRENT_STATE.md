@@ -2,7 +2,7 @@
 
 ## React implementation update - 2026-10-23 (Asia/Singapore)
 
-M00 is merged to main. M01 implements the React shell, Spawn and explicit intro/replay on feat/m01-shell-entry (draft PR #2). M02 on feat/m02-public-routes adds About, project inventory/gallery, Experience and Contact. M03 on feat/m03-crafting-skills implements the actual-skills loadout and crafting workshop. Advancements and editor remain placeholders; Supabase is still unavailable. See PROJECT_FACTS.md and M03_VERIFICATION.md for current evidence. The sections below describe the original supplied vanilla reference, not completed React features.
+M00-M03 are merged to main (PR #1, PR #4). M01 implements the React shell, Spawn and explicit intro/replay. M02 adds About, project inventory/gallery, Experience and Contact. M03 implements the actual-skills loadout and crafting workshop. Advancements and editor remain placeholders; Supabase is still unavailable. See PROJECT_FACTS.md and M03_VERIFICATION.md for current evidence. The sections below describe the original supplied vanilla reference, not completed React features.
 
 ## Already present in the baseline
 
