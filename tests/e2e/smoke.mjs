@@ -45,8 +45,8 @@ for(let i=0;i<2;i++){
  assert.equal(await page.locator('canvas').count(),1);
 }
 for(let i=0;i<3;i++){
- await page.getByRole('link',{name:'Inventory',exact:true}).click();
- await page.getByRole('heading',{name:'Inventory',exact:true}).waitFor();
+ await page.getByRole('link',{name:'Crafting',exact:true}).click();
+ await page.getByRole('heading',{name:'Crafting',exact:true}).waitFor();
  assert.deepEqual(await page.evaluate(()=>({frames:__lifecycle.frames.size,buffers:__lifecycle.buffers,programs:__lifecycle.programs,observers:__lifecycle.observers})),{frames:0,buffers:0,programs:0,observers:0});
  await page.getByRole('link',{name:'Spawn',exact:true}).click();await page.locator('canvas').waitFor();
 }
@@ -81,7 +81,7 @@ await np.emulateMedia({reducedMotion:'reduce'});await np.locator('#loader').wait
 assert.equal(await np.locator('#main').evaluate(el=>getComputedStyle(el).opacity),'1');
 await np.emulateMedia({reducedMotion:'no-preference'});
 await np.evaluate(()=>{location.hash='projects';setTimeout(()=>location.hash='experience',20);setTimeout(()=>location.hash='contact',40);});
-await np.getByRole('heading',{name:'Message',exact:true}).waitFor();assert.equal(await np.locator('#main').evaluate(el=>getComputedStyle(el).opacity),'1');
+await np.getByRole('heading',{name:'Let’s write the next chapter.',exact:true}).waitFor();assert.equal(await np.locator('#main').evaluate(el=>getComputedStyle(el).opacity),'1');
 await np.getByRole('button',{name:'Pause motion'}).click();assert.equal(await np.locator('body').evaluate(el=>el.classList.contains('paused')),true);
 await normal.close();
 const fallback=await browser.newContext({reducedMotion:'reduce'});

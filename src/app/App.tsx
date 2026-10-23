@@ -3,7 +3,7 @@ import { Shell } from '../components/layout/Shell';
 import { Notice } from '../components/ui/Notice';
 import { HomePage } from '../features/home/HomePage';
 import { Intro } from '../features/intro/Intro';
-import { RoutePlaceholder } from '../features/RoutePlaceholder';
+import { PublicRoute } from '../features/PublicRoute';
 import { createContentRepository } from '../data/repository';
 import type { ContentSnapshot } from '../types/content';
 import type { Scene } from '../components/three/renderer.js';
@@ -46,6 +46,6 @@ export function App() {
  useEffect(()=>{if(!toast)return;const timer=setTimeout(()=>setToast(''),5500);return()=>clearTimeout(timer);},[toast]);
  return <>{open&&!error&&<Intro key={cycle} ready={ready} progress={progress} title={snapshot?.content.settings.introTitle||'A world built one idea at a time.'} warning={warning} paused={paused} stageHome={stageHome} finish={finish}/>}
  <Shell route={route} paused={paused} togglePause={()=>setPaused(value=>!value)} locked={open&&!error} name={snapshot?.content.settings.name}>
- {error?<Notice error>{error}</Notice>:snapshot&&(route==='home'?<HomePage content={snapshot.content} scene={scenes.home_landscape} paused={paused} replay={()=>{setCycle(value=>value+1);setOpen(true);}} notify={setToast}/>:<><Notice>Demo mode — this page is a placeholder for a later milestone.</Notice><RoutePlaceholder route={route}/></>)}
+ {error?<Notice error>{error}</Notice>:snapshot&&(route==='home'?<HomePage content={snapshot.content} scene={scenes.home_landscape} paused={paused} replay={()=>{setCycle(value=>value+1);setOpen(true);}} notify={setToast}/>:<PublicRoute route={route} content={snapshot.content} scenes={scenes} paused={paused} notify={setToast}/>)}
  </Shell><div id="toast" role="status" aria-live="polite" className={toast?'visible':''}>{toast}</div></>;
 }

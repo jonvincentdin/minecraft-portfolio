@@ -17,7 +17,8 @@
     "assets:sync": "node scripts/sync-assets.mjs",
     "assets:verify": "node scripts/verify-assets.mjs",
     "test": "tsx --test tests/unit/*.test.ts",
-    "test:browser": "node tests/e2e/smoke.mjs"
+    "test:browser": "node tests/e2e/smoke.mjs",
+    "test:m02": "node tests/e2e/m02.mjs && node tests/e2e/m02-pointer.mjs"
   },
   "dependencies": {
     "react": "19.3.1",
