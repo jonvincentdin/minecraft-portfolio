@@ -1,6 +1,6 @@
 # M02 — Content routes
 
-Status: implemented and verified 2026-10-23 (Asia/Singapore), on feat/m02-public-routes. See ../M02_VERIFICATION.md and ../evidence/m02. Not merged or deployed.
+Status: implemented and verified 2026-10-23 (Asia/Singapore), merged to main through PR #4 (e505c63e54e078e566e47dfacc2710f5fc13d70e). See ../M02_VERIFICATION.md and ../evidence/m02. Not deployed.
 
 Dependency: M01.
 

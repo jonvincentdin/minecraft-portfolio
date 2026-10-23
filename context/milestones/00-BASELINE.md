@@ -1,6 +1,6 @@
 # M00 — Baseline and scaffold
 
-Status: not started in this handoff.
+Status: implemented and verified; merged to main through PR #1 (e6d134749a56f742a18009847d19940e89780c96). See ../M00_VERIFICATION.md.
 
 Dependency: None.
 
