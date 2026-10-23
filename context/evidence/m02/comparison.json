@@ -1,0 +1,222 @@
+{
+  "about-1440": {
+    "dimensions": [
+      [
+        1440,
+        980
+      ],
+      [
+        1440,
+        980
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      1440,
+      980,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "projects-1440": {
+    "dimensions": [
+      [
+        1440,
+        1239
+      ],
+      [
+        1440,
+        1239
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      1440,
+      1239,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "experience-1440": {
+    "dimensions": [
+      [
+        1440,
+        949
+      ],
+      [
+        1440,
+        949
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      1440,
+      949,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "contact-1440": {
+    "dimensions": [
+      [
+        1440,
+        906
+      ],
+      [
+        1440,
+        906
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      1440,
+      906,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "about-390": {
+    "dimensions": [
+      [
+        390,
+        1618
+      ],
+      [
+        390,
+        1618
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      390,
+      1618,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "projects-390": {
+    "dimensions": [
+      [
+        390,
+        2119
+      ],
+      [
+        390,
+        2119
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      390,
+      2119,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "experience-390": {
+    "dimensions": [
+      [
+        390,
+        1696
+      ],
+      [
+        390,
+        1696
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      390,
+      1696,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "contact-390": {
+    "dimensions": [
+      [
+        390,
+        1221
+      ],
+      [
+        390,
+        1221
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      390,
+      1221,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "project-modal-desktop": {
+    "dimensions": [
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      1440,
+      900,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "project-modal-mobile": {
+    "dimensions": [
+      [
+        390,
+        844
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      390,
+      844,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "experience-compare": {
+    "dimensions": [
+      [
+        1440,
+        1251
+      ],
+      [
+        1440,
+        1251
+      ]
+    ],
+    "differentPixels": 0,
+    "bounds": [
+      1440,
+      1251,
+      0,
+      0
+    ],
+    "fraction": 0
+  }
+}

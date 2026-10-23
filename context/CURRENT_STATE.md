@@ -2,7 +2,7 @@
 
 ## React implementation update - 2026-10-23 (Asia/Singapore)
 
-M00 is merged to main. M01 now implements the React shell, Spawn and explicit intro/replay on feat/m01-shell-entry. Other public routes/editor remain placeholders and Supabase is still an unavailable boundary. See PROJECT_FACTS.md and M01_VERIFICATION.md for current evidence. The sections below describe the original supplied vanilla reference, not completed React features.
+M00 is merged to main. M01 implements the React shell, Spawn and explicit intro/replay on feat/m01-shell-entry (draft PR #2). M02 on feat/m02-public-routes adds About, project inventory/gallery, Experience and Contact. Crafting, advancements and editor remain placeholders; Supabase is still unavailable. See PROJECT_FACTS.md and M02_VERIFICATION.md for current evidence. The sections below describe the original supplied vanilla reference, not completed React features.
 
 ## Already present in the baseline
 
