@@ -1,6 +1,6 @@
 # M01 — Visual shell and entry
 
-Status: implemented and verified 2026-10-23 (Asia/Singapore). See ../M01_VERIFICATION.md; delivery is a draft PR pending merge.
+Status: implemented and verified 2026-10-23 (Asia/Singapore). See ../M01_VERIFICATION.md; merged to main through PR #4 (e505c63e54e078e566e47dfacc2710f5fc13d70e).
 
 Dependency: M00.
 
