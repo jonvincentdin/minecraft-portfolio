@@ -46,7 +46,7 @@ for(let i=0;i<2;i++){
 }
 for(let i=0;i<3;i++){
  await page.getByRole('link',{name:'Advancements',exact:true}).click();
- await page.getByRole('heading',{name:'Advancements',exact:true}).waitFor();
+ await page.getByRole('heading',{name:'Collected along the way.',exact:true}).waitFor();
  assert.deepEqual(await page.evaluate(()=>({frames:__lifecycle.frames.size,buffers:__lifecycle.buffers,programs:__lifecycle.programs,observers:__lifecycle.observers})),{frames:0,buffers:0,programs:0,observers:0});
  await page.getByRole('link',{name:'Spawn',exact:true}).click();await page.locator('canvas').waitFor();
 }

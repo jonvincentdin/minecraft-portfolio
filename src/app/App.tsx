@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Shell } from '../components/layout/Shell';
 import { Notice } from '../components/ui/Notice';
 import { HomePage } from '../features/home/HomePage';
@@ -8,6 +8,7 @@ import { createContentRepository } from '../data/repository';
 import type { ContentSnapshot } from '../types/content';
 import type { Scene } from '../components/three/renderer.js';
 import { readRoute, routes } from './routes';
+import { mountSectionMotion, pixelBurst } from '../lib/motion.js';
 export function App() {
  const [route,setRoute]=useState(()=>readRoute(location.hash));
  const [paused,setPaused]=useState(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -15,6 +16,8 @@ export function App() {
  const [scenes,setScenes]=useState<Record<string,Scene>>({});
  const [progress,setProgress]=useState(0),[ready,setReady]=useState(false),[error,setError]=useState(''),[warning,setWarning]=useState('');
  const [open,setOpen]=useState(true),[cycle,setCycle]=useState(0),[toast,setToast]=useState('');
+ const pausedRef=useRef(paused),openRef=useRef(open),sectionMotion=useRef<(()=>void)|undefined>(undefined);
+ pausedRef.current=paused;openRef.current=open;
  const stageHome=useCallback(()=>{history.replaceState(null,'','#home');setRoute('home');},[]);
  const finish=useCallback(()=>setOpen(false),[]);
  useEffect(()=>{document.body.classList.toggle('intro-open',open);if(!open)document.getElementById('main')?.focus({preventScroll:true});return()=>document.body.classList.remove('intro-open');},[open]);
@@ -32,6 +35,17 @@ export function App() {
   setRoute(readRoute(location.hash));
   addEventListener('hashchange',change);return()=>{sequence++;animation?.cancel();removeEventListener('hashchange',change);};
  },[paused,open]);
+ // Reveal each rendered route once, as the reference did after render(); the intro already animates the page beneath it.
+ useEffect(()=>{
+  if(!snapshot||openRef.current||route==='editor')return;
+  const stop=mountSectionMotion(document.getElementById('main')!,()=>pausedRef.current);sectionMotion.current=stop;
+  return()=>{stop();if(sectionMotion.current===stop)sectionMotion.current=undefined;};
+ },[route,snapshot]);
+ useEffect(()=>{if(paused)sectionMotion.current?.();},[paused]);
+ useEffect(()=>{
+  const click=(event:MouseEvent)=>{const button=(event.target as Element|null)?.closest?.('.btn');if(button&&!pausedRef.current&&!document.body.classList.contains('editing')&&!document.body.classList.contains('intro-open'))pixelBurst(button,event);};
+  document.addEventListener('click',click);return()=>document.removeEventListener('click',click);
+ },[]);
  useEffect(()=>{const media=matchMedia('(prefers-reduced-motion: reduce)');const change=()=>setPaused(media.matches);media.addEventListener('change',change);return()=>media.removeEventListener('change',change);},[]);
  useEffect(()=>{
   const abort=new AbortController();let alive=true;

@@ -6,6 +6,7 @@ import { AboutPage } from './about/AboutPage';
 import { ProjectsPage } from './projects/ProjectsPage';
 import { ExperiencePage } from './experience/ExperiencePage';
 import { ContactPage } from './contact/ContactPage';
+import { AdvancementsPage } from './advancements/AdvancementsPage';
 import { Notice } from '../components/ui/Notice';
 import { RoutePlaceholder } from './RoutePlaceholder';
 export function PublicRoute({route,content,scenes,paused,notify}:{route:Route;content:PortfolioContent;scenes:Record<string,Scene>;paused:boolean;notify:(message:string)=>void}) {
@@ -14,6 +15,7 @@ export function PublicRoute({route,content,scenes,paused,notify}:{route:Route;co
  if(route==='about')return <AboutPage {...props}/>;
  if(route==='projects')return <ProjectsPage {...props} notify={notify}/>;
  if(route==='experience')return <ExperiencePage {...props}/>;
+ if(route==='achievements')return <AdvancementsPage content={content} paused={paused}/>;
  if(route==='contact')return <ContactPage content={content}/>;
  return <><Notice>Demo mode — this page is a placeholder for a later milestone.</Notice><RoutePlaceholder route={route}/></>;
 }

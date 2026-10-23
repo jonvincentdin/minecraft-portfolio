@@ -6,3 +6,5 @@ src/data/demo-content.json -text
 context/content-seed.json -text
 src/domain/crafting-data.js -text
 src/domain/crafting-engine.js -text
+src/domain/tree-paths.js -text
+src/lib/motion.js -text
