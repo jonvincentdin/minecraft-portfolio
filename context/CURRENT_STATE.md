@@ -2,7 +2,7 @@
 
 ## React implementation update - 2026-10-23 (Asia/Singapore)
 
-M00-M03 are merged to main (PR #1, PR #4). M01 implements the React shell, Spawn and explicit intro/replay. M02 adds About, project inventory/gallery, Experience and Contact. M03 implements the actual-skills loadout and crafting workshop. M04 on feat/m04-advancements-motion implements both advancement trees, the path glow and shared reveal/pixel motion. The editor remains a placeholder; Supabase is still unavailable. See PROJECT_FACTS.md and M04_VERIFICATION.md for current evidence. The sections below describe the original supplied vanilla reference, not completed React features.
+M00-M03 are merged to main (PR #1, PR #4). M01 implements the React shell, Spawn and explicit intro/replay. M02 adds About, project inventory/gallery, Experience and Contact. M03 implements the actual-skills loadout and crafting workshop. M04 (merged through PR #7) implements both advancement trees, the path glow and shared reveal/pixel motion. The editor remains a placeholder; Supabase is still unavailable. See PROJECT_FACTS.md and M04_VERIFICATION.md for current evidence. The sections below describe the original supplied vanilla reference, not completed React features.
 
 ## Already present in the baseline
 
