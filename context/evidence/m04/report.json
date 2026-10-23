@@ -1,0 +1,23 @@
+{
+  "errors": [],
+  "checks": [
+    "markup matches the reference; first root selected and lit",
+    "ancestor, descendant and sibling selections light exactly the root path; inspector text matches",
+    "keyboard Enter selects a focused node",
+    "zoom clamps 50–180%, pan clamps and Center map match the reference",
+    "certification tree is separate, resets selection and has credential wording",
+    "list view keeps selection, ignores zoom and restores the map path",
+    "three tree teardowns leave no frames, observers or script animations",
+    "section reveals match: 460ms, 42ms index stagger, backwards fill",
+    "sibling route retracts in reverse, then extends; 280ms ease-in-out edges, 400ms node pulse",
+    "inspector children replay detailArrive on selection",
+    "five rapid clicks settle on the last node in both",
+    "pause or a reduced-motion change mid-route settles the glow immediately",
+    "pausing mid-reveal and interrupting a route leave every group fully opaque",
+    "pixel bursts: six 440ms pixels, centred for keyboard, none while paused, all removed",
+    "section reveals match the reference on all seven routes (about 3, projects 3, skills 5, experience 9, achievements 4, contact 4, home 7)",
+    "button hover and press transforms match (matrix(1, 0, 0, 1, 0, -3) / matrix(0.98, 0, 0, 0.98, 0, 1))",
+    "disconnected roots clear the old path and start the new root, once, under StrictMode",
+    "an invalid tree is reported and not drawn; the other tree still works"
+  ]
+}

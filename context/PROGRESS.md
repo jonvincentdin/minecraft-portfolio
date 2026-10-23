@@ -13,7 +13,7 @@
 - [x] M01 Visual shell and entry
 - [x] M02 Public content routes
 - [x] M03 Crafting and skills
-- [ ] M04 Advancements and motion parity
+- [x] M04 Advancements and motion parity
 - [ ] M05 Editor parity
 - [ ] M06 Supabase persistence and authorization
 - [ ] M07 Verification and delivery
@@ -72,3 +72,14 @@ No canonical/reference changes, new dependencies, migrations, authorization or p
 ## 2026-10-23 (Asia/Singapore): M01-M03 merged to main
 
 On the user's explicit authorization, PR #4 (feat/m03-crafting-skills, head 0e9bf9f) was marked ready and merged into main with a merge commit, e505c63e54e078e566e47dfacc2710f5fc13d70e. The branch contained M01 and M02, so GitHub closed PRs #2 and #3 as merged. Before the merge, build/typecheck, 14 unit tests and 100 asset hashes were re-run and passed. Main has no branch protection or CI workflow; the only status was CodeRabbit, which skipped the draft. No deployment is configured or occurred. M04 remains unstarted.
+
+## 2026-10-23 (Asia/Singapore): M04 advancements and motion parity completed
+
+Implementation 84543ec on feat/m04-advancements-motion, based on main 397bba2.
+- **Trees:** tree-paths.js and motion.js are copied byte-for-byte. The React advancements page covers both trees, pan/zoom/list and the inspector, and creates one animator per drawn tree with StrictMode-safe cleanup. Trees are validated before drawing.
+- **App motion:** section reveals run once per route render outside the intro, and the `.btn` pixel burst is added.
+- **Deliberate differences:** pausing or reduced motion mid-route settles the glow immediately; invalid trees show an alert instead of being drawn; pointercancel clears `.panning`.
+
+Passed: build/typecheck, 22 unit tests, 100 asset hashes, shell regression, the M02 and M03 suites, and test:m04 (18 checks). test:m04 compares React side by side with the reference for markup, selection, map controls, glow order and timing, rapid clicks, reveals on all seven routes, pixel burst, hover/press, teardown and a StrictMode disconnected-roots/invalid-tree fixture. All 11 screenshot pairs have zero differing pixels. See M04_VERIFICATION.md and evidence/m04.
+
+Not verified: physical touch panning, other engines, and separate timing of the modal entrance. Same-route hash changes do not re-run reveals. No canonical/reference changes, dependencies, migrations or deployment. M05 remains unstarted.
