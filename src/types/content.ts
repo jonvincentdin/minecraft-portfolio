@@ -10,4 +10,4 @@ export interface Experience { id: string; character: string; title: string; orga
 export interface Advancement { id: string; title: string; description: string; date: string; issuer: string; evidence: string; symbol: string; parent: string; x: number; y: number; sample: boolean }
 export interface Settings { name: string; tagline: string; heroLabel: string; github: string; linkedin: string; introTitle: string; aboutTitle: string; bio: string; portrait: string; portraitPosition: number; contactTitle: string; contactCopy: string }
 export interface PortfolioContent { version: number; settings: Settings; highlights: TextEntry[]; journal: TextEntry[]; projects: Project[]; actualSkills: ActualSkill[]; skills: LegacySkill[]; characters: Character[]; experience: Experience[]; achievements: Advancement[]; certifications: Advancement[]; contacts: (TextEntry & { url: string })[]; recipes: Recipe[]; startingInventory: StartingItem[] }
-export interface ContentSnapshot { content: PortfolioContent; revision: number; source: 'demo' | 'supabase' }
+export interface ContentSnapshot { content: PortfolioContent; revision: number; source: 'demo' | 'local' | 'supabase' }
