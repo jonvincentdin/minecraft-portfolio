@@ -1,0 +1,4 @@
+interface:
+  display_name: "JVD Parity QA"
+  short_description: "Prove reference parity and deliver a milestone"
+  default_prompt: "Use $jvd-parity-qa. Run the current milestone's acceptance checks and record the evidence."
