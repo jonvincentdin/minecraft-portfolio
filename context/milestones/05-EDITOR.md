@@ -1,6 +1,6 @@
 # M05 — Editor parity
 
-Status: not started in this handoff.
+Status: implemented and verified against the local repository adapter 2026-10-24 (Asia/Singapore) on feat/m05-editor (6c1caeb). Backend, sign-in and server authorization are not claimed; they are M06. See ../M05_VERIFICATION.md.
 
 Dependency: M04.
 

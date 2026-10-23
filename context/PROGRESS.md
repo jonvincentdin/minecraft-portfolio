@@ -14,7 +14,7 @@
 - [x] M02 Public content routes
 - [x] M03 Crafting and skills
 - [x] M04 Advancements and motion parity
-- [ ] M05 Editor parity
+- [x] M05 Editor parity (local repository adapter; backend in M06)
 - [ ] M06 Supabase persistence and authorization
 - [ ] M07 Verification and delivery
 
@@ -87,3 +87,15 @@ Not verified: physical touch panning, other engines, and separate timing of the 
 ## 2026-10-23 (Asia/Singapore): M04 merged to main
 
 Under the user's standing authorization, PR #7 (head 824ce5d) was squash-merged into main as 656cedd8885086a6581e5a7620f0f905174537d5. Main has no branch protection, CI workflow or deploy hook; CodeRabbit's review was still in progress at merge time. No deployment occurred. M05 remains unstarted.
+
+## 2026-10-24 (Asia/Singapore): M05 editor parity completed (local adapter)
+
+Implementation 6c1caeb on feat/m05-editor, based on main 4c06561.
+- **Editor:** the React world editor covers all eight sections, the project gallery, portrait, visual tree connections, recipe and inventory studios, the five characters, and import/export.
+- **Repository:** `LocalContentRepository` keeps separate draft and published documents in IndexedDB with compare-and-swap revisions, and falls back to a labelled session-only memory store.
+- **Validation:** content-validation.ts ports the reference validator and is stricter on references. Preview renders the draft through the public pages.
+- **Decisions:** explicit choices when deleting referenced records; import keeps a recovery copy and never publishes; conflicts keep local edits. Move-mode node selection, broken in the reference under current Chromium, is fixed.
+
+Passed: build/typecheck, 29 unit tests (validator parity with the reference on 24 cases), 100 asset hashes, smoke/M02/M03/M04 regressions, and test:m05 (13 checks; three consecutive runs green after fixing a test-side toast race). The field coverage matrix is in M05_VERIFICATION.md. Of 12 editor screenshot pairs, 3 are identical; the other differences are confined to the intended topbar, notice and help-text regions, or are antialiasing.
+
+Not done (M06): sign-in, server authorization, shared drafts, Storage uploads, atomic server publish, RLS. Not verified: physical touch tree dragging, other engines. No dependencies, migrations or deployment. M06 remains unstarted.

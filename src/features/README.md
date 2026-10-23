@@ -4,4 +4,6 @@ Crafting, advancements and editor remain RoutePlaceholder until M03, M04 and M05
 
 M03 implements skills/SkillsPage, SkillLoadout and WorkshopDialog with the unchanged crafting engine/data. Visitor progress is separate from actual skills.
 
-M04 implements advancements/AdvancementsPage on the unchanged tree-paths.js, and App mounts the unchanged motion.js section reveals and pixel burst. Only the editor remains a placeholder; M05 is next.
+M04 implements advancements/AdvancementsPage on the unchanged tree-paths.js, and App mounts the unchanged motion.js section reveals and pixel burst.
+
+M05 implements editor/EditorPage with section, entry, settings, tree-connection and workshop editors. useDraft owns the working copy and saves through the ContentRepository contract (the browser-local adapter in demo mode).
