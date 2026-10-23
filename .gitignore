@@ -11,3 +11,10 @@ test-results/
 # Local review output; may contain private memory excerpts or large drafts
 .local/memory-audits/
 work/model-drafts/
+
+# Generated copies and local tool configuration
+public/assets/
+.codex/
+.gemini/
+.impeccable/
+.taste-skill/

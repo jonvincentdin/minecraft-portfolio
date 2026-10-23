@@ -1,0 +1,34 @@
+{
+  "name": "jvd-world-of-builds",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "predev": "npm run assets:sync",
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "reference": "node scripts/preview-reference.mjs",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "npm run assets:sync",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "assets:sync": "node scripts/sync-assets.mjs",
+    "assets:verify": "node scripts/verify-assets.mjs",
+    "test": "tsx --test tests/unit/*.test.ts",
+    "test:browser": "node tests/e2e/smoke.mjs"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "vite": "8.3.5",
+    "typescript": "7.0.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.0.0",
+    "@playwright/test": "^1.58.0"
+  }
+}

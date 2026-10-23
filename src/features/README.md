@@ -1,0 +1,1 @@
+M00 implements only home/BaselinePage and shared RoutePlaceholder. The hash controller exposes all seven public routes and editor without claiming feature completion. Future modules: intro (M01), home/about/projects/experience/contact (M01/M02), skills (M03), advancements (M04), editor (M05). No empty feature components are generated.

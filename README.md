@@ -1,8 +1,42 @@
 # Jon Vincent Din — React + Supabase rebuild handoff
 
-This package is a source-grounded specification and asset bundle for rebuilding **World of Builds** in React in VS Code. It is **not an already converted React application** and does not create or connect a Supabase project.
+M00 now provides a runnable React + TypeScript + Vite foundation. Public routes are explicit placeholders; the supplied vanilla implementation remains the immutable reference. Supabase is a declared boundary for M06, not an active backend.
 
-## Start here
+
+## Run the M00 foundation
+
+Requires Node >=22.12 (verified with Node 24.19) and npm. From the repository root:
+
+```powershell
+npm.cmd ci
+npm.cmd run dev
+```
+
+React: http://127.0.0.1:5173. In a second terminal:
+
+```powershell
+npm.cmd run reference
+```
+
+Immutable reference: http://127.0.0.1:4174.
+
+| Command | Purpose |
+| --- | --- |
+| npm.cmd run typecheck | Strict TypeScript check |
+| npm.cmd run build | Sync assets, typecheck, production bundle |
+| npm.cmd run preview | Serve production build on port 4173 |
+| npm.cmd run assets:sync | Exact runtime copies under public/assets |
+| npm.cmd run assets:verify | Check 100 supplied original hashes |
+| npm.cmd test | Repository behavior and copy integrity (sync assets first) |
+| npm.cmd run test:browser | Edge smoke and screenshots; start dev and reference servers first |
+
+No environment file is needed for demo mode. Optional .env.local uses only the public settings in .env.example. VITE_CONTENT_MODE=supabase requires both public settings and then honestly reports that M06 integration is pending. There are no remote saves or owner enrollment in M00.
+
+The reference CSS is copied with root-relative font URLs. The custom renderer is copied exactly; a React effect manages its lifetime. Runtime assets are generated and ignored. The version-5 demo seed has a dedicated runtime copy, checked against the canonical seed by tests.
+
+See context/M00_VERIFICATION.md for checks, screenshots and limitations. Historical handoff instructions below describe the original ZIP; M00 completion supersedes their setup step. Stop before M01.
+
+## Original handoff starting instructions
 
 1. Extract the whole ZIP into a project folder and open it in VS Code.
 2. Read `context/CONTEXT.md`, `context/CURRENT_STATE.md`, and `context/ARCHITECTURE.md`.

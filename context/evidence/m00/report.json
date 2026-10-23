@@ -1,0 +1,28 @@
+{
+  "mode": "webgl",
+  "gpu": {
+    "vendor": "Google Inc. (NVIDIA)",
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "referenceMode": [
+    {
+      "fallback": false
+    }
+  ],
+  "errors": [],
+  "referenceErrors": [],
+  "viewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "checks": [
+    "demo shell",
+    "all routes",
+    "WebGL draws and mouse rotation",
+    "3 teardown/remount cycles with zero RAF/buffer/program/observer leaks",
+    "runtime assets",
+    "private context blocked",
+    "mobile overflow",
+    "forced thumbnail fallback"
+  ]
+}

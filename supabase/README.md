@@ -1,0 +1,1 @@
+M06 will add reviewed migrations under migrations/ and implement SupabaseContentRepository. No migrations, RLS policies, owner enrollment or authentication are implemented or applied in M00. Only public URL and publishable key belong in VITE variables.

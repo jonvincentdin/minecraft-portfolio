@@ -9,7 +9,7 @@
 
 ## React/Supabase implementation status
 
-- [ ] M00 Baseline and scaffold
+- [x] M00 Baseline and scaffold
 - [ ] M01 Visual shell and entry
 - [ ] M02 Public content routes
 - [ ] M03 Crafting and skills
@@ -26,3 +26,17 @@ The above implementation tasks are not completed by this handoff. Record dates, 
 - Added dated facts and a source-linked verification report covering all eleven suggested third-party tools. No third-party MCP, paid generator or external skill pack installed.
 - Skill format checks passed for all four folders. The supplied asset check verified 100 original assets. Memory-audit fixture exercise preserved files and distinguished claims from evidence; see SKILL_UPDATE_VALIDATION.md.
 - Existing application source, models and uploaded Git/tool configuration were preserved. This update does not advance React/Supabase implementation milestones or change production behavior.
+
+## 2026-10-23 (Asia/Singapore): M00 completed
+
+Implemented the authorized React/Vite/TypeScript scaffold, lockfile, explicit demo repository, typed version-5 content, unavailable Supabase boundary, original CSS and renderer lifecycle wrapper, shared shell and route placeholders. Added exact runtime asset sync, separate reference HTTP preview, foundation tests and browser evidence.
+
+Initial local checkpoint: 6a4d5ea on feat/m00-baseline-scaffold. The repository started without HEAD and the fetched remote had no branches. No main history was invented. Reference provenance remains 47d8b1ca11b05db6791adaf9bf33a5cf9bd946ca.
+
+Commands passed: npm run assets:verify (100), npm run typecheck, npm run build, npm test (5), npm run test:browser, git diff --check. Edge used actual NVIDIA RTX 4060 WebGL. Forced fallback and three zero-leak teardown cycles passed. Desktop/mobile screenshots were captured and reviewed. See M00_VERIFICATION.md for complete evidence and scope.
+
+An initial typecheck identified missing ImportMetaEnv declarations; fixed and rerun successfully. Screenshot review caught shell-pipeline Unicode substitution in new copy; corrected and recaptured. Canonical assets and reference stayed byte-identical.
+
+M01 remains unstarted. Physical touch, feature parity, backend/RLS and real owner content remain later work. No merge, deployment, database operation or repository-permission change. This request is delivered as local commits; no push or PR was performed.
+
+Finalization: scaffold commit 49f5ed3 is retained. Added checkout-safe attributes for the exact renderer/CSS/seed copies and removed test EOF whitespace. Five foundation tests and diff checks passed again after the interrupted approval attempt. The approval service previously hit a usage limit; no blocked Git command executed.
