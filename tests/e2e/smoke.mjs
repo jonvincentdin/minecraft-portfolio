@@ -76,4 +76,3 @@ await reference.screenshot({path:out+'/reference-home-mobile.png',fullPage:true}
 await writeFile(out+'/report.json',JSON.stringify({mode,gpu,referenceMode,errors,referenceErrors,viewports:['1440x900','390x844'],checks:['demo shell','all routes','WebGL draws and mouse rotation','3 teardown/remount cycles with zero RAF/buffer/program/observer leaks','runtime assets','private context blocked','mobile overflow','forced thumbnail fallback']},null,2));
 assert.deepEqual(errors,[]); console.log(JSON.stringify({mode,gpu,errors,referenceErrors},null,2));
 await browser.close();
-
