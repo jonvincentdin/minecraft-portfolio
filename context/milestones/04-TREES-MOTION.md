@@ -1,6 +1,6 @@
 # M04 — Advancements and motion parity
 
-Status: implemented and verified 2026-10-23 (Asia/Singapore) on feat/m04-advancements-motion (84543ec). See ../M04_VERIFICATION.md and ../evidence/m04. Not deployed.
+Status: implemented and verified 2026-10-23 (Asia/Singapore) merged to main through PR #7 (656cedd8885086a6581e5a7620f0f905174537d5). See ../M04_VERIFICATION.md and ../evidence/m04. Not deployed.
 
 Dependency: M03.
 

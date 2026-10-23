@@ -83,3 +83,7 @@ Implementation 84543ec on feat/m04-advancements-motion, based on main 397bba2.
 Passed: build/typecheck, 22 unit tests, 100 asset hashes, shell regression, the M02 and M03 suites, and test:m04 (18 checks). test:m04 compares React side by side with the reference for markup, selection, map controls, glow order and timing, rapid clicks, reveals on all seven routes, pixel burst, hover/press, teardown and a StrictMode disconnected-roots/invalid-tree fixture. All 11 screenshot pairs have zero differing pixels. See M04_VERIFICATION.md and evidence/m04.
 
 Not verified: physical touch panning, other engines, and separate timing of the modal entrance. Same-route hash changes do not re-run reveals. No canonical/reference changes, dependencies, migrations or deployment. M05 remains unstarted.
+
+## 2026-10-23 (Asia/Singapore): M04 merged to main
+
+Under the user's standing authorization, PR #7 (head 824ce5d) was squash-merged into main as 656cedd8885086a6581e5a7620f0f905174537d5. Main has no branch protection, CI workflow or deploy hook; CodeRabbit's review was still in progress at merge time. No deployment occurred. M05 remains unstarted.
