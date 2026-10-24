@@ -218,3 +218,20 @@ The owner reported a rectangle blinking as the intro hands over to Spawn. Frame 
 - Measured: the notice opacity is 0 through the whole exit, then 0 to 1 over about 450ms. The hero's top stays at 135px in every sample.
 - New test:m06 check: the notice is transparent during the intro and appears without layout shift. All 13 checks passed.
 - Also passed: smoke, M01 comparison (exact, apart from 1-pixel noise at 1366), 37 unit tests.
+
+## 2026-10-24 (Asia/Singapore): intro exit no longer leaves the ground slab over the header
+
+The owner pointed out a green rectangle blinking during the hand-over to Spawn. The cause is in the reference's own exit choreography, which React reproduced exactly:
+- Each landscape piece rises by 115vh and fades only to 0.85.
+- The ground plane is 65% tall and set 25% below the screen, so after rising it stops with its bottom edge at y≈207px.
+- It stays there at 0.85 opacity, a green grid slab over the header, from about 0.65s until the loader is removed at about 1.3s, then disappears in a single frame.
+
+Measured per frame in both the reference and React.
+
+**Fix:** a deliberate difference from the reference, made at the owner's request. Pieces fade out as they rise and reach 0 opacity at the end; the ground fades faster (0.25 by 35%). The motion path and timing are unchanged, and nothing is left on screen when the loader goes.
+
+**Checks:**
+- New smoke-test assertion (motion enabled): about 1.05s after Enter, no intro piece inside the viewport has opacity above 0.05. It fails on the old code (naming `cinema-ground`) and passes on the new.
+- Also passed: smoke, M01 comparison (intro exact; it is captured before the exit), test:m04 (18), test:m06 (13), 37 unit tests.
+
+The previous fix (the notice fading in after the intro) remains; it addressed a different element.

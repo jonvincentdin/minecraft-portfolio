@@ -76,6 +76,12 @@ const np=await normal.newPage();np.on('pageerror',error=>errors.push(error.messa
 await np.goto('http://127.0.0.1:5173');await np.locator('#loader[data-phase="ready"]').waitFor();
 const start=Date.now();await np.locator('#skip-intro').click();
 await np.locator('.intro-shutters > span').last().waitFor();assert.equal(await np.locator('.intro-shutters > span').count(),8);
+// Near the end of the exit no landscape piece may still cover the page: they fade out as they rise, so nothing
+// (notably the large ground plane, which stops over the header) is left on screen to vanish when the loader is removed.
+await np.waitForTimeout(Math.max(0,1050-(Date.now()-start)));
+const leftovers=await np.evaluate(()=>[...document.querySelectorAll('#loader .cinema-landscape > *, #loader .cinema-content > *, #loader .cinema-bottom > *')].filter(el=>{const r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight&&Number(getComputedStyle(el).opacity)>0.05;}).map(el=>el.className));
+assert.ok(await np.locator('#loader').count(),'the loader is still present when checked');
+assert.deepEqual(leftovers,[],'intro pieces still visible at the end of the exit');
 await np.locator('#loader').waitFor({state:'detached'});const duration=Date.now()-start;assert.ok(duration>=1200&&duration<2500,'entry duration '+duration);
 await np.getByRole('button',{name:'Replay intro'}).click();await np.locator('#skip-intro').click();
 await np.emulateMedia({reducedMotion:'reduce'});await np.locator('#loader').waitFor({state:'detached'});

@@ -130,3 +130,8 @@ The published site still shows the sample world. In the seed:
 8. **Owner password:** the generated password should be changed through the editor's *Change password* if that hasn't
    been done.
 9. **Separate modal entrance timing:** not measured on its own (unchanged since M04).
+
+## Deliberate differences added after M07
+
+- **Intro exit:** landscape pieces fade to 0 as they rise. The reference stops the ground plane over the header at 0.85 opacity until the loader is removed, which reads as a blinking green rectangle. Guarded by a smoke-test assertion.
+- **Backend notice:** in Supabase mode the "Nothing has been published yet" notice stays transparent during the intro and fades in afterwards, keeping its space so the layout does not shift.
