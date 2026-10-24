@@ -182,3 +182,28 @@ At the user's request (new free project, Singapore, owner chanseytheopiest@gmail
   - `test:m06` (12): the new browser check covers a wrong current password, a mismatched repeat, and the old password refused while the new one signs in.
   - Hosted check with a temporary account: wrong current refused, change accepted, old refused, new accepted. The account was deleted afterwards.
 - **Not touched:** the owner's own password. The owner should change it now through the editor.
+
+## 2026-10-24 (Asia/Singapore): M07 parity verification and handoff completed
+
+On feat/m07-delivery. The user asked to continue and complete the project.
+
+**Verification run** (every check passed):
+- Typecheck, build, 37 unit tests, test:db (11), assets:verify (100).
+- test:browser, test:m02, test:m03, test:m04 (18), test:m05 (13), test:m06 (13).
+- New: test:reference (the reference's own check scripts, unchanged, against the React modules and assets), test:m07 (accessibility, keyboard and touch sweep beside the reference) and test:engines (Firefox 157, WebKit 27.2).
+- Visual capture and compare for M01–M05.
+
+**Found and fixed:**
+- **M01 intro comparison:** it had drifted to 30% different because the smoke test opened React at #projects and the reference at /. Both now use #projects, and all six M01 pairs match; home-768 shows Δ1 WebGL noise in some runs.
+- **Project search focus:** the reference removes its focus outline with no replacement; a :focus-within ring was added in foundation.css.
+
+**Added:**
+- A failed-upload cleanup check in test:m06.
+- context/DEPLOYMENT.md and a rewritten README top section.
+- context/M07_VERIFICATION.md and evidence in context/evidence/m07.
+
+**Decisions:**
+- No favicon was invented; the reference has none either.
+- test:m06-hosted was not rerun, because it deletes content and the owner may have started editing.
+
+**Remaining:** listed in M07_VERIFICATION.md. They include physical touch, deployment and the production origin, owner content, and the owner password change.

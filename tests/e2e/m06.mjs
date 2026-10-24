@@ -106,6 +106,16 @@ try {
  assert.ok(await second.locator('#portrait-editor-preview').evaluate(img => img.decode().then(() => img.naturalWidth > 0)));
  check('uploads are registered, stored privately as resized WebP, and shown to editors through signed URLs');
 
+ // ---- A failed upload leaves no media record behind and changes nothing ----
+ await owner.route('**/storage/v1/object/portfolio-drafts/**', route => route.request().method() === 'POST' ? route.abort('failed') : route.continue());
+ await owner.locator('#portrait-upload').setInputFiles({ name: 'second.png', mimeType: 'image/png', buffer: png });
+ await toastShows(owner, /could not be uploaded/);
+ await owner.unroute('**/storage/v1/object/portfolio-drafts/**');
+ assert.deepEqual((await sql('select count(*)::int as n from public.media_assets'))[0].n, 1, 'the failed registration was removed');
+ assert.equal((await sql('select revision::int from public.portfolio_drafts'))[0].revision, 2, 'the draft is unchanged');
+ assert.equal(await owner.locator('#portrait-editor-preview').getAttribute('src'), src, 'the previous portrait stays');
+ check('a failed upload is reported, its reservation is cleaned up, and the draft keeps the previous image');
+
  // ---- Preview, then publish ----
  await owner.locator('#preview-section').click(); await owner.locator('.preview-banner').waitFor();
  assert.match(await owner.locator('.preview-banner').textContent(), /Draft preview · draft revision 2 · not published/);

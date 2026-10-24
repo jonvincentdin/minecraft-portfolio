@@ -52,7 +52,8 @@ for(let i=0;i<3;i++){
 }
 await page.getByRole('button',{name:'GitHub'}).click();await page.locator('#toast.visible').waitFor();
 const ref=await context.newPage();ref.on('pageerror',error=>errors.push('reference: '+error.message));
-await ref.goto('http://127.0.0.1:4174');await ref.locator('#skip-intro:not([disabled])').waitFor();
+// Same deep link as the React page above, so the page staged under the intro matches (the reference also returns to #home on entry).
+await ref.goto('http://127.0.0.1:4174/#projects');await ref.locator('#skip-intro:not([disabled])').waitFor();
 await ref.waitForTimeout(1000);
 await ref.screenshot({path:out+'/reference-intro-desktop.png',fullPage:true});
 await ref.locator('#skip-intro').click();await ref.locator('#loader').waitFor({state:'hidden'});

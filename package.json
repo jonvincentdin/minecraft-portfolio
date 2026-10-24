@@ -24,7 +24,10 @@
     "test:m05": "node tests/e2e/m05.mjs",
     "test:db": "tsx --test tests/db/*.test.ts",
     "test:m06": "node tests/e2e/m06.mjs",
-    "test:m06-hosted": "node tests/e2e/m06-hosted.mjs"
+    "test:m06-hosted": "node tests/e2e/m06-hosted.mjs",
+    "test:reference": "node scripts/reference-checks.mjs",
+    "test:m07": "node tests/e2e/m07.mjs",
+    "test:engines": "node tests/e2e/m07-engines.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.3",
