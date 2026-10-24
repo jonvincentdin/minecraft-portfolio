@@ -138,3 +138,15 @@ The browser test first exposed three defects, all fixed:
 - Media cleanup UI.
 
 No PR could be opened, because `gh` is not installed here. Nothing was merged or deployed.
+
+## 2026-10-24 (Asia/Singapore): M03 fix and M06 merged to main
+
+On the user's instruction ("install gh and handle the rest"), the GitHub CLI 2.103.2 was installed with winget and the user signed in through the device flow.
+
+- PR #11 (fix/m03-dialog-parity) was squash-merged as b6caeb2.
+- PR #12 (feat/m06-supabase) conflicted only in PROGRESS.md and PROJECT_FACTS.md, because #11 was squashed. Main's versions of both files were identical to the original M03 commit, so the branch versions were kept. After the merge, 36 unit tests and the typecheck passed. #12 was squash-merged as f80e90b.
+- On main after the merges, 36 unit tests, test:db (11) and the build passed.
+- Both feature branches were deleted.
+- Main has no branch protection, CI workflow, webhook or deployment; nothing was deployed.
+- No migration was applied to any Supabase project. Hosted verification still waits for credentials and approval to apply the migration.
+- PR #12 had damaged two words in CURRENT_STATE.md ("M00" became "000", "There" became "hhere"), and its intended M06 sentence was missing. This PR restores the file to its pre-M06 text and applies that sentence.

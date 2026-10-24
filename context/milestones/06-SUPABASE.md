@@ -1,6 +1,6 @@
 # M06 — Auth, persistence and publication
 
-Status: implemented on feat/m06-supabase 2026-10-24 (Asia/Singapore) and verified against the migration in PGlite and a local Supabase API emulator. Not yet applied to or verified against a hosted project: the owner's Supabase URL and publishable key are still missing. See ../M06_VERIFICATION.md.
+Status: implemented 2026-10-24 (Asia/Singapore), merged to main through PR #12 (f80e90b), and verified against the migration in PGlite and a local Supabase API emulator. Not yet applied to or verified against a hosted project: the owner's Supabase URL and publishable key are still missing. See ../M06_VERIFICATION.md.
 
 Dependency: M05.
 
