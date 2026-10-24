@@ -6,13 +6,14 @@ import {Notice} from '../../components/ui/Notice';
 import {sections,collectionOf,viewLink,readSection} from './schema';
 import {ConfirmDialog,type Confirmation} from './fields';
 import {useDraft,type DraftState} from './useDraft';
+import {PasswordDialog} from './PasswordDialog';
 import {EntryEditor} from './EntryEditor';
 import {SettingsCard,CharactersCard} from './SettingsCards';
 import {TreeConnectionEditor} from './TreeConnectionEditor';
 import {WorkshopEditor,SkillEditorNav} from './WorkshopEditor';
 
 // The signed-in editor in backend mode; absent in local mode.
-export interface Account { email:string; signOut:()=>void; reauthorize:()=>void }
+export interface Account { email:string; signOut:()=>void; reauthorize:()=>void; changePassword:(current:string,next:string)=>Promise<void> }
 interface Props { repository:ContentRepository; notify:(m:string)=>void; paused:boolean; onPreview:(content:PortfolioContent,revision:number)=>void; onPublished:(snapshot:ContentSnapshot)=>void; account?:Account }
 const EXPORT_NAME='Jon_Vincent_Din_Portfolio_Content.json',MAX_IMPORT=50*1024*1024;
 
@@ -38,13 +39,13 @@ export function EditorPage({repository,notify,paused,onPreview,onPublished,accou
  const shared=repository.kind==='supabase',status=statusText(state,shared);
  // A refused session hands over to the gate, which asks to sign in again while this page keeps the edits.
  useEffect(()=>{if(state.status==='unauthorized')account?.reauthorize();},[state.status,account]);
- const [confirm,setConfirm]=useState<Confirmation|null>(null);
+ const [confirm,setConfirm]=useState<Confirmation|null>(null),[passwordOpen,setPasswordOpen]=useState(false);
  if(state.status==='unavailable')return <><Notice error>{'Editing is unavailable: '+state.message}</Notice></>;
  const draft=state.content;
  if(!draft)return <p className="editor-notice" role="status">{shared?'Loading the draft…':'Loading the local draft…'}</p>;
  const {section,workshop}=where,collection=collectionOf[section];
  const preview=()=>onPreview(draft,state.revision);
- const dialog=confirm&&<ConfirmDialog confirm={confirm} close={()=>setConfirm(null)}/>;
+ const dialog=<>{confirm&&<ConfirmDialog confirm={confirm} close={()=>setConfirm(null)}/>}{passwordOpen&&account&&<PasswordDialog account={account} notify={notify} close={()=>setPasswordOpen(false)}/>}</>;
  const canPublish=state.status==='saved'&&state.revision>0&&state.revision!==state.publishedRevision;
  const requestPublish=()=>setConfirm(shared?{eyebrow:'PUBLISH',title:'Publish draft revision '+state.revision+'?',lead:'Every visitor will see this revision. Uploaded images it shows are copied to public storage first; if anything fails, nothing is published.',action:'Publish to the public site',run:publish}:{eyebrow:'PUBLISH LOCALLY',title:'Publish draft revision '+state.revision+'?',lead:'This browser’s public pages will show this revision. Nothing is uploaded: other visitors and devices keep seeing their own content until the authorized backend arrives.',action:'Publish in this browser',run:publish});
  const chooseImport=async(file:File|undefined)=>{
@@ -60,7 +61,7 @@ export function EditorPage({repository,notify,paused,onPreview,onPublished,accou
  if(workshop)return <><WorkshopEditor draft={draft} inventory={workshop==='inventory'} commit={commit} confirm={setConfirm} notify={notify} paused={paused} preview={preview} status={status} shared={shared}/>{dialog}</>;
  return <><div className="editor-shell"><aside className="editor-sidebar"><a href="#home" className="editor-logo">JVD<span>WORLD EDITOR</span></a><span className="editor-mode"><i></i> {shared?'SHARED DRAFT':'LOCAL DRAFT'}</span>
  <nav aria-label="Editor sections">{sections.map(([id,name,icon])=><a key={id} href={'#editor/'+id} aria-current={id===section?'page':undefined}><span>{icon}</span>{name}<small>{id==='projects'?draft.projects.length:id==='experience'?draft.experience.length:''}</small></a>)}</nav>
- <div className="editor-side-bottom"><button className="text-button" id="export-content" onClick={()=>download(draft)}>↓ Export content JSON</button><label className="text-button import-control">↑ Import content JSON<input type="file" id="import-content" accept="application/json,.json" className="sr-only" onChange={e=>{void chooseImport(e.currentTarget.files?.[0]);e.currentTarget.value='';}}/></label>{state.recovery&&<button className="text-button" id="download-recovery" onClick={recovery}>↓ Pre-import recovery copy</button>}{account&&<button className="text-button" id="sign-out" onClick={account.signOut}>Sign out</button>}<a href="#home">← Return to portfolio</a></div></aside>
+ <div className="editor-side-bottom"><button className="text-button" id="export-content" onClick={()=>download(draft)}>↓ Export content JSON</button><label className="text-button import-control">↑ Import content JSON<input type="file" id="import-content" accept="application/json,.json" className="sr-only" onChange={e=>{void chooseImport(e.currentTarget.files?.[0]);e.currentTarget.value='';}}/></label>{state.recovery&&<button className="text-button" id="download-recovery" onClick={recovery}>↓ Pre-import recovery copy</button>}{account&&<><button className="text-button" id="change-password" onClick={()=>setPasswordOpen(true)}>Change password</button><button className="text-button" id="sign-out" onClick={account.signOut}>Sign out</button></>}<a href="#home">← Return to portfolio</a></div></aside>
  <div className="editor-main"><div className="editor-topbar"><div><span className="eyebrow">{'CONTENT STUDIO / '+section.toUpperCase()}</span><h1>{sections.find(([id])=>id===section)![1]}</h1></div>
  <div className="editor-actions"><a href={'#'+viewLink[section]} className="btn secondary" id="preview-section" onClick={preview}>Preview section ↗</a><button className="btn" id="publish-draft" disabled={!canPublish} onClick={requestPublish}>{shared?'Publish':'Publish in this browser'}</button><span className="local-status" id="save-status" role="status">{status}</span></div></div>
  {shared?<p className="editor-notice" id="backend-mode-notice">{'Signed in as '+(account?.email||'an editor')+'. Drafts are private to enrolled editors and saved to the content service; visitors see only the published revision.'}</p>

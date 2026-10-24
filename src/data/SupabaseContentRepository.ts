@@ -11,6 +11,7 @@ const PORTFOLIO = 'jvd-world';
 const DRAFTS = 'portfolio-drafts', PUBLIC = 'portfolio-media';
 const SIGNED_SECONDS = 60 * 60;
 const TIMEOUT_MS = 15000;
+export const MIN_PASSWORD = 12;
 export type Client = SupabaseClient<Database>;
 export interface Membership { user: User; role: 'owner' | 'editor' | null }
 
@@ -139,6 +140,18 @@ export class SupabaseContentRepository implements ContentRepository {
   if (error) throw new Error(/invalid/i.test(error.message) ? 'That email and password do not match an account.' : error.message);
  }
  async signOut() { await this.client.auth.signOut(); }
+ // Confirms the current password by signing in with it again, then sets the new one for this account.
+ async changePassword(current: string, next: string) {
+  if (next.length < MIN_PASSWORD) throw new Error('Use at least ' + MIN_PASSWORD + ' characters for the new password.');
+  if (next === current) throw new Error('Choose a password different from the current one.');
+  const { data: { session } } = await this.client.auth.getSession();
+  const email = session?.user.email;
+  if (!email) throw new AuthorizationError('Sign in again before changing the password.');
+  const check = await this.client.auth.signInWithPassword({ email, password: current });
+  if (check.error) throw new Error(/invalid/i.test(check.error.message) ? 'The current password is not correct. Nothing was changed.' : check.error.message);
+  const { error } = await this.client.auth.updateUser({ password: next });
+  if (error) throw new Error(/different/i.test(error.message) ? 'Choose a password different from the current one.' : /weak|short|characters/i.test(error.message) ? 'That password is too weak: ' + error.message : 'The password was not changed: ' + error.message);
+ }
  // After the service refused the session: keep it if a refresh succeeds, otherwise end it on this device.
  async refreshAccess() {
   const { error } = await this.client.auth.refreshSession();

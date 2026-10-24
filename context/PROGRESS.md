@@ -173,3 +173,12 @@ At the user's request (new free project, Singapore, owner chanseytheopiest@gmail
 **Remaining:**
 - The owner should rotate the generated password, which appeared in the conversation.
 - The production origin and hosting variables wait for deployment.
+
+## 2026-10-24 (Asia/Singapore): owner password change
+
+- **Feature:** the editor sidebar now has *Change password* in Supabase mode. The current password is confirmed by signing in again, then `auth.updateUser` sets the new one (at least 12 characters, entered twice, different from the current one).
+- **Passed:**
+  - 37 unit tests: a wrong current password updates nothing.
+  - `test:m06` (12): the new browser check covers a wrong current password, a mismatched repeat, and the old password refused while the new one signs in.
+  - Hosted check with a temporary account: wrong current refused, change accepted, old refused, new accepted. The account was deleted afterwards.
+- **Not touched:** the owner's own password. The owner should change it now through the editor.

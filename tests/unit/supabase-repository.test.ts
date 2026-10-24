@@ -103,6 +103,24 @@ test('removing media asks the database first and keeps storage untouched when it
  await repo.removeUnusedMedia('media:' + FILE);
  assert.deepEqual(calls().slice(1), ['rpc:remove_unused_media', `remove:portfolio-drafts:${FILE}`, `remove:portfolio-media:${FILE}`]);
 });
+test('a password change checks the current password before setting the new one', async () => {
+ const calls: string[] = [];
+ let signInError: { message: string } | null = { message: 'Invalid login credentials' };
+ const client = { auth: {
+  getSession: async () => ({ data: { session: { user: { email: 'owner@example.test' } } } }),
+  signInWithPassword: async () => { calls.push('verify'); return { error: signInError }; },
+  updateUser: async (attributes: { password: string }) => { calls.push('update:' + attributes.password); return { error: null }; },
+  onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } }),
+ } } as unknown as Client;
+ const repo = new SupabaseContentRepository(client, 'https://example.supabase.co');
+ await assert.rejects(repo.changePassword('old', 'short'), /at least 12 characters/);
+ await assert.rejects(repo.changePassword('same-long-password', 'same-long-password'), /different from the current/);
+ await assert.rejects(repo.changePassword('wrong', 'a new long passphrase'), /current password is not correct\. Nothing was changed/);
+ assert.deepEqual(calls, ['verify'], 'nothing is updated when the check fails');
+ signInError = null;
+ await repo.changePassword('right', 'a new long passphrase');
+ assert.deepEqual(calls, ['verify', 'verify', 'update:a new long passphrase']);
+});
 test('network failures say the edits were kept', () => {
  assert.match(requestError({ message: 'TypeError: Failed to fetch' }).message, /could not be reached\. Your edits were kept/);
  assert.match(requestError({ message: 'signal timed out', code: '' }).message, /could not be reached/);

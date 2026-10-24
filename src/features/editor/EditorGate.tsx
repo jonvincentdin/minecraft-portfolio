@@ -35,7 +35,7 @@ function BackendGate({repository,...rest}:Props&{repository:SupabaseContentRepos
  // The last signed-in address stays on screen while the editor waits for a new sign-in.
  const [email,setEmail]=useState('');
  useEffect(()=>{if(state.phase==='ready')setEmail(state.email);},[state]);
- const account=useMemo(()=>({email,signOut:()=>void signOut(),reauthorize:()=>void reauthorize()}),[email,reauthorize]);
+ const account=useMemo(()=>({email,signOut:()=>void signOut(),reauthorize:()=>void reauthorize(),changePassword:(current:string,next:string)=>repository.changePassword(current,next)}),[email,reauthorize,repository]);
 
  if(opened)return <><EditorPage {...rest} repository={repository} account={account}/>
   {state.phase!=='ready'&&state.phase!=='checking'&&<Modal label="Sign in again" close={()=>void signOut()}><span className="eyebrow">SESSION ENDED</span><h2>Sign in again to keep saving.</h2>
