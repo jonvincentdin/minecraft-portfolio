@@ -32,11 +32,11 @@ Snapshot: 2026-10-24 (Asia/Singapore), updated after M06 implementation.
 - Build/typecheck, 29 unit tests, 100 asset hashes, shell regression, test:m02, test:m03, test:m04 (18 checks) and test:m05 (13 checks) passed.
 - All 11 advancement screenshot pairs across five viewports, both trees, list view and a deep selection match the reference with zero differing pixels.
 
-## M06 state (feat/m06-supabase, not merged)
+## M06 state (merged to main, hosted verification pending)
 
-- Migration, RLS, RPCs, storage policies, SupabaseContentRepository, EditorGate and the emulator-backed tests are on feat/m06-supabase, which is based on fix/m03-dialog-parity. Neither branch is merged and no PR exists yet: the GitHub CLI is not installed in this environment.
+- The M03 dialog fix merged through PR #11 (squash) at b6caeb2. M06 merged through PR #12 (squash) at f80e90b. Main has no branch protection, CI workflow, webhook or deployment.
 - Verified: test:db (11, PGlite), test:m06 (11 browser checks against the emulator), 36 unit tests, build, 100 asset hashes, and the demo-mode regressions smoke/M02/M03/M04/M05.
-- Not verified: anything on a hosted Supabase project. No migration has been applied anywhere.
+- Not verified: anything on a hosted Supabase project. No migration has been applied anywhere, and merging deployed nothing.
 
 ## Planned work
 
@@ -52,5 +52,4 @@ M06 hosted verification once credentials exist; M07 full verification.
 
 ## Next concrete steps
 
-1. Open PRs for fix/m03-dialog-parity and feat/m06-supabase, in that order, and merge after review.
-2. With credentials: follow supabase/README.md on a development project, then run the browser flow there and record the evidence in M06_VERIFICATION.md.
+1. With credentials: follow supabase/README.md on a development project, then run the browser flow there and record the evidence in M06_VERIFICATION.md.
