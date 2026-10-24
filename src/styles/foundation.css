@@ -1,3 +1,6 @@
 .scene-host{display:contents}.scene-host[hidden]{display:none}
 .foundation-notice{padding:14px 5%;background:#263b2c;color:#eee9d5;font-size:14px}
 .baseline-copy{margin:20px 0;max-width:48ch;color:#acbda8}
+
+/* Accessibility fix over the reference: it removes the search input outline without a replacement. */
+.search:focus-within{outline:3px solid #f1cf7f;outline-offset:3px}

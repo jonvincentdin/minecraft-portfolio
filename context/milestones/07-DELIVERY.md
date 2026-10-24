@@ -1,6 +1,6 @@
 # M07 — Parity verification and handoff
 
-Status: not started in this handoff.
+Status: complete 2026-10-24 (Asia/Singapore). See ../M07_VERIFICATION.md for the final parity report and ../DEPLOYMENT.md for hosting.
 
 Dependency: M06.
 

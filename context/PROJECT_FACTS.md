@@ -1,6 +1,6 @@
 # Project fact snapshot
 
-Snapshot: 2026-10-24 (Asia/Singapore), updated after M06 implementation.
+Snapshot: 2026-10-24 (Asia/Singapore), after M07.
 
 ## Verified current state
 
@@ -40,7 +40,13 @@ Snapshot: 2026-10-24 (Asia/Singapore), updated after M06 implementation.
 
 ## Planned work
 
-M07 full verification and delivery.
+All milestones (M00–M07) are complete. Next: deployment (host to be chosen by the owner) and the owner's real content.
+
+## M07 state
+
+- Final parity report: context/M07_VERIFICATION.md. All suites pass, including the new test:reference, test:m07 and test:engines (Firefox 157, WebKit 27.2).
+- Every exact screenshot pair matches or has a documented cause.
+- M07 changes: the M01 smoke comparison now uses the same deep link for both sites; the project search gets a focus ring the reference lacked; the failed-upload cleanup is tested; a deployment guide and a README rewrite were added.
 
 ## Blockers and unknowns
 
@@ -54,4 +60,4 @@ M07 full verification and delivery.
 
 1. Owner: sign in at #editor and import or enter real content, then publish.
 2. When deploying: set the VITE_ variables in hosting, then add the production origin to supabase/config.toml and run supabase config push.
-3. Start M07 when asked.
+3. Physical touch-device check after deployment.

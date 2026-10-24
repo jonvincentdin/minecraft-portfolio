@@ -1,44 +1,56 @@
-# Jon Vincent Din — React + Supabase rebuild handoff
+# Jon Vincent Din — World of Builds (React + Supabase)
 
-M00 provides the React + TypeScript + Vite foundation. M01 adds the reference shell, Spawn and explicit entry/replay. M02 adds About, project inventory/gallery, Experience and Contact. M03 adds the actual-skills loadout and crafting workshop. M04 adds both advancement trees and shared motion parity. M05 adds the world editor against a browser-local repository (drafts, preview, publish in this browser, import/export); sign-in and shared publishing arrive with Supabase in M06; the supplied vanilla implementation remains the immutable reference. Supabase is a declared boundary for M06, not an active backend.
+A React + TypeScript + Vite rebuild of the voxel portfolio. It covers the cinematic entry, seven public routes, the
+crafting workshop, the advancement trees and a world editor. The editor saves drafts and publishes through Supabase,
+with the owner signed in and access enforced by RLS. The supplied vanilla implementation in `reference/site/` stays
+unchanged and is the parity baseline.
 
+Status: milestones M00–M07 are complete. See `context/M07_VERIFICATION.md` for the final parity report and
+`context/PROGRESS.md` for the history. The site has not been deployed; see `context/DEPLOYMENT.md`.
 
-## Run the React portfolio
+## Run it
 
-Requires Node >=22.12 (verified with Node 24.19) and npm. From the repository root:
-
-```powershell
-npm.cmd ci
-npm.cmd run dev
-```
-
-React: http://127.0.0.1:5173. In a second terminal:
+Requires Node 22.12 or newer (verified with Node 24.19) and npm.
 
 ```powershell
-npm.cmd run reference
+npm ci
+npm run dev          # http://127.0.0.1:5173
+npm run reference    # the immutable reference, http://127.0.0.1:4174 (second terminal)
 ```
 
-Immutable reference: http://127.0.0.1:4174.
+The content mode comes from `.env.local`, which Git ignores:
+
+- **Demo** (the default when no `.env.local` exists): content stays in this browser and needs no account.
+- **Supabase:** `VITE_CONTENT_MODE=supabase` plus `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. The owner
+  signs in at `#editor`. This checkout is configured for the project `jvd-world`; see `supabase/README.md`.
+
+To run the demo-mode browser suites while `.env.local` selects Supabase, start the dev server with the mode overridden:
+`$env:VITE_CONTENT_MODE='demo'; npm run dev`. Process variables take priority over `.env` files.
+
+## Commands
 
 | Command | Purpose |
 | --- | --- |
-| npm.cmd run typecheck | Strict TypeScript check |
-| npm.cmd run build | Sync assets, typecheck, production bundle |
-| npm.cmd run preview | Serve production build on port 4173 |
-| npm.cmd run assets:sync | Exact runtime copies under public/assets |
-| npm.cmd run assets:verify | Check 100 supplied original hashes |
-| npm.cmd run test:m05 | Editor field coverage, CRUD, validation, preview, publish, import/export and conflicts (dev server running) |
-| npm.cmd run test:m04 | Advancement trees, glow routes and shared motion parity against the reference (both servers running) |
-| npm.cmd run test:m03 | Crafting, cancellation and edited-config browser checks (both servers running) |
-| npm.cmd run test:m02 | M02 browser interactions and pointer controls (both servers running) |
-| npm.cmd test | Repository behavior and copy integrity (sync assets first) |
-| npm.cmd run test:browser | Edge smoke and screenshots; start dev and reference servers first |
+| `npm run build` | Sync assets, typecheck, production bundle in `dist/` |
+| `npm run preview` | Serve the production build on port 4173 |
+| `npm run typecheck` | Strict TypeScript check |
+| `npm run assets:sync` / `assets:verify` | Copy runtime assets / check all 100 original hashes |
+| `npm test` | Unit tests (domain, repositories, copy integrity) |
+| `npm run test:db` | Migration, RLS, grants and validator parity in PGlite |
+| `npm run test:reference` | The reference's own check scripts, run against the React app's modules and assets |
+| `npm run test:browser`, `test:m02` … `test:m05` | Demo-mode browser suites (dev server in demo mode, plus reference server for M02–M04) |
+| `npm run test:m06` | Supabase-mode browser suite against a local API emulator (starts its own servers) |
+| `npm run test:m06-hosted` | The same flows against the real project. **Deletes all content**; see `supabase/README.md` |
+| `npm run test:m07` | Accessibility, keyboard and touch sweep beside the reference (both servers running) |
+| `node tests/visual/capture-m0N.mjs` + `compare-m0N.mjs` | Screenshot capture and pixel comparison per milestone |
 
-No environment file is needed for demo mode. Optional .env.local uses only the public settings in .env.example. VITE_CONTENT_MODE=supabase requires both public settings and then honestly reports that M06 integration is pending. There are no remote saves or owner enrollment in M00.
+## Where things are
 
-The reference CSS is copied with root-relative font URLs. The custom renderer is copied exactly; a React effect manages its lifetime. Runtime assets are generated and ignored. The version-5 demo seed has a dedicated runtime copy, checked against the canonical seed by tests.
-
-See context/M00_VERIFICATION.md for checks, screenshots and limitations. Historical handoff instructions below describe the original ZIP; M00 completion supersedes their setup step. M01 evidence is in context/M01_VERIFICATION.md. M02 evidence is in context/M02_VERIFICATION.md. M03 evidence and visual limits are in context/M03_VERIFICATION.md. M04 evidence is in context/M04_VERIFICATION.md. M05 evidence and the field matrix are in context/M05_VERIFICATION.md. Stop before M06.
+- `src/`: app shell and routes (`app/`, `features/`), the exact renderer wrapper (`components/three/`), domain logic
+  (`domain/`), content repositories (`data/`), types.
+- `supabase/`: migration, Auth config and setup guide. `context/DEPLOYMENT.md` covers hosting.
+- `context/`: requirements, verification records (`M00`–`M07_VERIFICATION.md`), evidence screenshots, the progress log,
+  and `OWNER_CONTENT.md`, the content that still needs Jon's real details.
 
 ## Original handoff starting instructions
 
@@ -71,7 +83,7 @@ Matching this snapshot is the acceptance target. “1:1” means reproducing its
 
 React handles the client application. Supabase supplies hosted Auth, Postgres and Storage; a separate Express/Node backend is unnecessary for this scope. Node is used locally by development tooling. Privileged or abuse-sensitive server work, if added later, belongs in a server function.
 
-No live website was changed by creating this package. No Supabase credentials, deployments, or database migrations were executed.
+No live website was changed by creating this package. (Historical note: the Supabase project and its migration were set up later, in M06.)
 
 ## Memory and 3D workflow update
 

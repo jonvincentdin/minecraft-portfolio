@@ -16,3 +16,7 @@ The name is Jon Vincent Din. Do not replace it with the account holder's name or
 | Backend | Supabase project URL/publishable key via local environment; owner Auth user enrolled securely |
 
 Continue the UI build with clearly labeled seed examples until these are supplied. Do not block layout work waiting for them, and do not remove demo indicators prematurely.
+
+## Status 2026-10-24
+
+The backend row is done: Supabase project jvd-world, with the owner enrolled. Everything else above is still needed. The seed's projects, actual skills, experience entries, achievements and certifications are all marked as samples, and the portrait, GitHub, LinkedIn and contact email are empty. Enter the real content in the editor (`#editor`) and publish; demo indicators disappear as samples are replaced.
