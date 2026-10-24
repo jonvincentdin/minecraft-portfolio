@@ -23,7 +23,7 @@ function blank(collection:CollectionKey,count:number):Entry {
 }
 
 export function EntryEditor(props:Props) {
- const {draft,collection,commit,confirm}=props;
+ const {draft,collection,commit,confirm,repository}=props;
  const [editing,setEditing]=useState<{entry:Entry;isNew:boolean}|null>(null);
  useEffect(()=>setEditing(null),[collection]);
  const list=entries(draft,collection);
@@ -35,7 +35,7 @@ export function EntryEditor(props:Props) {
   const linked=collection==='projects'?[...draft.actualSkills,...draft.skills].filter(s=>s.projectId===id):[];
   const lead=children.length?`${label(x)} is the parent of ${children.map(label).join(', ')}. Deleting it makes ${children.length===1?'that node a root':'those nodes roots'}; no other entry is removed.`
    :linked.length?`${label(x)} is linked from ${linked.map(s=>s.title).join(', ')}. Deleting it removes ${linked.length===1?'that link':'those links'}; the skills themselves stay.`
-   :`${label(x)} will be removed from this browser draft. Export a backup first if you need to keep it.`;
+   :`${label(x)} will be removed from ${repository.kind==='supabase'?'the draft':'this browser draft'}. Export a backup first if you need to keep it.`;
   confirm({eyebrow:'DELETE ENTRY',title:'Remove this entry?',lead,danger:true,cancel:'Keep it',action:children.length?'Detach children and delete':linked.length?'Unlink and delete':'Delete entry',run:async()=>{
    if(await commit(d=>{(d[collection] as unknown as Entry[])=entries(d,collection).filter(e=>e.id!==id);if(children.length)entries(d,collection).forEach(n=>{if(n.parent===id)n.parent='';});if(linked.length)[...d.skills,...d.actualSkills].forEach(s=>{if(s.projectId===id)s.projectId='';});},'Entry deleted.'))setEditing(e=>e?.entry.id===id?null:e);
   }});
@@ -59,7 +59,8 @@ export function EntryEditor(props:Props) {
 
 function EntryForm({draft,collection,commit,notify,repository,paused,entry,isNew,close}:Props&{entry:Entry;isNew:boolean;close:()=>void}) {
  const [tab,setTab]=useState('details'),[photos,setPhotos]=useState<Photo[]>(()=>structuredClone(entry.photos||[]));
- const [pending,setPending]=useState(false),[note,setNote]=useState('Saved locally, not published to a shared CMS.');
+ const shared=repository.kind==='supabase';
+ const [pending,setPending]=useState(false),[note,setNote]=useState(shared?'Saved to the draft; visitors see it only after you publish.':'Saved locally, not published to a shared CMS.');
  const form=useRef<HTMLFormElement>(null),projects=collection==='projects';
  useEffect(()=>{const panel=form.current?.parentElement;panel?.scrollIntoView({behavior:paused?'instant':'smooth',block:'start'});form.current?.querySelector<HTMLInputElement>('input[name="title"]')?.focus({preventScroll:true});},[paused]);
  const submit=async(event:FormEvent<HTMLFormElement>)=>{
@@ -86,7 +87,7 @@ function EntryForm({draft,collection,commit,notify,repository,paused,entry,isNew
  const swap=(i:number,j:number)=>setPhotos(p=>{if(j<0||j>=p.length)return p;const n=[...p];[n[i],n[j]]=[n[j],n[i]];return n;});
  const fields=(specs:typeof schema[CollectionKey])=><div className="editor-fields">{specs.map(spec=><SchemaField key={spec[0]} spec={spec} draft={draft} collection={collection} current={entry}/>)}</div>;
  const tabs=[['details','Details & symbol'],['story','Case study'],['media','Photos & cover'],['links','Links']] as const;
- return <form id="entry-form" ref={form} onSubmit={submit}><div className="form-panel-heading"><div><span className="eyebrow">{(isNew?'NEW ENTRY':'EDIT ENTRY')+' / LOCAL DRAFT'}</span><h2>{isNew?'Create something new.':entry.title}</h2></div><button type="button" className="text-button" data-cancel onClick={close}>Cancel ×</button></div>
+ return <form id="entry-form" ref={form} onSubmit={submit}><div className="form-panel-heading"><div><span className="eyebrow">{(isNew?'NEW ENTRY':'EDIT ENTRY')+(shared?' / DRAFT':' / LOCAL DRAFT')}</span><h2>{isNew?'Create something new.':entry.title}</h2></div><button type="button" className="text-button" data-cancel onClick={close}>Cancel ×</button></div>
  {projects?<><div className="editor-tabs">{tabs.map(([id,name])=><button type="button" key={id} data-edit-tab={id} aria-pressed={tab===id} onClick={()=>setTab(id)}>{name}</button>)}</div>
   <div className="edit-tab" data-panel="details" hidden={tab!=='details'}>{fields(schema.projects.slice(0,7))}<SymbolPicker value={entry.symbol} project/></div>
   <div className="edit-tab" data-panel="story" hidden={tab!=='story'}>{fields(schema.projects.slice(7,13))}</div>

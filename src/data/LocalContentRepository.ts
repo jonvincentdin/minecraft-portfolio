@@ -12,6 +12,7 @@ const now=()=>new Date().toISOString();
 // Browser-only content adapter for demo mode. Drafts and publications live in this browser's IndexedDB;
 // nothing reaches other visitors and there is no sign-in. M06 replaces it with the authorized Supabase adapter.
 export class LocalContentRepository implements ContentRepository {
+ readonly kind='local' as const;
  private ready:Promise<DocumentStore>;
  // Without usable IndexedDB (private windows, blocked site data) work continues in memory and reports it.
  constructor(store?:DocumentStore){this.ready=store?Promise.resolve(store):IndexedDbDocumentStore.open().catch(()=>new MemoryDocumentStore());}

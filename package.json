@@ -22,7 +22,8 @@
     "test:m03": "node tests/e2e/m03.mjs && node tests/e2e/m03-config.mjs",
     "test:m04": "node tests/e2e/m04.mjs",
     "test:m05": "node tests/e2e/m05.mjs",
-    "test:db": "tsx --test tests/db/*.test.ts"
+    "test:db": "tsx --test tests/db/*.test.ts",
+    "test:m06": "node tests/e2e/m06.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.3",
