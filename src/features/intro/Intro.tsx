@@ -12,7 +12,9 @@ export function Intro({ ready, progress, title, warning, paused, stageHome, fini
   const groups=Array.from(loader.querySelectorAll<HTMLElement>('.cinema-landscape,.cinema-content'));
   groups.forEach(el=>{el.style.transform=getComputedStyle(el).transform;el.style.animation='none';});
   const pieces=Array.from(loader.querySelectorAll<HTMLElement>('.cinema-landscape > *, .cinema-content > *, .cinema-bottom > *'));
-  const tasks=shuffled(pieces).map((el,i)=>{const transform=getComputedStyle(el).transform;const base=transform==='none'?'':transform;return animate(el,[{transform:base||'none',opacity:1},{transform:'translate3d(0,-115vh,0) '+base,opacity:.85}],{duration:650+(i%3)*60,delay:i*18,easing:'cubic-bezier(.64,0,.32,1)',fill:'forwards'});});
+  // Pieces fade out while they rise (the reference keeps them at .85), so no solid slab sweeps across the page being revealed.
+  // The ground is the largest piece, a full-width grid plane, so it is gone before it reaches the header.
+  const tasks=shuffled(pieces).map((el,i)=>{const transform=getComputedStyle(el).transform;const base=transform==='none'?'':transform;const ground=el.classList.contains('cinema-ground');return animate(el,[{transform:base||'none',opacity:1},{offset:ground?.35:.55,opacity:ground?.25:.8},{transform:'translate3d(0,-115vh,0) '+base,opacity:0}],{duration:650+(i%3)*60,delay:i*18,easing:'cubic-bezier(.64,0,.32,1)',fill:'forwards'});});
   shuffled(Array.from(loader.querySelectorAll('.intro-shutters > span'))).forEach((el,i)=>tasks.push(animate(el,[{transform:'translateY(0)'},{transform:'translateY(-102%)'}],{duration:680,delay:320+i*46,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'})));
   document.querySelectorAll('#site-header,main .hero-copy > *, main .hero-world,#site-footer').forEach(el=>tasks.push(animate(el,[{opacity:0,transform:'translateY(28px)'},{opacity:1,transform:'translateY(0)'}],{duration:600,delay:560,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'})));
   document.body.classList.add('world-entering');
