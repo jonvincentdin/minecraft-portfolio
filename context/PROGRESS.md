@@ -105,3 +105,7 @@ Not done (M06): sign-in, server authorization, shared drafts, Storage uploads, a
 Under the user's standing authorization, PR #9 (head c22121d) was squash-merged into main as 048ec692450b6282fe1cfcafe295cabba6f58ee0. Main has no branch protection, CI workflow or deploy hook. No deployment occurred. M06 remains unstarted.
 
 Process note: the M05 implementation commit was first made on local main by mistake. It was moved to feat/m05-editor before anything was pushed, and local main was reset to origin/main. No published history changed.
+
+## 2026-10-24 (Asia/Singapore): M03 dialog capture residual resolved
+
+On fix/m03-dialog-parity. The four M03 dialog pairs that differed (max 6/255, a band just outside the dialog's top/left edge) were traced to Chromium compositing of the `.craft-dialog::backdrop` blur after a preceding fullPage capture. The dialog markup, boxes and computed styles match; the page under the dialog and the blurred backdrop with the dialog hidden are pixel-identical; and the reference's own frames vary under the same blur. tests/visual/capture-m03.mjs now disables the backdrop blur identically on both sides for the exact pairs and keeps the as-rendered `*-blur.png` pairs, which compare-m03.mjs reports with maxChannelDelta. All 11 exact pairs: zero differing pixels in three consecutive runs. No application, reference or asset change.

@@ -38,7 +38,7 @@ M06 Supabase sign-in, shared drafts, Storage, atomic publish and RLS behind the 
 
 ## Blockers and unknowns
 
-Physical touch, other browser engines, separate modal-entrance timing and the four minor M03 dialog capture differences remain unverified or unresolved. Owner portrait, social URLs and verified credentials remain unsupplied. No deployment occurred.
+Physical touch, other browser engines and separate modal-entrance timing remain unverified. The M03 dialog capture residual was resolved on 2026-10-24 (backdrop-blur compositing; all 11 M03 pairs exact). Owner portrait, social URLs and verified credentials remain unsupplied. No deployment occurred.
 
 ## Next concrete steps
 

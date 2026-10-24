@@ -11,6 +11,7 @@
       ]
     ],
     "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
       1440,
       1586,
@@ -30,14 +31,15 @@
         900
       ]
     ],
-    "differentPixels": 2061,
+    "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
-      98,
-      17,
-      1335,
-      89
+      1440,
+      900,
+      0,
+      0
     ],
-    "fraction": 0.0015902777777777777
+    "fraction": 0
   },
   "skills-390": {
     "dimensions": [
@@ -51,6 +53,7 @@
       ]
     ],
     "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
       390,
       3284,
@@ -70,14 +73,15 @@
         844
       ]
     ],
-    "differentPixels": 1688,
+    "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
-      8,
-      7,
-      379,
-      75
+      390,
+      844,
+      0,
+      0
     ],
-    "fraction": 0.005128205128205128
+    "fraction": 0
   },
   "skills-1366": {
     "dimensions": [
@@ -91,6 +95,7 @@
       ]
     ],
     "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
       1366,
       1583,
@@ -110,14 +115,15 @@
         768
       ]
     ],
-    "differentPixels": 2567,
+    "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
-      60,
-      15,
-      1304,
-      89
+      1366,
+      768,
+      0,
+      0
     ],
-    "fraction": 0.0024468872010736946
+    "fraction": 0
   },
   "skills-1024": {
     "dimensions": [
@@ -131,6 +137,7 @@
       ]
     ],
     "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
       1024,
       1796,
@@ -151,6 +158,7 @@
       ]
     ],
     "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
       1024,
       768,
@@ -171,6 +179,7 @@
       ]
     ],
     "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
       768,
       1896,
@@ -191,6 +200,7 @@
       ]
     ],
     "differentPixels": 0,
+    "maxChannelDelta": 0,
     "bounds": [
       768,
       1024,
@@ -210,7 +220,134 @@
         900
       ]
     ],
+    "differentPixels": 0,
+    "maxChannelDelta": 0,
+    "bounds": [
+      1440,
+      900,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "workshop-1440-blur": {
+    "dimensions": [
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
     "differentPixels": 2061,
+    "maxChannelDelta": 6,
+    "bounds": [
+      98,
+      17,
+      1335,
+      89
+    ],
+    "fraction": 0.0015902777777777777
+  },
+  "workshop-390-blur": {
+    "dimensions": [
+      [
+        390,
+        844
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "differentPixels": 1688,
+    "maxChannelDelta": 4,
+    "bounds": [
+      8,
+      7,
+      379,
+      75
+    ],
+    "fraction": 0.005128205128205128
+  },
+  "workshop-1366-blur": {
+    "dimensions": [
+      [
+        1366,
+        768
+      ],
+      [
+        1366,
+        768
+      ]
+    ],
+    "differentPixels": 2567,
+    "maxChannelDelta": 4,
+    "bounds": [
+      60,
+      15,
+      1304,
+      89
+    ],
+    "fraction": 0.0024468872010736946
+  },
+  "workshop-1024-blur": {
+    "dimensions": [
+      [
+        1024,
+        768
+      ],
+      [
+        1024,
+        768
+      ]
+    ],
+    "differentPixels": 0,
+    "maxChannelDelta": 0,
+    "bounds": [
+      1024,
+      768,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "workshop-768-blur": {
+    "dimensions": [
+      [
+        768,
+        1024
+      ],
+      [
+        768,
+        1024
+      ]
+    ],
+    "differentPixels": 0,
+    "maxChannelDelta": 0,
+    "bounds": [
+      768,
+      1024,
+      0,
+      0
+    ],
+    "fraction": 0
+  },
+  "react-crafted-blur": {
+    "dimensions": [
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        900
+      ]
+    ],
+    "differentPixels": 2061,
+    "maxChannelDelta": 6,
     "bounds": [
       98,
       17,
