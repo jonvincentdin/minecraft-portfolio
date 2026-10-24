@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "visitors see the labelled sample world while nothing is published",
+    "the editor asks visitors to sign in and shows no editing controls",
+    "wrong passwords and non-enrolled accounts are refused, in the UI and by the database (403)",
+    "the enrolled owner saves a revision-guarded draft that visitors cannot see",
+    "uploads are registered, stored privately as resized WebP, and shown to editors through signed URLs",
+    "publishing copies the upload to its public name and publishes exactly the saved revision to visitors",
+    "a stale save is refused with the current revision, keeps the edit, and saves only on explicit choice",
+    "after the session ends, the failed save keeps the input; signing in again and retrying saves it",
+    "the database validates the whole document (422) when the client is bypassed",
+    "an unreachable service shows an error with Try again instead of a stuck loader, and recovers",
+    "only the URL and publishable key are configured in the browser"
+  ],
+  "errors": []
+}

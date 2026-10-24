@@ -109,3 +109,32 @@ Process note: the M05 implementation commit was first made on local main by mist
 ## 2026-10-24 (Asia/Singapore): M03 dialog capture residual resolved
 
 On fix/m03-dialog-parity. The four M03 dialog pairs that differed (max 6/255, a band just outside the dialog's top/left edge) were traced to Chromium compositing of the `.craft-dialog::backdrop` blur after a preceding fullPage capture. The dialog markup, boxes and computed styles match; the page under the dialog and the blurred backdrop with the dialog hidden are pixel-identical; and the reference's own frames vary under the same blur. tests/visual/capture-m03.mjs now disables the backdrop blur identically on both sides for the exact pairs and keeps the as-rendered `*-blur.png` pairs, which compare-m03.mjs reports with maxChannelDelta. All 11 exact pairs: zero differing pixels in three consecutive runs. No application, reference or asset change.
+
+## 2026-10-24 (Asia/Singapore): M06 implemented, hosted verification pending
+
+On feat/m06-supabase, based on fix/m03-dialog-parity. The user asked to complete M06 and will supply credentials later.
+
+- **Database:** the reviewed migration adds the editors, drafts, publications and media tables under RLS. Content writes go only through `save_draft`, `import_draft` and `publish_draft`. These are security-definer RPCs with enrollment checks, a server port of the content validator, and compare-and-swap revisions; publishing is atomic.
+- **Media:** uploads are registered, then stored in a private bucket. Publishing copies them to immutable public names and checks them atomically.
+- **Client:** the Supabase repository implements the existing contract; EditorGate handles sign-in, the not-enrolled state and session loss while keeping edits; the editor wording depends on the mode; failed content loads end with a retry.
+- **Dependencies:** supabase-js 2.117.3 and pglite 0.5.8 (dev).
+- **Decisions:**
+  - JSON snapshots, as DATA_MODEL.md proposes.
+  - Email and password sign-in.
+  - Two buckets, with media references of the form `media:<uuid>.<ext>`.
+  - Server-only limits: a 2 MB document and no inline images. Import uploads embedded images first.
+  - With no publication, visitors see the labelled sample world, never a draft.
+
+**Passed:** test:db (11), test:m06 (11), unit tests (36), build, assets:verify (100), diff check, and the smoke/M02/M03/M04/M05 regressions. See M06_VERIFICATION.md.
+
+The browser test first exposed three defects, all fixed:
+- StrictMode created two auth clients.
+- An expired session never reached the sign-in prompt, because the client still held a stale local session. Refused saves now refresh the session, or end it locally.
+- Retrying after an outage did not replay the entry sequence.
+
+**Not done:**
+- Hosted-project migration and verification (blocked on credentials and approval).
+- Generated database types.
+- Media cleanup UI.
+
+No PR could be opened, because `gh` is not installed here. Nothing was merged or deployed.
