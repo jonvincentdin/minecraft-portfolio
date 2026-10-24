@@ -5,7 +5,7 @@ import type {Recipe,StartingItem} from '../../types/content';
 import type {Confirmation} from './fields';
 import {newId,type Draft} from './schema';
 
-interface Props { draft:Draft; inventory:boolean; commit:(change:(d:Draft)=>void,message:string)=>Promise<boolean>; confirm:(c:Confirmation)=>void; notify:(m:string)=>void; paused:boolean; preview:()=>void; status:string }
+interface Props { draft:Draft; inventory:boolean; commit:(change:(d:Draft)=>void,message:string)=>Promise<boolean>; confirm:(c:Confirmation)=>void; notify:(m:string)=>void; paused:boolean; preview:()=>void; status:string; shared:boolean }
 type Option=readonly [string,string];
 const Select=({name,label,items,value,onChange}:{name:string;label:string;items:readonly Option[];value:string;onChange?:(v:string)=>void})=><label className="editor-field"><span>{label}</span><select name={name} defaultValue={value} onChange={e=>onChange?.(e.target.value)}>{items.map(([id,text])=><option key={id} value={id}>{text}</option>)}</select></label>;
 const NumberField=({name,label,value,min,max}:{name:string;label:string;value:number;min:number;max:number})=><label className="editor-field"><span>{label}</span><input type="number" name={name} defaultValue={value} min={min} max={max} step={1} required/></label>;
@@ -14,7 +14,7 @@ const skillItems=craftItems.filter(x=>x.kind==='Skill').map(x=>[x.id,x.name] as 
 export const SkillEditorNav=({active}:{active:'loadout'|'recipes'|'inventory'})=><nav className="skill-editor-nav" aria-label="Skills editor"><a href="#editor/skills" aria-current={active==='loadout'?'page':undefined}>Portfolio skills</a><a href="#editor/skills/recipes" aria-current={active==='recipes'?'page':undefined}>Recipes</a><a href="#editor/skills/inventory" aria-current={active==='inventory'?'page':undefined}>Starting inventory</a></nav>;
 
 // Recipe studio and starter kit, as reference/site/workshop-editor.js. Saves are checked against the whole workshop configuration.
-export function WorkshopEditor({draft,inventory,commit,confirm,notify,paused,preview,status}:Props) {
+export function WorkshopEditor({draft,inventory,commit,confirm,notify,paused,preview,status,shared}:Props) {
  const key=inventory?'startingInventory':'recipes';
  const [editing,setEditing]=useState<(Recipe|StartingItem)|null>(null);
  useEffect(()=>setEditing(null),[inventory]);
@@ -33,7 +33,7 @@ export function WorkshopEditor({draft,inventory,commit,confirm,notify,paused,pre
  const cards=draft[key] as (Recipe&StartingItem)[];
  return <section className="workshop-editor"><a className="text-button" href="#editor/skills">← World Editor</a><div className="section-head"><div><span className="eyebrow">CONTENT STUDIO / SKILLS</span><h1>{inventory?'Starting inventory.':'The recipe studio.'}</h1></div><a className="btn secondary" href="#skills" onClick={preview}>Preview crafting ↗</a></div>
  <SkillEditorNav active={inventory?'inventory':'recipes'}/>
- <p className="editor-notice"><span className="local-status" id="save-status" role="status">{status}</span>{'. Local mode: changes stay in this browser. The playground uses the published configuration on its next visit; your portfolio skill loadout stays separate.'}</p>
+ <p className="editor-notice"><span className="local-status" id="save-status" role="status">{status}</span>{(shared?'. Changes stay in the draft until you publish.':'. Local mode: changes stay in this browser.')+' The playground uses the published configuration on its next visit; your portfolio skill loadout stays separate.'}</p>
  <div className="recipe-studio-guide"><img src="/assets/thumbs/material_book.png" alt="Blank book"/><span>+</span><img src="/assets/thumbs/dye_cyan.png" alt="Colored dye"/><span>+</span><img src="/assets/thumbs/item_ender_pearl.png" alt="Special item"/><span>→</span><img src="/assets/thumbs/skill_react.png" alt="Original React artifact"/><div><strong>Shared ingredients. Distinct results.</strong><p>Choose a custom artifact or a classic book for each result. React keeps its original model by default.</p></div></div>
  <div className="collection-header"><h2>{inventory?'The visitor’s starter kit':'Skill recipes'}</h2><button className="btn" id="add-config" onClick={()=>open()}>{'+ '+(inventory?'Add item':'Add recipe')}</button></div>
  <div id="config-list"><div className="config-cards">{cards.length?cards.map(x=><article className="config-card" key={x.id}><img src={'/assets/thumbs/'+(inventory?itemById[x.item].model:x.resultModel||itemById[x.output].model)+'.png'} alt=""/><div><h3>{inventory?itemById[x.item].name:x.title}</h3>

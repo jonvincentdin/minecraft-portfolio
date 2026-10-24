@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { EditorPage } from '../features/editor/EditorPage';
+import { EditorGate } from '../features/editor/EditorGate';
 import { Shell } from '../components/layout/Shell';
 import { Notice } from '../components/ui/Notice';
 import { HomePage } from '../features/home/HomePage';
@@ -10,15 +10,21 @@ import type { ContentSnapshot, PortfolioContent } from '../types/content';
 import type { Scene } from '../components/three/renderer.js';
 import { readRoute, routes } from './routes';
 import { mountSectionMotion, pixelBurst } from '../lib/motion.js';
+// One repository (and one auth client) per page load; StrictMode runs state initializers twice.
+let source:{repository:ReturnType<typeof createContentRepository>;failure?:undefined}|{repository?:undefined;failure:string}|undefined;
+function contentSource(){
+ if(!source){try{source={repository:createContentRepository(import.meta.env)};}catch(reason){source={failure:(reason as Error).message};}}
+ return source;
+}
 export function App() {
  const [route,setRoute]=useState(()=>readRoute(location.hash));
  const [paused,setPaused]=useState(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
  const [snapshot,setSnapshot]=useState<ContentSnapshot>();
  const [scenes,setScenes]=useState<Record<string,Scene>>({});
  const [progress,setProgress]=useState(0),[ready,setReady]=useState(false),[error,setError]=useState(''),[warning,setWarning]=useState('');
- const [open,setOpen]=useState(true),[cycle,setCycle]=useState(0),[toast,setToast]=useState('');
+ const [open,setOpen]=useState(true),[cycle,setCycle]=useState(0),[toast,setToast]=useState(''),[attempt,setAttempt]=useState(0);
  // One repository for the published snapshot and the editor; an invalid environment surfaces as an error.
- const [source]=useState(()=>{try{return {repository:createContentRepository(import.meta.env)};}catch(reason){return {failure:(reason as Error).message};}});
+ const [source]=useState(contentSource);
  // Draft preview renders the unchanged public pages with the editor's working copy, under a visible banner.
  const [preview,setPreview]=useState<{content:PortfolioContent;revision:number}|null>(null);
  const published=useCallback((next:ContentSnapshot)=>{setSnapshot(next);setPreview(null);},[]);
@@ -62,14 +68,18 @@ export function App() {
   const content=Promise.resolve().then(()=>{if(!source.repository)throw Error(source.failure);return source.repository.getPublishedContent('jvd-world');}).then(value=>{if(alive)setSnapshot(value);advance(25);});
   const models=fetch('/assets/models/scene-data.json',{signal:AbortSignal.any([abort.signal,AbortSignal.timeout(15000)])}).then(r=>{if(!r.ok)throw Error('Models unavailable');return r.json();}).then(value=>{if(alive)setScenes(value);}).catch(()=>{if(alive)setWarning('3D data unavailable. Supplied thumbnails remain available.');}).finally(()=>advance(50));
   const fonts=document.fonts.load('16px JVD').then(()=>document.fonts.ready).finally(()=>advance(25));
+  // A failed or slow content service ends the intro with an explained error and a retry, never an endless loader.
   void Promise.all([content,models,fonts]).then(()=>{if(alive){setProgress(100);setReady(true);}}).catch(reason=>{if(alive){setError(reason.message);setOpen(false);}});
   return()=>{alive=false;abort.abort();};
- },[source]);
+ },[source,attempt]);
+ // Retrying replays the entry sequence, which waits for the content again.
+ const retry=()=>{setError('');setReady(false);setAttempt(value=>value+1);setCycle(value=>value+1);setOpen(true);};
  useEffect(()=>{if(!toast)return;const timer=setTimeout(()=>setToast(''),5500);return()=>clearTimeout(timer);},[toast]);
  const shown=preview&&route!=='editor'?preview.content:snapshot?.content;
  return <>{open&&!error&&<Intro key={cycle} ready={ready} progress={progress} title={snapshot?.content.settings.introTitle||'A world built one idea at a time.'} warning={warning} paused={paused} stageHome={stageHome} finish={finish}/>}
  <Shell route={route} paused={paused} togglePause={()=>setPaused(value=>!value)} locked={open&&!error} name={shown?.settings.name}>
- {preview&&route!=='editor'&&<p className="foundation-notice preview-banner" role="status">{'Draft preview · local revision '+preview.revision+' · not published. '}<a href="#editor">Back to editor</a>{' · '}<button className="text-button" onClick={()=>setPreview(null)}>Exit preview</button></p>}
- {error?<Notice error>{error}</Notice>:snapshot&&shown&&(route==='editor'&&source.repository?<EditorPage repository={source.repository} notify={setToast} paused={paused} onPreview={startPreview} onPublished={published}/>:route==='home'?<HomePage content={shown} scene={scenes.home_landscape} paused={paused} replay={()=>{setCycle(value=>value+1);setOpen(true);}} notify={setToast}/>:<PublicRoute route={route} content={shown} scenes={scenes} paused={paused} notify={setToast}/>)}
+ {preview&&route!=='editor'&&<p className="foundation-notice preview-banner" role="status">{'Draft preview · '+(source.repository?.kind==='supabase'?'draft':'local')+' revision '+preview.revision+' · not published. '}<a href="#editor">Back to editor</a>{' · '}<button className="text-button" onClick={()=>setPreview(null)}>Exit preview</button></p>}
+ {source.repository?.kind==='supabase'&&snapshot?.source==='demo'&&route!=='editor'&&!preview&&<p className="foundation-notice" role="status">Nothing has been published yet · showing the sample world.</p>}
+ {error?<Notice error>{error}{source.repository&&<>{' '}<button className="text-button" id="retry-content" onClick={retry}>Try again</button></>}</Notice>:snapshot&&shown&&(route==='editor'&&source.repository?<EditorGate repository={source.repository} notify={setToast} paused={paused} onPreview={startPreview} onPublished={published}/>:route==='home'?<HomePage content={shown} scene={scenes.home_landscape} paused={paused} replay={()=>{setCycle(value=>value+1);setOpen(true);}} notify={setToast}/>:<PublicRoute route={route} content={shown} scenes={scenes} paused={paused} notify={setToast}/>)}
  </Shell><div id="toast" role="status" aria-live="polite" className={toast?'visible':''}>{toast}</div></>;
 }

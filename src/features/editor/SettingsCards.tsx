@@ -28,7 +28,7 @@ export function SettingsCard({draft,section,commit,notify,repository}:Props) {
   <div><p>Use a chest-up photo with a little space around your head. The portfolio places it inside an oak item frame.</p><label className="btn secondary upload-label">{busy?'Preparing…':'Choose portrait'}<input type="file" accept="image/png,image/jpeg,image/webp" id="portrait-upload" className="sr-only" disabled={busy} onChange={e=>{void portrait(e.currentTarget.files?.[0]);e.currentTarget.value='';}}/></label><button type="button" className="text-button danger" id="remove-portrait" disabled={!s.portrait} onClick={()=>commit(d=>{d.settings.portrait='';},'Portrait removed.')}>Remove photo</button></div></div></div>
   <Field name="portraitPosition" label="Vertical crop position (0–100)" kind="number" value={s.portraitPosition}/></>}
  {section==='contact'&&<><Field name="contactTitle" label="Contact heading" value={s.contactTitle}/><Field name="contactCopy" label="Invitation text" kind="textarea" value={s.contactCopy}/></>}
- </div><div className="form-actions"><button className="btn">Save section</button><span className="help">Saved to this browser’s draft. Contact sends nothing.</span></div></form>;
+ </div><div className="form-actions"><button className="btn">Save section</button><span className="help">{repository.kind==='supabase'?'Saved to the draft until you publish. Contact sends nothing.':'Saved to this browser’s draft. Contact sends nothing.'}</span></div></form>;
 }
 
 // EDITOR.md: the five fixed character categories keep their ids; only names, labels and intros change.
