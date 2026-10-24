@@ -75,6 +75,13 @@ createServer(async (req, res) => {
    const who = actor(req);
    if (typeof who !== 'object') return send(res, 401, { code: 401, msg: 'invalid JWT' });
    const email = Object.keys(accounts).find(key => accounts[key].id === who.user)!;
+   if (req.method === 'PUT') {
+    const input = JSON.parse((await body(req)).toString() || '{}');
+    if (typeof input.password === 'string') {
+     if (input.password === accounts[email].password) return send(res, 422, { code: 'same_password', msg: 'New password should be different from the old password.' });
+     accounts[email].password = input.password;
+    }
+   }
    return send(res, 200, token(who.user, email).user);
   }
 

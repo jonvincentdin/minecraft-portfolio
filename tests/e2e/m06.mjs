@@ -160,6 +160,27 @@ try {
  assert.equal((await sql("select content #>> '{settings,tagline}' as t from public.portfolio_drafts"))[0].t, 'Written after the session ended');
  check('after the session ends, the failed save keeps the input; signing in again and retrying saves it');
 
+ // ---- Changing the password ----
+ await owner.locator('#change-password').click();
+ await owner.locator('#password-form [name="current"]').fill('not the password');
+ await owner.locator('#password-form [name="next"]').fill('a new long passphrase');
+ await owner.locator('#password-form [name="repeat"]').fill('a new long passphrase');
+ await owner.locator('#password-form button[type="submit"]').click();
+ await owner.locator('#password-error').waitFor(); assert.match(await owner.locator('#password-error').textContent(), /current password is not correct\. Nothing was changed/);
+ await owner.locator('#password-form [name="current"]').fill(OWNER.password);
+ await owner.locator('#password-form [name="repeat"]').fill('a different passphrase');
+ await owner.locator('#password-form button[type="submit"]').click();
+ assert.match(await owner.locator('#password-error').textContent(), /do not match/);
+ await owner.locator('#password-form [name="repeat"]').fill('a new long passphrase');
+ await owner.locator('#password-form button[type="submit"]').click();
+ await toastShows(owner, /Password changed/);
+ await owner.screenshot({ path: out + '/password-changed.png' });
+ const pwContext = await context(), pw = await open(pwContext, '#editor');
+ await signIn(pw, OWNER); await pw.locator('#sign-in-error').waitFor(); assert.match(await pw.locator('#sign-in-error').textContent(), /do not match/);
+ await signIn(pw, { ...OWNER, password: 'a new long passphrase' }); await pw.locator('#backend-mode-notice').waitFor();
+ OWNER.password = 'a new long passphrase';
+ check('changing the password needs the current one; afterwards only the new password signs in');
+
  // ---- Invalid documents are refused by the database even if the client is bypassed ----
  const bypass = await owner.evaluate(async url => {
   const key = Object.keys(localStorage).find(k => k.endsWith('-auth-token')), token = JSON.parse(localStorage.getItem(key)).access_token;
