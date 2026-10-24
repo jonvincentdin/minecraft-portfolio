@@ -5,9 +5,8 @@ Branch: feat/m06-supabase, based on fix/m03-dialog-parity (itself on main b3b6f6
 ## Status
 
 Implemented and verified against PostgreSQL 18 (PGlite) running the real migration, and against a local HTTP emulator
-of the Supabase APIs. **Not yet verified against a hosted Supabase project:** the owner has not supplied a project URL
-or publishable key, and no migration has been applied anywhere. The acceptance items below that need a hosted instance
-are listed as open; they are not claimed.
+of the Supabase APIs. On 2026-10-24 it was also applied to, and verified against, the hosted project `jvd-world` (see
+*Hosted verification* below).
 
 ## Implemented
 
@@ -101,6 +100,45 @@ generated shape until types can be generated from an applied project.
     5466), which is capture noise already noted in M05;
   - local-mode text and markup are unchanged.
 
+## Hosted verification - 2026-10-24
+
+At the owner's request, the owner was signed in to the Supabase CLI (2.122.0). Then:
+
+- **Project:** `jvd-world` (ref `bkfvkqnusckxyphpvsiq`) was created in the "Personal Projects" organization, region
+  ap-southeast-1, free plan. The owner's other project ("Manthano") was not touched.
+- **Migration:** `supabase db push --linked` was run after a dry run and applied `20261024000000_portfolio_content.sql`
+  without errors.
+- **Auth settings:** `supabase/config.toml` declares only `enable_signup = false`, `site_url` and
+  `additional_redirect_urls`. `supabase config push` changed exactly those three properties; a fresh `config diff`
+  shows no declared differences.
+- **Owner:** `chanseytheopiest@gmail.com` was created through the Auth admin API with a generated password and email
+  confirmed, then enrolled as `owner`. The secret key stayed in process memory and is not stored anywhere.
+- **Local configuration:** `.env.local` (ignored by Git) holds only the URL and the publishable key. The CLI link state
+  in `supabase/.temp/` is ignored, and the database password is in the ignored `.env.supabase.local`.
+- **Types:** `src/types/database.ts` was generated from the applied schema. `portfolio_editors.role` is a text column,
+  so the repository now narrows it.
+
+`tests/e2e/m06-hosted.mjs`: 10 checks passed against the hosted project in Edge (`evidence/m06/hosted-report.json`, `hosted-*.png`):
+- **Anonymous:** reads only the empty publication. Drafts, membership, media and `save_draft` return 401.
+- **Visitors** see the labelled sample world.
+- **Public sign-up** is refused (422).
+- **Non-enrolled account:** a temporary account sees the not-enrolled state. `save_draft`, `register_media` and
+  self-enrollment return 403, and it sees no draft rows.
+- **Owner draft:** saving is private. A stale save gets HTTP 409 with `code: PT409` and `details: "1"` from real
+  PostgREST, and an invalid document gets 422 with the validator message.
+- **Upload:** stored privately as a 60×80 WebP. The public URL fails before publishing, and the drafts bucket is not
+  public. A second owner session shows it through a signed URL.
+- **Publish:** the image is copied to the public bucket (public URL 200), and visitors see revision 2 with the image
+  loaded.
+- **Sessions:** the owner session survives a reload; a stale session gets "now revision 3" and keeps its edit; sign-out
+  works.
+
+Afterwards the test deleted every draft, publication, media record and stored object it created, plus the temporary
+account. The project was left with 0 drafts, 0 publications, 0 media records and one user, the enrolled owner.
+
+The built bundle contains neither the secret nor the legacy service-role key value. The only match for `sb_secret_` is
+supabase-js's own key-prefix check.
+
 ## What the emulator and PGlite do not prove
 
 - **Hosted Storage service:** enforcement of bucket size and MIME limits (the emulator applies the same limits itself),
@@ -112,14 +150,15 @@ generated shape until types can be generated from an applied project.
 - **True concurrency:** PGlite runs one connection. The revision guard uses `select … for update` plus a conditional
   `on conflict … where`, and the concurrent first-save path is reasoned about, not raced.
 
-## Open acceptance items (need the owner's project)
+## Remaining items
 
-1. Apply the migration to a development project and record the output.
-2. Create and enroll the owner as described in `supabase/README.md`.
-3. Run the browser flow against it: sign-in across sessions, save, upload, publish, a visitor view and a denied
-   stranger.
-4. Generate `src/types/database.ts` from the applied schema.
-5. Turn off public sign-ups and set the Site URL.
+1. **Production origin:** once the site is deployed, add its origin to `site_url` and `additional_redirect_urls` in
+   `supabase/config.toml` and run `supabase config push`.
+2. **Hosting variables:** set the same three `VITE_` variables in the hosting provider.
+3. **Owner password:** the generated password was shown in the setup conversation, so the owner should rotate it. The
+   app has no change-password screen yet.
+4. **Not exercised against the hosted project:** session-expiry recovery and true concurrent first saves. Both are
+   covered only by the emulator and by reasoning.
 
 ## Known limitations
 

@@ -32,19 +32,19 @@ Snapshot: 2026-10-24 (Asia/Singapore), updated after M06 implementation.
 - Build/typecheck, 29 unit tests, 100 asset hashes, shell regression, test:m02, test:m03, test:m04 (18 checks) and test:m05 (13 checks) passed.
 - All 11 advancement screenshot pairs across five viewports, both trees, list view and a deep selection match the reference with zero differing pixels.
 
-## M06 state (merged to main, hosted verification pending)
+## M06 state (merged to main, verified on the hosted project)
 
 - The M03 dialog fix merged through PR #11 (squash) at b6caeb2. M06 merged through PR #12 (squash) at f80e90b. Main has no branch protection, CI workflow, webhook or deployment.
 - Verified: test:db (11, PGlite), test:m06 (11 browser checks against the emulator), 36 unit tests, build, 100 asset hashes, and the demo-mode regressions smoke/M02/M03/M04/M05.
-- Not verified: anything on a hosted Supabase project. No migration has been applied anywhere, and merging deployed nothing.
+- Hosted: Supabase project jvd-world (ref bkfvkqnusckxyphpvsiq, ap-southeast-1, free plan). The migration is applied, sign-up is disabled, and chanseytheopiest@gmail.com is enrolled as owner. tests/e2e/m06-hosted.mjs passed 10 checks and left the project with no content. The site itself is not deployed.
 
 ## Planned work
 
-M06 hosted verification once credentials exist; M07 full verification.
+M07 full verification and delivery.
 
 ## Blockers and unknowns
 
-- **Supabase:** the owner's project URL, publishable key, owner account and approval to apply the migration.
+- **Supabase:** the production origin is not yet in the Auth settings or the hosting variables, and the owner should rotate the generated password (there is no change-password UI yet).
 - **Unverified:** physical touch, other browser engines and separate modal-entrance timing.
 - **Resolved:** the M03 dialog capture residual (backdrop-blur compositing); all 11 M03 pairs are exact.
 - **Content not yet supplied:** owner portrait, social URLs and verified credentials.
@@ -52,4 +52,6 @@ M06 hosted verification once credentials exist; M07 full verification.
 
 ## Next concrete steps
 
-1. With credentials: follow supabase/README.md on a development project, then run the browser flow there and record the evidence in M06_VERIFICATION.md.
+1. Owner: sign in at #editor and import or enter real content, then publish.
+2. When deploying: set the VITE_ variables in hosting, then add the production origin to supabase/config.toml and run supabase config push.
+3. Start M07 when asked.

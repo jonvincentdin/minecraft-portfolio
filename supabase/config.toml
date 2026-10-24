@@ -1,0 +1,9 @@
+# Settings pushed to the hosted project with `supabase config push`. Only declared properties are changed.
+project_id = "jvd-world"
+
+[auth]
+# No production origin yet; update both when the site is deployed.
+site_url = "http://127.0.0.1:5173"
+additional_redirect_urls = ["http://127.0.0.1:5173"]
+# Owner and editors are created by an administrator and enrolled in portfolio_editors; nobody signs up.
+enable_signup = false

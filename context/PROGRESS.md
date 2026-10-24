@@ -150,3 +150,26 @@ On the user's instruction ("install gh and handle the rest"), the GitHub CLI 2.1
 - Main has no branch protection, CI workflow, webhook or deployment; nothing was deployed.
 - No migration was applied to any Supabase project. Hosted verification still waits for credentials and approval to apply the migration.
 - PR #12 had damaged two words in CURRENT_STATE.md ("M00" became "000", "There" became "hhere"), and its intended M06 sentence was missing. This PR restores the file to its pre-M06 text and applies that sentence.
+
+## 2026-10-24 (Asia/Singapore): Supabase project set up and M06 verified on it
+
+At the user's request (new free project, Singapore, owner chanseytheopiest@gmail.com with a generated password), and after the user signed in to the Supabase CLI:
+
+- **Project:** jvd-world (ref bkfvkqnusckxyphpvsiq) was created. The existing "Manthano" project was not touched.
+- **Migration:** applied with `db push --linked` after a dry run.
+- **Auth settings:** sign-up disabled, and the site and redirect URL set through a minimal `supabase/config.toml` and `config push` (exactly three properties changed).
+- **Owner:** created through the admin API and enrolled.
+- **Local configuration:** `.env.local` written with only the URL and publishable key. The database password is in the ignored `.env.supabase.local`.
+- **Types:** `src/types/database.ts` generated from the applied schema; the editor role is now narrowed from text.
+
+**Checks:**
+- `tests/e2e/m06-hosted.mjs`: 10 checks passed against the hosted project. Real PostgREST returned PT409 with details, and 422 for invalid content and for sign-up.
+- The test cleaned up all content and its temporary user.
+- Also passed: emulator `test:m06` (11), 36 unit tests, typecheck, build. No secret key value is in the bundle.
+
+**Problems during setup:**
+- The first owner-creation attempt sent the new `sb_secret_` key as a Bearer token, using the CLI's truncated (unrevealed) key. It failed before creating anything, which a check confirmed. It was rerun with `--reveal` and the `apikey` header.
+
+**Remaining:**
+- The owner should rotate the generated password, which appeared in the conversation.
+- The production origin and hosting variables wait for deployment.
