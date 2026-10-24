@@ -44,12 +44,14 @@ node tests/visual/compare-m03.mjs
 
 The visual capture script aligns page and internal scroll positions after the interaction tests. Viewports: 1440x900, 390x844, 1366x768, 1024x768 and 768x1024. All five full-page skills screenshots match exactly, including the table and six loadout cards. Workshop dialogs at 1024 and 768 also match exactly.
 
-Seven of eleven final pairs have zero differing pixels. The remaining dialog captures differ by 2061 pixels at 1440, 1688 at 390 and 2567 at 1366; the crafted-React state differs by 2061 pixels. These differences are confined to the top capture region (y=7..89), around the header/close/backdrop area. Workshop content below that region matches. Maximum whole-image difference is 0.513%. The residual top-region rendering difference is documented, not a claim of perfect dialog parity.
+All eleven final pairs have zero differing pixels (re-verified 2026-10-24, three consecutive runs).
+
+Dialog residual, resolved 2026-10-24: the original captures showed 2061 (1440), 1688 (390), 2567 (1366) and 2061 (crafted) differing pixels at most 6/255 per channel, confined to a band just outside the dialog's top/left edge (y=7..89). Root cause is Chromium compositing of the `.craft-dialog::backdrop` `blur(5px)` edge after a preceding fullPage capture, not the implementation: the dialog trees have the same elements, boxes and computed styles (attribute order and `draggable=false` on empty cells aside); the page under the dialog and the blurred backdrop with the dialog hidden are pixel-identical; without the prior fullPage capture both sides are identical; and the reference's own frames vary under the same blur. The capture now disables the backdrop blur identically on both sides for the exact pairs, and still records the as-rendered pairs as `*-blur.png` with `maxChannelDelta` in comparison.json (1440 and 1366/390 at Δ6 and Δ4, 1024/768 identical). No application or reference CSS changed.
 
 Desktop/mobile layouts, the solid/wireframe table and crafted React output were visually inspected. Full-page screenshots may be taller than their viewport.
 
 ## Boundaries and delivery
 
-M03 is implemented and functionally verified; minor dialog capture differences remain recorded above. Physical touch hardware, other browser engines and full motion-recording comparison remain unverified. The edited-content fixture is an ignored test artifact, not an owner editor. Owner content remains demo-labeled. No new dependency, backend, migration, environment, publication or deployment changes.
+M03 is implemented and functionally verified; the dialog capture residual is explained and resolved above. Physical touch hardware, other browser engines and full motion-recording comparison remain unverified. The edited-content fixture is an ignored test artifact, not an owner editor. Owner content remains demo-labeled. No new dependency, backend, migration, environment, publication or deployment changes.
 
 Feature branch: feat/m03-crafting-skills; draft PR targets main and depends on #2 and #3. Merge remains separately authorized. Roll back through a focused revert PR without changing immutable assets or database state. M04 is not started.
