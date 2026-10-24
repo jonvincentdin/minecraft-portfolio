@@ -20,8 +20,10 @@ export const collectionFields={
 } as const;
 
 export function safeUrl(url:string){try{const u=new URL(url);return ['https:','http:','mailto:'].includes(u.protocol)?u.href:'';}catch{return '';}}
-// Same accepted forms as the reference: bundled assets, inline PNG/JPEG/WebP and http(s) URLs.
-export function safeImage(src:unknown){if(typeof src!=='string')return '';if(/^assets\/[a-zA-Z0-9_./-]+$/.test(src))return src;if(/^data:image\/(png|jpeg|webp);base64,/.test(src))return src;const u=safeUrl(src);return u.startsWith('http')?u:'';}
+// An owner upload stored by the backend; the database accepts exactly this form.
+export const MEDIA_REF=/^media:([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.(?:webp|png|jpg))$/;
+// Same accepted forms as the reference (bundled assets, inline PNG/JPEG/WebP, http(s) URLs) plus uploaded media.
+export function safeImage(src:unknown){if(typeof src!=='string')return '';if(/^assets\/[a-zA-Z0-9_./-]+$/.test(src)||MEDIA_REF.test(src))return src;if(/^data:image\/(png|jpeg|webp);base64,/.test(src))return src;const u=safeUrl(src);return u.startsWith('http')?u:'';}
 
 type Doc=Record<string,any>;
 // Older version-5 exports predate the workshop collections; fill them from the seed, as the reference migrate() did.
