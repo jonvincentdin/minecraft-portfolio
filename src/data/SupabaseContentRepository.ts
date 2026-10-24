@@ -131,7 +131,8 @@ export class SupabaseContentRepository implements ContentRepository {
   if (!session) return null;
   const { data, error, status } = await this.client.from('portfolio_editors').select('role').eq('portfolio_id', PORTFOLIO).eq('user_id', session.user.id).maybeSingle();
   if (error) throw requestError(error, status);
-  return { user: session.user, role: data?.role ?? null };
+  const role = data?.role === 'owner' || data?.role === 'editor' ? data.role : null;
+  return { user: session.user, role };
  }
  async signIn(email: string, password: string) {
   const { error } = await this.client.auth.signInWithPassword({ email, password });

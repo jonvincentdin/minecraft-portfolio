@@ -1,8 +1,17 @@
 # Supabase backend
 
 Implements M06: owner sign-in, private revision-guarded drafts, atomic publication, owner media and RLS.
-Nothing here has been applied to a hosted project yet. Applying the migration and enrolling the owner are
-deliberate steps for the project owner (see below).
+
+**Current project:** `jvd-world`, ref `bkfvkqnusckxyphpvsiq`, region ap-southeast-1. Set up on 2026-10-24 by following
+the steps below, with the CLI in place of the dashboard:
+- the migration is applied;
+- `config.toml` is pushed;
+- the owner is enrolled;
+- `.env.local` is written.
+
+To re-verify it, run `npm run test:m06-hosted` with `M06_OWNER_EMAIL`, `M06_OWNER_PASSWORD` and `SUPABASE_SECRET_KEY` set in
+the shell. Never put them in a file. The test deletes all content when it finishes, so do not run it once real content
+is published.
 
 ## What the migration creates
 
@@ -33,8 +42,9 @@ uploads through one-hour signed URLs. Publishing copies each upload from `portfo
    service-role or secret key in this app.
 2. **Apply the migration.** Use either the SQL editor (paste the migration file) or the CLI:
    `supabase link --project-ref <ref>` then `supabase db push`. Apply it to a development project first.
-3. **Auth settings.** Authentication → Providers → Email: keep email + password enabled. Under Authentication →
-   Sign In / Providers, turn **off "Allow new users to sign up"**. Enrollment already blocks strangers, but there is no
+3. **Auth settings.** `supabase/config.toml` declares them; `supabase config push` applies only those properties.
+   In the dashboard, the equivalent is: Authentication → Providers → Email keeps email + password enabled, and under
+   Authentication → Sign In / Providers, **"Allow new users to sign up"** is off. Enrollment already blocks strangers, but there is no
    reason to accept accounts. Set Site URL to the production origin. Password sign-in needs no redirect URLs; add
    `http://127.0.0.1:5173` and the production origin to the Redirect URLs list if password reset is used later.
 4. **Create the owner account.** Authentication → Users → Add user, with email and password and *Auto Confirm User*.
