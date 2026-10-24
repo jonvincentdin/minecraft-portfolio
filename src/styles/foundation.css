@@ -4,3 +4,8 @@
 
 /* Accessibility fix over the reference: it removes the search input outline without a replacement. */
 .search:focus-within{outline:3px solid #f1cf7f;outline-offset:3px}
+
+/* Backend-mode notice: holds its place under the intro, then fades in once the intro has handed over. */
+.publish-notice{transition:opacity .45s ease-out}
+body.intro-open .publish-notice{opacity:0;transition:none}
+body.paused .publish-notice{transition:none}

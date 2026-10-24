@@ -207,3 +207,14 @@ On feat/m07-delivery. The user asked to continue and complete the project.
 - test:m06-hosted was not rerun, because it deletes content and the owner may have started editing.
 
 **Remaining:** listed in M07_VERIFICATION.md. They include physical touch, deployment and the production origin, owner content, and the owner password change.
+
+## 2026-10-24 (Asia/Singapore): intro exit no longer flashes the backend notice
+
+The owner reported a rectangle blinking as the intro hands over to Spawn. Frame captures showed the cause: in Supabase mode, the "Nothing has been published yet" notice (added in M06, so absent from every demo-mode comparison) rendered at full opacity under the header while the staged reveal was still running.
+
+**Fix:** the notice keeps its place from the first render, so the layout never shifts. It stays transparent while `body.intro-open` is set and fades in over 0.45s once the intro finishes; there is no fade when paused or with reduced motion. The reference's own black letterbox bar rising during the exit is the original choreography and is unchanged.
+
+**Checks:**
+- Measured: the notice opacity is 0 through the whole exit, then 0 to 1 over about 450ms. The hero's top stays at 135px in every sample.
+- New test:m06 check: the notice is transparent during the intro and appears without layout shift. All 13 checks passed.
+- Also passed: smoke, M01 comparison (exact, apart from 1-pixel noise at 1366), 37 unit tests.
