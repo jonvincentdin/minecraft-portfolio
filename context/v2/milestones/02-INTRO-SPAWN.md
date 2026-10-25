@@ -4,7 +4,7 @@ Dependency: V2-01.
 
 ## Scope
 
-features/01-INTRO.md and features/02-SPAWN.md. Export the logo cell grid from `brand/generate-logo.mjs` for the voxel assembly. Implement the depth-dive entry and the block-dissolve exit from Spawn.
+features/01-INTRO.md and features/02-SPAWN.md. Reuse the letter grid `G` from `brand/source/scene.html` for the voxel assembly, and use `brand/jvd-keyart.png` as the target framing. Implement the depth-dive entry and the block-dissolve exit from Spawn.
 
 ## Acceptance
 

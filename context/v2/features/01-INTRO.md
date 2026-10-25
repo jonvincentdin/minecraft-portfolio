@@ -9,7 +9,7 @@ States: loading → ready → exiting → entered. Real asset readiness. Ready w
 ## New beats
 
 1. Chunk-loading landscape whose progress follows real loading.
-2. The JVD wordmark assembles from falling voxels, generated from `brand/generate-logo.mjs`'s cell grid, then the grass wave, then the full-stop block drop.
+2. The brand shot is recreated live (BRAND.md → Motion tie-in): the letter blocks fall into place from the grid in `brand/source/scene.html`, the grass caps land, the gold ore starts to glow, and the full-stop block drops and hovers.
 3. The name types on in pixel type, with parallax clouds and rising particles.
 4. Enter → depth dive through the layers and clouds, the letterbox opens, and the sky strips wipe as the last beat. About 2.2s.
 5. Hand-off into Spawn at sunrise with a scroll cue.

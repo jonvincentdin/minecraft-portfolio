@@ -20,7 +20,7 @@ Status (2026-10-25): **specified, not built.** Only these context files and the 
 | A rich interaction on every page (drag inventory, 3×3 workshop, tree pan/zoom, comparisons) | Fewer, lighter interactions (see FEATURES.md) |
 | Intro: shuffled upward exit | Intro: a longer cinematic in which the logo is built from blocks, with depth and a hand-off into scroll |
 | "Edit world" button → `#editor`, signed in with a password | Logo → `/editor` page, signed in with an emailed one-time code |
-| Text "JVD." brand | The JVD block logo (`brand/`) |
+| Text "JVD." brand | A cinematic 3D JVD title render and emblem (`brand/`, PNG) |
 
 ## Unchanged and reused
 
@@ -36,6 +36,6 @@ The custom WebGL renderer and scene-data models (`../v1/MODELS.md`, `../v1/ASSET
 - `MILESTONES.md` and `milestones/`: the build plan.
 - `MASTER_PROMPT.md`: the implementation prompt for an agent.
 - `PROGRESS.md`, `PROJECT_FACTS.md`: history and the current verified snapshot.
-- `brand/`: logo SVGs and the script that generates them.
+- `brand/`: brand PNGs (key art, logos, emblem, icons) and `source/` to re-render them.
 
 Verification evidence (screenshots, reports) is **not** committed in v2. Keep it in the ignored `test-results/` folder and summarise the checks in `PROGRESS.md`.
