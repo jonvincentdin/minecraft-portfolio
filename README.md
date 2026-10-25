@@ -5,8 +5,9 @@ crafting workshop, the advancement trees and a world editor. The editor saves dr
 with the owner signed in and access enforced by RLS. The supplied vanilla implementation in `reference/site/` stays
 unchanged and is the parity baseline.
 
-Status: milestones M00–M07 are complete. See `context/M07_VERIFICATION.md` for the final parity report and
-`context/PROGRESS.md` for the history. The site has not been deployed; see `context/DEPLOYMENT.md`.
+Status: v1 (milestones M00–M07) is complete. Version 2, a single-page cinematic scroll rework, is specified in
+`context/v2/` and not yet built. See `context/v1/M07_VERIFICATION.md` for the final parity report and
+`context/v1/PROGRESS.md` for the history. The site has not been deployed; see `context/v1/DEPLOYMENT.md`.
 
 ## Run it
 
@@ -48,27 +49,28 @@ To run the demo-mode browser suites while `.env.local` selects Supabase, start t
 
 - `src/`: app shell and routes (`app/`, `features/`), the exact renderer wrapper (`components/three/`), domain logic
   (`domain/`), content repositories (`data/`), types.
-- `supabase/`: migration, Auth config and setup guide. `context/DEPLOYMENT.md` covers hosting.
-- `context/`: requirements, verification records (`M00`–`M07_VERIFICATION.md`), evidence screenshots, the progress log,
+- `supabase/`: migration, Auth config and setup guide. `context/v1/DEPLOYMENT.md` covers hosting.
+- `context/v2/`: the v2 rework (single-page cinematic scroll site) — start here for new work.
+- `context/v1/`: the finished v1 requirements, verification records (`M00`–`M07_VERIFICATION.md`), the progress log,
   and `OWNER_CONTENT.md`, the content that still needs Jon's real details.
 
 ## Original handoff starting instructions
 
 1. Extract the whole ZIP into a project folder and open it in VS Code.
-2. Read `context/CONTEXT.md`, `context/CURRENT_STATE.md`, and `context/ARCHITECTURE.md`.
-3. Give Codex `context/SETUP_PROMPT.md` first. It prepares the repository and a runnable foundation.
-4. Then give it `context/MASTER_PROMPT.md` to implement the remaining milestones.
+2. Read `context/v1/CONTEXT.md`, `context/v1/CURRENT_STATE.md`, and `context/v1/ARCHITECTURE.md`.
+3. Give Codex `context/v1/SETUP_PROMPT.md` first. It prepares the repository and a runnable foundation.
+4. Then give it `context/v1/MASTER_PROMPT.md` to implement the remaining milestones.
 5. Keep `reference/site` immutable. Compare against it at matching viewport sizes.
-6. Supply actual personal content using `context/OWNER_CONTENT.md`. Supplied content is clearly labeled demo content.
+6. Supply actual personal content using `context/v1/OWNER_CONTENT.md`. Supplied content is clearly labeled demo content.
 
 ## Included
 
-- `context/`: separate Markdown files for requirements, design, flows, features, assets, models, motion, architecture, backend, editor, testing, skills, milestones, setup and master prompts.
+- `context/v1/`: separate Markdown files for requirements, design, flows, features, assets, models, motion, architecture, backend, editor, testing, skills, milestones, setup and master prompts.
 - `assets/models/`: **48 GLB files**, scene-data JSON, original manifests and topology report. **39 models have refined mesh entries**, plus 9 legacy scenes/models.
 - `assets/thumbs/`: 39 thumbnails; `assets/fonts/`: original JVD font and its license; `assets/demos/`: 6 illustrative project SVGs.
 - `reference/site/`: exact HTML/CSS/JavaScript and assets from the published reference, including its motion update. This is the visual and behavioral baseline.
 - `reference/model-source/`: original procedural model and image-generation scripts; retained for provenance, not required for the React runtime.
-- `context/content-seed.json`: deterministic IDs for the default demo content; not an export of private browser drafts.
+- `context/v1/content-seed.json`: deterministic IDs for the default demo content; not an export of private browser drafts.
 - `scripts/verify-assets.mjs`: verify all supplied asset hashes, including the original React model.
 - `scripts/sync-assets.mjs`: copy canonical assets into the future React app's `public/assets` folder.
 - `.env.example`: public client configuration placeholders only.
@@ -87,6 +89,6 @@ No live website was changed by creating this package. (Historical note: the Supa
 
 ## Memory and 3D workflow update
 
-Read `context/MEMORY_WORKFLOW.md` for the four included repository skills and `context/THREE_D_TOOL_VERIFICATION.md` for the checked tool sources. Current facts are in `context/PROJECT_FACTS.md`. No extra MCP is required to integrate the existing assets. Future explicitly requested model generation is supported by the 3D workflow.
+Read `context/v1/MEMORY_WORKFLOW.md` for the four included repository skills and `context/v1/THREE_D_TOOL_VERIFICATION.md` for the checked tool sources. Current facts are in `context/v1/PROJECT_FACTS.md`. No extra MCP is required to integrate the existing assets. Future explicitly requested model generation is supported by the 3D workflow.
 
 When applying this ZIP to an existing checkout, copy the updated project files while retaining that checkout's own `.git` directory. The supplied Git metadata was not changed by this update.

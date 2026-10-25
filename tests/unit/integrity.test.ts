@@ -12,5 +12,5 @@ test('runtime copies and renderer preserve every original byte', async () => {
  assert.equal((await readdir('assets/thumbs')).filter(f => f.endsWith('.png')).length, 39);
  assert.deepEqual(await readFile('src/components/three/renderer.js'), await readFile('reference/site/renderer.js'));
  assert.equal(await readFile('src/styles/reference.css','utf8'), (await readFile('reference/site/style.css','utf8')).replaceAll("url('assets/", "url('/assets/"));
- assert.deepEqual(await readFile('src/data/demo-content.json'), await readFile('context/content-seed.json'));
+ assert.deepEqual(await readFile('src/data/demo-content.json'), await readFile('context/v1/content-seed.json'));
 });
