@@ -37,5 +37,6 @@ The custom WebGL renderer and scene-data models (`../v1/MODELS.md`, `../v1/ASSET
 - `MASTER_PROMPT.md`: the implementation prompt for an agent.
 - `PROGRESS.md`, `PROJECT_FACTS.md`: history and the current verified snapshot.
 - `brand/`: brand PNGs (key art, logos, emblem, icons) and `source/` to re-render them.
+- `previs/`: a rough working prototype of the storyboard (`index.html`) and a recorded walkthrough (`din-v2-previs.webm`). It is a motion reference, not the build: plain CSS and JS, thumbnails instead of the 3D renderer, and sample content.
 
 Verification evidence (screenshots, reports) is **not** committed in v2. Keep it in the ignored `test-results/` folder and summarise the checks in `PROGRESS.md`.

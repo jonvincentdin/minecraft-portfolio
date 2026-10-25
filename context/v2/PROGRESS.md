@@ -64,3 +64,26 @@
 - BRAND.md rewritten, including the new violet colors. The intro, storyboard, milestone and decision references now describe runes rising into the word and a glint sweep.
 - Open point: violet is new next to the olive site palette; decide in V2-01.
 - Checks: viewed the key art, logo and emblem, plus a contact sheet including the 64px and 32px icons. All final files came from the committed scripts.
+
+## 2026-10-26 (Asia/Singapore): scroll previs and video
+
+- The owner asked for a video showing how the website scrolls. v2 isn't built, so I made a previsualization: `previs/index.html`, one page that follows STORYBOARD.md.
+  - Intro: runes rise into the DIN logo, then Enter world.
+  - Global day-to-night sky, XP bar and hotbar.
+  - Spawn: the letters drift apart and fall like blocks.
+  - Journal: the oak frame builds, the ink reveals, pages turn and the book slides away.
+  - Projects: horizontal track; the hotbar swaps to project slots; the last item drops.
+  - Skills: book, dye and item fly into the 3×3 grid, the result flies to the loadout, then the plank-door transition.
+  - Experience: the minecart rides a sloped rail past five characters with parallax and a mine-shaft drop.
+  - Advancements: the path glow draws in, "Advancement Made!" toasts appear and torches light up.
+  - Campfire: the contact book writes itself and signposts drop in.
+  - Credits roll.
+- It uses plain CSS and JS with no libraries, the model thumbnails in place of the WebGL renderer, the brand PNG and the v1 seed content.
+- `previs/record.mjs` serves the repo locally, drives Edge with Playwright and records `previs/din-v2-previs.webm`: 1280×720, about 1:46, about 21 MB.
+- Fixed while reviewing frames:
+  - Pinning was broken by `overflow-x: hidden` on html and body; changed to `clip`.
+  - The crafting items were too small.
+  - The cross-drive rename in the recorder failed; it now copies.
+  - The portrait placeholder text had low contrast.
+- Known: the first fraction of a second of the video is blank while the browser starts. The previs has no reduced-motion path and isn't responsive below desktop.
+- Checks: reviewed the recording through contact sheets of frames sampled every 0.8–4.4s. No application code changed.
