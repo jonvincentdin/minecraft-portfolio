@@ -4,7 +4,7 @@ import type { PGlite } from '@electric-sql/pglite';
 import seed from '../../src/data/demo-content.json' with { type: 'json' };
 import { createDatabase, as, outcome, OWNER, STRANGER, type Actor } from './harness';
 
-// The authorization matrix of context/SUPABASE.md, run in order against one database.
+// The authorization matrix of context/v1/SUPABASE.md, run in order against one database.
 let db: PGlite;
 const owner: Actor = { user: OWNER }, stranger: Actor = { user: STRANGER };
 const doc = (change: (c: any) => void = () => {}) => { const c = structuredClone(seed) as any; change(c); return JSON.stringify(c); };
