@@ -33,5 +33,7 @@ Received 2026-10-25 (Asia/Singapore) from the owner, Jon Vincent Din. This is th
 | R9 | The editor asks for the owner's Gmail first. Only when it matches is a sign-in code sent to that inbox. | AUTH.md |
 | R10 | A logo that ties Minecraft to Jon's name. | BRAND.md, `brand/` |
 | R11 | Context only for now: no application code changes in this step. | PROGRESS.md |
+| R12 | (2026-10-26, after seeing the first previs) Heavy motion, not light easing: big travel, inertia and momentum. | MOTION.md → Owner direction |
+| R13 | (2026-10-26) Scrolling must read as one continuous vertical journey. Sections scroll into each other; no pinned scene swapped for the next "page". | STORYBOARD.md → Owner direction |
 
 Owner Gmail for editor sign-in: **jonvincent.din@gmail.com** (see AUTH.md for how it is used and why the browser must never hard-code it).

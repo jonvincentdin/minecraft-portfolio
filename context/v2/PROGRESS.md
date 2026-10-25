@@ -87,3 +87,19 @@
   - The portrait placeholder text had low contrast.
 - Known: the first fraction of a second of the video is blank while the browser starts. The previs has no reduced-motion path and isn't responsive below desktop.
 - Checks: reviewed the recording through contact sheets of frames sampled every 0.8–4.4s. No application code changed.
+
+## 2026-10-26 (Asia/Singapore): previs reworked for heavy, continuous motion; MP4
+
+- The owner asked why the video was WebM and wanted MP4. Playwright records WebM only, and its bundled ffmpeg can't encode H.264, so `record.mjs` now replays the take in Edge onto a canvas and re-encodes it with MediaRecorder (`video/mp4;codecs=avc1`, 2.5 Mbps). It skips the blank start-up frames by timestamp, because the WebM can't seek. The WebM is removed; the output is `previs/din-v2-previs.mp4` (about 18 MB, about 1:10).
+- Owner feedback on the first previs: "give heavy motions instead of easy ones" and "when you scroll it goes on vertically, you're just transitioning it to another page". Recorded as R12 and R13 in BRIEF.md and as override notes at the top of STORYBOARD.md and MOTION.md.
+- Rewrote `previs/index.html` as one continuous world:
+  - an inertial scroll layer with velocity skew;
+  - sections that scroll into each other;
+  - giant outlined pixel words sweeping sideways between sections;
+  - hard parallax on the hero letters and blocks;
+  - overshoot entrances (frame swing, alternating line slams, signpost drops);
+  - skill rows whose ingredients converge from off-screen as they cross the centre;
+  - a tall advancement tree whose glow follows the scroll;
+  - pins only for the Projects and Experience horizontal runs.
+- The recorder now scrolls continuously at a steady pace instead of stopping at each chapter.
+- Checks: reviewed frame sheets of the MP4. The first frame is clean, and every section is visible and moving. No application code changed.

@@ -1,5 +1,12 @@
 # Motion specification (v2)
 
+> **Owner direction, 2026-10-26: heavy, continuous motion.**
+> - **Weight:** an inertial scroll layer that trails the real scroll position (previs lerp factor 0.075 per frame) and skews content with scroll velocity (up to about 7°). Native scroll stays the source of truth; Lenis with a low `lerp` is the production equivalent.
+> - **Travel:** entrances cover 30–80vw or vh, not 12–20px. Use rotations of 6–45° and an overshoot ease (back-out) so elements land with a thud.
+> - **Depth:** parallax speeds from 0.3× to 3× on decorative blocks.
+> - **Flow:** no scene-swap transitions; see STORYBOARD.md → Owner direction.
+> - Reduced motion and pause still give the static, readable page.
+
 v1's timing table (`../v1/MOTION.md`) still holds for the interactions v2 keeps: hover, press, six-pixel feedback, the advancement edge and node glow, and dialogs. This file adds the scroll system.
 
 ## Engine
