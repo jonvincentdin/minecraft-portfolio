@@ -1,35 +1,48 @@
-# Brand — DIN, breaking into blocks
+# Brand — DIN, enchanted
 
-Revised 2026-10-26. History: a flat pixel "JVD" logo, then block-built "JVD" and "DIN" scenes at dusk. The owner rejected each one: not cinematic, letters built from cubes looked crude, textures looked cheap, and the landscape scene didn't fit. The owner chose this direction: **solid letters whose edges break into blocks**.
+Revised 2026-10-26. The owner asked for something **simple and iconic, not cinematic**, and chose the "Enchanted" concept from a round of options. Earlier directions (pixel JVD, block-built letters, letters breaking into cubes, cinematic dusk scenes) were rejected; see PROGRESS.md.
 
 ## Concept
 
-- **Solid, premium letters.** "DIN" (Jon's surname) as a heavy sans-serif sculpted in 3D: warm cream stone faces with a soft clearcoat, and polished gold-metal sides and bevels.
-- **Minecraft as a hint, not a costume.** The N's right stem breaks apart into cubes. Next to the break they are still aligned in a grid; further out they drift up and to the right, turning and thinning out. A few glow like embers, and a few of the far ones are tiny grass blocks: the world forming as the letter breaks apart.
-- **A film title card.** Near-black void with an olive-teal haze, a glossy dark floor, a warm key spotlight, teal and amber rim lights, dust in the light, light bloom, film grain and letterbox. "JON VINCENT DIN" in light, widely tracked sans-serif, over "WORLD OF BUILDS" in small gold capitals between hairlines.
-- **Emblem.** The same treatment on a single "D".
+- **One word, one effect.** "DIN" (Jon's surname) in a classical serif (Cinzel Black), carrying the shimmer of an enchanted item from the game: a lilac-white to violet-indigo fill, a crisp top light, two thin diagonal teal glints, and a soft violet glow.
+- **Runes as the only decoration.** A few small, original pixel runes drift in loose clusters beside the word, rising toward it and fading as they get close, like the glyphs that float into an enchanting table. They never overlap the letters or the credit line. They are generated from simple rules (a stem, a tick or two, a detached dot on a 4×5 grid), so they are not letters and not a copied script.
+- **Credit line.** "JON VINCENT DIN" in light, widely tracked Inter, over "WORLD OF BUILDS" in small lilac capitals between hairlines.
+- **Emblem.** A single enchanted "D" with a few runes, for square spaces.
 
 ## Files (all PNG, in `brand/`)
 
 | File | Size | Use |
 | --- | --- | --- |
-| `din-keyart.png` | 2560×1440 | Hero key art: intro poster frame, social/OG image, README banner |
-| `din-logo.png` | 1600×1222, transparent | Primary logo with name and tagline, for dark backgrounds |
-| `din-logo-mark-only.png` | 1330×875, transparent | Letters and cubes only. HUD/header logo (the link to `/editor`), 44–64px tall |
-| `din-emblem.png` | 1024×1024 | Square "D" emblem: avatar, app icon, OG fallback |
+| `din-keyart.png` | 2560×1440 | Banner/OG image on the deep violet background |
+| `din-logo.png` | 1933×994, transparent | Primary logo with the credit line |
+| `din-logo-mark-only.png` | 2466×909, transparent | Word and runes only. Header/HUD logo (the link to `/editor`) |
+| `din-emblem.png` | 1024×1024 | Square "D" emblem: avatar, app icon |
 | `din-icon-512.png`, `-180.png`, `-64.png`, `-32.png` | as named | PWA icon, Apple touch icon, favicons |
+
+## Colors
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--enchant-white` | #f6f1ff | Top of the letter fill |
+| `--enchant-lilac` | #cdb8ff | Fill, runes, tagline |
+| `--enchant-violet` | #8f6be8 | Fill, glow |
+| `--enchant-indigo` | #3a2a78 | Bottom of the fill |
+| `--enchant-teal` | #7ff5e0 | Glints, some runes |
+| `--enchant-bg` | #0a0812 → #140f24 | Key-art and emblem background |
+
+This violet accent is new next to the site's olive/forest palette (DESIGN_SYSTEM.md). Decide in V2-01 whether violet becomes the site accent or stays reserved for the brand mark.
 
 ## Rules
 
-- Dark backgrounds only (#050807–#1c2e22). The transparent logos are lit for dark surroundings.
-- Don't recolor, stretch or crop into the cube trail; the trail is part of the mark. Scale down only.
-- Below 44px tall, use the emblem icons.
+- Use on dark backgrounds only. The transparent logos rely on their glow.
+- Don't recolor, stretch or add effects. Scale down only.
+- Below about 120px wide, use the emblem icons instead of the wordmark.
 - The header logo's accessible name is "Jon Vincent Din — editor sign-in"; its `alt` text is "DIN — Jon Vincent Din".
-- The key art's text is part of the image. On the live page, set the name in real HTML and use a text-free render (`&title=0`) where the text must be selectable.
+- On the live site, set the name and tagline as real HTML text where they must be selectable; the PNGs have them baked in.
 
 ## Regenerating
 
-`brand/source/scene.html` builds the scene with three.js 0.160.0, loaded from jsDelivr for design tooling only; the site keeps its own renderer. The letters use the MgOpen Moderna typeface that ships with three.js as `helvetiker_bold` (permissive MgOpen license).
+`brand/source/scene.html` draws everything on a 2D canvas. It loads Cinzel and Inter from Google Fonts (both under the SIL Open Font License).
 
 ```
 node context/v2/brand/source/render.mjs <out.png> keyart 1920 1080 1.3333333
@@ -40,13 +53,8 @@ node context/v2/brand/source/post.mjs trim   <in.png> <out.png>
 node context/v2/brand/source/post.mjs resize <in.png> <out.png> <size>
 ```
 
-Rendering needs Microsoft Edge (Playwright's `msedge` channel) and network access. The `seed` query parameter changes the cube scatter.
+Rendering needs Microsoft Edge (Playwright's `msedge` channel) and network access for the fonts. The `seed` query parameter changes the runes.
 
 ## Motion tie-in
 
-The brand is a frozen frame of the intro's main move, so the intro should play it in reverse and then forward:
-
-1. Cubes stream in from the upper right and snap into grid position, assembling D, I and N. The grid cubes then fuse into the solid, smooth letters, with a gold edge-light sweeping across as each letter becomes solid.
-2. On Enter world, the letters break apart into cubes again, as in the key art, but completely. The cubes fly past the camera and become the world the visitor scrolls into.
-
-Use the break-line function from `scene.html` (the solid region is `x + 0.22·y < cut`) so the live animation and the PNGs match.
+The mark animates easily, with no 3D: the runes drift up and fade into the word, and the teal glints sweep across the letters every few seconds, like an enchanted item in the game's inventory. Use it in the intro (features/01-INTRO.md) and as a subtle hover on the header logo. Respect reduced motion: the glint stays still and the runes stay where they are.

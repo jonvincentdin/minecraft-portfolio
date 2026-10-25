@@ -1,155 +1,86 @@
-<!doctype html><html><head><meta charset="utf-8">
-<style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}
-#stage{position:relative;width:100vw;height:100vh;overflow:hidden}
-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.fx{position:absolute;inset:0;pointer-events:none}
-.vignette{background:radial-gradient(ellipse at 50% 46%,transparent 40%,rgba(2,4,4,.55) 78%,rgba(1,2,2,.92) 100%)}
-.grain{opacity:.07;mix-blend-mode:overlay}
-.bars:before,.bars:after{content:"";position:absolute;left:0;right:0;height:8%;background:#020303}
-.bars:before{top:0}.bars:after{bottom:0}
-.title{position:absolute;left:0;right:0;text-align:center;color:#efe4c6;font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif}
-.title .name{font-weight:300;font-size:var(--name,30px);letter-spacing:.78em;padding-left:.78em;text-shadow:0 0 22px rgba(255,200,130,.35)}
-.title .rule{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:var(--gap,14px);font-weight:600;font-size:var(--sub,11px);letter-spacing:.6em;padding-left:.6em;color:#c9a35a}
-.title .rule i{display:block;width:var(--line,80px);height:1px;background:linear-gradient(90deg,transparent,#c9a35a)}
-.title .rule i:last-child{transform:scaleX(-1)}
-</style></head><body><div id="stage"></div>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script type="module">
-import * as THREE from 'three';
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>DIN brand</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;600&display=block" rel="stylesheet">
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}canvas{display:block}</style></head><body><canvas id="c"></canvas>
+<script>
+// DIN — enchanted. Modes: keyart | logo (transparent; &title=0 for the mark only) | emblem.
+const Q = new URLSearchParams(location.search), MODE = Q.get('mode') || 'keyart', TITLE = Q.get('title') !== '0';
+const W = innerWidth, H = innerHeight, dpr = devicePixelRatio, cv = document.getElementById('c');
+cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+const g = cv.getContext('2d'); g.scale(dpr, dpr);
+let seed = +(Q.get('seed') || 5); const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const COL = { white: '#f6f1ff', lilac: '#cdb8ff', violet: '#8f6be8', indigo: '#3a2a78', teal: '#7ff5e0', bg0: '#0a0812', bg1: '#140f24', cream: '#eee3be', gold: '#c9a35a' };
 
-const P = new URLSearchParams(location.search);
-const MODE = P.get('mode') || 'keyart';          // keyart | logo | emblem
-const TEXT = MODE === 'emblem' ? 'D' : 'DIN';
-const W = innerWidth, H = innerHeight, stage = document.getElementById('stage');
-const rnd = (() => { let s = +(P.get('seed') || 7); return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
-
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
-renderer.setPixelRatio(devicePixelRatio); renderer.setSize(W, H); renderer.setClearColor(0, 0);
-renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
-renderer.localClippingEnabled = true;
-stage.appendChild(renderer.domElement);
-const scene = new THREE.Scene();
-scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), .04).texture;
-scene.environmentIntensity = .35;
-const camera = new THREE.PerspectiveCamera(MODE === 'emblem' ? 26 : 24, W / H, .1, 500);
-
-// ---------- materials ----------
-const face = new THREE.MeshPhysicalMaterial({ color: '#efe3c2', roughness: .42, metalness: .05, clearcoat: .35, clearcoatRoughness: .4 });
-const side = new THREE.MeshPhysicalMaterial({ color: '#b98d45', roughness: .32, metalness: .95 });
-const ember = new THREE.MeshStandardMaterial({ color: '#2a1a08', emissive: new THREE.Color('#ffb040'), emissiveIntensity: 3.2 });
-// a few cubes are grass blocks: the world forming as the letters break apart
-function pixTex(draw) { const c = document.createElement('canvas'); c.width = c.height = 16; draw(c.getContext('2d')); const t = new THREE.CanvasTexture(c); t.magFilter = THREE.NearestFilter; t.colorSpace = THREE.SRGBColorSpace; return t; }
-const pick = a => a[Math.floor(rnd() * a.length)];
-const gTop = pixTex(g => { for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) { g.fillStyle = pick(['#7fae45', '#8fbe52', '#6f9e3c', '#9bc95c']); g.fillRect(x, y, 1, 1); } });
-const gSide = pixTex(g => { for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) { g.fillStyle = pick(['#86603f', '#7a5739', '#93694a', '#6c4d34']); g.fillRect(x, y, 1, 1); } for (let x = 0; x < 16; x++) { const d = 3 + Math.floor(rnd() * 3); for (let y = 0; y < d; y++) { g.fillStyle = pick(['#7fae45', '#8fbe52', '#6f9e3c']); g.fillRect(x, y, 1, 1); } } });
-const gs = new THREE.MeshStandardMaterial({ map: gSide, roughness: .8 }), gt = new THREE.MeshStandardMaterial({ map: gTop, roughness: .8 });
-const GRASS = [gs, gs, gt, gs, gs, gs];
-
-// ---------- letters ----------
-const font = await new Promise((ok, no) => new FontLoader().load('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/fonts/helvetiker_bold.typeface.json', ok, undefined, no));
-const SIZE = 7, DEPTH = 2.0;
-const geo = new TextGeometry(TEXT, { font, size: SIZE, height: DEPTH, curveSegments: 16, bevelEnabled: true, bevelThickness: .22, bevelSize: .12, bevelSegments: 5 });
-geo.computeBoundingBox(); const bb = geo.boundingBox; const cx = (bb.max.x + bb.min.x) / 2;
-geo.translate(-cx, -bb.min.y, -(bb.max.z + bb.min.z) / 2); geo.computeBoundingBox();
-const B = geo.boundingBox, width = B.max.x - B.min.x;
-const logo = new THREE.Group(); scene.add(logo);
-
-// break-up front: solid where u = x + k*y < cut
-const K = .22, CUT = B.min.x + width * (MODE === 'emblem' ? .84 : MODE === 'logo' ? .9 : .87);
-const n = new THREE.Vector3(-1, -K, 0); const len = n.length(); n.normalize();
-const clip = new THREE.Plane(n, CUT / len);       // keeps points where n·p + c >= 0  ->  x + K*y <= CUT
-const faceC = face.clone(), sideC = side.clone(); faceC.clippingPlanes = sideC.clippingPlanes = [clip]; faceC.clipShadows = sideC.clipShadows = true;
-const solid = new THREE.Mesh(geo, [faceC, sideC]); solid.castShadow = solid.receiveShadow = true; logo.add(solid);
-
-// voxelise the letters beyond the cut by ray-testing the solid shape
-const probe = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }));
-const ray = new THREE.Raycaster(); const V = .36, cubes = [];
-const zLayers = Math.max(1, Math.round((B.max.z - B.min.z) / V));
-for (let y = B.min.y + V / 2; y < B.max.y; y += V) for (let x = B.min.x + V / 2; x < B.max.x; x += V) {
-  const u = x + K * y; if (u < CUT - V) continue;
-  ray.set(new THREE.Vector3(x, y, 50), new THREE.Vector3(0, 0, -1));
-  if (!ray.intersectObject(probe).length) continue;
-  for (let zi = 0; zi < zLayers; zi++) cubes.push({ x, y, z: B.max.z - V / 2 - zi * V, d: u - CUT });
+// Original abstract runes: a stem, a tick or two and a detached dot on a 4x5 grid. Not letters, not a copied script.
+function makeRune() {
+  const m = Array.from({ length: 5 }, () => [0, 0, 0, 0]);
+  const stem = Math.floor(rnd() * 4), from = Math.floor(rnd() * 2), to = 3 + Math.floor(rnd() * 2);
+  for (let y = from; y <= to; y++) m[y][stem] = 1;
+  for (let k = 0; k < 1 + Math.floor(rnd() * 2); k++) { const y = from + Math.floor(rnd() * (to - from + 1)), dir = stem < 2 ? 1 : -1, len = 1 + Math.floor(rnd() * 2); for (let i = 1; i <= len; i++) { const x = stem + dir * i; if (x >= 0 && x < 4) m[y][x] = 1; } }
+  const dy = rnd() < .5 ? 0 : 4, dx = stem < 2 ? 3 : 0; if (!m[dy][dx]) m[dy][dx] = 1;
+  return m;
 }
-const dMax = Math.max(...cubes.map(c => c.d));
-const buckets = new Map(); const add = (mats, m) => { if (!buckets.has(mats)) buckets.set(mats, []); buckets.get(mats).push(m); };
-const FACE = [side, side, side, side, face, side];
-for (const c of cubes) {
-  const t = Math.max(0, c.d) / dMax;                    // 0 at the break, 1 at the far edge
-  const noise = (rnd() - .5) * .35;
-  const loose = t + noise > .2;
-  if (loose && rnd() < Math.min(.85, (t + noise) * 1.25)) continue;  // thin out as it disperses
-  const m = new THREE.Matrix4();
-  if (!loose) { m.makeTranslation(c.x, c.y, c.z); add(FACE, m); continue; }
-  const f = Math.pow(t + Math.max(0, noise), 1.6);
-  const pos = new THREE.Vector3(c.x + f * (3.5 + rnd() * 3), c.y + f * (4 + rnd() * 5), c.z + f * (rnd() * 6 - 1));
-  const rot = new THREE.Euler(f * (rnd() - .5) * 5, f * (rnd() - .5) * 5, f * (rnd() - .5) * 5);
-  const s = 1 - f * .45 * rnd();
-  m.compose(pos, new THREE.Quaternion().setFromEuler(rot), new THREE.Vector3(s, s, s));
-  const r = rnd();
-  add(r < .07 ? [ember, ember, ember, ember, ember, ember] : (f > .5 && r < .2) ? GRASS : FACE, m);
+const RUNES = Array.from({ length: 16 }, makeRune);
+function rune(x, y, u, alpha, color) {
+  const r = RUNES[Math.floor(rnd() * RUNES.length)]; g.globalAlpha = alpha; g.fillStyle = color;
+  r.forEach((row, j) => row.forEach((k, i) => k && g.fillRect(Math.round(x + i * u), Math.round(y + j * u), Math.ceil(u), Math.ceil(u)))); g.globalAlpha = 1;
 }
-const cube = new THREE.BoxGeometry(V * .96, V * .96, V * .96);
-for (const [mats, list] of buckets) { const im = new THREE.InstancedMesh(cube, mats, list.length); list.forEach((m, i) => im.setMatrixAt(i, m)); im.castShadow = im.receiveShadow = true; logo.add(im); }
-
-// ---------- lights ----------
-const key = new THREE.SpotLight('#ffd7a0', 260, 120, .42, .6, 1.6); key.position.set(-14, 22, 24); key.target.position.set(0, 3, 0);
-key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -.0004; scene.add(key, key.target);
-const rim = new THREE.DirectionalLight('#7fe0c0', 2.2); rim.position.set(18, 10, -20); scene.add(rim);
-const rim2 = new THREE.DirectionalLight('#ffb070', 1.4); rim2.position.set(-20, 4, -16); scene.add(rim2);
-const fill = new THREE.HemisphereLight('#2d3b38', '#0a0806', .5); scene.add(fill);
-const glow = new THREE.PointLight('#ffb040', 14, 12, 2); glow.position.set(B.min.x + width * .8, 5, 2); logo.add(glow);
-
-// ---------- environment ----------
-const composer = new EffectComposer(renderer); composer.addPass(new RenderPass(scene, camera));
-if (MODE !== 'logo') {
-  scene.background = new THREE.Color('#050807');
-  scene.fog = new THREE.Fog('#050807', 40, 120);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshPhysicalMaterial({ color: '#0b100e', roughness: .28, metalness: .2, clearcoat: .6, clearcoatRoughness: .25 }));
-  floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
-  // haze glow behind the letters
-  const hc = document.createElement('canvas'); hc.width = hc.height = 256; const hg = hc.getContext('2d'); const gr = hg.createRadialGradient(128, 128, 0, 128, 128, 128);
-  gr.addColorStop(0, 'rgba(90,130,110,.32)'); gr.addColorStop(.35, 'rgba(50,75,62,.12)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); hg.fillStyle = gr; hg.fillRect(0, 0, 256, 256);
-  const ht = new THREE.CanvasTexture(hc); ht.colorSpace = THREE.SRGBColorSpace;
-  const haze = new THREE.Sprite(new THREE.SpriteMaterial({ map: ht, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false }));
-  haze.position.set(2, 5, -30); haze.scale.set(90, 55, 1); scene.add(haze);
-  // dust motes in the key light
-  const N = 600, pos = new Float32Array(N * 3); for (let i = 0; i < N; i++) { pos[i * 3] = (rnd() - .5) * 60; pos[i * 3 + 1] = rnd() * 22; pos[i * 3 + 2] = -25 + rnd() * 40; }
-  const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const dc = document.createElement('canvas'); dc.width = dc.height = 32; const dg = dc.getContext('2d'); const dgr = dg.createRadialGradient(16, 16, 0, 16, 16, 16); dgr.addColorStop(0, 'rgba(255,225,180,1)'); dgr.addColorStop(1, 'rgba(255,200,140,0)'); dg.fillStyle = dgr; dg.fillRect(0, 0, 32, 32);
-  scene.add(new THREE.Points(pg, new THREE.PointsMaterial({ size: .16, map: new THREE.CanvasTexture(dc), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: .7 })));
-  composer.addPass(new UnrealBloomPass(new THREE.Vector2(W, H), .35, .5, .92));
+// Runes drift in two loose clusters either side of the word, rising toward it and fading as they near it.
+function runeStream(cx, cy, halfW, height, count, uMax, reach = .9) {
+  g.save(); g.shadowColor = COL.violet; g.shadowBlur = uMax * 3;
+  for (let i = 0; i < count; i++) {
+    const side = i % 2 ? 1 : -1, t = rnd();                // t: 0 = outer and low, 1 = close to the word
+    const x = cx + side * (halfW + (1 - t) * halfW * reach + rnd() * halfW * .15);
+    const y = cy + height * (.45 - t * .7) + (rnd() - .5) * height * .3;
+    const u = Math.max(1.4, uMax * (.55 + rnd() * .45));
+    rune(x - 2 * u, y - 2.5 * u, u, .25 + .55 * t, rnd() < .3 ? COL.teal : COL.lilac);
+  }
+  g.restore();
 }
-composer.addPass(new OutputPass());
-
-if (MODE === 'emblem') { camera.position.set(-1, 4, 27); camera.lookAt(1.6, 4.4, 0); logo.rotation.y = .14; }
-else if (MODE === 'logo') { camera.position.set(-2, 3.6, 46); camera.lookAt(1.2, 4.6, 0); logo.rotation.y = .16; }
-else { camera.position.set(-5, 2.4, 50); camera.lookAt(1.2, 2.2, 0); logo.rotation.y = .16; }
-
-// ---------- 2D overlays ----------
-function addFx() {
-  const v = document.createElement('div'); v.className = 'fx vignette'; stage.appendChild(v);
-  const g = document.createElement('canvas'); g.className = 'fx grain'; g.width = W; g.height = H; const gc = g.getContext('2d'); const id = gc.createImageData(W, H);
-  for (let i = 0; i < id.data.length; i += 4) { const q = 128 + (rnd() - .5) * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = q; id.data[i + 3] = 255; } gc.putImageData(id, 0, 0); stage.appendChild(g);
+// The enchanted word: soft violet glow, smooth lilac-to-indigo fill, a crisp top light, two diagonal glint bands.
+function enchanted(text, cx, cy, size, weight = 900) {
+  const font = `${weight} ${size}px Cinzel`;
+  g.save(); g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.shadowColor = 'rgba(150,105,255,.85)'; g.shadowBlur = size * .28; g.fillStyle = COL.indigo; g.fillText(text, cx, cy); g.restore();
+  const oc = document.createElement('canvas'); oc.width = W * dpr; oc.height = H * dpr; const o = oc.getContext('2d'); o.scale(dpr, dpr);
+  o.font = font; o.textAlign = 'center'; o.textBaseline = 'middle';
+  const fill = o.createLinearGradient(0, cy - size * .42, 0, cy + size * .42);
+  fill.addColorStop(0, COL.white); fill.addColorStop(.35, COL.lilac); fill.addColorStop(.7, COL.violet); fill.addColorStop(1, COL.indigo);
+  o.fillStyle = fill; o.fillText(text, cx, cy);
+  o.globalCompositeOperation = 'source-atop';
+  const w = o.measureText(text).width;
+  for (const [pos, wd, a] of [[.32, .05, .55], [.44, .022, .8]]) {
+    const gl = o.createLinearGradient(cx - w / 2, cy - size / 2, cx + w / 2, cy + size / 2);
+    gl.addColorStop(Math.max(0, pos - wd), 'rgba(127,245,224,0)'); gl.addColorStop(pos, `rgba(200,255,245,${a})`); gl.addColorStop(Math.min(1, pos + wd), 'rgba(127,245,224,0)');
+    o.fillStyle = gl; o.fillRect(0, 0, W, H);
+  }
+  const top = o.createLinearGradient(0, cy - size * .42, 0, cy - size * .3); top.addColorStop(0, 'rgba(255,255,255,.7)'); top.addColorStop(1, 'rgba(255,255,255,0)');
+  o.fillStyle = top; o.fillRect(0, 0, W, H);
+  g.drawImage(oc, 0, 0, W, H);
+  return w;
 }
-function addTitle(top, scale = 1) {
-  const t = document.createElement('div'); t.className = 'title'; t.style.top = top;
-  for (const [k, v] of [['--name', 30], ['--sub', 11], ['--gap', 14], ['--line', 80]]) t.style.setProperty(k, `${v * scale}px`);
-  t.innerHTML = '<div class="name">JON VINCENT DIN</div><div class="rule"><i></i>WORLD OF BUILDS<i></i></div>'; stage.appendChild(t);
+function credit(cx, y, scale) {
+  g.save(); g.textAlign = 'center'; g.fillStyle = COL.cream; g.font = `300 ${22 * scale}px Inter`; g.letterSpacing = `${17 * scale}px`; g.fillText('JON VINCENT DIN', cx + 8 * scale, y);
+  g.font = `600 ${10.5 * scale}px Inter`; g.letterSpacing = `${6.5 * scale}px`; g.fillStyle = COL.lilac; g.fillText('WORLD OF BUILDS', cx + 3 * scale, y + 28 * scale);
+  const lw = 70 * scale; g.fillStyle = 'rgba(205,184,255,.5)'; g.fillRect(cx - 120 * scale - lw, y + 24 * scale, lw, 1); g.fillRect(cx + 120 * scale, y + 24 * scale, lw, 1); g.restore();
 }
-if (MODE === 'keyart') { addFx(); if (P.get('title') !== '0') addTitle('77%', W / 1920 * 1.2); const b = document.createElement('div'); b.className = 'fx bars'; stage.appendChild(b); }
-if (MODE === 'emblem') addFx();
-if (MODE === 'logo' && P.get('title') !== '0') addTitle('80%', W / 1200 * 1.1);
-
-for (let i = 0; i < 3; i++) MODE === 'logo' ? renderer.render(scene, camera) : composer.render();
-window.__done = true;
+function backdrop(cy) {
+  const bg = g.createRadialGradient(W / 2, cy, 0, W / 2, cy, Math.max(W, H) * .75);
+  bg.addColorStop(0, COL.bg1); bg.addColorStop(1, COL.bg0); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+}
+(async () => {
+  await Promise.all(['900 100px Cinzel', '300 20px Inter', '600 10px Inter'].map(f => document.fonts.load(f)));
+  if (MODE === 'keyart') {
+    const cy = H * .45, size = H * .3; backdrop(cy);
+    const w = enchanted('DIN', W / 2, cy, size); runeStream(W / 2, cy, w / 2 + size * .25, size, 26, H / 200);
+    if (TITLE) credit(W / 2, H * .78, H / 720);
+  } else if (MODE === 'emblem') {
+    const cy = H * .53, size = H * .62; backdrop(cy);
+    const w = enchanted('D', W / 2, cy, size); runeStream(W / 2, cy, w / 2 + size * .02, size * .9, 16, H / 120, .22);
+  } else {
+    const size = H * (TITLE ? .42 : .62), cy = TITLE ? H * .4 : H * .52;
+    const w = enchanted('DIN', W / 2, cy, size); runeStream(W / 2, cy, w / 2 + size * .12, size, 18, size / 70, .4);
+    if (TITLE) credit(W / 2, H * .8, H / 600 * 1.1);
+  }
+  window.__done = true;
+})();
 </script></body></html>
