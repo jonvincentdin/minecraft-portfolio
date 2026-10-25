@@ -25,7 +25,7 @@ Notation:
 Keeps the v1 contract: real asset readiness, an explicit **Enter world**, replay, and pause/reduced motion. It is longer and deeper.
 
 1. **Black → world loads.** Letterbox bars. A chunk-loading grid fades in: blocks pop into a low-poly landscape tile by tile, from the centre outward, with progress tied to real asset loading. The pixel progress bar fills like a Minecraft XP bar.
-2. **The logo builds.** Voxels fall from above in a few staggered waves and land, with a squash and a small dust burst, to form the 3D JVD block logo. The grass caps grow last, in one green wave across the letters. The full stop drops in as a grass block and bounces.
+2. **The logo builds.** Voxels fall from above in a few staggered waves and land, with a squash and a small dust burst, to form the 3D DIN logo. The grass caps grow last, in one green wave across the letters. The full stop drops in as a grass block and bounces.
 3. **Ready.** The name types on in pixel type, letter by letter, each letter blinking once like a cursor. Clouds drift in parallax and particles rise. **Enter world** pulses gently. Ready never auto-enters.
 4. **Enter.** The camera dives forward: the logo flies at the viewer and passes overhead, the landscape layers separate in depth (far mountains slowly, near blocks fast), and the cloud layer is punched through. The letterbox bars open vertically, and the sky strips from v1 survive as the final wipe. Spawn's sunrise is waiting underneath. About 2.2s in total.
 5. **Hand-off.** The dive ends with Spawn's hero in place and a "scroll" cue (a pixel mouse whose wheel ticks). Focus moves to `main`.
@@ -90,7 +90,7 @@ Reduced motion: chunk loading, the logo build and the dive are replaced by short
 
 - **XP bar** along the bottom edge fills with overall scroll progress, and a level number counts chapters passed.
 - The **hotbar** (chapter navigator) has nine slots: chapters 1–7 plus Credits, and one spare slot showing the logo block. The active chapter is highlighted; clicking scrolls there. On wide screens it sits bottom-centre. On small screens it collapses into a single slot that opens the list.
-- Top bar: the JVD block logo (→ `/editor`), a pause-motion toggle, and the sound toggle if sound is ever added (not in scope).
+- Top bar: the DIN logo (→ `/editor`), a pause-motion toggle, and the sound toggle if sound is ever added (not in scope).
 
 ## Mobile (below 760px)
 

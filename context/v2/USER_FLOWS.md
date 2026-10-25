@@ -18,6 +18,6 @@ Deep link `/#experience`: intro → Enter → lands on the Experience chapter's 
 
 ## Owner
 
-Click the JVD logo → `/editor` → enter the Gmail → "If that's the owner's Gmail, a code is on its way" → open the email → enter the 6-digit code → the editor loads the private draft → edit → Save draft → Preview (opens `/` with the draft and a banner) → Publish → Back to the world. Sign out ends the session.
+Click the DIN logo → `/editor` → enter the Gmail → "If that's the owner's Gmail, a code is on its way" → open the email → enter the 6-digit code → the editor loads the private draft → edit → Save draft → Preview (opens `/` with the draft and a banner) → Publish → Back to the world. Sign out ends the session.
 
 A wrong code shows "That code didn't work" and allows retries until the limit; an expired code asks for a new one; Resend has a cooldown.

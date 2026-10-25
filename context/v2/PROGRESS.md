@@ -32,3 +32,11 @@
   - Icons at 512, 180, 64 and 32 px.
 - Renders come from `brand/source/scene.html` (three.js 0.160.0 from jsDelivr, design tooling only, not a site dependency) through `render.mjs` and `post.mjs` in headless Edge.
 - Checks: looked at every output, plus a contact sheet on the site background including the 32px and 64px icons (not committed). Re-ran `render.mjs` from its repo location to confirm the committed script works. No application code changed.
+
+## 2026-10-26 (Asia/Singapore): brand letters changed to DIN
+
+- The owner rejected "JVD" and asked for **DIN**.
+- New D, I and N block glyphs in `brand/source/scene.html`: N is 7 wide with a strong diagonal, and I is a slim 4 wide. Grass now caps every exposed top step, not just the top row, so the letters read as terrain.
+- The emblem's gold-ore text now reads "DIN".
+- Re-rendered all PNGs as `din-*.png` and removed the `jvd-*.png` files. The full name "JON VINCENT DIN" and "WORLD OF BUILDS" stay under the letters.
+- Checks: viewed the key art, transparent logo and emblem renders. Every output was regenerated with the committed scripts.

@@ -8,7 +8,7 @@ Dependency: V2-00. Approvals needed first: P1 (GSAP + Lenis dependencies), P2 (A
 - Vite multi-page: `/` and `/editor` (the editor entry can mount the v1 editor unchanged for now).
 - `ScrollProvider`, `Chapter` component, motion-preference store, sky layer, HUD (logo link, XP bar, chapter hotbar, pause), anchors and v1-hash redirects.
 - Each chapter rendered as a static placeholder section with real content from the published snapshot, so the page reads top to bottom before any choreography.
-- Brand PNGs copied into `public/brand/`; favicon and Apple touch icon set from `jvd-icon-*.png`; OG image from the keyart.
+- Brand PNGs copied into `public/brand/`; favicon and Apple touch icon set from `din-icon-*.png`; OG image from the keyart.
 - `useVoxelView` with mount-on-proximity and the three-context cap.
 
 ## Acceptance
