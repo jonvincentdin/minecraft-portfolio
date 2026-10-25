@@ -10,7 +10,7 @@ A fixed full-screen layer behind all chapters. Global progress drives the gradie
 
 ## HUD
 
-- **Logo** (top-left): `jvd-wordmark.svg`, a link to `/editor`, accessible name "Jon Vincent Din — editor sign-in".
+- **Logo** (top-left): `jvd-logo-mark-only.png` (40–56px tall), a link to `/editor`, accessible name "Jon Vincent Din — editor sign-in".
 - **XP bar** (bottom edge): global progress; the level number is the count of chapters passed; a level-up flash when a chapter is completed.
 - **Hotbar** (bottom-centre): nine slots, one per chapter plus the logo block; active highlight; click scrolls; `aria-current` on the active slot; works as a `nav` landmark labelled "Chapters". It swaps to the project hotbar while Projects is pinned.
 - **Pause motion** toggle (top-right).

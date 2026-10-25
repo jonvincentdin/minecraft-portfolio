@@ -1,0 +1,173 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:JVD;src:url('JVDPixel.woff') format('woff')}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}
+#stage{position:relative;width:100vw;height:100vh;overflow:hidden}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fx{position:absolute;inset:0;pointer-events:none}
+.vignette{background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(4,6,10,.55) 80%,rgba(2,3,6,.9) 100%)}
+.grain{opacity:.10;mix-blend-mode:overlay}
+.bars:before,.bars:after{content:"";position:absolute;left:0;right:0;height:8%;background:#030405}
+.bars:before{top:0}.bars:after{bottom:0}
+.title{position:absolute;left:0;right:0;text-align:center;color:#f4e7c3;font-family:JVD,monospace}
+.title .name{font-size:var(--name,34px);letter-spacing:.62em;padding-left:.62em;text-shadow:0 0 18px rgba(255,190,110,.55),0 2px 0 rgba(0,0,0,.6)}
+.title .rule{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:var(--gap,16px);font:600 var(--sub,13px)/1 ui-monospace,Consolas,monospace;letter-spacing:.55em;padding-left:.55em;color:#d8b46a}
+.title .rule i{display:block;width:var(--line,90px);height:1px;background:linear-gradient(90deg,transparent,#d8b46a)}
+.title .rule i:last-child{transform:scaleX(-1)}
+</style></head><body><div id="stage"></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+const P = new URLSearchParams(location.search);
+const MODE = P.get('mode') || 'keyart';           // keyart | logo | emblem
+const W = innerWidth, H = innerHeight;
+const stage = document.getElementById('stage');
+const rnd = (() => { let s = 1337; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+
+// ---------- pixel textures ----------
+function tex(draw, n = 16, smooth = false) {
+  const c = document.createElement('canvas'); c.width = c.height = n; const g = c.getContext('2d'); draw(g, n);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  if (smooth) { t.magFilter = t.minFilter = THREE.LinearFilter; } else { t.magFilter = THREE.NearestFilter; t.minFilter = THREE.NearestMipmapNearestFilter; }
+  return t;
+}
+const px = (g, x, y, col) => { g.fillStyle = col; g.fillRect(x, y, 1, 1); };
+const pick = a => a[Math.floor(rnd() * a.length)];
+const stoneCols = ['#efe2bd', '#e7d8ae', '#f5ead0', '#ddcc9c', '#e9dcb4'];
+const bevel = (g, n) => { for (let i = 0; i < n; i++) { px(g, i, 0, '#fbf3dc'); px(g, 0, i, '#f8eed2'); px(g, i, n - 1, '#b39a66'); px(g, n - 1, i, '#c0a874'); } };
+const stone = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(stoneCols)); bevel(g, n); });
+const oreE = [];
+const ore = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(stoneCols)); bevel(g, n);
+  for (let k = 0; k < 5; k++) { const x = 2 + Math.floor(rnd() * 11), y = 2 + Math.floor(rnd() * 11); oreE.push([x, y]); g.fillStyle = '#ffcf5a'; g.fillRect(x, y, 2, 2); px(g, x, y, '#fff2b0'); } });
+const oreEm = tex((g, n) => { g.fillStyle = '#000'; g.fillRect(0, 0, n, n); for (const [x, y] of oreE) { g.fillStyle = '#ffb030'; g.fillRect(x, y, 2, 2); } });
+const grassCols = ['#8fbf4c', '#7fb043', '#9ccc58', '#6fa03a', '#a8d464'];
+const grassTop = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(grassCols)); });
+const dirtCols = ['#866043', '#7a573b', '#93694a', '#6c4d34', '#5e432d'];
+const grassSide = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(dirtCols));
+  for (let x = 0; x < n; x++) { const d = 3 + Math.floor(rnd() * 3); for (let y = 0; y < d; y++) px(g, x, y, pick(grassCols)); } });
+const dirt = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(dirtCols)); });
+
+const M = o => new THREE.MeshStandardMaterial({ roughness: .78, metalness: 0, ...o });
+const mStone = M({ map: stone }), mOre = M({ map: ore, emissiveMap: oreEm, emissive: new THREE.Color('#ffa21a'), emissiveIntensity: 2.6 });
+const mGrassTop = M({ map: grassTop }), mGrassSide = M({ map: grassSide }), mDirt = M({ map: dirt });
+// BoxGeometry face order: +x, -x, +y, -y, +z, -z
+const GRASS = [mGrassSide, mGrassSide, mGrassTop, mDirt, mGrassSide, mGrassSide];
+
+// ---------- renderer / scene ----------
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(devicePixelRatio); renderer.setSize(W, H); renderer.setClearColor(0x000000, 0);
+renderer.shadowMap.enabled = MODE !== 'logo'; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = MODE === 'logo' ? 1.15 : 1.05;
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(MODE === 'emblem' ? 24 : 28, W / H, .1, 400);
+
+// ---------- letters ----------
+const G = { J: ['..####','...##.','...##.','...##.','##.##.','##.##.','.###..'],
+            V: ['##..##','##..##','##..##','##..##','##..##','.####.','..##..'],
+            D: ['#####.','##..##','##..##','##..##','##..##','##..##','#####.'] };
+const box = new THREE.BoxGeometry(1, 1, 1);
+const logo = new THREE.Group(); scene.add(logo);
+const DEPTH = 3; let ox = 0; const cells = [];
+for (const ch of 'JVD') { G[ch].forEach((row, y) => [...row].forEach((c, x) => { if (c === '#') for (let z = 0; z < DEPTH; z++) cells.push({ x: ox + x, y: 6 - y, z, cap: y === 0 }); })); ox += 7; }
+const width = ox - 1;
+for (const c of cells) {
+  const mat = c.cap ? GRASS : (rnd() < .09 ? mOre : mStone);
+  const m = new THREE.Mesh(box, mat); m.position.set(c.x - width / 2 + .5, c.y, -c.z); m.castShadow = m.receiveShadow = true; logo.add(m);
+}
+// the full stop: a floating grass block with a warm glow under it
+const dot = new THREE.Mesh(box, GRASS); dot.scale.setScalar(1.6); dot.position.set(width / 2 + 1.9, 1.4, -.5); dot.rotation.set(.32, .72, .08); dot.castShadow = true; logo.add(dot);
+const dotLight = new THREE.PointLight('#ffd27a', MODE === 'logo' ? 0 : 14, 7, 2); dotLight.position.set(width / 2 + 1.9, .2, .6); logo.add(dotLight);
+logo.position.y = -0.5;
+
+// ---------- lighting ----------
+const hemi = new THREE.HemisphereLight('#c9d6ff', '#4a3a2a', MODE === 'logo' ? 1.6 : .8); scene.add(hemi);
+const key = new THREE.DirectionalLight('#ffb466', MODE === 'logo' ? 2.4 : 3.2); key.position.set(14, 18, -22); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -30, right: 30, top: 25, bottom: -25, near: 1, far: 90 }); key.shadow.bias = -.0005; scene.add(key);
+const front = new THREE.DirectionalLight('#ffe2b8', MODE === 'logo' ? 1.6 : 1.7); front.position.set(-8, 6, 20); scene.add(front);
+const rim = new THREE.DirectionalLight('#8fb4ff', 1.2); rim.position.set(-20, 8, -14); scene.add(rim);
+
+if (MODE === 'logo') {
+  camera.position.set(2, -4.5, 33); camera.lookAt(0.8, 0.2, 0); logo.rotation.y = -.14; logo.position.y = -2.0;
+  hemi.intensity = .9; key.position.set(-10, 22, 8); key.color.set('#ffd9a0'); key.intensity = 2.6; front.intensity = .9; rim.position.set(16, 6, -18); rim.color.set('#7fa8ff'); rim.intensity = 2.2;
+} else if (MODE === 'emblem') {
+  logo.visible = false;
+  const g3 = { J: ['.##','..#','..#','#.#','##.'], V: ['#.#','#.#','#.#','#.#','.#.'], D: ['##.','#.#','#.#','#.#','##.'] };
+  const mono = []; ['J','V','D'].forEach((ch, i) => g3[ch].forEach((row, y) => [...row].forEach((c, x) => c === '#' && mono.push([2 + i * 4 + x, 7 + y]))));
+  const sideImg = grassSide.image; const monoSide = tex((g, n) => { g.drawImage(sideImg, 0, 0); for (const [x, y] of mono) px(g, x, y, (x + y) % 3 ? '#ffcf5a' : '#fff2b0'); });
+  const monoEm = tex((g, n) => { g.fillStyle = '#000'; g.fillRect(0, 0, n, n); for (const [x, y] of mono) px(g, x, y, '#ffb030'); });
+  const mMono = M({ map: monoSide, emissiveMap: monoEm, emissive: new THREE.Color('#ffa21a'), emissiveIntensity: 3.2 });
+  const b = new THREE.Mesh(box, [mMono, mGrassSide, mGrassTop, mDirt, mMono, mGrassSide]); b.scale.setScalar(6); b.rotation.set(.52, .78, 0); b.castShadow = true; scene.add(b);
+  const l2 = new THREE.PointLight('#ffcf7a', 40, 20, 2); l2.position.set(0, -5.5, 2); scene.add(l2);
+  camera.position.set(0, 0, 30); camera.lookAt(0, -.4, 0);
+} else {
+  camera.position.set(-4, 0.6, 36); camera.lookAt(0.6, 2.4, 0); logo.rotation.y = .12; camera.fov = 30; camera.updateProjectionMatrix();
+}
+
+// ---------- environment ----------
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+if (MODE !== 'logo') {
+  scene.fog = new THREE.FogExp2(MODE === 'emblem' ? '#1a1722' : '#3a2b3c', MODE === 'emblem' ? .02 : .018);
+  const sky = new THREE.Mesh(new THREE.SphereGeometry(200, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false,
+    uniforms: { top: { value: new THREE.Color(MODE === 'emblem' ? '#0b1020' : '#0d1428') }, mid: { value: new THREE.Color(MODE === 'emblem' ? '#241a2e' : '#4a2f48') }, bot: { value: new THREE.Color(MODE === 'emblem' ? '#3a2a2a' : '#ff9a52') } },
+    vertexShader: 'varying vec3 p; void main(){ p = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
+    fragmentShader: 'uniform vec3 top,mid,bot; varying vec3 p; void main(){ float h=p.y; vec3 c = h>0.04 ? mix(mid,top,smoothstep(0.04,0.45,h)) : mix(bot,mid,smoothstep(-0.06,0.04,h)); gl_FragColor=vec4(c,1.); }' }));
+  scene.add(sky);
+  if (MODE === 'keyart') {
+    const sunTex = tex((g, n) => { const gr = g.createRadialGradient(n/2, n/2, 0, n/2, n/2, n/2); gr.addColorStop(0, 'rgba(255,240,200,1)'); gr.addColorStop(.18, 'rgba(255,200,120,.9)'); gr.addColorStop(.5, 'rgba(255,140,70,.25)'); gr.addColorStop(1, 'rgba(255,120,60,0)'); g.fillStyle = gr; g.fillRect(0, 0, n, n); }, 256, true);
+    const sun = new THREE.Sprite(new THREE.SpriteMaterial({ map: sunTex, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, transparent: true }));
+    sun.position.set(2, 5, -120); sun.scale.set(95, 95, 1); scene.add(sun);
+    const rayTex = tex((g, n) => { const gr = g.createLinearGradient(0, 0, 0, n); gr.addColorStop(0, 'rgba(255,200,130,0)'); gr.addColorStop(.15, 'rgba(255,200,130,.55)'); gr.addColorStop(1, 'rgba(255,200,130,0)'); g.fillStyle = gr; g.fillRect(0, 0, n, n);
+      const h = g.createLinearGradient(0, 0, n, 0); h.addColorStop(0, 'rgba(0,0,0,1)'); h.addColorStop(.5, 'rgba(0,0,0,0)'); h.addColorStop(1, 'rgba(0,0,0,1)'); g.globalCompositeOperation = 'destination-out'; g.fillStyle = h; g.fillRect(0, 0, n, n); }, 128, true);
+    for (let i = 0; i < 9; i++) {
+      const ray = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: rayTex, transparent: true, opacity: .12 + rnd() * .12, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, side: THREE.DoubleSide }));
+      const a = (-.9 + i * .225) + (rnd() - .5) * .1; ray.scale.set(4 + rnd() * 6, 110, 1);
+      ray.position.set(2 + Math.sin(a) * 52, 5 - Math.cos(a) * 52 + 4, -60); ray.rotation.z = a; scene.add(ray);
+    }
+    // voxel terrain receding into the fog (instanced)
+    const spots = [];
+    for (let x = -60; x <= 60; x++) for (let z = -90; z <= 40; z++) {
+      const d = Math.hypot(x / 1.4, z + 2);
+      let hgt = Math.floor(1.4 * Math.sin(x * .21) + 1.2 * Math.cos(z * .17) + (z < -25 ? (-25 - z) * .16 + Math.abs(x) * .05 : 0) + (rnd() < .05 ? 1 : 0));
+      if (z > -22) hgt = Math.min(hgt, z > -10 ? -1 : 0);
+      spots.push([x, -0.5 + Math.max(-1, hgt), z]);
+    }
+    const dim = m => { const c = m.clone(); c.color = new THREE.Color('#7d7a70'); return c; };
+    const inst = new THREE.InstancedMesh(box, GRASS.map(dim), spots.length); const mx = new THREE.Matrix4();
+    spots.forEach((s, i) => inst.setMatrixAt(i, mx.makeTranslation(s[0], s[1], s[2]))); inst.receiveShadow = true; scene.add(inst);
+    const N = 420, pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) { pos[i*3] = (rnd() - .5) * 70; pos[i*3+1] = -3 + rnd() * 22; pos[i*3+2] = -40 + rnd() * 52; }
+    const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const dotT = tex((g, n) => { const gr = g.createRadialGradient(n/2, n/2, 0, n/2, n/2, n/2); gr.addColorStop(0, 'rgba(255,230,170,1)'); gr.addColorStop(.4, 'rgba(255,180,90,.5)'); gr.addColorStop(1, 'rgba(255,150,60,0)'); g.fillStyle = gr; g.fillRect(0, 0, n, n); }, 32, true);
+    scene.add(new THREE.Points(pg, new THREE.PointsMaterial({ size: .32, map: dotT, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, color: '#ffd59a' })));
+  }
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(W, H), MODE === 'emblem' ? .55 : .7, .55, .82));
+}
+composer.addPass(new OutputPass());
+
+// ---------- 2D overlays ----------
+function addFx() {
+  const v = document.createElement('div'); v.className = 'fx vignette'; stage.appendChild(v);
+  const g = document.createElement('canvas'); g.className = 'fx grain'; g.width = W; g.height = H; const gc = g.getContext('2d'); const id = gc.createImageData(W, H);
+  for (let i = 0; i < id.data.length; i += 4) { const n = 128 + (rnd() - .5) * 255; id.data[i] = id.data[i+1] = id.data[i+2] = n; id.data[i+3] = 255; } gc.putImageData(id, 0, 0); stage.appendChild(g);
+}
+function addTitle(top, scale = 1) {
+  const t = document.createElement('div'); t.className = 'title'; t.style.top = top;
+  t.style.setProperty('--name', `${34 * scale}px`); t.style.setProperty('--sub', `${15 * scale}px`); t.style.setProperty('--gap', `${16 * scale}px`); t.style.setProperty('--line', `${90 * scale}px`);
+  t.innerHTML = '<div class="name">JON VINCENT DIN</div><div class="rule"><i></i>WORLD OF BUILDS<i></i></div>'; stage.appendChild(t);
+}
+if (MODE === 'keyart') { addFx(); addTitle('75%', W / 1920 * 1.25); const b = document.createElement('div'); b.className = 'fx bars'; stage.appendChild(b); }
+if (MODE === 'emblem') addFx();
+if (MODE === 'logo' && P.get('title') !== '0') addTitle('76%', W / 1200 * 1.2);
+
+await document.fonts.ready;
+const target = MODE === 'logo' ? renderer : composer;
+for (let i = 0; i < 3; i++) MODE === 'logo' ? renderer.render(scene, camera) : composer.render();
+window.__done = true;
+</script></body></html>

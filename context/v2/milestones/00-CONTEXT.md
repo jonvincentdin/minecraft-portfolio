@@ -8,4 +8,4 @@ Move the v1 context into `context/v1/` (without its evidence folder), write the 
 
 ## Acceptance
 
-`context/v1` holds the full v1 documentation without evidence; `context/v2` covers the brief; the logo SVGs render; the unit test that compares the seed file points at its new path.
+`context/v1` holds the full v1 documentation without evidence; `context/v2` covers the brief; the brand PNGs exist and were checked at full size and as small icons; the unit test that compares the seed file points at its new path.
