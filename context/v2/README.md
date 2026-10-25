@@ -20,7 +20,7 @@ Status (2026-10-25): **specified, not built.** Only these context files and the 
 | A rich interaction on every page (drag inventory, 3×3 workshop, tree pan/zoom, comparisons) | Fewer, lighter interactions (see FEATURES.md) |
 | Intro: shuffled upward exit | Intro: a longer cinematic in which the logo is built from blocks, with depth and a hand-off into scroll |
 | "Edit world" button → `#editor`, signed in with a password | Logo → `/editor` page, signed in with an emailed one-time code |
-| Text "JVD." brand | A cinematic 3D JVD title render and emblem (`brand/`, PNG) |
+| Text "JVD." brand | DIN: a cinematic 3D title render and emblem (`brand/`, PNG) |
 
 ## Unchanged and reused
 

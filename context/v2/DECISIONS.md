@@ -6,7 +6,7 @@
 - D2. Logo click → `/editor`, a separate page. The editor UI stays plain and functional, with no cinematic motion.
 - D3. Editor sign-in is an emailed one-time code sent only to the owner's Gmail, jonvincent.din@gmail.com. Authority is enforced on the server (AUTH.md).
 - D4. Fewer interactions than v1 (FEATURES.md lists what stays).
-- D5. New logo: the JVD block (BRAND.md).
+- D5. New logo: DIN, a cinematic block-built title render (BRAND.md). The owner rejected "JVD" letters on 2026-10-26.
 - D6. Verification evidence is not committed (TESTING.md).
 
 ## Proposed (approve when the milestone starts)

@@ -68,13 +68,13 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(MODE === 'emblem' ? 24 : 28, W / H, .1, 400);
 
 // ---------- letters ----------
-const G = { J: ['..####','...##.','...##.','...##.','##.##.','##.##.','.###..'],
-            V: ['##..##','##..##','##..##','##..##','##..##','.####.','..##..'],
-            D: ['#####.','##..##','##..##','##..##','##..##','##..##','#####.'] };
+const G = { D: ['#####.','##..##','##..##','##..##','##..##','##..##','#####.'],
+            I: ['####','.##.','.##.','.##.','.##.','.##.','####'],
+            N: ['##...##','###..##','####.##','##.####','##..###','##...##','##...##'] };
 const box = new THREE.BoxGeometry(1, 1, 1);
 const logo = new THREE.Group(); scene.add(logo);
 const DEPTH = 3; let ox = 0; const cells = [];
-for (const ch of 'JVD') { G[ch].forEach((row, y) => [...row].forEach((c, x) => { if (c === '#') for (let z = 0; z < DEPTH; z++) cells.push({ x: ox + x, y: 6 - y, z, cap: y === 0 }); })); ox += 7; }
+for (const ch of 'DIN') { G[ch].forEach((row, y) => [...row].forEach((c, x) => { if (c === '#') for (let z = 0; z < DEPTH; z++) cells.push({ x: ox + x, y: 6 - y, z, cap: y === 0 || (y <= 2 && G[ch][y - 1][x] !== '#') }); })); ox += G[ch][0].length + 1; }
 const width = ox - 1;
 for (const c of cells) {
   const mat = c.cap ? GRASS : (rnd() < .09 ? mOre : mStone);
@@ -97,8 +97,8 @@ if (MODE === 'logo') {
   hemi.intensity = .9; key.position.set(-10, 22, 8); key.color.set('#ffd9a0'); key.intensity = 2.6; front.intensity = .9; rim.position.set(16, 6, -18); rim.color.set('#7fa8ff'); rim.intensity = 2.2;
 } else if (MODE === 'emblem') {
   logo.visible = false;
-  const g3 = { J: ['.##','..#','..#','#.#','##.'], V: ['#.#','#.#','#.#','#.#','.#.'], D: ['##.','#.#','#.#','#.#','##.'] };
-  const mono = []; ['J','V','D'].forEach((ch, i) => g3[ch].forEach((row, y) => [...row].forEach((c, x) => c === '#' && mono.push([2 + i * 4 + x, 7 + y]))));
+  const g3 = { D: ['##.','#.#','#.#','#.#','##.'], I: ['###','.#.','.#.','.#.','###'], N: ['#..#','##.#','#.##','#..#','#..#'] };
+  const mono = []; [['D',2],['I',6],['N',10]].forEach(([ch, x0]) => g3[ch].forEach((row, y) => [...row].forEach((c, x) => c === '#' && mono.push([x0 + x, 7 + y]))));
   const sideImg = grassSide.image; const monoSide = tex((g, n) => { g.drawImage(sideImg, 0, 0); for (const [x, y] of mono) px(g, x, y, (x + y) % 3 ? '#ffcf5a' : '#fff2b0'); });
   const monoEm = tex((g, n) => { g.fillStyle = '#000'; g.fillRect(0, 0, n, n); for (const [x, y] of mono) px(g, x, y, '#ffb030'); });
   const mMono = M({ map: monoSide, emissiveMap: monoEm, emissive: new THREE.Color('#ffa21a'), emissiveIntensity: 3.2 });

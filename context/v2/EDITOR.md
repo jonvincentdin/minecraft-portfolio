@@ -4,7 +4,7 @@
 
 ## Entry
 
-- From the public page: click the JVD logo in the HUD. It is a normal link to `/editor`, so it opens in the same tab and middle-click works.
+- From the public page: click the DIN logo in the HUD. It is a normal link to `/editor`, so it opens in the same tab and middle-click works.
 - `/editor` shows sign-in (AUTH.md) until there is an authorized session, then the editor.
 - A "← Back to the world" link returns to `/`.
 
