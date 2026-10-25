@@ -51,3 +51,16 @@
 - Re-rendered all `din-*.png` files. The emblem is a breaking "D". The key art dropped from 3.9 MB to 1.7 MB.
 - Updated BRAND.md and the intro, storyboard, milestone and decision references: the intro assembles the letters from cubes and breaks them apart on Enter.
 - Checks: viewed every render, plus a contact sheet on the site background including 64px and 32px icons. All final files came from the committed scripts.
+
+## 2026-10-26 (Asia/Singapore): brand changed to "DIN, enchanted"
+
+- The owner asked to change the breaking-cubes logo and wanted "something simple, iconic", not cinematic.
+- Showed three 3D/serif concepts (pickaxe as the I, enchanted, gold title with a grass block), then eight flat ideas. The owner chose the **Enchanted** concept.
+- Rewrote `brand/source/scene.html` as a 2D canvas render:
+  - Cinzel Black "DIN" with a lilac-to-indigo fill, a top light, two teal glints and a violet glow.
+  - Original procedural pixel runes in loose clusters beside the word, kept clear of the text.
+  - An Inter credit line.
+- Re-rendered all `din-*.png` files. The emblem is an enchanted "D". The key art is 653 KB.
+- BRAND.md rewritten, including the new violet colors. The intro, storyboard, milestone and decision references now describe runes rising into the word and a glint sweep.
+- Open point: violet is new next to the olive site palette; decide in V2-01.
+- Checks: viewed the key art, logo and emblem, plus a contact sheet including the 64px and 32px icons. All final files came from the committed scripts.
