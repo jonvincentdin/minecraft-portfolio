@@ -1,173 +1,155 @@
 <!doctype html><html><head><meta charset="utf-8">
 <style>
-@font-face{font-family:JVD;src:url('JVDPixel.woff') format('woff')}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}
 #stage{position:relative;width:100vw;height:100vh;overflow:hidden}
 canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .fx{position:absolute;inset:0;pointer-events:none}
-.vignette{background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(4,6,10,.55) 80%,rgba(2,3,6,.9) 100%)}
-.grain{opacity:.10;mix-blend-mode:overlay}
-.bars:before,.bars:after{content:"";position:absolute;left:0;right:0;height:8%;background:#030405}
+.vignette{background:radial-gradient(ellipse at 50% 46%,transparent 40%,rgba(2,4,4,.55) 78%,rgba(1,2,2,.92) 100%)}
+.grain{opacity:.07;mix-blend-mode:overlay}
+.bars:before,.bars:after{content:"";position:absolute;left:0;right:0;height:8%;background:#020303}
 .bars:before{top:0}.bars:after{bottom:0}
-.title{position:absolute;left:0;right:0;text-align:center;color:#f4e7c3;font-family:JVD,monospace}
-.title .name{font-size:var(--name,34px);letter-spacing:.62em;padding-left:.62em;text-shadow:0 0 18px rgba(255,190,110,.55),0 2px 0 rgba(0,0,0,.6)}
-.title .rule{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:var(--gap,16px);font:600 var(--sub,13px)/1 ui-monospace,Consolas,monospace;letter-spacing:.55em;padding-left:.55em;color:#d8b46a}
-.title .rule i{display:block;width:var(--line,90px);height:1px;background:linear-gradient(90deg,transparent,#d8b46a)}
+.title{position:absolute;left:0;right:0;text-align:center;color:#efe4c6;font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif}
+.title .name{font-weight:300;font-size:var(--name,30px);letter-spacing:.78em;padding-left:.78em;text-shadow:0 0 22px rgba(255,200,130,.35)}
+.title .rule{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:var(--gap,14px);font-weight:600;font-size:var(--sub,11px);letter-spacing:.6em;padding-left:.6em;color:#c9a35a}
+.title .rule i{display:block;width:var(--line,80px);height:1px;background:linear-gradient(90deg,transparent,#c9a35a)}
 .title .rule i:last-child{transform:scaleX(-1)}
 </style></head><body><div id="stage"></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from 'three';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const P = new URLSearchParams(location.search);
-const MODE = P.get('mode') || 'keyart';           // keyart | logo | emblem
-const W = innerWidth, H = innerHeight;
-const stage = document.getElementById('stage');
-const rnd = (() => { let s = 1337; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+const MODE = P.get('mode') || 'keyart';          // keyart | logo | emblem
+const TEXT = MODE === 'emblem' ? 'D' : 'DIN';
+const W = innerWidth, H = innerHeight, stage = document.getElementById('stage');
+const rnd = (() => { let s = +(P.get('seed') || 7); return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
 
-// ---------- pixel textures ----------
-function tex(draw, n = 16, smooth = false) {
-  const c = document.createElement('canvas'); c.width = c.height = n; const g = c.getContext('2d'); draw(g, n);
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
-  if (smooth) { t.magFilter = t.minFilter = THREE.LinearFilter; } else { t.magFilter = THREE.NearestFilter; t.minFilter = THREE.NearestMipmapNearestFilter; }
-  return t;
-}
-const px = (g, x, y, col) => { g.fillStyle = col; g.fillRect(x, y, 1, 1); };
-const pick = a => a[Math.floor(rnd() * a.length)];
-const stoneCols = ['#efe2bd', '#e7d8ae', '#f5ead0', '#ddcc9c', '#e9dcb4'];
-const bevel = (g, n) => { for (let i = 0; i < n; i++) { px(g, i, 0, '#fbf3dc'); px(g, 0, i, '#f8eed2'); px(g, i, n - 1, '#b39a66'); px(g, n - 1, i, '#c0a874'); } };
-const stone = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(stoneCols)); bevel(g, n); });
-const oreE = [];
-const ore = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(stoneCols)); bevel(g, n);
-  for (let k = 0; k < 5; k++) { const x = 2 + Math.floor(rnd() * 11), y = 2 + Math.floor(rnd() * 11); oreE.push([x, y]); g.fillStyle = '#ffcf5a'; g.fillRect(x, y, 2, 2); px(g, x, y, '#fff2b0'); } });
-const oreEm = tex((g, n) => { g.fillStyle = '#000'; g.fillRect(0, 0, n, n); for (const [x, y] of oreE) { g.fillStyle = '#ffb030'; g.fillRect(x, y, 2, 2); } });
-const grassCols = ['#8fbf4c', '#7fb043', '#9ccc58', '#6fa03a', '#a8d464'];
-const grassTop = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(grassCols)); });
-const dirtCols = ['#866043', '#7a573b', '#93694a', '#6c4d34', '#5e432d'];
-const grassSide = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(dirtCols));
-  for (let x = 0; x < n; x++) { const d = 3 + Math.floor(rnd() * 3); for (let y = 0; y < d; y++) px(g, x, y, pick(grassCols)); } });
-const dirt = tex((g, n) => { for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) px(g, x, y, pick(dirtCols)); });
-
-const M = o => new THREE.MeshStandardMaterial({ roughness: .78, metalness: 0, ...o });
-const mStone = M({ map: stone }), mOre = M({ map: ore, emissiveMap: oreEm, emissive: new THREE.Color('#ffa21a'), emissiveIntensity: 2.6 });
-const mGrassTop = M({ map: grassTop }), mGrassSide = M({ map: grassSide }), mDirt = M({ map: dirt });
-// BoxGeometry face order: +x, -x, +y, -y, +z, -z
-const GRASS = [mGrassSide, mGrassSide, mGrassTop, mDirt, mGrassSide, mGrassSide];
-
-// ---------- renderer / scene ----------
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
-renderer.setPixelRatio(devicePixelRatio); renderer.setSize(W, H); renderer.setClearColor(0x000000, 0);
-renderer.shadowMap.enabled = MODE !== 'logo'; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = MODE === 'logo' ? 1.15 : 1.05;
+renderer.setPixelRatio(devicePixelRatio); renderer.setSize(W, H); renderer.setClearColor(0, 0);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
+renderer.localClippingEnabled = true;
 stage.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(MODE === 'emblem' ? 24 : 28, W / H, .1, 400);
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), .04).texture;
+scene.environmentIntensity = .35;
+const camera = new THREE.PerspectiveCamera(MODE === 'emblem' ? 26 : 24, W / H, .1, 500);
+
+// ---------- materials ----------
+const face = new THREE.MeshPhysicalMaterial({ color: '#efe3c2', roughness: .42, metalness: .05, clearcoat: .35, clearcoatRoughness: .4 });
+const side = new THREE.MeshPhysicalMaterial({ color: '#b98d45', roughness: .32, metalness: .95 });
+const ember = new THREE.MeshStandardMaterial({ color: '#2a1a08', emissive: new THREE.Color('#ffb040'), emissiveIntensity: 3.2 });
+// a few cubes are grass blocks: the world forming as the letters break apart
+function pixTex(draw) { const c = document.createElement('canvas'); c.width = c.height = 16; draw(c.getContext('2d')); const t = new THREE.CanvasTexture(c); t.magFilter = THREE.NearestFilter; t.colorSpace = THREE.SRGBColorSpace; return t; }
+const pick = a => a[Math.floor(rnd() * a.length)];
+const gTop = pixTex(g => { for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) { g.fillStyle = pick(['#7fae45', '#8fbe52', '#6f9e3c', '#9bc95c']); g.fillRect(x, y, 1, 1); } });
+const gSide = pixTex(g => { for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) { g.fillStyle = pick(['#86603f', '#7a5739', '#93694a', '#6c4d34']); g.fillRect(x, y, 1, 1); } for (let x = 0; x < 16; x++) { const d = 3 + Math.floor(rnd() * 3); for (let y = 0; y < d; y++) { g.fillStyle = pick(['#7fae45', '#8fbe52', '#6f9e3c']); g.fillRect(x, y, 1, 1); } } });
+const gs = new THREE.MeshStandardMaterial({ map: gSide, roughness: .8 }), gt = new THREE.MeshStandardMaterial({ map: gTop, roughness: .8 });
+const GRASS = [gs, gs, gt, gs, gs, gs];
 
 // ---------- letters ----------
-const G = { D: ['#####.','##..##','##..##','##..##','##..##','##..##','#####.'],
-            I: ['####','.##.','.##.','.##.','.##.','.##.','####'],
-            N: ['##...##','###..##','####.##','##.####','##..###','##...##','##...##'] };
-const box = new THREE.BoxGeometry(1, 1, 1);
+const font = await new Promise((ok, no) => new FontLoader().load('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/fonts/helvetiker_bold.typeface.json', ok, undefined, no));
+const SIZE = 7, DEPTH = 2.0;
+const geo = new TextGeometry(TEXT, { font, size: SIZE, height: DEPTH, curveSegments: 16, bevelEnabled: true, bevelThickness: .22, bevelSize: .12, bevelSegments: 5 });
+geo.computeBoundingBox(); const bb = geo.boundingBox; const cx = (bb.max.x + bb.min.x) / 2;
+geo.translate(-cx, -bb.min.y, -(bb.max.z + bb.min.z) / 2); geo.computeBoundingBox();
+const B = geo.boundingBox, width = B.max.x - B.min.x;
 const logo = new THREE.Group(); scene.add(logo);
-const DEPTH = 3; let ox = 0; const cells = [];
-for (const ch of 'DIN') { G[ch].forEach((row, y) => [...row].forEach((c, x) => { if (c === '#') for (let z = 0; z < DEPTH; z++) cells.push({ x: ox + x, y: 6 - y, z, cap: y === 0 || (y <= 2 && G[ch][y - 1][x] !== '#') }); })); ox += G[ch][0].length + 1; }
-const width = ox - 1;
-for (const c of cells) {
-  const mat = c.cap ? GRASS : (rnd() < .09 ? mOre : mStone);
-  const m = new THREE.Mesh(box, mat); m.position.set(c.x - width / 2 + .5, c.y, -c.z); m.castShadow = m.receiveShadow = true; logo.add(m);
-}
-// the full stop: a floating grass block with a warm glow under it
-const dot = new THREE.Mesh(box, GRASS); dot.scale.setScalar(1.6); dot.position.set(width / 2 + 1.9, 1.4, -.5); dot.rotation.set(.32, .72, .08); dot.castShadow = true; logo.add(dot);
-const dotLight = new THREE.PointLight('#ffd27a', MODE === 'logo' ? 0 : 14, 7, 2); dotLight.position.set(width / 2 + 1.9, .2, .6); logo.add(dotLight);
-logo.position.y = -0.5;
 
-// ---------- lighting ----------
-const hemi = new THREE.HemisphereLight('#c9d6ff', '#4a3a2a', MODE === 'logo' ? 1.6 : .8); scene.add(hemi);
-const key = new THREE.DirectionalLight('#ffb466', MODE === 'logo' ? 2.4 : 3.2); key.position.set(14, 18, -22); key.castShadow = true;
-key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -30, right: 30, top: 25, bottom: -25, near: 1, far: 90 }); key.shadow.bias = -.0005; scene.add(key);
-const front = new THREE.DirectionalLight('#ffe2b8', MODE === 'logo' ? 1.6 : 1.7); front.position.set(-8, 6, 20); scene.add(front);
-const rim = new THREE.DirectionalLight('#8fb4ff', 1.2); rim.position.set(-20, 8, -14); scene.add(rim);
+// break-up front: solid where u = x + k*y < cut
+const K = .22, CUT = B.min.x + width * (MODE === 'emblem' ? .84 : MODE === 'logo' ? .9 : .87);
+const n = new THREE.Vector3(-1, -K, 0); const len = n.length(); n.normalize();
+const clip = new THREE.Plane(n, CUT / len);       // keeps points where n·p + c >= 0  ->  x + K*y <= CUT
+const faceC = face.clone(), sideC = side.clone(); faceC.clippingPlanes = sideC.clippingPlanes = [clip]; faceC.clipShadows = sideC.clipShadows = true;
+const solid = new THREE.Mesh(geo, [faceC, sideC]); solid.castShadow = solid.receiveShadow = true; logo.add(solid);
 
-if (MODE === 'logo') {
-  camera.position.set(2, -4.5, 33); camera.lookAt(0.8, 0.2, 0); logo.rotation.y = -.14; logo.position.y = -2.0;
-  hemi.intensity = .9; key.position.set(-10, 22, 8); key.color.set('#ffd9a0'); key.intensity = 2.6; front.intensity = .9; rim.position.set(16, 6, -18); rim.color.set('#7fa8ff'); rim.intensity = 2.2;
-} else if (MODE === 'emblem') {
-  logo.visible = false;
-  const g3 = { D: ['##.','#.#','#.#','#.#','##.'], I: ['###','.#.','.#.','.#.','###'], N: ['#..#','##.#','#.##','#..#','#..#'] };
-  const mono = []; [['D',2],['I',6],['N',10]].forEach(([ch, x0]) => g3[ch].forEach((row, y) => [...row].forEach((c, x) => c === '#' && mono.push([x0 + x, 7 + y]))));
-  const sideImg = grassSide.image; const monoSide = tex((g, n) => { g.drawImage(sideImg, 0, 0); for (const [x, y] of mono) px(g, x, y, (x + y) % 3 ? '#ffcf5a' : '#fff2b0'); });
-  const monoEm = tex((g, n) => { g.fillStyle = '#000'; g.fillRect(0, 0, n, n); for (const [x, y] of mono) px(g, x, y, '#ffb030'); });
-  const mMono = M({ map: monoSide, emissiveMap: monoEm, emissive: new THREE.Color('#ffa21a'), emissiveIntensity: 3.2 });
-  const b = new THREE.Mesh(box, [mMono, mGrassSide, mGrassTop, mDirt, mMono, mGrassSide]); b.scale.setScalar(6); b.rotation.set(.52, .78, 0); b.castShadow = true; scene.add(b);
-  const l2 = new THREE.PointLight('#ffcf7a', 40, 20, 2); l2.position.set(0, -5.5, 2); scene.add(l2);
-  camera.position.set(0, 0, 30); camera.lookAt(0, -.4, 0);
-} else {
-  camera.position.set(-4, 0.6, 36); camera.lookAt(0.6, 2.4, 0); logo.rotation.y = .12; camera.fov = 30; camera.updateProjectionMatrix();
+// voxelise the letters beyond the cut by ray-testing the solid shape
+const probe = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }));
+const ray = new THREE.Raycaster(); const V = .36, cubes = [];
+const zLayers = Math.max(1, Math.round((B.max.z - B.min.z) / V));
+for (let y = B.min.y + V / 2; y < B.max.y; y += V) for (let x = B.min.x + V / 2; x < B.max.x; x += V) {
+  const u = x + K * y; if (u < CUT - V) continue;
+  ray.set(new THREE.Vector3(x, y, 50), new THREE.Vector3(0, 0, -1));
+  if (!ray.intersectObject(probe).length) continue;
+  for (let zi = 0; zi < zLayers; zi++) cubes.push({ x, y, z: B.max.z - V / 2 - zi * V, d: u - CUT });
 }
+const dMax = Math.max(...cubes.map(c => c.d));
+const buckets = new Map(); const add = (mats, m) => { if (!buckets.has(mats)) buckets.set(mats, []); buckets.get(mats).push(m); };
+const FACE = [side, side, side, side, face, side];
+for (const c of cubes) {
+  const t = Math.max(0, c.d) / dMax;                    // 0 at the break, 1 at the far edge
+  const noise = (rnd() - .5) * .35;
+  const loose = t + noise > .2;
+  if (loose && rnd() < Math.min(.85, (t + noise) * 1.25)) continue;  // thin out as it disperses
+  const m = new THREE.Matrix4();
+  if (!loose) { m.makeTranslation(c.x, c.y, c.z); add(FACE, m); continue; }
+  const f = Math.pow(t + Math.max(0, noise), 1.6);
+  const pos = new THREE.Vector3(c.x + f * (3.5 + rnd() * 3), c.y + f * (4 + rnd() * 5), c.z + f * (rnd() * 6 - 1));
+  const rot = new THREE.Euler(f * (rnd() - .5) * 5, f * (rnd() - .5) * 5, f * (rnd() - .5) * 5);
+  const s = 1 - f * .45 * rnd();
+  m.compose(pos, new THREE.Quaternion().setFromEuler(rot), new THREE.Vector3(s, s, s));
+  const r = rnd();
+  add(r < .07 ? [ember, ember, ember, ember, ember, ember] : (f > .5 && r < .2) ? GRASS : FACE, m);
+}
+const cube = new THREE.BoxGeometry(V * .96, V * .96, V * .96);
+for (const [mats, list] of buckets) { const im = new THREE.InstancedMesh(cube, mats, list.length); list.forEach((m, i) => im.setMatrixAt(i, m)); im.castShadow = im.receiveShadow = true; logo.add(im); }
+
+// ---------- lights ----------
+const key = new THREE.SpotLight('#ffd7a0', 260, 120, .42, .6, 1.6); key.position.set(-14, 22, 24); key.target.position.set(0, 3, 0);
+key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -.0004; scene.add(key, key.target);
+const rim = new THREE.DirectionalLight('#7fe0c0', 2.2); rim.position.set(18, 10, -20); scene.add(rim);
+const rim2 = new THREE.DirectionalLight('#ffb070', 1.4); rim2.position.set(-20, 4, -16); scene.add(rim2);
+const fill = new THREE.HemisphereLight('#2d3b38', '#0a0806', .5); scene.add(fill);
+const glow = new THREE.PointLight('#ffb040', 14, 12, 2); glow.position.set(B.min.x + width * .8, 5, 2); logo.add(glow);
 
 // ---------- environment ----------
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
+const composer = new EffectComposer(renderer); composer.addPass(new RenderPass(scene, camera));
 if (MODE !== 'logo') {
-  scene.fog = new THREE.FogExp2(MODE === 'emblem' ? '#1a1722' : '#3a2b3c', MODE === 'emblem' ? .02 : .018);
-  const sky = new THREE.Mesh(new THREE.SphereGeometry(200, 32, 16), new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false,
-    uniforms: { top: { value: new THREE.Color(MODE === 'emblem' ? '#0b1020' : '#0d1428') }, mid: { value: new THREE.Color(MODE === 'emblem' ? '#241a2e' : '#4a2f48') }, bot: { value: new THREE.Color(MODE === 'emblem' ? '#3a2a2a' : '#ff9a52') } },
-    vertexShader: 'varying vec3 p; void main(){ p = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }',
-    fragmentShader: 'uniform vec3 top,mid,bot; varying vec3 p; void main(){ float h=p.y; vec3 c = h>0.04 ? mix(mid,top,smoothstep(0.04,0.45,h)) : mix(bot,mid,smoothstep(-0.06,0.04,h)); gl_FragColor=vec4(c,1.); }' }));
-  scene.add(sky);
-  if (MODE === 'keyart') {
-    const sunTex = tex((g, n) => { const gr = g.createRadialGradient(n/2, n/2, 0, n/2, n/2, n/2); gr.addColorStop(0, 'rgba(255,240,200,1)'); gr.addColorStop(.18, 'rgba(255,200,120,.9)'); gr.addColorStop(.5, 'rgba(255,140,70,.25)'); gr.addColorStop(1, 'rgba(255,120,60,0)'); g.fillStyle = gr; g.fillRect(0, 0, n, n); }, 256, true);
-    const sun = new THREE.Sprite(new THREE.SpriteMaterial({ map: sunTex, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, transparent: true }));
-    sun.position.set(2, 5, -120); sun.scale.set(95, 95, 1); scene.add(sun);
-    const rayTex = tex((g, n) => { const gr = g.createLinearGradient(0, 0, 0, n); gr.addColorStop(0, 'rgba(255,200,130,0)'); gr.addColorStop(.15, 'rgba(255,200,130,.55)'); gr.addColorStop(1, 'rgba(255,200,130,0)'); g.fillStyle = gr; g.fillRect(0, 0, n, n);
-      const h = g.createLinearGradient(0, 0, n, 0); h.addColorStop(0, 'rgba(0,0,0,1)'); h.addColorStop(.5, 'rgba(0,0,0,0)'); h.addColorStop(1, 'rgba(0,0,0,1)'); g.globalCompositeOperation = 'destination-out'; g.fillStyle = h; g.fillRect(0, 0, n, n); }, 128, true);
-    for (let i = 0; i < 9; i++) {
-      const ray = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: rayTex, transparent: true, opacity: .12 + rnd() * .12, blending: THREE.AdditiveBlending, depthWrite: false, fog: false, side: THREE.DoubleSide }));
-      const a = (-.9 + i * .225) + (rnd() - .5) * .1; ray.scale.set(4 + rnd() * 6, 110, 1);
-      ray.position.set(2 + Math.sin(a) * 52, 5 - Math.cos(a) * 52 + 4, -60); ray.rotation.z = a; scene.add(ray);
-    }
-    // voxel terrain receding into the fog (instanced)
-    const spots = [];
-    for (let x = -60; x <= 60; x++) for (let z = -90; z <= 40; z++) {
-      const d = Math.hypot(x / 1.4, z + 2);
-      let hgt = Math.floor(1.4 * Math.sin(x * .21) + 1.2 * Math.cos(z * .17) + (z < -25 ? (-25 - z) * .16 + Math.abs(x) * .05 : 0) + (rnd() < .05 ? 1 : 0));
-      if (z > -22) hgt = Math.min(hgt, z > -10 ? -1 : 0);
-      spots.push([x, -0.5 + Math.max(-1, hgt), z]);
-    }
-    const dim = m => { const c = m.clone(); c.color = new THREE.Color('#7d7a70'); return c; };
-    const inst = new THREE.InstancedMesh(box, GRASS.map(dim), spots.length); const mx = new THREE.Matrix4();
-    spots.forEach((s, i) => inst.setMatrixAt(i, mx.makeTranslation(s[0], s[1], s[2]))); inst.receiveShadow = true; scene.add(inst);
-    const N = 420, pos = new Float32Array(N * 3);
-    for (let i = 0; i < N; i++) { pos[i*3] = (rnd() - .5) * 70; pos[i*3+1] = -3 + rnd() * 22; pos[i*3+2] = -40 + rnd() * 52; }
-    const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const dotT = tex((g, n) => { const gr = g.createRadialGradient(n/2, n/2, 0, n/2, n/2, n/2); gr.addColorStop(0, 'rgba(255,230,170,1)'); gr.addColorStop(.4, 'rgba(255,180,90,.5)'); gr.addColorStop(1, 'rgba(255,150,60,0)'); g.fillStyle = gr; g.fillRect(0, 0, n, n); }, 32, true);
-    scene.add(new THREE.Points(pg, new THREE.PointsMaterial({ size: .32, map: dotT, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, color: '#ffd59a' })));
-  }
-  composer.addPass(new UnrealBloomPass(new THREE.Vector2(W, H), MODE === 'emblem' ? .55 : .7, .55, .82));
+  scene.background = new THREE.Color('#050807');
+  scene.fog = new THREE.Fog('#050807', 40, 120);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshPhysicalMaterial({ color: '#0b100e', roughness: .28, metalness: .2, clearcoat: .6, clearcoatRoughness: .25 }));
+  floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+  // haze glow behind the letters
+  const hc = document.createElement('canvas'); hc.width = hc.height = 256; const hg = hc.getContext('2d'); const gr = hg.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0, 'rgba(90,130,110,.32)'); gr.addColorStop(.35, 'rgba(50,75,62,.12)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); hg.fillStyle = gr; hg.fillRect(0, 0, 256, 256);
+  const ht = new THREE.CanvasTexture(hc); ht.colorSpace = THREE.SRGBColorSpace;
+  const haze = new THREE.Sprite(new THREE.SpriteMaterial({ map: ht, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false }));
+  haze.position.set(2, 5, -30); haze.scale.set(90, 55, 1); scene.add(haze);
+  // dust motes in the key light
+  const N = 600, pos = new Float32Array(N * 3); for (let i = 0; i < N; i++) { pos[i * 3] = (rnd() - .5) * 60; pos[i * 3 + 1] = rnd() * 22; pos[i * 3 + 2] = -25 + rnd() * 40; }
+  const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const dc = document.createElement('canvas'); dc.width = dc.height = 32; const dg = dc.getContext('2d'); const dgr = dg.createRadialGradient(16, 16, 0, 16, 16, 16); dgr.addColorStop(0, 'rgba(255,225,180,1)'); dgr.addColorStop(1, 'rgba(255,200,140,0)'); dg.fillStyle = dgr; dg.fillRect(0, 0, 32, 32);
+  scene.add(new THREE.Points(pg, new THREE.PointsMaterial({ size: .16, map: new THREE.CanvasTexture(dc), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: .7 })));
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(W, H), .35, .5, .92));
 }
 composer.addPass(new OutputPass());
+
+if (MODE === 'emblem') { camera.position.set(-1, 4, 27); camera.lookAt(1.6, 4.4, 0); logo.rotation.y = .14; }
+else if (MODE === 'logo') { camera.position.set(-2, 3.6, 46); camera.lookAt(1.2, 4.6, 0); logo.rotation.y = .16; }
+else { camera.position.set(-5, 2.4, 50); camera.lookAt(1.2, 2.2, 0); logo.rotation.y = .16; }
 
 // ---------- 2D overlays ----------
 function addFx() {
   const v = document.createElement('div'); v.className = 'fx vignette'; stage.appendChild(v);
   const g = document.createElement('canvas'); g.className = 'fx grain'; g.width = W; g.height = H; const gc = g.getContext('2d'); const id = gc.createImageData(W, H);
-  for (let i = 0; i < id.data.length; i += 4) { const n = 128 + (rnd() - .5) * 255; id.data[i] = id.data[i+1] = id.data[i+2] = n; id.data[i+3] = 255; } gc.putImageData(id, 0, 0); stage.appendChild(g);
+  for (let i = 0; i < id.data.length; i += 4) { const q = 128 + (rnd() - .5) * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = q; id.data[i + 3] = 255; } gc.putImageData(id, 0, 0); stage.appendChild(g);
 }
 function addTitle(top, scale = 1) {
   const t = document.createElement('div'); t.className = 'title'; t.style.top = top;
-  t.style.setProperty('--name', `${34 * scale}px`); t.style.setProperty('--sub', `${15 * scale}px`); t.style.setProperty('--gap', `${16 * scale}px`); t.style.setProperty('--line', `${90 * scale}px`);
+  for (const [k, v] of [['--name', 30], ['--sub', 11], ['--gap', 14], ['--line', 80]]) t.style.setProperty(k, `${v * scale}px`);
   t.innerHTML = '<div class="name">JON VINCENT DIN</div><div class="rule"><i></i>WORLD OF BUILDS<i></i></div>'; stage.appendChild(t);
 }
-if (MODE === 'keyart') { addFx(); addTitle('75%', W / 1920 * 1.25); const b = document.createElement('div'); b.className = 'fx bars'; stage.appendChild(b); }
+if (MODE === 'keyart') { addFx(); if (P.get('title') !== '0') addTitle('77%', W / 1920 * 1.2); const b = document.createElement('div'); b.className = 'fx bars'; stage.appendChild(b); }
 if (MODE === 'emblem') addFx();
-if (MODE === 'logo' && P.get('title') !== '0') addTitle('76%', W / 1200 * 1.2);
+if (MODE === 'logo' && P.get('title') !== '0') addTitle('80%', W / 1200 * 1.1);
 
-await document.fonts.ready;
-const target = MODE === 'logo' ? renderer : composer;
 for (let i = 0; i < 3; i++) MODE === 'logo' ? renderer.render(scene, camera) : composer.render();
 window.__done = true;
 </script></body></html>

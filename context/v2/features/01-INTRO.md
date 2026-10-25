@@ -9,9 +9,9 @@ States: loading → ready → exiting → entered. Real asset readiness. Ready w
 ## New beats
 
 1. Chunk-loading landscape whose progress follows real loading.
-2. The brand shot is recreated live (BRAND.md → Motion tie-in): the letter blocks fall into place from the grid in `brand/source/scene.html`, the grass caps land, the gold ore starts to glow, and the full-stop block drops and hovers.
+2. The brand assembles live (BRAND.md → Motion tie-in): cubes stream in and snap into a grid forming D, I and N, then fuse into the solid cream-and-gold letters as a gold edge-light sweeps across.
 3. The name types on in pixel type, with parallax clouds and rising particles.
-4. Enter → depth dive through the layers and clouds, the letterbox opens, and the sky strips wipe as the last beat. About 2.2s.
+4. Enter → the letters break back into cubes (as in `brand/din-keyart.png`, but completely), and the cubes fly past the camera into the depth dive. The letterbox opens and the sky strips wipe as the last beat. About 2.2s.
 5. Hand-off into Spawn at sunrise with a scroll cue.
 
 ## Acceptance
