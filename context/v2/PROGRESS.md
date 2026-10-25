@@ -40,3 +40,14 @@
 - The emblem's gold-ore text now reads "DIN".
 - Re-rendered all PNGs as `din-*.png` and removed the `jvd-*.png` files. The full name "JON VINCENT DIN" and "WORLD OF BUILDS" stay under the letters.
 - Checks: viewed the key art, transparent logo and emblem renders. Every output was regenerated with the committed scripts.
+
+## 2026-10-26 (Asia/Singapore): brand redone as solid letters breaking into blocks
+
+- The owner rejected the block-built DIN ("Blocks usage is so bad") and then three block-built alternatives (classic title, mossy monument, terrain strata). Feedback: letters built from cubes look crude, textures look cheap, and the dusk landscape doesn't fit. The owner chose "letters breaking into blocks".
+- Rewrote `brand/source/scene.html`:
+  - Extruded "DIN" in MgOpen Moderna bold (three.js `helvetiker_bold`), with cream clearcoat faces and gold-metal sides.
+  - A clipping plane cuts the solid letters. Beyond the cut, the letters are turned into cubes by ray tests; the cubes stay on the grid near the break, then scatter, spin and thin out. Some glow; some far ones are grass blocks.
+  - A dark void with haze, a glossy floor, a key spotlight, teal and amber rims, dust and bloom.
+- Re-rendered all `din-*.png` files. The emblem is a breaking "D". The key art dropped from 3.9 MB to 1.7 MB.
+- Updated BRAND.md and the intro, storyboard, milestone and decision references: the intro assembles the letters from cubes and breaks them apart on Enter.
+- Checks: viewed every render, plus a contact sheet on the site background including 64px and 32px icons. All final files came from the committed scripts.

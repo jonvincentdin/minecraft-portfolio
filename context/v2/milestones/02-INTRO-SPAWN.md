@@ -4,7 +4,7 @@ Dependency: V2-01.
 
 ## Scope
 
-features/01-INTRO.md and features/02-SPAWN.md. Reuse the letter grid `G` from `brand/source/scene.html` for the voxel assembly, and use `brand/din-keyart.png` as the target framing. Implement the depth-dive entry and the block-dissolve exit from Spawn.
+features/01-INTRO.md and features/02-SPAWN.md. Reuse the break-line and cube-scatter logic from `brand/source/scene.html` for the assembly and break-up, and use `brand/din-keyart.png` as the target framing. Implement the depth-dive entry and the block-dissolve exit from Spawn.
 
 ## Acceptance
 
