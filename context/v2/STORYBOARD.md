@@ -1,5 +1,12 @@
 # Storyboard — one Minecraft day, one scroll
 
+> **Owner direction, 2026-10-26 (overrides the pin-heavy plan below):** after the first previs the owner asked for *heavy* motion and for scrolling to *keep going vertically* instead of "transitioning to another page".
+> - Sections are tall blocks in one continuous flow. Each next section scrolls up over the last; there is no pin-then-swap.
+> - Pin only the two horizontal stretches (Projects, Experience), and enter and leave them within the flow.
+> - Drop the scene-swap transitions in the catalogue (block dissolve, book close, item drop, plank doors, mine-shaft whip). Continuity comes from overlap, parallax depth and the giant pixel words that sweep sideways between sections.
+> - Within sections, motion is scrubbed to the section's position in the viewport: lines slam in from alternating sides, frames swing in, crafting ingredients converge as each skill row crosses the centre, the advancement glow follows you down a tall tree, signposts slam down.
+> - Reference: `previs/din-v2-previs.mp4` and `previs/index.html`.
+
 The page is a single journey through Jon's world, told as **one in-game day**. Scroll position is time: dawn at the intro, noon over the projects, golden hour over the advancements, night at the contact campfire. A global sky layer behind every chapter scrubs its colour, sun/moon arc and stars from overall scroll progress. This one device makes the whole page feel continuous instead of a stack of sections.
 
 Notation:
