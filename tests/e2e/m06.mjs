@@ -49,18 +49,9 @@ try {
  // ---- Visitors before anything is published ----
  const visitorContext = await context();
  const visitor = await open(visitorContext);
- assert.match(await visitor.locator('.foundation-notice[role="status"]').first().textContent(), /Nothing has been published yet · showing the sample world/);
+ assert.equal(await visitor.locator('.foundation-notice[role="status"]').count(), 0, 'no sample-world notice');
  png = Buffer.from(await visitor.evaluate(() => { const c = document.createElement('canvas'); c.width = 60; c.height = 80; const g = c.getContext('2d'); g.fillStyle = '#c96'; g.fillRect(0, 0, 60, 80); return c.toDataURL('image/png').split(',')[1]; }), 'base64');
- // The notice holds its place but stays invisible during the intro, so it never flashes ahead of the page reveal.
- const intro = await visitorContext.newPage();
- await intro.goto(APP); await intro.locator('#skip-intro:not([disabled])').waitFor();
- assert.equal(await intro.locator('.publish-notice').evaluate(n => getComputedStyle(n).opacity), '0');
- const heroTop = await intro.locator('.hero').evaluate(h => h.getBoundingClientRect().top);
- await intro.locator('#skip-intro').click(); await intro.locator('#loader').waitFor({ state: 'detached' });
- await intro.waitForFunction(() => getComputedStyle(document.querySelector('.publish-notice')).opacity === '1');
- assert.equal(await intro.locator('.hero').evaluate(h => h.getBoundingClientRect().top), heroTop, 'no layout shift when the notice appears');
- await intro.close();
- check('visitors see the labelled sample world while nothing is published; the notice fades in only after the intro, without shifting the page');
+ check('visitors see the sample world, without a notice, while nothing is published');
  await go(visitor, 'editor');
  await visitor.locator('#sign-in-form').waitFor();
  assert.equal(await visitor.locator('#publish-draft').count(), 0);
