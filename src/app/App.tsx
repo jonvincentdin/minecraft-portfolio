@@ -80,7 +80,6 @@ export function App() {
  <Shell route={route} paused={paused} togglePause={()=>setPaused(value=>!value)} locked={open&&!error} name={shown?.settings.name}>
  {preview&&route!=='editor'&&<p className="foundation-notice preview-banner" role="status">{'Draft preview · '+(source.repository?.kind==='supabase'?'draft':'local')+' revision '+preview.revision+' · not published. '}<a href="#editor">Back to editor</a>{' · '}<button className="text-button" onClick={()=>setPreview(null)}>Exit preview</button></p>}
  {/* Keeps its place from the start (no layout shift) but stays invisible until the entry sequence has finished. */}
- {source.repository?.kind==='supabase'&&snapshot?.source==='demo'&&route!=='editor'&&!preview&&<p className="foundation-notice publish-notice" role="status">Nothing has been published yet · showing the sample world.</p>}
  {error?<Notice error>{error}{source.repository&&<>{' '}<button className="text-button" id="retry-content" onClick={retry}>Try again</button></>}</Notice>:snapshot&&shown&&(route==='editor'&&source.repository?<EditorGate repository={source.repository} notify={setToast} paused={paused} onPreview={startPreview} onPublished={published}/>:route==='home'?<HomePage content={shown} scene={scenes.home_landscape} paused={paused} replay={()=>{setCycle(value=>value+1);setOpen(true);}} notify={setToast}/>:<PublicRoute route={route} content={shown} scenes={scenes} paused={paused} notify={setToast}/>)}
  </Shell><div id="toast" role="status" aria-live="polite" className={toast?'visible':''}>{toast}</div></>;
 }

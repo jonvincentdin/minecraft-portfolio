@@ -235,3 +235,9 @@ Measured per frame in both the reference and React.
 - Also passed: smoke, M01 comparison (intro exact; it is captured before the exit), test:m04 (18), test:m06 (13), 37 unit tests.
 
 The previous fix (the notice fading in after the intro) remains; it addressed a different element.
+
+## Sample-world notice removed (2026-10-25)
+
+At the owner's request, the "Nothing has been published yet · showing the sample world." banner no longer appears. Visitors still see the sample world while nothing is published, just without the label. Removed the banner from `App.tsx` and its fade-in CSS. The M06 and hosted M06 tests now assert that no notice appears.
+
+**Checks:** `tsc -b`, production build, test:m06 (13 passed). test:m06-hosted was not run because it needs the hosted project.

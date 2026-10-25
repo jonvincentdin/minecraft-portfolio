@@ -48,9 +48,9 @@ try {
 
  // Visitor UI before publishing
  const visitorContext = await context(), visitor = await open(visitorContext);
- assert.match(await visitor.locator('.foundation-notice[role="status"]').first().textContent(), /Nothing has been published yet/);
+ assert.equal(await visitor.locator('.foundation-notice[role="status"]').count(), 0, 'no sample-world notice');
  const png = Buffer.from(await visitor.evaluate(() => { const c = document.createElement('canvas'); c.width = 60; c.height = 80; c.getContext('2d').fillStyle = '#c96'; c.getContext('2d').fillRect(0, 0, 60, 80); return c.toDataURL('image/png').split(',')[1]; }), 'base64');
- check('visitors see the labelled sample world');
+ check('visitors see the sample world without a notice');
 
  // Sign-up is disabled
  const signup = await api('/auth/v1/signup', { method: 'POST', headers: anon, body: JSON.stringify({ email: 'm06-signup@example.com', password: randomBytes(12).toString('hex') }) });
