@@ -1,18 +1,18 @@
-# Owner content still needed (v2)
+# Owner content and remaining inputs
 
-Same gaps as v1 (`../v1/OWNER_CONTENT.md`); v2 makes some of them more visible.
+Updated 2026-10-27. Real content is independent of the visual prototype; do not fabricate it.
 
-| Content | Needed input | Why it matters more in v2 |
+| Input | Existing v1 destination | Presentation |
 | --- | --- | --- |
-| Portrait | Real photo, crop, alt text | The oak frame builds around it as a set piece |
-| Social links | Verified GitHub and LinkedIn URLs | Spawn CTAs and campfire signposts |
-| About | Biography, journal chapters | Each chapter becomes a page turn |
-| Projects | Real projects with screenshots | Each is a full-screen card in the track. Consider featuring fewer, stronger projects (6–9 fits one hotbar) |
-| Actual skills | Real skills and levels | Each gets its own crafting moment |
-| Experience | Records per character | Each character is a station |
-| Achievements and certifications | Real nodes and links | Each node fires a toast |
-| Contact | Public email and links | Signposts |
-| Editor Gmail | jonvincent.din@gmail.com (supplied 2026-10-25) | Needs an auth user and membership on the hosted project (AUTH.md) |
-| SMTP | Provider choice and credentials, set in Supabase only | Code delivery (P4) |
+| Project screenshots, captions and alt text | projects.photos | Largest visual element in each showcase |
+| Purpose, role, stack, process, outcome and real links | Existing project fields | Case studies and readable summaries |
+| Biography and journal chapters | settings.bio, journal | About |
+| Optional real portrait and crop | settings.portrait, portraitPosition | About; journal object remains valid when absent |
+| Actual skills and evidence | actualSkills | Readable capabilities and linked work |
+| Experience records | experience, existing character associations | Dates, role, contribution and evidence |
+| Verified achievements / certifications | Existing separate collections | Evidence beside each entry |
+| Public contact / social links | settings and contacts | Direct contact actions |
 
-Until supplied, keep the seed's sample labels visible. Never invent content.
+The current previs reads only the existing sample seed and demo artwork, labelled throughout. New presentation models are original design assets, not claims about Jon's work or identity. Production must preserve each sample flag until the owner replaces the record.
+
+Account/SMTP credentials are not required for this local design work. Future auth inputs belong in service configuration, never chat or tracked environment files. Historical owner-address instructions remain in the earlier brief; enrollment is not performed here.

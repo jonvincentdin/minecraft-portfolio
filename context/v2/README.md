@@ -1,42 +1,36 @@
-# Jon Vincent Din — World of Builds, version 2
+# Jon Vincent Din — Builder’s Exhibition
 
-Version 2 reworks the finished v1 site (see `../v1/`) into a **single-page, cinematic scroll experience**. The world, palette, models and content stay; the way visitors move through it changes. Instead of clicking between seven routes, visitors scroll through one continuous journey with vertical and horizontal sequences, scroll-scrubbed motion, and a smaller set of interactions.
+Revised 2026-10-27 (Asia/Singapore). v2 presents the portfolio through a Minecraft-inspired exhibition: large project imagery, readable case studies, a restrained voxel setting, and smooth continuous scroll motion. The existing enchanted DIN brand remains.
 
-Status (2026-10-25): **specified, not built.** Only these context files and the logo exist. The owner will build v2 step by step from the milestones.
+## Status
+
+This delivery is a design specification, original review models, and a working local previsualization. It is not the production React v2 implementation. V2-01 onward remain pending. Actual verification and delivery state are in PROGRESS.md and PROJECT_FACTS.md.
 
 ## Start here
 
-1. `BRIEF.md`: the owner's request, word for word, and the requirements taken from it.
-2. `CONTEXT.md`: authority order and reading order.
-3. `STORYBOARD.md`: the scroll journey, section by section. This is the core of v2.
-4. `MILESTONES.md`, then the current file under `milestones/`.
+1. Read root AGENTS.md, then BRIEF.md, CONTEXT.md, CURRENT_STATE.md and DECISIONS.md.
+2. Read STORYBOARD.md, DESIGN_SYSTEM.md, MOTION.md and MODELS.md together.
+3. Read DATA_MODEL.md, ARCHITECTURE.md and the current milestone before coding.
+4. Use FEATURES.md to find each feature contract; TESTING.md defines evidence.
 
-## What changes from v1
+## Review the proposal
 
-| v1 | v2 |
-| --- | --- |
-| Seven hash routes and a header nav | One page of scroll chapters. The header links scroll to anchors |
-| Section reveals when an element enters view | Scroll-scrubbed timelines, pinned scenes and horizontal tracks |
-| A rich interaction on every page (drag inventory, 3×3 workshop, tree pan/zoom, comparisons) | Fewer, lighter interactions (see FEATURES.md) |
-| Intro: shuffled upward exit | Intro: a longer cinematic in which the logo is built from blocks, with depth and a hand-off into scroll |
-| "Edit world" button → `#editor`, signed in with a password | Logo → `/editor` page, signed in with an emailed one-time code |
-| Text "JVD." brand | DIN, enchanted: a serif wordmark with an enchanted shimmer and runes (`brand/`, PNG) |
+- Video: [din-v2-previs.mp4](previs/din-v2-previs.mp4).
+- Run: node context/v2/previs/server.mjs; open the printed local URL.
+- Model review: [previs/models.html](previs/models.html), served through the same local server.
+- Rebuild model drafts: node context/v2/previs/build-models.mjs.
+- Record: node context/v2/previs/record.mjs.
+- Verify the exported MP4: node context/v2/previs/check-video.mjs.
+- Draft GLBs, scene JSON, previews and manifest: work/model-drafts/portfolio-exhibition/v1/ (ignored; reproducible from tracked source).
 
-## Unchanged and reused
+The previs uses original voxel geometry with the existing VoxelView renderer and explicitly labelled v1 sample content. It makes no backend connection. The sample artwork is not evidence of Jon's completed projects.
 
-The custom WebGL renderer and scene-data models (`../v1/MODELS.md`, `../v1/ASSETS.md`), canonical `/assets`, the content document and its Supabase draft/publish backend (`../v1/DATA_MODEL.md`, `../v1/SUPABASE.md`), RLS, the palette and JVDPixel font. The v1 React components are a parts bin, not a constraint: reuse what fits and rewrite what doesn't.
+## What stays / what changes
 
-## Folder map
+The React + TypeScript + Vite stack, plain CSS, v1 database schema, document version, content repositories, RLS, publication RPCs and Storage contract stay. Canonical assets and immutable reference files stay byte-identical.
 
-- `BRIEF.md`, `CONTEXT.md`, `CURRENT_STATE.md`, `DECISIONS.md`: orientation and open decisions.
-- `STORYBOARD.md`, `MOTION.md`, `DESIGN_SYSTEM.md`, `BRAND.md`: the experience.
-- `FEATURES.md` and `features/`: per-section specifications.
-- `ARCHITECTURE.md`, `DATA_MODEL.md`, `AUTH.md`, `EDITOR.md`: structure, data and the editor.
-- `USER_FLOWS.md`, `OWNER_CONTENT.md`, `TESTING.md`: flows, content still needed, how to verify.
-- `MILESTONES.md` and `milestones/`: the build plan.
-- `MASTER_PROMPT.md`: the implementation prompt for an agent.
-- `PROGRESS.md`, `PROJECT_FACTS.md`: history and the current verified snapshot.
-- `brand/`: brand PNGs (key art, logos, emblem, icons) and `source/` to re-render them.
-- `previs/`: a rough working prototype of the storyboard (`index.html`) and a recorded walkthrough (`din-v2-previs.mp4`). It is a motion reference, not the build: plain CSS and JS, thumbnails instead of the 3D renderer, and sample content.
+The public composition, section order, presentation models, navigation and motion change. Projects come directly after the hero. Minecraft supplies materials, shape and a few meaningful interactions. Reading work never requires playing a game.
 
-Verification evidence (screenshots, reports) is **not** committed in v2. Keep it in the ignored `test-results/` folder and summarise the checks in `PROGRESS.md`.
+All v2 Markdown specifications have been reconciled with this direction. The accepted brand PNGs and their authoring sources were reviewed and retained without regeneration. Historical progress stays in PROGRESS.md; superseded instructions there describe history only.
+
+The requested MP4 is a design deliverable and is tracked. Test captures, traces and reports remain in ignored test-results/. No deployment, merge, auth setting, owner enrollment or migration is implied by this package.

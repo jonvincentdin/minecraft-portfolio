@@ -1,23 +1,21 @@
-# User flows (v2)
+# User flows
+
+Updated 2026-10-27.
 
 ## Visitor
 
-Open `/` → intro loads (chunk loading, logo build) → ready → **Enter world** → depth dive → Spawn at sunrise → scroll.
+Open portfolio → immediately understand the name and introduction → scroll to selected projects → optionally open a case study → continue through About, Skills, Experience, Achievements/Certifications and Contact. The desktop project passage moves horizontally within the same vertical document. Mobile stacks projects vertically.
 
-Scroll down: Spawn orbits and dissolves → About journal pages turn → Projects slide sideways with the hotbar following → Skills craft one by one into the loadout → the minecart rides past five characters → the advancement tree lights up with toasts → night at the campfire contact → credits → Replay intro.
+Work/About/Skills/Contact anchors and a Back to top link provide direct navigation. No mandatory game, loading tour or credential unlock blocks reading. The opening model movement can replay without resetting owner content or visitor navigation unexpectedly.
 
-At any point:
-- Click a hotbar slot to fly to that chapter (or project, while in Projects).
-- Open a project's case study, read, close, and continue scrolling from the same place.
-- "Try a recipe" in Skills; drag to rotate Spawn's world or a character.
-- Click an advancement node to read its details.
-- Pause motion to turn the page into a static long read.
-- Scroll back up: everything scrubbed reverses.
+Case study opens a focused dialog, exposes the existing story/gallery fields, closes with Escape and restores focus to the invoking project. Every project is reachable through the full collection index.
 
-Deep link `/#experience`: intro → Enter → lands on the Experience chapter's resting frame.
+Pause or reduced motion → complete static reading order. Reverse scroll → visual movement reverses without changing records. Experience and credentials remain visible as text; optional model/crafting interactions never alter actual skills.
+
+Contact → enter details → review message. A send success is shown only if a separately configured real service succeeds. The local previs does not send anything.
 
 ## Owner
 
-Click the DIN logo → `/editor` → enter the Gmail → "If that's the owner's Gmail, a code is on its way" → open the email → enter the 6-digit code → the editor loads the private draft → edit → Save draft → Preview (opens `/` with the draft and a banner) → Publish → Back to the world. Sign out ends the session.
+Production logo → planned /editor entry → existing authorized sign-in → private draft → edit with familiar v1 forms → Save draft → labelled Preview → atomic Publish. Failed operations retain input. Import keeps recovery and never publishes automatically.
 
-A wrong code shows "That code didn't work" and allows retries until the limit; an expired code asks for a new one; Resend has a cooldown.
+The earlier Gmail/code flow is deferred to the separately authorized auth milestone. Current owner access is preserved. No workflow needs a new database structure for the visual redesign.

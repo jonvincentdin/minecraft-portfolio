@@ -1,16 +1,17 @@
-# V2-01 — Scroll foundation
+# V2-01 — React scroll foundation
 
-Dependency: V2-00. Approvals needed first: P1 (GSAP + Lenis dependencies), P2 (AGENTS.md update).
+Updated 2026-10-27 (Asia/Singapore). Dependency: review of V2-00R.
+
+Status: pending production implementation.
 
 ## Scope
 
-- Feature branch from `main`. New v2 app shell alongside v1 code; remove v1 routing once v2 renders every section (by V2-05).
-- Vite multi-page: `/` and `/editor` (the editor entry can mount the v1 editor unchanged for now).
-- `ScrollProvider`, `Chapter` component, motion-preference store, sky layer, HUD (logo link, XP bar, chapter hotbar, pause), anchors and v1-hash redirects.
-- Each chapter rendered as a static placeholder section with real content from the published snapshot, so the page reads top to bottom before any choreography.
-- Brand PNGs copied into `public/brand/`; favicon and Apple touch icon set from `din-icon-*.png`; OG image from the keyart.
-- `useVoxelView` with mount-on-proximity and the three-context cap.
+Build real React section components with existing PortfolioContent and repositories. Add native progress/anchors, responsive composition, motion preferences, model lifecycle and the three-context cap. Keep v1 runnable until the new public page covers every section. No dependency installation or schema migration by default.
 
 ## Acceptance
 
-The page scrolls top to bottom with all content readable; the hotbar and XP bar track scroll; anchors and `#editor` → `/editor` work; reduced motion and pause produce the static page; WebGL contexts never exceed three; typecheck, build and unit tests pass.
+Typecheck/build and unit tests; unchanged seed and import compatibility; all content readable without motion; native anchors and legacy aliases; keyboard focus; model fallback and cleanup; desktop/mobile browser checks.
+
+## Delivery boundary
+
+Use a focused feature branch. Record real verification, update PROGRESS/PROJECT_FACTS, commit, push and open a draft PR. Explicit merge authorization is required. Stop after this milestone; do not begin the next one unasked.

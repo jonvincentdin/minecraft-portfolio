@@ -1,78 +1,35 @@
-# Motion specification (v2)
+# Motion specification — smooth, purposeful movement
 
-> **Owner direction, 2026-10-26: heavy, continuous motion.**
-> - **Weight:** an inertial scroll layer that trails the real scroll position (previs lerp factor 0.075 per frame) and skews content with scroll velocity (up to about 7°). Native scroll stays the source of truth; Lenis with a low `lerp` is the production equivalent.
-> - **Travel:** entrances cover 30–80vw or vh, not 12–20px. Use rotations of 6–45° and an overshoot ease (back-out) so elements land with a thud.
-> - **Depth:** parallax speeds from 0.3× to 3× on decorative blocks.
-> - **Flow:** no scene-swap transitions; see STORYBOARD.md → Owner direction.
-> - Reduced motion and pause still give the static, readable page.
+Active direction 2026-10-27. Supersedes the earlier global skew, 30–80vw text slams, repeated overshoot, character railway and scene-swap catalogue.
 
-v1's timing table (`../v1/MOTION.md`) still holds for the interactions v2 keeps: hover, press, six-pixel feedback, the advancement edge and node glow, and dialogs. This file adds the scroll system.
+## Principles
 
-## Engine
+Native vertical scroll is authoritative. One main movement at a time. Substantial travel belongs to imagery, frames and camera composition; text settles early and remains level. No scroll velocity skew on the whole document. No state mutations, credential unlocks or message submission from scroll position.
 
-- Scroll-linked timelines, pinning and horizontal tracks: **GSAP ScrollTrigger** (proposal P1; approve before installing).
-- Smoothed wheel input: **Lenis**, driven from the same `requestAnimationFrame` tick as GSAP. Native scrolling stays the source of truth: no virtual scroll containers, and keyboard, touch, find-in-page and anchor links must keep working.
-- 3D: the existing VoxelView renderer. Scroll timelines set renderer parameters (yaw, pitch, zoom, focus) through a small imperative API on the React wrapper; the renderer keeps its own frame loop. Do not add a second 3D renderer.
-- Everything else: CSS transforms and opacity. Avoid animating layout properties.
+## Choreography
 
-## Kinds of motion
+| Element | Proposed behavior |
+| --- | --- |
+| Opening | Camera settles over about 1.4s; portfolio is visible and usable throughout |
+| Hero model | Small continuous yaw change linked to viewport progress; no full spin through an unreadable screen |
+| Project arrival | Artwork scales from .82 to 1 as it arrives; frame accents separate slightly |
+| Desktop projects | One sticky region; native vertical distance maps reversibly to horizontal travel; 2–4 featured records, remainder in the full collection |
+| About / skills | Controlled object turn while copy remains stationary within normal flow |
+| Experience / credentials | Clear progression beside readable entries; no autoplaying achievement claims |
+| Contact | Model settles beside an immediately usable contact action |
+| Controls | 180–250ms hover/press feedback; no required animation delay before action |
+| Detail dialog | Native focus handling and Escape; opening/closing must not depend on animation finishing |
 
-| Kind | Use for | Rule |
-| --- | --- | --- |
-| Scrubbed | Camera moves, parallax, page curls, tracks, path glow, sky | Fully reversible; no state change at the ends |
-| Triggered | Toasts, pick-up bounces, particle bursts, typing | Plays once per crossing; replays when re-crossed going forward only |
-| Ambient | Clouds, fire, fireflies, idle bob | Pauses off-screen and when motion is paused |
-| Interactive | Hover, press, drag-rotate, clicks | v1 timings |
+Previs actual behavior lives in previs/app.mjs and style.css. It uses native scroll, CSS sticky and an owned rAF, with no new library. Future library choice is P1 in DECISIONS.md; do not treat an old GSAP/Lenis proposal as installed or approved.
 
-## Easing and timing defaults
+## Lifecycle and resources
 
-- Scrubs: `ease: "none"` with ScrollTrigger `scrub: 0.6` (a short catch-up lag that feels weighty).
-- Entrances: `cubic-bezier(.16,1,.3,1)` (v1's "out-expo-ish"), 500–700ms.
-- Impacts (blocks landing): a short drop with `power3.in`, then a 120ms squash (scaleY .85, scaleX 1.1) and settle.
-- Stagger groups: 30–60ms per element, 12 elements max before switching to a wave (stagger from the centre or by grid distance).
+Use the existing VoxelView renderer. Dispose offscreen views before mounting nearby scenes; maximum three live contexts. Share scroll measurements per frame. Clean up observers, events, rAF, buffers and programs on unmount. Preserve canonical geometry and correct axes. Pause WebGL when hidden/offscreen.
 
-## Transition catalogue (between chapters)
+## Pause / reduced motion
 
-Use each at most once. Variety is part of the brief.
+Both turn the project track into normal vertical content, remove spatial choreography and settle every model. Follow media-query changes at runtime. No text remains invisible; focused elements remain reachable. Native touch, wheel, keyboard, browser find and anchor navigation retain their meaning.
 
-| Transition | Where | Description |
-| --- | --- | --- |
-| Chunk load | Intro start | Tiles pop in from the centre outward, scaled 0→1 with a stagger by distance |
-| Depth dive | Intro → Spawn | Layers zoom past the camera at different speeds; the clouds are punched through |
-| Block dissolve | Spawn → About | Screen-space tile grid; tiles fall and rotate with gravity, revealing the next chapter |
-| Book close | About → Projects | 3D rotateY of the cover, then a slide down |
-| Item drop | Projects → Skills | Card becomes a spinning item entity and falls; the camera follows |
-| Plank split | Skills → Experience | The crafting table splits into slats that slide apart like doors |
-| Mine-shaft fall | Experience → Advancements | Fast vertical whip with motion-blur streaks (pixel lines) |
-| Nightfall | Advancements → Contact | Sky scrub with torches lighting up in sequence |
-| Credits roll | Contact → Credits | Slow upward crawl, with the sky looping to dawn |
+## Acceptance
 
-## Element animation (not just text)
-
-- Text: pixel type-on for display headings, word-by-word rise for body, and ink-reveal on the journal.
-- Images: pixelate-in. A canvas or CSS `image-rendering: pixelated` steps from 8px blocks to sharp over 400ms.
-- Cards and panels: build from blocks. Borders draw on clockwise, then the fill appears.
-- Icons and symbols: pop with a squash on arrival.
-- Buttons: v1 six-pixel burst plus a 3px rise.
-- 3D models: drop-in with bounce, scroll-scrubbed rotation, and drag-to-rotate where kept.
-- Lines (tree edges, rails): stroke-dashoffset draw.
-- Numbers (XP level, counts): tick up.
-
-## Performance budget
-
-- 60 fps on a mid-range laptop and no long tasks over 50ms while scrolling. Measure, don't assume.
-- At most **three live WebGL contexts** at once. Mount a VoxelView only while its chapter is within one viewport of the screen; otherwise show its thumbnail. Browsers cap the number of WebGL contexts, so this cap matters on a single page.
-- Particles: pooled DOM or a single canvas per chapter; no per-particle React state.
-- Use `will-change` only during active pins.
-- Recalculate triggers on resize, font load and image load (`ScrollTrigger.refresh`), debounced.
-
-## Pause and reduced motion
-
-- `prefers-reduced-motion: reduce`, or the pause toggle, turns the page into a **static, readable long page**: no pins, no scrubbing, no horizontal tracks (they become vertical lists), no particles, and the sky fixed per chapter. Content order and anchors are unchanged. The intro still requires Enter world, with fades only.
-- Toggling either at runtime must settle every timeline into its readable end state. No element may stay invisible.
-- Respond to the media query changing while the page is open (as v1 does).
-
-## Determinism for tests
-
-A test mode (`?test=1` or an env flag) seeds random order, freezes ambient loops and exposes `window.__scroll.progress()` per chapter. Test real timing separately.
+Forward/reverse scrolling, fast anchor jumps, resize, pause mid-track, reduced-motion toggle, dialog focus and offscreen resource cleanup need browser checks. Target smooth 60fps on a representative laptop, but report measured hardware and traces; a video or software-rendered capture alone does not prove the performance target.

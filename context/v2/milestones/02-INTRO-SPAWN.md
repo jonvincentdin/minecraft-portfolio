@@ -1,11 +1,17 @@
-# V2-02 — Intro 2.0 and Spawn
+# V2-02 — Opening and portfolio hero
 
-Dependency: V2-01.
+Updated 2026-10-27 (Asia/Singapore). Dependency: V2-01.
+
+Status: pending production implementation.
 
 ## Scope
 
-features/01-INTRO.md and features/02-SPAWN.md. Reuse the rune generator and the enchanted fill and glint from `brand/source/scene.html` for the logo reveal. Implement the depth-dive entry and the block-dissolve exit from Spawn.
+Implement V01/V02 from the revised feature specs. Immediate portfolio visibility, restrained opening/replay, reviewed model display and screenshot projection or an approved texture implementation. Preserve canonical React and brand assets.
 
 ## Acceptance
 
-The acceptance lists of V01 and V02, checked in a real browser at 1440×900 and 390×844, with full motion and with reduced motion.
+Hero text/action immediately usable; two-line heading target; correct image/model alignment at camera poses; fallback and responsive layouts; pause/replay cleanup; real browser captures. No mandatory Enter-world gate.
+
+## Delivery boundary
+
+Use a focused feature branch. Record real verification, update PROGRESS/PROJECT_FACTS, commit, push and open a draft PR. Explicit merge authorization is required. Stop after this milestone; do not begin the next one unasked.

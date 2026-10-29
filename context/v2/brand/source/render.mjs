@@ -1,6 +1,6 @@
-// Renders one v2 brand image from scene.html in headless Edge (WebGL via SwiftShader).
+// Renders one v2 brand image from the Canvas 2D scene.html in headless Edge.
 // Usage: node context/v2/brand/source/render.mjs <out.png> <keyart|logo|emblem> <width> <height> [dpr] [transparent 0|1] [extra query]
-// Needs network access: scene.html loads three@0.160.0 from cdn.jsdelivr.net.
+// Needs network access for the Cinzel and Inter fonts loaded by scene.html.
 import { chromium } from 'playwright';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const here = fileURLToPath(new URL('.', import.meta.url));

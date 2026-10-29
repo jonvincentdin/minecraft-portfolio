@@ -1,11 +1,9 @@
-# V02 — Spawn
+# V02 — Portfolio hero
 
-Anchor `#spawn`. Pinned about 150vh. Storyboard §1.
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-Content: Jon Vincent Din (exact), hero label, tagline, two CTAs ("See my builds" → `#projects`, "Experience" → `#experience`), GitHub and LinkedIn slots ("Add link" when blank, as in v1, never invented), two highlights, and the `home_landscape` world scene.
+Primary anchor #spawn; production #home aliases it. Show Jon Vincent Din exactly, the existing tagline/introduction, Work action and a substantial project image within the new gallery display. Use the decorative studio model from MODELS.md. The existing highlights/links may appear only when configured.
 
-Scroll: the world orbits and dollies out; name letters separate in depth; highlights slide in as floating blocks; the sun rises. The exit is the block dissolve into About.
+The composition pairs large type with one 3D object group. A slow viewport-linked camera turn supplies depth; text stays level. The hero exits in normal page flow into Work. Do not scatter letters, add unrelated floating inventory, or replace real project images with item icons.
 
-Interaction: drag to rotate the world (renderer inertia). Scroll scrubbing pauses while the visitor drags and resumes on release.
-
-Acceptance: fully reversible scrub; CTAs scroll to their anchors and move focus to the chapter heading; the WebGL fallback shows the thumbnail; text stays at AA contrast at every scroll position.
+Acceptance: clear title/action at desktop and phone sizes; model/screenshot alignment remains correct during movement; readable fallback; no missing-image URL; accessible anchors; approved canonical assets stay unchanged.

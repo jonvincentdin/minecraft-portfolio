@@ -1,29 +1,19 @@
-# Editor (v2)
+# Editor — familiar v1 workflow
 
-"Editor should still be a simple site." The `/editor` page keeps the v1 editor's content coverage (`../v1/EDITOR.md`) and its save/preview/publish model, without cinematic motion.
+Updated 2026-10-27. The public redesign does not require a new content editor or schema. A separate /editor entry remains planned. The local previs only explains that entry; it does not connect to an account.
 
-## Entry
+## Preserve coverage
 
-- From the public page: click the DIN logo in the HUD. It is a normal link to `/editor`, so it opens in the same tab and middle-click works.
-- `/editor` shows sign-in (AUTH.md) until there is an authorized session, then the editor.
-- A "← Back to the world" link returns to `/`.
+Keep Landing settings/highlights, About biography/portrait/crop/journal, Projects with all case-study fields and photo ordering, Skills with actual skills/recipes/starting inventory, Experience with fixed character associations, both advancement trees, and Contact. Fields unused by the new public presentation remain editable or safely retained; never silently delete them on save.
 
-## Tabs (simplified from v1)
+Use existing media uploads and media: references. Public cover images derive from the first project photo; reorder through the current gallery controls. New decorative voxel scenes are application assets, not a new media-upload type.
 
-| Tab | Content | Change from v1 |
-| --- | --- | --- |
-| Spawn | Name, eyebrow, tagline, CTAs, GitHub, LinkedIn, highlights | Renamed from Landing |
-| About | Biography, portrait and crop, journal chapters | Same |
-| Projects | Case-study fields, symbol, gallery (files, alt text, captions, order) | Same; slot order no longer matters |
-| Skills | Actual skills; recipes used by the scripted crafting and "Try a recipe" | Starting-inventory editor removed (no public workshop) |
-| Experience | Five characters and their records | Same; comparison fields removed |
-| Advancements | Achievements and Certifications trees: node fields, parent links, positions | Same controls; positions must fit without pan/zoom (warn when a tree is too wide) |
-| Contact | Copy, email, links | Same |
+## Workflow
 
-## Behaviour (unchanged from v1)
+Authorized session → private draft → edit → Save draft with expected revision → Preview through the same public React components → Publish the saved revision atomically. Import creates a recovery copy and does not publish. Preserve edits on network, authorization, validation, upload and revision-conflict failures.
 
-Save draft with a revision check, preview, and atomic publish. Dirty, saving, saved, error and conflict states. Failed saves and uploads keep form data. JSON import/export with a recovery copy; import never publishes.
+The production logo leads to /editor. The editor has a visible Back to portfolio link. Auth follows AUTH.md; the visual redesign does not disable passwords or enroll users.
 
-## Preview
+## Acceptance
 
-Preview opens `/` with the draft snapshot and a "Draft preview" banner (v1 behaviour), so the owner sees the real scroll experience before publishing.
+All existing collections survive load/save/import/export. Sample flags, IDs and unused legacy fields persist. Draft preview is labelled and never leaks private media. Editor remains keyboard-accessible and usable without cinematic motion.

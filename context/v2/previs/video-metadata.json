@@ -1,0 +1,14 @@
+{
+  "seconds": 66.4314,
+  "samples": 1608,
+  "bytes": 28920607,
+  "seekable": true,
+  "codec": "H.264 / AVC",
+  "audio": false,
+  "width": 1440,
+  "height": 900,
+  "targetFrameRate": 30,
+  "recorded": "2026-10-28",
+  "timezone": "Asia/Singapore",
+  "source": "Actual Edge recording of the standalone previs; illustrative v1 content; no audio."
+}

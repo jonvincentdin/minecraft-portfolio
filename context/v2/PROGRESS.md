@@ -1,8 +1,11 @@
 # Build progress (v2)
 
+Current direction and verification: the 2026-10-29 entry below. Older entries are historical; the current root AGENTS.md controls permissions. Earlier statements about blanket merge authorization do not authorize this delivery's merge.
+
 ## Status
 
 - [x] V2-00 Context and logo
+- [x] V2-00R Portfolio direction, original review models and recorded design package (owner visual acceptance pending)
 - [ ] V2-01 Scroll foundation
 - [ ] V2-02 Intro 2.0 and Spawn
 - [ ] V2-03 About and Projects
@@ -103,3 +106,40 @@
   - pins only for the Projects and Experience horizontal runs.
 - The recorder now scrolls continuously at a steady pace instead of stopping at each chapter.
 - Checks: reviewed frame sheets of the MP4. The first frame is clean, and every section is visible and moving. No application code changed.
+
+
+## 2026-10-29 (Asia/Singapore): V2-00R — Builder's Exhibition review package
+
+### Scope and retained contracts
+
+- Read root project rules, prior v1 implementation/verification contracts, all v2 specifications and relevant repository skills before authoring. Reconciled every v2 Markdown document, feature and milestone with the portfolio-first direction. Historical brief/progress remain history.
+- New direction: native vertical flow, immediate project access, a short desktop horizontal showcase, stable reading text, restrained voxel scenery and smooth image/camera movement. Mobile, pause and reduced motion use a vertical project list.
+- Retained the enchanted DIN PNGs. Corrected stale authoring comments; no brand image regeneration.
+- No production application, dependency, canonical asset, immutable reference, database schema, auth, media-access or deployment changes. v1 document version 5, database tables, RPCs, RLS and Storage remain the contract. No hosted operation or reseed.
+
+### Models and video
+
+- Authored four original deterministic voxel drafts: gallery-display, workshop-lantern, builder-journal and the combined portfolio-studio. Generated GLB/scene JSON/manifest before recording; retained original React geometry and thumbnail.
+- Tracked authoring/export source is in previs/. Versioned outputs and front/side/oblique review images are in ignored work/model-drafts/portfolio-exhibition/v1/. No external model-generation service was used.
+- Reused unchanged VoxelView with flat colors and existing shading. The display image is a projected DOM image. No added PBR, real cast shadows, emissive shader, rigging or runtime GLB loader is claimed.
+- Final MP4: previs/din-v2-previs.mp4, recorded 2026-10-28 and verified 2026-10-29. H.264, 1440 x 900, 66.4314 seconds, 28,920,607 bytes, silent. Target capture rate 30fps with variable encoded intervals. Standalone concept uses explicitly labelled v1 sample content.
+
+### Verification actually performed
+
+- Model generation: finite coordinates, positive dimensions, triangle winding, bounds/counts/bytes/SHA manifest passed. Intentional cuboid intersections are not claimed manifold.
+- node context/v2/previs/check.mjs: passed at 320, 390, 768, 1024, 1440 and 1920px. Actual WebGL, forward/reverse project navigation, keyboard focus into offscreen projects, dialog Escape/focus restoration, local contact review, pause and runtime reduced motion passed. No page errors. Observed live contexts remained within three.
+- Four models captured from front/side/oblique; pointer rotation passed. Edge reported ANGLE / NVIDIA RTX 4060 / Direct3D11. This is rendering evidence, not a performance benchmark.
+- Local preview server rejected environment, migration and traversal reads.
+- Independent visual review found and resolved 320px skills clipping, 1920px hero-caption overlap, and the fixed disclosure covering content. Fresh captures were reviewed; final disposition: ship for this design package.
+- node context/v2/previs/check-video.mjs: final file decoded, played and sought to fifteen timestamps including first/last frames. Contact sheet reviewed for section coverage and clean opening. No video decode errors.
+- npm.cmd run assets:verify: all 100 originals passed.
+- npm.cmd run test:db: 11/11 passed locally with PGlite. This does not verify hosted state.
+- npm.cmd run build: typecheck and production build passed; existing bundle-size warning remains.
+- npm.cmd test: 36/37 passed. The unchanged byte-integrity test fails because the v1 seed working copy is CRLF (32,973 bytes), while its runtime copy is LF (31,972 bytes). git ls-files --eol confirms this. The HEAD seed matches the runtime exactly; normalizing working-copy CRLF also matches. Neither protected seed nor test was modified to conceal the baseline checkout issue.
+- git diff --check: passed with the repository's normal line-ending settings. Scope review confirms only context/v2 changes.
+
+### Delivery and limits
+
+- Branch: feat/v2-portfolio-previs, based on 2e60137; confirmed remote jonvincentdin/minecraft-portfolio. Commit/push/draft PR delivery is recorded below once complete. No merge or deployment is authorized by this package.
+- Local evidence: test-results/v2-previs/report.json, video-report.json, video-contact-sheet.png and viewport/model screenshots. These are ignored and reproducible from tracked scripts.
+- V2-00R review package complete; owner visual acceptance remains pending. Production V2-01 onward, real portfolio copy/screenshots, physical touch, assistive technology, other browser engines, representative-device performance and hosted auth decisions remain pending.

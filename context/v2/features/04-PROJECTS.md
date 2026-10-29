@@ -1,11 +1,13 @@
-# V04 — Projects hotbar track (horizontal)
+# V04 — Work showcase and case studies
 
-Anchor `#projects`. Pinned; vertical scroll drives a horizontal track. Storyboard §3.
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-Content: all projects in document order, with sample labels kept. Each card shows the symbol item (3D or thumbnail), title, category, summary, role/date/stack and a pixelated-in screenshot.
+Primary anchor #work; production #projects aliases it. Projects follow the hero. Use existing project fields, sample flags, photos and document order. First photo is the cover. Missing imagery gets an explicit honest placeholder.
 
-Scroll: the track translates horizontally; the card at the centre scales up slightly and its item spins with progress; screenshots parallax faster than text; a pick-up bounce when a card centres. The project hotbar (nine slots per page, paged after nine) highlights the centred project. The exit is the item drop into Skills.
+Desktop: feature 2–4 projects in a short sticky horizontal passage, with large imagery and stable title, purpose, role, stack and case-study action. The first three are used in the previs. A complete collection index exposes every record. Do not add a database featured field just for this layout.
 
-Interaction: click a hotbar slot to scroll to that card. "Open" on a card opens the case-study overlay (v1 content: overview, problem, solution, features, process, outcome, links, gallery with captions and alt text). While the overlay is open, Lenis is stopped and focus is trapped; closing returns focus to the card.
+Mobile/pause/reduced motion: stack the projects vertically. Project-navigation controls use accessible names. Keyboard focus on an offscreen project must scroll its panel into view. Do not trap the visitor in an excessively long pinned sequence.
 
-Acceptance: the hotbar and track stay in sync while scrolling both directions; keyboard users can tab through cards and the page scrolls to keep the focused card visible; reduced motion shows a vertical list of cards; no horizontal page overflow at 390px.
+Case studies reuse overview, problem, solution, features, process, outcome, role/date/stack, links and full ordered photo gallery with alt text/captions. Use a native dialog with Escape, focus containment and restoration; missing links do not become invented destinations.
+
+Acceptance: every published project reachable; zero/one/many projects; all case-study fields represented; both scroll directions; anchor/focus visibility; no page overflow; sample labels retained. The previs demonstrates reading but is not full production gallery acceptance.

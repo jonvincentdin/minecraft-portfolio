@@ -1,23 +1,9 @@
-# V01 — Intro cinematic 2.0
+# V01 — Opening and replay
 
-The owner liked v1's intro but found it simple. Keep its contract and make it deeper. Full beat sheet: STORYBOARD.md §0.
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-## Contract kept from v1
+The revised opening is a brief model/camera settle inside the visible hero. The name, introduction, Work link and ordinary scrolling are usable immediately. This deliberately supersedes the old compulsory Enter world overlay for the portfolio emphasis approved on 2026-10-27.
 
-States: loading → ready → exiting → entered. Real asset readiness. Ready waits indefinitely for **Enter world**. Repeat clicks while exiting are ignored. Replay works repeatedly, with no ghost layers or duplicate callbacks. Focus moves to `main` after entry, and inert is released. Pause and reduced motion settle cleanly.
+Use real font/model readiness with an immediate static fallback. Never display fabricated percentage progress. Keep the accepted DIN logo intact. Replay restarts the visual flourish without mutating content; it must not create duplicate render loops or ghost overlays. Reduced motion settles immediately.
 
-## New beats
-
-1. Chunk-loading landscape whose progress follows real loading.
-2. The brand appears (BRAND.md → Motion tie-in): original runes rise from the edges and fade into the word as "DIN" brightens into its enchanted fill, then a teal glint sweeps across the letters.
-3. The name types on in pixel type, with parallax clouds and rising particles.
-4. Enter → the camera dives forward through the layers and clouds, the letterbox opens, and the sky strips wipe as the last beat. About 2.2s.
-5. Hand-off into Spawn at sunrise with a scroll cue.
-
-## Acceptance
-
-- No auto-entry after 10s at ready.
-- Entry finishes in 2.0–2.5s at full motion. Nothing from the intro remains visible or blinks after the overlay is removed (v1 regression #18).
-- Replay twice: identical sequence, no leftover nodes.
-- Reduced motion: fades only, Enter still required, and entry is under 600ms.
-- The page underneath does not scroll until entry. Scroll position is restored to the top of Spawn on entry and on replay.
+Acceptance: first viewport identifies Jon and provides a work action; no interaction waits for the flourish; pause/replay are safe; no intro element covers focused content; a failed model/font request leaves readable content.

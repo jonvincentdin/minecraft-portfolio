@@ -1,28 +1,25 @@
-# Master prompt — v2 cinematic scroll rework
+# Master prompt — v2 Builder's Exhibition
 
-Give this to the implementing agent for each milestone.
+Act as the implementation engineer for Jon Vincent Din's World of Builds. Implement the owner-approved portfolio direction in React + TypeScript + Vite with plain CSS. Minecraft shapes the presentation; projects, contribution and evidence lead.
 
----
+## Read before work
 
-Act as the implementation engineer for **Jon Vincent Din's World of Builds, version 2**. The v1 React + TypeScript + Vite + Supabase app in this repository is complete. v2 reworks it into a single-page, cinematic scroll site with the same Minecraft-inspired world, and moves the editor behind the logo to a `/editor` page with an emailed one-time code.
-
-## Read first
-
-AGENTS.md, then `context/v2/`: BRIEF.md, CONTEXT.md, CURRENT_STATE.md, DECISIONS.md, STORYBOARD.md, MOTION.md, DESIGN_SYSTEM.md, BRAND.md, FEATURES.md, ARCHITECTURE.md, DATA_MODEL.md, AUTH.md, EDITOR.md, MILESTONES.md, TESTING.md, PROGRESS.md, and the current milestone's file and feature files. Consult `context/v1/` for anything v2 leaves unchanged.
+Root AGENTS.md; context/v2/BRIEF.md, CONTEXT.md, CURRENT_STATE.md, DECISIONS.md; then STORYBOARD.md, DESIGN_SYSTEM.md, MOTION.md, MODELS.md, DATA_MODEL.md, ARCHITECTURE.md, AUTH.md, EDITOR.md, TESTING.md and the current feature/milestone. Consult context/v1 and actual source for retained contracts. Resolve old context paths through CONTEXT.md; do not edit rules to give yourself permission.
 
 ## Constraints
 
-- One public page with scroll chapters, vertical and horizontal, as in STORYBOARD.md. Be creative inside that storyboard; propose changes in PROGRESS.md rather than silently dropping beats.
-- Keep the custom WebGL renderer; drive it from scroll through a small pose API. No second 3D renderer. Respect the three-context cap.
-- Use GSAP ScrollTrigger and Lenis only after proposal P1 is approved. Native scroll stays the source of truth.
-- Reduced motion and pause give a complete, readable static page. Nothing ends invisible.
-- Interactions are fewer than v1's (FEATURES.md). Visitor play never changes owner content.
-- Reuse `src/domain` and `src/data` unchanged unless a test-backed reason requires a change.
-- The editor is a separate, plain page. Sign-in follows AUTH.md exactly. Never put the owner's Gmail, SMTP credentials or service keys in browser code.
-- Don't invent Jon's content, links, face or credentials. Keep sample labels.
-- Keep canonical `assets/` and `reference/` unchanged.
-- Don't commit evidence files. Record actual checks in `context/v2/PROGRESS.md`.
+- Native continuous page with a concise horizontal work showcase on desktop; mobile and reduced motion are vertical and complete.
+- Hero → Projects → About → Skills → Experience → Achievements/Certifications → Contact. Full collection remains reachable.
+- Use existing content fields and database structure. No new schema, bucket, recipe model ID or document version for decorative assets.
+- Reuse content repositories, validation, publication, media access and RLS. Do not replace saved owner data with sample content.
+- Keep canonical assets and immutable reference untouched, especially React geometry/GLB/thumbnail. New models remain versioned review assets until promoted through the protected-file policy.
+- Use the existing renderer. New lighting/renderer/dependency changes need a specific documented reason and browser comparison. No library is approved merely because older v2 prose named it.
+- Do not embed the standalone previs as the React application. Build maintainable components and lifecycle-owned motion.
+- Preserve editor coverage and working authentication. OTP/enrollment/SMTP are separate decisions.
+- No fabricated face, credentials, links, projects or success states. Keep sample labels.
 
-## Working process
+## Delivery
 
-Work one milestone at a time on a feature branch. Implement, run the milestone's checks in a real browser, fix material problems, update PROGRESS.md and PROJECT_FACTS.md, then commit, push, open the PR and merge as the owner's standing permissions allow. Stop after the milestone and report. Ask only for approvals listed in DECISIONS.md or for missing content and credentials.
+Inspect branch, remote and working tree. Fetch, branch from latest origin/main when safe, preserve user edits. Work only the requested milestone. Run relevant checks and visual review; record actual outcomes in PROGRESS.md and PROJECT_FACTS.md. Stage focused changes, commit, push and open a draft PR. Explicit merge authorization remains required; no production deployment is included.
+
+This 2026-10-27 package is context, new review models and a video. It does not complete V2-01 or later. Stop for the owner's visual review before starting production milestones.

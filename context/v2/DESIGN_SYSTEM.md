@@ -1,41 +1,36 @@
-# Design system (v2)
+# Design system — portfolio with Minecraft art direction
 
-v2 keeps v1's palette, type and material language (`../v1/DESIGN_SYSTEM.md`) and drops the requirement to match the reference stylesheet pixel for pixel. Start new styles in a fresh v2 stylesheet. Do not keep piling onto the v1 reference cascade.
+Updated 2026-10-27. The enchanted DIN brand remains. The portfolio is the focal point; voxel objects frame the work and explain the craft.
 
-## Tokens (carried over)
+## Roles
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--bg` | #111e1a | Page base (under the sky layer) |
-| `--bg-header` | #0e1a17 | HUD bars |
-| `--text` | #eee9d5 | Body text |
-| `--cream` | #eee3be | Display type, logo letters |
-| `--gold` | #c7b778 | Eyebrows, labels |
-| `--focus` | #f1cf7f | Focus ring, 3px with 5px offset |
-| `--muted` | #8fa397 | Secondary text |
-| `--grass` | #bbd48e | Accent, active states, logo grass |
-| `--grass-dk` | #8fb15a | Accent shade |
-| `--forest` | #2f4a34 / #1c2e22 | Extrusions, shadows |
-| `--dirt` | #8a6a43 / #6e5434 | Block sides (logo, crafting) |
+| Role | Value / treatment |
+| --- | --- |
+| Reading ground | Warm parchment #eee9d9; lighter #f6f1e5 for skills |
+| Main ink | Deep forest #14291f |
+| Hero / closing field | #172e25 / #101f1a with warm cream text |
+| Secondary ink | #546656 on light ground; readable pale foliage on dark |
+| Action | Muted grass #a5be83 with dark text |
+| Materials | Charcoal masonry, oak, restrained brass, moss |
+| Magic | Violet/teal remain concentrated in the approved DIN brand; avoid flooding the page with glow |
 
-Add sky tokens for the day cycle: dawn #2b3a4f→#e8a86b, noon #6fa8d8→#bfe3f5, golden #d98a4a→#f2c27a, dusk #3a2f4f→#c06a5a, night #0b1020→#1b2440. The sky layer interpolates between these by scroll. Body text must keep 4.5:1 contrast against whatever sky sits behind it, so put text on panels or add a scrim, never directly on a bright sky.
+## Type and composition
 
-## Type
+- JVDPixel remains the display face; use clean system sans for body copy and navigation. Do not set long paragraphs in pixel type.
+- Name and headings should fit two lines at the intended widths. Desktop hero display around 75–86px; mobile around 40–48px. Body 17–20px, readable line length, stable positions.
+- Real project imagery occupies the largest project region. Symbols are supporting identifiers, never the sole evidence of work.
+- Use equal outer gutters (22px mobile, about 5.5vw desktop), shared text edges and distinct compositions for neighboring sections.
+- Sharp geometry, material details and pixel accents carry the theme. Use opaque reading surfaces. No persistent game HUD or giant decorative marquee.
+- Navigation has visible Work, About, Skills, Contact labels. A slim reading-progress line is navigation feedback, not an XP/credential claim.
 
-- Display: JVDPixel (`assets/fonts/JVDPixel.woff`), weight 400. Large chapter titles go up to `clamp(48px, 9vw, 140px)`.
-- Body: system UI sans, 16–18px, line-height 1.55.
-- Labels/HUD: ui-monospace 11–12px, letter-spacing .08em.
+## Model language
 
-## Materials
+See MODELS.md. Deliberate silhouettes, consistent voxel scale, recessed details, a small shared material palette and purposeful movement. Keep model detail subordinate to project imagery. Lighting must be verified in the actual renderer, not assumed from a modeling-tool render.
 
-Sharp corners, block borders with inset highlights, opaque parchment panels for reading, pixel-art icons, `image-rendering: pixelated` for sprite art. No rounded cards, no glassmorphism, no generic gradients except the sky.
+## Responsive and accessibility
 
-## Layout
-
-- Each chapter is a full-viewport stage. Content sits on a 12-column grid, max-width 1440px, side gutters 5% (16px minimum on phones).
-- No accidental horizontal page overflow: horizontal tracks live inside pinned containers with `overflow: clip`.
-- Breakpoints: 760, 1100 and 1600px.
+At 760px and below, stack the project showcase and other split layouts. Avoid horizontal page overflow, tiny metadata and inaccessible offscreen controls. Pause and reduced motion expose all content in a static reading order. Keep 4.5:1 body contrast, visible focus, descriptive image alternatives and real links/buttons.
 
 ## Editor
 
-The editor (`/editor`) uses this palette and font but plain layout: sidebar, forms, buttons. No scroll choreography.
+Retain the familiar v1 editor controls and all content fields. The separate editor page uses this palette with ordinary forms and no scroll choreography.

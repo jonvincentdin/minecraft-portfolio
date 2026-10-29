@@ -30,13 +30,13 @@ Revised 2026-10-26. The owner asked for something **simple and iconic, not cinem
 | `--enchant-teal` | #7ff5e0 | Glints, some runes |
 | `--enchant-bg` | #0a0812 → #140f24 | Key-art and emblem background |
 
-This violet accent is new next to the site's olive/forest palette (DESIGN_SYSTEM.md). Decide in V2-01 whether violet becomes the site accent or stays reserved for the brand mark.
+Violet and teal remain reserved for the brand mark. Forest, parchment and moss carry the exhibition interface; see DESIGN_SYSTEM.md.
 
 ## Rules
 
 - Use on dark backgrounds only. The transparent logos rely on their glow.
 - Don't recolor, stretch or add effects. Scale down only.
-- Below about 120px wide, use the emblem icons instead of the wordmark.
+- Use the wordmark where DIN remains legible at its rendered size; use the emblem for constrained icon slots. Review both desktop and mobile at actual size.
 - The header logo's accessible name is "Jon Vincent Din — editor sign-in"; its `alt` text is "DIN — Jon Vincent Din".
 - On the live site, set the name and tagline as real HTML text where they must be selectable; the PNGs have them baked in.
 
@@ -58,3 +58,9 @@ Rendering needs Microsoft Edge (Playwright's `msedge` channel) and network acces
 ## Motion tie-in
 
 The mark animates easily, with no 3D: the runes drift up and fade into the word, and the teal glints sweep across the letters every few seconds, like an enchanted item in the game's inventory. Use it in the intro (features/01-INTRO.md) and as a subtle hover on the header logo. Respect reduced motion: the glint stays still and the runes stay where they are.
+
+## 2026-10-27 — exhibition usage
+
+The accepted DIN PNGs and Canvas 2D authoring scene were reviewed and retained without regeneration. Stale renderer comments were corrected. The mark stays small on dark forest surfaces; violet/teal remain brand accents. Portfolio headings use JVDPixel and body copy uses a clean sans. No new logo generation is required. The revised opening is non-blocking and the public page emphasizes projects; see STORYBOARD.md.
+
+The current previs displays the existing static PNG. The motion tie-in above is optional production guidance, not an effect implemented by this recording.
