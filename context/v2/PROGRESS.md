@@ -140,6 +140,6 @@ Current direction and verification: the 2026-10-29 entry below. Older entries ar
 
 ### Delivery and limits
 
-- Branch: feat/v2-portfolio-previs, based on 2e60137; confirmed remote jonvincentdin/minecraft-portfolio. Commit/push/draft PR delivery is recorded below once complete. No merge or deployment is authorized by this package.
+- Branch: feat/v2-portfolio-previs, based on 2e60137; confirmed remote jonvincentdin/minecraft-portfolio. Package commit 9d22fc7 was pushed. Draft PR: https://github.com/jonvincentdin/minecraft-portfolio/pull/28, targeting main. This handoff record follows in a focused documentation commit. No merge or deployment performed.
 - Local evidence: test-results/v2-previs/report.json, video-report.json, video-contact-sheet.png and viewport/model screenshots. These are ignored and reproducible from tracked scripts.
 - V2-00R review package complete; owner visual acceptance remains pending. Production V2-01 onward, real portfolio copy/screenshots, physical touch, assistive technology, other browser engines, representative-device performance and hosted auth decisions remain pending.

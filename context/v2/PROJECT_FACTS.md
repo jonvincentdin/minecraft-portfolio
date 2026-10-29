@@ -32,4 +32,5 @@ Verified 2026-10-29 (Asia/Singapore). Historical work remains in PROGRESS.md.
 - No real cast shadows, PBR, emissive shaders, rigging or GLB-loading support was added. Physical touch, screen readers, other engines and representative-device performance remain unverified.
 - Hosted account state, email delivery, repository protection and deployment configuration were not re-audited. Older service notes are historical.
 - This package does not authorize renderer replacement, canonical model promotion, auth changes, migrations, merge or deployment. Root AGENTS.md and the current user's scope govern subsequent work.
-- Review the video and models, then explicitly authorize the next production milestone. Delivery commit/PR state is recorded in the final response and PROGRESS.md.
+- Package commit 9d22fc7 is pushed on feat/v2-portfolio-previs. Draft PR #28 targets main: https://github.com/jonvincentdin/minecraft-portfolio/pull/28. No merge or deployment performed. This delivery record follows in a documentation commit.
+- Review the video and models, then explicitly authorize the next production milestone.
