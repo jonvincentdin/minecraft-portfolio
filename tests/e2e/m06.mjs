@@ -14,7 +14,7 @@ function start(args, env) {
 }
 async function waitFor(url) { for (let i = 0; i < 60; i++) { try { await fetch(url); return; } catch { await new Promise(r => setTimeout(r, 500)); } } throw Error('Not reachable: ' + url); }
 start(['node_modules/tsx/dist/cli.mjs', 'tests/e2e/supabase-emulator.ts'], { EMULATOR_PORT: '54330' });
-start(['node_modules/vite/bin/vite.js', '--host', '127.0.0.1', '--port', '5175', '--strictPort'], { VITE_CONTENT_MODE: 'supabase', VITE_SUPABASE_URL: EMU, VITE_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_emulator' });
+start(['node_modules/vite/bin/vite.js', '--host', '127.0.0.1', '--port', '5175', '--strictPort'], { VITE_OWNER_EMAIL: '', VITE_CONTENT_MODE: 'supabase', VITE_SUPABASE_URL: EMU, VITE_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_emulator' });
 await waitFor(EMU + '/rest/v1/portfolio_publications'); await waitFor(APP);
 
 const sql = async query => { const r = await fetch(EMU + '/__test/sql', { method: 'POST', body: query }); assert.ok(r.ok, await r.clone().text()); return r.json(); };
@@ -36,7 +36,8 @@ const go = async (p, hash) => { await p.evaluate(h => location.hash = h, hash); 
 const statusIs = (p, pattern) => p.waitForFunction(source => new RegExp(source).test(document.querySelector('#save-status')?.textContent || ''), pattern.source, { timeout: 10000 });
 const toastShows = (p, pattern) => p.waitForFunction(source => new RegExp(source).test(document.querySelector('#toast')?.textContent || ''), pattern.source, { timeout: 10000 });
 async function signIn(p, who, scope = '') {
- await p.locator(scope + ' #sign-in-form [name="email"]').fill(who.email); await p.locator(scope + ' #sign-in-form [name="password"]').fill(who.password);
+ if(await p.locator(scope+' #sign-in-form [name="password"]').count())await p.locator(scope+' #sign-in-form').getByRole('button',{name:'Change email'}).click();
+ await p.locator(scope + ' #sign-in-form [name="email"]').fill(who.email); await p.locator(scope+' #sign-in-form button[type="submit"]').click(); await p.locator(scope + ' #sign-in-form [name="password"]').fill(who.password);
  await p.locator(scope + ' #sign-in-form button[type="submit"]').click();
 }
 async function saveSettings(p, values) {
@@ -84,7 +85,7 @@ try {
  await statusIs(owner, /^Draft rev 1 saved · not published$/);
  assert.deepEqual(await sql("select revision::int, content #>> '{settings,name}' as name from public.portfolio_drafts"), [{ revision: 1, name: 'Jon (draft one)' }]);
  assert.equal(await published(), undefined);
- await visitor.reload(); await visitor.locator('#skip-intro:not([disabled])').click(); await visitor.locator('#loader').waitFor({ state: 'detached' });
+ await visitor.reload(); if(!new URL(visitor.url()).hash.startsWith('#editor')){await visitor.locator('#skip-intro:not([disabled])').click(); await visitor.locator('#loader').waitFor({ state: 'detached' });}
  assert.ok(!(await visitor.locator('header').textContent()).includes('draft one'), 'visitors never see the draft');
  await owner.screenshot({ path: out + '/editor-saved.png' });
  check('the enrolled owner saves a revision-guarded draft that visitors cannot see');
@@ -129,7 +130,7 @@ try {
  const pub = await published();
  assert.deepEqual([pub.revision, pub.name, pub.portrait], [2, 'Jon (draft one)', 'media:' + media.file]);
  assert.equal((await fetch(`${EMU}/storage/v1/object/public/portfolio-media/${media.file}`)).status, 200);
- await visitor.reload(); await visitor.locator('#skip-intro:not([disabled])').click(); await visitor.locator('#loader').waitFor({ state: 'detached' });
+ await visitor.reload(); if(!new URL(visitor.url()).hash.startsWith('#editor')){await visitor.locator('#skip-intro:not([disabled])').click(); await visitor.locator('#loader').waitFor({ state: 'detached' });}
  await go(visitor, 'about');
  assert.equal(await visitor.locator('.foundation-notice[role="status"]').count(), 0, 'the sample-world notice is gone');
  assert.equal(await visitor.locator('#portrait-frame img').getAttribute('src'), `${EMU}/storage/v1/object/public/portfolio-media/${media.file}`);

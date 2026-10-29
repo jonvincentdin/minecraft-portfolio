@@ -250,3 +250,15 @@ At the owner's request, the "Nothing has been published yet · showing the sampl
 - Passed production build/typecheck (existing >500 kB chunk warning), all 37 unit tests after fixing the seed checkout line endings, and all 100 original asset hashes.
 - Read-only browser smoke passed locally and on the public production URL: seven public routes, signed-out owner editor, Supabase publications HTTP 200, zero page errors, no horizontal overflow at 390px. Desktop/mobile screenshots and JSON evidence are local under `test-results/deploy-v1/`. Reproducible check: `tests/e2e/deploy-v1.mjs`.
 - Owner-authenticated editing/publication and email redirects were not retested. No destructive hosted tests run. Existing owner content and missing social-link placeholders were preserved.
+
+## V1 owner access and UI refinement - 2026-10-29 (Asia/Singapore)
+
+- Authorized follow-up on branch `fix/v1-owner-access`, based on v1 deployment commit `9ce9560`. V2 checkout and assets remain unchanged.
+- Removed the public Edit world link and Replay intro button. Five top-left JVD activations open email-first owner sign-in. The production owner email was verified by a read-only join of auth.users and portfolio_editors, and kept in ignored public build configuration rather than tracked owner content.
+- Added Forgot password, explicit recovery-token consumption/removal, invalid-link feedback, matching new-password confirmation, enrolled-owner validation and sign-out after reset. Password authentication and RLS remain the security boundary. Applied only the reviewed production site URL and redirect allowlist changes; no migration or content changes.
+- Model viewer toolbars are absent from inventory, skills and experience; existing renderer and drag behavior remain. Recipe cells now use constrained tracks inside a square frame and fit at 1440, 768 and 390px.
+- Passed: build/typecheck (existing bundle-size warning), 37 unit tests, 11 database/RLS tests, 13 emulator browser checks, 100 canonical asset hashes, targeted v1-owner browser checks and diff whitespace check. Existing emulator helper was updated for email-first sign-in and editor reloads without the intro.
+- Recovery browser tests intercept Auth responses and never send email or modify the production password. Actual mailbox delivery is not verified. No pixel-parity claim: toolbar removal and recipe containment deliberately differ from the original reference.
+- Evidence: `context/v1/evidence/v1-owner/`; test reproduction: `node tests/e2e/v1-owner.mjs` with production build preview on 4178 and ignored VITE_OWNER_EMAIL configured. Set CHECK_URL for a live read-only/intercepted-auth run.
+- Deployment completed: `dpl_EBambXPhEwPZH8khwsyE98CedGNP` READY at https://minecraft-portfolio-v1.vercel.app. Targeted owner/layout checks and all-route smoke passed again on production. No real Auth recovery request or password update was sent during these checks.
+- Final deployment `dpl_6FV6AkjRKENiEM2vzf1k19NkD9gs` also removes the remaining public About/Skills editor shortcuts, preserving logo entry. Build and both production browser checks passed again.

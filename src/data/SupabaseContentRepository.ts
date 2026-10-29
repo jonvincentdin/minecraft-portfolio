@@ -34,6 +34,39 @@ export function requestError(error: PostgrestError | { message: string; code?: s
 // only through the database RPCs, which validate the document and compare-and-swap its revision.
 export class SupabaseContentRepository implements ContentRepository {
  readonly kind = 'supabase' as const;
+ recoveryActive = false;
+ recoveryError = '';
+ private recoveryReady: Promise<void> = Promise.resolve();
+ // Explicitly consume recovery tokens once; URL fragments never go to the host.
+ acceptRecoveryLink(hash: string) {
+  const params = new URLSearchParams(hash.slice(1));
+  if (params.get('type') !== 'recovery' && !params.has('error_description')) return;
+  this.recoveryActive = true;
+  history.replaceState(null, '', location.pathname + location.search + '#editor');
+  this.recoveryReady = (async () => {
+   const access_token = params.get('access_token'), refresh_token = params.get('refresh_token');
+   if (!access_token || !refresh_token || params.has('error_description')) {
+    this.recoveryError = 'This reset link is invalid or expired. Request a new link below.'; return;
+   }
+   const { error } = await this.client.auth.setSession({ access_token, refresh_token });
+   if (error) this.recoveryError = 'This reset link is invalid or expired. Request a new link below.';
+  })().catch(() => { this.recoveryError = 'The reset link could not be verified. Request a new link below.'; });
+ }
+ async requestPasswordReset(email: string) {
+  const { error } = await this.client.auth.resetPasswordForEmail(email, { redirectTo: location.origin });
+  if (error) throw new Error(error.message);
+ }
+ async finishPasswordReset(password: string) {
+  await this.recoveryReady;
+  if (!this.recoveryActive || this.recoveryError) throw new AuthorizationError('Open a valid password reset link first.');
+  if (password.length < MIN_PASSWORD) throw new Error('Use at least ' + MIN_PASSWORD + ' characters.');
+  const member = await this.membership();
+  if (member?.role !== 'owner') throw new AuthorizationError('Only the portfolio owner can reset the owner password here.');
+  const { error } = await this.client.auth.updateUser({ password });
+  if (error) throw new Error(error.message);
+  this.recoveryActive = false;
+  await this.signOut();
+ }
  // Draft-only uploads are private, so the editor and preview show them through signed or local URLs.
  private readonly drafted = new Map<string, string>();
  constructor(readonly client: Client, private readonly url: string) {
@@ -128,6 +161,7 @@ export class SupabaseContentRepository implements ContentRepository {
 
  // Sign-in state for the editor gate. Membership is read from the database, never from user metadata.
  async membership(): Promise<Membership | null> {
+  await this.recoveryReady;
   const { data: { session } } = await this.client.auth.getSession();
   if (!session) return null;
   const { data, error, status } = await this.client.from('portfolio_editors').select('role').eq('portfolio_id', PORTFOLIO).eq('user_id', session.user.id).maybeSingle();
@@ -138,6 +172,8 @@ export class SupabaseContentRepository implements ContentRepository {
  async signIn(email: string, password: string) {
   const { error } = await this.client.auth.signInWithPassword({ email, password });
   if (error) throw new Error(/invalid/i.test(error.message) ? 'That email and password do not match an account.' : error.message);
+  this.recoveryActive = false;
+  this.recoveryError = '';
  }
  async signOut() { await this.client.auth.signOut(); }
  // Confirms the current password by signing in with it again, then sets the new one for this account.

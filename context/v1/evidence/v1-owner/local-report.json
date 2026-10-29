@@ -1,0 +1,10 @@
+{
+  "base": "http://127.0.0.1:4178",
+  "checks": [
+    "Five-click entry, wrong email rejected, email-first password step, wrong password refused, reset request payload (intercepted; no email sent)",
+    "Inventory, skills and experience have no viewer toolbar; models render and accept drag",
+    "All nine recipe cells fit frame at 1440, 768 and 390px",
+    "Recovery tokens removed from URL, invalid link rejected, new-password confirmation and update/sign-out flow (auth responses simulated)"
+  ],
+  "errors": []
+}

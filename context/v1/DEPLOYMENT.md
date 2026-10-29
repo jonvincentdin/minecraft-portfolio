@@ -95,3 +95,11 @@ email-based flows.
 - **Content:** before large edits, export the content JSON from the editor. Importing it later restores the draft,
   which you then publish again.
 - **Database:** schema changes need their own data-preserving plan (see `supabase/README.md`).
+
+## Owner entry and recovery update - 2026-10-29
+
+- Click the top-left JVD logo five times (no more than four seconds between clicks) to open the editor. Keyboard activation works too. The normal single-click home link remains. The public Edit world and Replay intro controls are removed.
+- Enter the enrolled owner Gmail, then the password. `VITE_OWNER_EMAIL` is an additional public build-time UI setting, not a secret or authorization boundary. Supabase password authentication and database membership/RLS remain authoritative.
+- Forgot password sends a Supabase recovery email. The link returns to v1, consumes its session tokens, removes them from the address, and asks for a confirmed new password of at least 12 characters. The verified recovery session must belong to the enrolled owner. Then sign in again with the new password.
+- Supabase config diff was reviewed and exactly two properties pushed: `auth.site_url` and `auth.additional_redirect_urls`. Production is now the site URL and an allowed redirect; localhost remains allowed. Eight undeclared remote properties were left unchanged. No migrations or RLS changes.
+- Reset requests and successful/expired reset flows were checked with intercepted Auth responses; no real reset email was sent and the real owner password was not changed. Actual email delivery still depends on Supabase's email service.

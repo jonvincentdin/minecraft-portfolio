@@ -22,7 +22,7 @@ export function App() {
  const [snapshot,setSnapshot]=useState<ContentSnapshot>();
  const [scenes,setScenes]=useState<Record<string,Scene>>({});
  const [progress,setProgress]=useState(0),[ready,setReady]=useState(false),[error,setError]=useState(''),[warning,setWarning]=useState('');
- const [open,setOpen]=useState(true),[cycle,setCycle]=useState(0),[toast,setToast]=useState(''),[attempt,setAttempt]=useState(0);
+ const [open,setOpen]=useState(()=>readRoute(location.hash)!=='editor'),[cycle,setCycle]=useState(0),[toast,setToast]=useState(''),[attempt,setAttempt]=useState(0);
  // One repository for the published snapshot and the editor; an invalid environment surfaces as an error.
  const [source]=useState(contentSource);
  // Draft preview renders the unchanged public pages with the editor's working copy, under a visible banner.
@@ -80,6 +80,6 @@ export function App() {
  <Shell route={route} paused={paused} togglePause={()=>setPaused(value=>!value)} locked={open&&!error} name={shown?.settings.name}>
  {preview&&route!=='editor'&&<p className="foundation-notice preview-banner" role="status">{'Draft preview · '+(source.repository?.kind==='supabase'?'draft':'local')+' revision '+preview.revision+' · not published. '}<a href="#editor">Back to editor</a>{' · '}<button className="text-button" onClick={()=>setPreview(null)}>Exit preview</button></p>}
  {/* Keeps its place from the start (no layout shift) but stays invisible until the entry sequence has finished. */}
- {error?<Notice error>{error}{source.repository&&<>{' '}<button className="text-button" id="retry-content" onClick={retry}>Try again</button></>}</Notice>:snapshot&&shown&&(route==='editor'&&source.repository?<EditorGate repository={source.repository} notify={setToast} paused={paused} onPreview={startPreview} onPublished={published}/>:route==='home'?<HomePage content={shown} scene={scenes.home_landscape} paused={paused} replay={()=>{setCycle(value=>value+1);setOpen(true);}} notify={setToast}/>:<PublicRoute route={route} content={shown} scenes={scenes} paused={paused} notify={setToast}/>)}
+ {error?<Notice error>{error}{source.repository&&<>{' '}<button className="text-button" id="retry-content" onClick={retry}>Try again</button></>}</Notice>:snapshot&&shown&&(route==='editor'&&source.repository?<EditorGate repository={source.repository} notify={setToast} paused={paused} onPreview={startPreview} onPublished={published}/>:route==='home'?<HomePage content={shown} scene={scenes.home_landscape} paused={paused} notify={setToast}/>:<PublicRoute route={route} content={shown} scenes={scenes} paused={paused} notify={setToast}/>)}
  </Shell><div id="toast" role="status" aria-live="polite" className={toast?'visible':''}>{toast}</div></>;
 }
