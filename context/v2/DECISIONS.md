@@ -1,27 +1,29 @@
-# Decisions and open questions
+# Decisions and delivery boundaries
 
-## Decided (from the brief)
+Updated 2026-10-27 (Asia/Singapore).
 
-- D1. One public page; the scroll position is the primary navigation.
-- D2. Logo click → `/editor`, a separate page. The editor UI stays plain and functional, with no cinematic motion.
-- D3. Editor sign-in is an emailed one-time code sent only to the owner's Gmail, jonvincent.din@gmail.com. Authority is enforced on the server (AUTH.md).
-- D4. Fewer interactions than v1 (FEATURES.md lists what stays).
-- D5. New logo: DIN, enchanted (BRAND.md). A simple serif wordmark with an enchanted-item shimmer and original runes, chosen on 2026-10-26 after the owner asked for something simple and iconic instead of cinematic.
-- D6. Verification evidence is not committed (TESTING.md).
+## Accepted direction
 
-## Proposed (approve when the milestone starts)
+- D1. A continuous public page, with vertical reading and a short horizontal project passage on desktop. Native scroll is the source of truth.
+- D2. Portfolio content leads; Minecraft supplies voxel craftsmanship, materials and restrained interactions. Projects follow the hero.
+- D3. Keep the enchanted DIN logo and original React artifact. Create a small coherent set of new review models; preserve existing canonical assets.
+- D4. Large, smooth image and camera movement; stable reading areas. Repeated skew, letter scattering, slamming entrances and minecart stations are superseded.
+- D5. Use the same v1 database structure, document version, validators, repositories, Storage layout and RLS. No migration is required for this visual redesign.
+- D6. The current task covers v2 documentation, model drafts and a local previs/video. It does not start production milestones.
+- D7. Root AGENTS.md permits focused feature-branch commits, pushes and draft PRs. A merge still requires explicit authorization for that merge. The older PROJECT_FACTS claim of blanket merge permission was incorrect and is superseded.
+- D8. Screenshots/reports remain ignored. The user-requested MP4 is a tracked design deliverable.
 
-| ID | Proposal | Why | Approval needed because |
-| --- | --- | --- | --- |
-| P1 | Add **GSAP + ScrollTrigger** for scroll-linked timelines, pinning and horizontal tracks, and **Lenis** for smoothed wheel scrolling. | Pinning, scrubbing, horizontal pin-tracks and refresh-on-resize are hard to make robust by hand. CSS scroll-driven animations alone can't pin or coordinate the renderer. GSAP and its plugins have been free to use since 2025. | AGENTS.md requires a documented need for a new animation library, and dependency manifests are protected. The custom WebGL renderer stays; GSAP only drives values. |
-| P2 | Update `AGENTS.md` so its `context/...` paths point to `context/v2/`, and replace "preserve the supplied reference / never redesign" with "v2 is an owner-approved redesign; keep the theme, assets and backend." | The current text forbids the redesign the owner asked for, and its paths point to files now under `context/v1/`. | AGENTS.md is protected. |
-| P3 | Replace password sign-in with Supabase email OTP. Enroll jonvincent.din@gmail.com as owner and decide whether to remove the chanseytheopiest@gmail.com membership. | The brief asks for an emailed code to the Gmail. | Auth and enrollment are protected. Removing the old owner is a production data change. |
-| P4 | Configure custom SMTP (e.g. Resend, or Gmail SMTP with an app password) for Supabase Auth. | Supabase's built-in mailer is meant for testing: low rate limits and restricted recipients. OTP delivery has to be reliable. | It adds a secret held in Supabase. It must never be in the repo or a `VITE_` variable. |
-| P5 | Serve the editor as a real path, `/editor` (Vite multi-page entry or a tiny path router), and make the hosting rewrite unknown paths to `index.html`. `#editor` redirects to `/editor`. | "Directs you to another page." | Deployment configuration is protected once hosting exists. |
+## Deferred proposals
 
-## Open questions for the owner
+| ID | Proposal and condition |
+| --- | --- |
+| P1 | GSAP/Lenis are optional, not required dependencies. First prove native scroll, CSS sticky and owned rAF satisfy the storyboard. Propose a dependency only for a measured, concrete gap. None installed here. |
+| P2 | Correct root AGENTS.md and old skill paths separately if authorized. Current task leaves these rules unchanged; CONTEXT.md resolves their paths. |
+| P3 | Earlier email-code sign-in request remains a separate auth milestone. Keep current working password access until an approved, tested replacement exists. No owner removal or enrollment in this task. |
+| P4 | SMTP/email-template changes require a concrete hosted-auth plan and authorization. No credentials belong in chat, Git or VITE variables. |
+| P5 | Separate /editor entry remains planned; hosting rewrites depend on the chosen host. No deployment changes now. |
+| P6 | Real shadows, emissive materials or richer camera capability may justify extending the existing renderer. Document and compare a prototype before changing production rendering; new geometry alone does not supply those effects. |
 
-- Q1. Public repository: this repo is public, so the Gmail written in these context files is public. Keep it, or move it to an ignored local note and the Supabase configuration only?
-- Q2. Should visitors also get a visible way back to the top, given the logo now leads to the editor? (Proposed: the first hotbar slot and the `Home` key both return to Spawn.)
-- Q3. Keep the experience multi-chapter comparison at all, or drop it? (Proposed: drop.)
-- Q4. Hosting target for v2 (Vercel, Netlify, Cloudflare Pages, GitHub Pages). This affects the `/editor` rewrite.
+## Model approval and next step
+
+Review the video and the staged model gallery. The next production task is V2-01 only after the owner asks to proceed. Model drafts are authorized for review, not silently promoted over canonical assets.

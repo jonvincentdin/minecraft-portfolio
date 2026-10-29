@@ -1,11 +1,11 @@
-# V08 — Contact campfire and credits
+# V08 — Contact and closing scene
 
-Anchor `#contact`. Pinned about 100vh, then the credits roll. Storyboard §7–8.
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-Content: contact title and copy, contact links (email, GitHub, LinkedIn as configured; none invented).
+Anchor #contact. A concise invitation and configured contact links lead. Use a single lantern object as the closing visual. Keep the existing contact message review; do not invent email, social links or submission success.
 
-Scroll: night falls; stars and moon; fireflies; campfire sprite loop; the contact book on a lectern opens; signposts are hammered in one by one for each link. The credits roll slowly, then the sky loops to dawn.
+The previs contains a clearly labelled local message-review demonstration and does not send or store a message. The production workflow reuses the v1 contract unless a real submission service is separately commissioned.
 
-Interaction: the message form with review step (v1 behaviour: never claims to send without a real configured service). Credits contain **Replay intro**.
+Provide Back to top and Replay opening. No long movie-style credits roll. Contact remains usable while motion is paused and without WebGL.
 
-Acceptance: the form is fully usable while pinned (no scroll-jumps on focus or typing; Lenis must not intercept keys in fields); reduced motion removes particles and the roll.
+Acceptance: labels, validation, review, focus and Escape behavior; user text is treated as text; no fake send; configured links only; comfortable mobile layout.

@@ -1,11 +1,9 @@
-# V03 — About journal
+# V03 — About and journal
 
-Anchor `#about`. Pinned about 200vh. Storyboard §2.
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-Content: about title, biography, portrait (placeholder until the owner supplies one; crop from `portraitPosition`), journal chapters.
+Anchor #about, after selected work. Show settings.bio and journal chapters with an optional real portrait/crop. Use the original review journal model when no portrait exists; do not invent a face. The preview biography stays labelled sample.
 
-Scroll: the oak frame builds plank by plank around the portrait; the portrait pixelates in; the book opens; each scroll segment turns one page (3D curl, scrubbed); the biography is ink-revealed line by line. The exit is the book closing and sliding down.
+Use a stable reading column and a separate object composition. Chapters are readable details/sections; no mandatory page-turn timing. A slow prop turn is decoration, not a gate to the next paragraph.
 
-Interaction: chapter tabs on the book edge scroll to that page.
-
-Acceptance: every chapter readable at rest at its scroll position; tabs keyboard-operable; reduced motion shows the journal as a normal two-column spread with all chapters listed.
+Acceptance: every journal chapter reachable by keyboard; biography visible with motion off; long copy grows naturally; actual portrait uses existing media/crop helpers; no blank portrait frame dominating the page.

@@ -1,4 +1,26 @@
-# Owner brief — version 2
+# Owner brief — active revision 2026-10-27
+
+The earlier brief below is preserved as history. Where it conflicts, this latest direction controls.
+
+## Latest instructions
+
+> I want it to still have the minecraft vibe but focuses more on the portfolio side
+
+> I currently don't like the models provided right now ... I want it to fit what you're doing
+
+> Alright I want you to work on it, but before that read the rules for starting the project, refer to the previous versions. Check the rules and how the guidelines is built. And I want you to update all the files inside v2 for whatever you are trying to do. And provide a video in previs for what you are trying to do. If you can't do it yet without those models, make the models first before the video. Also, use the same database structure as v1 so we don't have to change that much
+
+## Active interpretation
+
+- Builder's Exhibition: portfolio imagery, contribution and evidence lead; Minecraft supplies crafted voxel objects, materials and restrained motion.
+- One continuous page, short horizontal project passage on desktop, readable mobile stack. Projects follow the hero.
+- Keep the enchanted DIN logo. Build a small new original model set for important visuals and preserve canonical assets, especially React.
+- Smooth camera/image motion with stable text replaces the old skew/slam/minecart presentation. Immediate portfolio access replaces the compulsory opening tour.
+- Update all v2 specifications and relevant preview sources; review and retain unchanged approved brand assets. Create a truthful video after the models exist.
+- Same v1 database structure, document format, adapter, validators, Storage and RLS. No migration, owner-data replacement or auth change in this task.
+- This is a reviewable design/model/previs package. Production milestones remain separate, with verification and review stops as in v1.
+
+## Historical request (superseded where noted above)
 
 Received 2026-10-25 (Asia/Singapore) from the owner, Jon Vincent Din. This is the authority for v2; the rest of `context/v2` interprets it.
 

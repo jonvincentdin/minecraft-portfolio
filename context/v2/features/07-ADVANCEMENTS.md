@@ -1,13 +1,11 @@
-# V07 — Advancements descent
+# V07 — Achievements and certifications
 
-Anchor `#advancements`. Pinned, about 50vh per tree depth level. Storyboard §6.
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-Content: the Achievements and Certifications trees (v1 rules: one parent per node, multiple roots allowed, no cycles, no cross-tree parents, positions 0–900).
+Anchor #advancements; production #achievements aliases it. Keep two labelled collections and their full existing records. Titles, descriptions, issuer/date and evidence take priority over the graph.
 
-Scroll: the glow extends from the roots along edges in breadth-first depth order (v1's normalized stroke-dashoffset, scrubbed). When a node is reached, show an "Advancement Made!" toast with its symbol and title; toasts stack (max 3) and dismiss after 3s. Disconnected roots glow in parallel; no fictitious edges. The sky moves from golden hour to dusk, and torches light along the edges.
+Use accessible lists as the baseline. A supporting path may connect actual parents; never infer credentials or invented edges from scroll order. Preserve the existing parent/x/y fields and validation. If a tree inspector is included, use the existing domain shortest-path/cancellation rules and an accessible list alternative.
 
-Interaction: an Achievements/Certifications toggle (cross-fade with a map flip). Clicking a node opens the inspector and runs v1's click path animation (retract to the common ancestor, then extend), with rapid clicks cancelling cleanly. An accessible list view of the nodes is always available to screen readers and keyboard users.
+The preview shows a representative subset, explicitly illustrative. Production exposes all records. No scroll-triggered “earned” credentials, fake XP or compulsory toast sequence.
 
-Use `src/domain` tree-path functions unchanged.
-
-Acceptance: scrubbing back retracts the glow and does not re-fire toasts in reverse; toasts are announced politely (`aria-live="polite"`) and never steal focus; reduced motion shows the full tree lit, with no toasts.
+Acceptance: both collections readable, real parent relationships honored, evidence accessible, multiple roots and empty lists handled, reduced motion static, relevant tree-domain tests pass.

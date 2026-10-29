@@ -1,11 +1,11 @@
-# V06 — Experience minecart line (horizontal)
+# V06 — Readable experience
 
-Anchor `#experience`. Pinned, about 120vh per character. Storyboard §5.
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-Content: five characters (professional, school uniform, casual, builder, explorer; fixed IDs) and their experience records (title, organization, dates, description, contribution, evidence, sample flag).
+Anchor #experience. Present dates, title, organization, description, contribution and evidence from existing experience records. Preserve fixed character associations in the data/editor, but make public records readable without character selection.
 
-Scroll: a minecart rides a rail across a three-layer parallax landscape. The rail rises and dips between stations, with sparks on the downhill. At each station the character model steps forward and turns to the viewer (keep v1's two-eye detail and correct rotation direction) and the records slide up from the track bed. The exit is the mine-shaft fall into Advancements.
+A subtle terraced path or material change may connect rows. The old full-screen minecart ride is superseded. Characters are optional supporting imagery, not the main content or a claim about Jon's appearance.
 
-Interaction: station markers scroll to a character; drag to rotate the active character.
+The previs shows four representative sample records; production must expose all records in document order. Long entries grow vertically, with no clipping inside fixed-height cards.
 
-Acceptance: each station's records fully readable while it is centred; at most one live character renderer (others use thumbnails); reduced motion shows five stacked chapters.
+Acceptance: every record and its evidence reachable, mobile order correct, sample flags retained, date ranges truthful, no character gate, no fabricated work history.

@@ -1,11 +1,17 @@
-# V2-07 — Polish, performance and handoff
+# V2-07 — Verification and handoff
 
-Dependency: V2-05 and V2-06.
+Updated 2026-10-27 (Asia/Singapore). Dependency: V2-05 and chosen V2-06 scope.
+
+Status: pending production implementation.
 
 ## Scope
 
-Performance pass against the MOTION.md budget, accessibility sweep, mobile tuning, retire v1-only browser suites, update README, PROJECT_FACTS and PROGRESS, and propose hosting (Q4).
+Run TESTING.md, including performance on representative hardware, touch and assistive technology, responsive states, no-WebGL and lifecycle checks. Review the final data/asset/security boundaries. Update docs and propose hosting separately.
 
 ## Acceptance
 
-TESTING.md in full: performance traces, keyboard and screen-reader pass, reduced motion, 390/768/1024/1440 widths, WebGL fallback, and the editor flows.
+Actual check records, resolved material UI defects, complete content coverage, no canonical/migration drift, focused draft PR and remaining limitations. Do not mark a deployment or hosted auth test successful without observing it.
+
+## Delivery boundary
+
+Use a focused feature branch. Record real verification, update PROGRESS/PROJECT_FACTS, commit, push and open a draft PR. Explicit merge authorization is required. Stop after this milestone; do not begin the next one unasked.

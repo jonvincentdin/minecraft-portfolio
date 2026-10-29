@@ -1,27 +1,21 @@
-# Current state — the starting point for v2
+# Current state
 
-Snapshot 2026-10-25 (Asia/Singapore), `main` after PR #19.
+Snapshot 2026-10-29 (Asia/Singapore). Baseline main: 2e60137. Design branch: feat/v2-portfolio-previs.
 
-## What exists (v1, complete)
+## Verified repository state
 
-- React + TypeScript + Vite app with seven hash routes (`#home`, `#about`, `#projects`, `#skills`, `#experience`, `#achievements`, `#contact`) and `#editor`.
-- Intro cinematic with explicit Enter world, shuffled upward exit, replay, pause and reduced motion.
-- Custom WebGL `VoxelView` renderer in a React wrapper, rendering scene-data models (48 GLBs and 39 thumbnails are canonical in `assets/`).
-- Project inventory and case-study gallery; crafting workshop (3×3 grid, recipes, inventory, discoveries); five experience characters; Achievements and Certifications trees with path glow; contact message review.
-- World editor (Landing, About, Projects, Skills, Experience, Achievements, Certifications, Contact) with JSON import/export.
-- Supabase backend: versioned draft and published snapshots, atomic publish, owner media in Storage, RLS, enrollment by membership row. Owner signs in with **email + password**; a change-password form exists.
-- Hosted Supabase project `jvd-world` (ap-southeast-1) with the migration applied and sign-up disabled. The enrolled owner account is **chanseytheopiest@gmail.com**, not the v2 Gmail. The site is not deployed.
-- Tests: unit, PGlite RLS (`test:db`), browser suites `test:m02`–`test:m07`, hosted `test:m06-hosted`.
-- No CI, no branch protection, no deployment.
+- Existing application: React + TypeScript + Vite, seven public hash routes and editor. v2 runtime has not replaced it.
+- Existing custom VoxelView uses scene-data geometry and flat vertex colors. It does not load GLBs, textures, PBR materials or embedded animation clips.
+- Canonical models, including skill_react, and the immutable reference are retained.
+- The v1 Supabase migration, ContentRepository, validators, Auth code and media helpers remain the production contracts.
+- The earlier v2 video used animated thumbnails. The revised previs renders new original voxel scenes through VoxelView and uses a projected DOM image for the display surface.
 
-## What v2 keeps
+## This design package
 
-Content document and backend, renderer, assets, palette, JVDPixel font, the crafting/tree domain logic (`src/domain`), the content repositories (`src/data`), and the visitor/owner separation rules.
+Updated v2 specifications, deterministic model source, versioned draft export, responsive standalone preview and an MP4 walkthrough. See MODELS.md for model provenance and limitations; PROGRESS.md for actual checks.
 
-## What v2 replaces
+## Still pending
 
-Route-based navigation and page compositions, the reveal-on-view motion system, the "Edit world" button and `#editor` route, password sign-in and the change-password form, the text brand, and most v1-specific browser suites, which assert route behaviour that will no longer exist.
+Production V2-01 onward; real portfolio screenshots and copy; approval of the review models' final appearance; any optional rendering improvements; hosted auth decisions and deployment. The preview's sample content is not owner evidence.
 
-## Known gaps carried over
-
-Real owner content is still missing (see OWNER_CONTENT.md). Most of the seed is labelled sample content.
+Hosted account, SMTP, repository protection and deployment configuration were not re-audited in this task. Earlier notes about those services are historical, not verified-current facts.

@@ -1,28 +1,30 @@
-# Context and reading order
+# Context and authority
+
+Updated 2026-10-27 (Asia/Singapore).
 
 ## Objective
 
-Rebuild Jon Vincent Din's World of Builds as a single-page, cinematic scroll site that keeps the v1 world (voxel/Minecraft-inspired, olive and forest-green surfaces, cream pixel type, parchment) and the v1 content backend. A separate, simple editor page sits behind the logo and uses an emailed sign-in code.
+Build a portfolio with Minecraft art direction. Show Jon's projects, contribution and evidence first. Use new, purpose-built voxel display objects, smooth scroll-linked motion, readable text and optional exploration. Preserve the enchanted DIN logo and the v1 content/backend contract.
 
 ## Authority order
 
-1. The owner's newest explicit instruction.
-2. `BRIEF.md` (the v2 request).
-3. These v2 context files.
-4. v1 context (`../v1/`) and the v1 implementation, for anything v2 does not change: content model, backend, renderer, assets, palette, font.
-5. `reference/site`, now only as the source of the v1 look and of reusable modules. **v2 is a deliberate redesign, so pixel parity with the reference is no longer an acceptance target.**
+1. The owner's newest explicit instructions, including the 2026-10-27 direction in BRIEF.md.
+2. Root AGENTS.md for repository safety, permissions and delivery. Its old context paths resolve to context/v1; its v1 parity instruction is superseded only for this explicitly authorized v2 redesign.
+3. The active v2 specifications, current feature and milestone.
+4. Verified v1 implementation and context/v1 for retained behavior and data contracts.
+5. reference/site as immutable v1 evidence, not a v2 composition target.
 
-If a v2 file and the brief disagree, the brief wins; record the discrepancy in `PROGRESS.md`. If v2 is silent, follow v1.
+The owner explicitly requested updates to v2 files, new models where needed, and a video before production work. This authorizes this design package. It does not authorize deployment, merging, canonical asset replacement or backend changes. Do not silently edit AGENTS.md or skills to expand permissions.
 
 ## Read in stages
 
 | Stage | Files |
 | --- | --- |
-| Orientation | BRIEF.md, CURRENT_STATE.md, DECISIONS.md, FEATURES.md |
-| Experience | STORYBOARD.md, MOTION.md, DESIGN_SYSTEM.md, BRAND.md, feature files |
-| Structure and data | ARCHITECTURE.md, DATA_MODEL.md, AUTH.md, EDITOR.md |
-| Execution | MILESTONES.md, current milestone file, TESTING.md, PROGRESS.md |
-| Agent setup | MASTER_PROMPT.md, `../v1/MEMORY_WORKFLOW.md`, `../v1/SKILLS.md` |
-| Unchanged v1 specifications | `../v1/MODELS.md`, `../v1/ASSETS.md`, `../v1/SUPABASE.md`, `../v1/DATA_MODEL.md` |
+| Orientation | BRIEF, CURRENT_STATE, DECISIONS, README |
+| Visual proposal | STORYBOARD, DESIGN_SYSTEM, MOTION, BRAND, MODELS |
+| Content and behavior | FEATURES, features/*, USER_FLOWS, OWNER_CONTENT |
+| Implementation | ARCHITECTURE, DATA_MODEL, AUTH, EDITOR |
+| Delivery | MILESTONES, current milestone, TESTING, PROGRESS, PROJECT_FACTS |
+| Retained workflow | ../v1/MEMORY_WORKFLOW.md, ../v1/SKILLS.md, ../v1/MODELS.md |
 
-The context folder is development documentation. Do not serve it as site content. `assets/` stays canonical; the runtime serves the synced copy in `public/assets`. Logo files move from `context/v2/brand/` into the app (e.g. `public/brand/`) when V2-01 is built; `context/v2/brand/` stays the source.
+The previs is development-only. Production must be real React components, not an iframe or wholesale HTML bridge. Do not serve context/, model drafts, secrets or private editor data in the public build.

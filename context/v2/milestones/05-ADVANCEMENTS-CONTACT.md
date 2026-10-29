@@ -1,11 +1,17 @@
-# V2-05 — Advancements, Contact and credits
+# V2-05 — Credentials and contact
 
-Dependency: V2-04.
+Updated 2026-10-27 (Asia/Singapore). Dependency: V2-04.
+
+Status: pending production implementation.
 
 ## Scope
 
-features/07-ADVANCEMENTS.md and features/08-CONTACT.md: the scrubbed tree glow with toasts, the tree toggle, the inspector with click-path animation, nightfall, the campfire contact book, the credits with Replay intro. Remove the v1 public routes and their now-unused code once every chapter is live.
+Implement V07/V08. Complete achievements/certifications, optional true-parent paths, usable contact/review and concise closing scene. Only retire old public routes after every published collection is accessible in v2.
 
 ## Acceptance
 
-The acceptance lists of V07 and V08. Tree-path unit tests still pass. The whole page, top to bottom and back, without stuck or invisible elements.
+All credential records/evidence; valid tree topology; accessible lists; contact validation/review without false success; top-to-bottom and reverse journey; anchors, fallback, keyboard and reduced motion.
+
+## Delivery boundary
+
+Use a focused feature branch. Record real verification, update PROGRESS/PROJECT_FACTS, commit, push and open a draft PR. Explicit merge authorization is required. Stop after this milestone; do not begin the next one unasked.

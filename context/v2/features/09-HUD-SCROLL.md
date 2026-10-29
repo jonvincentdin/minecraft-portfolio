@@ -1,20 +1,11 @@
-# V09 — HUD, sky and scroll system
+# V09 — Navigation and native scroll
 
-## Scroll system
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-`ScrollProvider` (ARCHITECTURE.md) with GSAP ScrollTrigger and Lenis (proposal P1). It provides per-chapter progress, global progress, pin registration, refresh on resize/font/image load, and teardown. Anchor links and hotbar clicks scroll through Lenis with an offset that lands on the chapter's resting frame. Native keyboard scrolling (Space, PageDown, arrows, Home/End) works unchanged.
+Replace the icon-only hotbar/XP HUD with visible Work, About, Skills and Contact links, a motion control and a quiet reading-progress line. The production DIN logo links to /editor; Back to top is separate. Experience and credentials retain stable anchors even when absent from the compact header.
 
-## Sky layer
+Use native document scrolling and CSS sticky for the short desktop project passage. Scroll progress drives transforms through a lifecycle-owned rAF. No fixed translated document, global skew, browser-find breakage or mandatory scroll smoothing. The previs uses no GSAP or Lenis.
 
-A fixed full-screen layer behind all chapters. Global progress drives the gradient between the day-cycle tokens (DESIGN_SYSTEM.md), the sun and moon positions on an arc, cloud drift speed and star opacity.
+Deep links land on readable content; legacy aliases are a production task. At narrow widths the work track becomes a vertical list. Pause and reduced motion do the same at every width. Track active state with aria-current; avoid viewport jumps when changing motion mode.
 
-## HUD
-
-- **Logo** (top-left): `din-logo-mark-only.png` (40–56px tall), a link to `/editor`, accessible name "Jon Vincent Din — editor sign-in".
-- **XP bar** (bottom edge): global progress; the level number is the count of chapters passed; a level-up flash when a chapter is completed.
-- **Hotbar** (bottom-centre): nine slots, one per chapter plus the logo block; active highlight; click scrolls; `aria-current` on the active slot; works as a `nav` landmark labelled "Chapters". It swaps to the project hotbar while Projects is pinned.
-- **Pause motion** toggle (top-right).
-
-## Acceptance
-
-Hotbar and XP bar track the scroll position in both directions; deep links (`/#skills`) land on the right resting frame after the intro; no layout shift when the HUD appears; HUD controls reachable by keyboard in a sensible order.
+Acceptance: keyboard, wheel, touch emulation, resize, find-in-page and anchors; focus remains visible; no page overflow; progress works both ways; context cap and teardown; existing logo assets preserved.

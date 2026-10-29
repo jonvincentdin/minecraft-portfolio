@@ -1,25 +1,45 @@
-# Data model (v2)
+# Data model — unchanged v1 contract
 
-The v1 content document, its snapshot tables, RLS and Storage layout (`../v1/DATA_MODEL.md`, `../v1/SUPABASE.md`) carry over unchanged. v2 changes only how the document is presented.
+Owner requirement, 2026-10-27: use the same database structure as v1. This is a presentation redesign. No schema migration or content-version bump is planned or applied.
 
-## Field usage changes
+## Executable authority
 
-| Field | v2 use |
+Use supabase/migrations/20261024000000_portfolio_content.sql, src/types/content.ts, src/types/database.ts and src/data/ContentRepository.ts. Early v1 prose describes a proposal; the checked-in migration and adapter record what was implemented.
+
+| Existing resource | Retained contract |
 | --- | --- |
-| `settings` (name, heroLabel, tagline, introTitle, github, linkedin) and `highlights` | Spawn chapter |
-| `settings` (aboutTitle, bio, portrait, portraitPosition) and `journal` | About journal |
-| `projects` (14 in the seed) | Projects track and hotbar. `symbol` is the hotbar slot icon and the item spinning on the card |
-| Visitor slot order (localStorage `jvd-slots-v5`) | Unused; the track follows document order |
-| `actualSkills` | The loadout in the Skills chapter; one scripted crafting step each |
-| `recipes` | Drive the scripted crafting and "Try a recipe" |
-| `startingInventory` | Unused on the public page; kept in the document for compatibility |
-| `skills` (skill cards) | Optional detail cards beside the loadout; decide in V2-04 |
-| `characters`, `experience` | Minecart stations and their chapters |
-| `achievements`, `certifications` (node `x`/`y`, `parent`) | Advancements descent. The layout must fit one pinned viewport |
-| `contacts`, `settings` (contactTitle, contactCopy) | Campfire signposts and the contact book |
+| public.portfolio_editors | Portfolio-scoped user membership, owner/editor roles; trusted enrollment only |
+| public.portfolio_drafts | schema_version, content, revision, recovery and update metadata |
+| public.portfolio_publications | schema_version, content, revision and publication metadata |
+| public.media_assets | file identity, portfolio/owner, image metadata and publication lifecycle |
+| portfolio_internal catalogs | Existing symbols and crafting item/model IDs; no decorative v2 IDs added |
+| Storage portfolio-drafts | Private draft images, signed access |
+| Storage portfolio-media | Immutable published copies addressed through existing media helpers |
+| RPCs | save_draft, import_draft, publish_draft, register_media, remove_unused_media |
 
-## Rules
+Retain all RLS, validation, compare-and-swap revisions, recovery export and atomic publication. Do not replace owner content with the seed or run a reseed for v2.
 
-- Do not delete fields the public page no longer reads. Old exports and published snapshots must still validate.
-- Any new field (for example a per-chapter accent or a project's hotbar order) goes through the existing validator in `src/domain` and, if stored server-side, the database validator. That is a protected migration.
-- Visitor play state for "Try a recipe" uses a new localStorage key, `jvd-v2-crafts`, and never touches owner content.
+## Presentation mapping
+
+| Document field | v2 use |
+| --- | --- |
+| settings / highlights | Name, introduction, links and factual highlights |
+| projects / photos | Featured showcase, complete collection and case studies. Existing order controls display; photos[0] is the cover when available |
+| settings.bio / portrait / portraitPosition / journal | About and optional portrait |
+| actualSkills | Actual skills and evidence; never derive from visitor crafts |
+| recipes / startingInventory | Retained and editable; optional demonstration uses existing logic |
+| legacy skills | Retained for import compatibility; not a replacement for actualSkills |
+| characters / experience | Preserve fixed associations; public view can render ordinary readable rows |
+| achievements / certifications | Separate collections; retain parent/x/y and evidence even when shown as lists |
+| contacts / contact settings | Configured links and existing message review |
+| version | Existing version 5; no redesign-only bump |
+
+The preview features the first three projects and leaves every record reachable in a collection index. Production selection is derived from existing order or component configuration; no new featured field is required. Do not persist presentation-only camera paths, lighting, model drafts or scroll progress in the document.
+
+## New models without a migration
+
+New display/lantern/journal scenes are decorative application assets selected by components. They are not recipe outputs, project symbol IDs, media uploads, or owner-uploaded GLBs. Existing validated model IDs remain unchanged. Any later request to make model assignment owner-editable needs a separate schema/validation proposal.
+
+## Compatibility checks
+
+Validate the unchanged v1 seed; preserve import/export round-trips, gallery ordering, IDs, references, sample labels and media resolution. Run unit and database suites when reusing the adapter. Never claim hosted state was verified by local PGlite tests.

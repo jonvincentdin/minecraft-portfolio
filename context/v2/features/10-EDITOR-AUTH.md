@@ -1,10 +1,11 @@
-# V10 — Editor page and email-code sign-in
+# V10 — Editor continuity
 
-Specification: AUTH.md (sign-in) and EDITOR.md (editor). Summary:
+Updated 2026-10-27 (Asia/Singapore). See STORYBOARD.md, MOTION.md and DATA_MODEL.md.
 
-1. The logo links to `/editor` (a separate Vite entry).
-2. Step 1 asks for the Gmail. `signInWithOtp` with `shouldCreateUser: false`; the same neutral message for any address.
-3. Step 2 takes the 6-digit code. `verifyOtp`; then membership/RLS decides editor access.
-4. The editor: the simplified v1 tabs, save, preview and publish, sign out.
+Keep the full v1 editor workflow and database structure. Planned /editor entry is separate from the animated public page. Logo leads there with an accessible editor-sign-in name. The local previs shows an explanatory dialog only.
 
-Acceptance: as listed in AUTH.md → Tests, plus the v1 editor checks still applicable (save conflict, failed upload keeps input, publish atomicity), and no Gmail string in the built public or editor bundles (`grep` the `dist` output).
+Do not remove starting inventory, character associations, tree positions or any unused field from saved documents. Preserve CRUD, galleries, draft/save/preview/publish, import recovery and conflict behavior.
+
+AUTH.md separates the earlier email-code proposal from the current visual work. Existing password access, memberships and RLS stay until a separately approved replacement is verified. Do not install a new auth system or add content tables.
+
+Acceptance for future implementation: existing editor/domain/RLS checks, private media, input preservation, import/export round-trip, correct preview, no secrets in bundles and no unexpected data migration.
