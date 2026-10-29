@@ -1,0 +1,31 @@
+import { chromium } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+const browser = await chromium.launch({channel:'msedge',headless:true});
+const page = await browser.newPage({viewport:{width:1440,height:900},reducedMotion:'reduce'});
+const errors=[]; const responses=[];
+page.on('pageerror', e=>errors.push(e.message));
+page.on('response', r=>{if(r.url().includes('supabase.co'))responses.push({status:r.status(),path:new URL(r.url()).pathname});});
+await page.goto(process.env.CHECK_URL || 'http://127.0.0.1:4178/');
+await page.locator('#loader[data-phase="ready"]').waitFor({timeout:45000});
+await page.locator('#skip-intro').click();
+await page.locator('#loader').waitFor({state:'detached'});
+await mkdir('test-results/deploy-v1',{recursive:true});
+await page.screenshot({path:'test-results/deploy-v1/home-desktop.png',fullPage:true});
+const routes={};
+for(const route of ['home','about','projects','skills','experience','achievements','contact','editor']) {
+ await page.evaluate(r=>location.hash=r,route);
+ await page.waitForTimeout(600);
+ routes[route]=await page.locator('h1').allTextContents();
+ if(!routes[route].length)throw Error('Missing heading: '+route);
+}
+await page.locator('#sign-in-form').waitFor();
+await page.evaluate(()=>location.hash='home');
+await page.setViewportSize({width:390,height:844});
+await page.waitForTimeout(600);
+await page.screenshot({path:'test-results/deploy-v1/home-mobile.png',fullPage:true});
+const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
+const report={routes,errors,responses,mobileOverflow:overflow};
+await writeFile('test-results/deploy-v1/smoke.json',JSON.stringify(report,null,2));
+console.log(JSON.stringify(report));
+await browser.close();
+if(errors.length||overflow||responses.some(r=>r.status>=400))process.exit(1);
