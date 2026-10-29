@@ -77,7 +77,7 @@ export function App() {
  useEffect(()=>{if(!toast)return;const timer=setTimeout(()=>setToast(''),5500);return()=>clearTimeout(timer);},[toast]);
  const shown=preview&&route!=='editor'?preview.content:snapshot?.content;
  return <>{open&&!error&&<Intro key={cycle} ready={ready} progress={progress} title={snapshot?.content.settings.introTitle||'A world built one idea at a time.'} warning={warning} paused={paused} stageHome={stageHome} finish={finish}/>}
- <Shell route={route} paused={paused} togglePause={()=>setPaused(value=>!value)} locked={open&&!error} name={shown?.settings.name}>
+ <Shell route={route} paused={paused} locked={open&&!error} name={shown?.settings.name}>
  {preview&&route!=='editor'&&<p className="foundation-notice preview-banner" role="status">{'Draft preview · '+(source.repository?.kind==='supabase'?'draft':'local')+' revision '+preview.revision+' · not published. '}<a href="#editor">Back to editor</a>{' · '}<button className="text-button" onClick={()=>setPreview(null)}>Exit preview</button></p>}
  {/* Keeps its place from the start (no layout shift) but stays invisible until the entry sequence has finished. */}
  {error?<Notice error>{error}{source.repository&&<>{' '}<button className="text-button" id="retry-content" onClick={retry}>Try again</button></>}</Notice>:snapshot&&shown&&(route==='editor'&&source.repository?<EditorGate repository={source.repository} notify={setToast} paused={paused} onPreview={startPreview} onPublished={published}/>:route==='home'?<HomePage content={shown} scene={scenes.home_landscape} paused={paused} notify={setToast}/>:<PublicRoute route={route} content={shown} scenes={scenes} paused={paused} notify={setToast}/>)}
