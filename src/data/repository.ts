@@ -8,5 +8,7 @@ export function createContentRepository(env: PublicEnvironment) {
  if (config.mode === 'demo') return new LocalContentRepository();
  // Only the publishable key reaches the browser; the signed-in editor's token and RLS decide access.
  const client = createClient<Database>(config.url!, config.publishableKey!, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
- return new SupabaseContentRepository(client, config.url!);
+ const repository = new SupabaseContentRepository(client, config.url!);
+ if (typeof location !== 'undefined') repository.acceptRecoveryLink(location.hash);
+ return repository;
 }

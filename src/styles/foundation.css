@@ -2,6 +2,13 @@
 .foundation-notice{padding:14px 5%;background:#263b2c;color:#eee9d5;font-size:14px}
 .baseline-copy{margin:20px 0;max-width:48ch;color:#acbda8}
 
+/* Keep all nine recipe squares inside their frame, including intrinsic image sizes. */
+.recipe-detail-layout{grid-template-columns:130px minmax(0,1fr)}
+.recipe-detail-layout .recipe-diagram{width:100%;box-sizing:border-box;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));aspect-ratio:1}
+.recipe-diagram>span{min-width:0;min-height:0;overflow:hidden}
+.recipe-diagram img{display:block;max-width:100%;max-height:100%}
+@media(max-width:600px){.recipe-detail-layout{grid-template-columns:90px minmax(0,1fr)}}
+
 /* Accessibility fix over the reference: it removes the search input outline without a replacement. */
 .search:focus-within{outline:3px solid #f1cf7f;outline-offset:3px}
 

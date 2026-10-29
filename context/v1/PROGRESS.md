@@ -241,3 +241,26 @@ The previous fix (the notice fading in after the intro) remains; it addressed a 
 At the owner's request, the "Nothing has been published yet · showing the sample world." banner no longer appears. Visitors still see the sample world while nothing is published, just without the label. Removed the banner from `App.tsx` and its fade-in CSS. The M06 and hosted M06 tests now assert that no notice appears.
 
 **Checks:** `tsc -b`, production build, test:m06 (13 passed). test:m06-hosted was not run because it needs the hosted project.
+
+## V1 production deployment - 2026-10-29 (Asia/Singapore)
+
+- Owner requested full v1 deployment while preserving v2. Used isolated branch `chore/deploy-v1` from fetched `origin/main` at `2e60137`; v2 checkout stays on `feat/v2-portfolio-previs` at `87b4a25`.
+- Published https://minecraft-portfolio-v1.vercel.app to dedicated Vercel project `dream-team-9071/minecraft-portfolio-v1`; deployment `dpl_9ptFMCuDVg4K4iEPkVSmGv4FpRhT` reported READY. No merge or Git auto-deployment configured.
+- Full existing React v1 runtime deployed unchanged, with the existing public Supabase configuration. Added static-only Vercel packaging and corrected the moved seed path in `.gitattributes` after a Windows line-ending integrity failure. No canonical asset/reference edits, migrations, content publication, auth configuration changes or private keys uploaded.
+- Passed production build/typecheck (existing >500 kB chunk warning), all 37 unit tests after fixing the seed checkout line endings, and all 100 original asset hashes.
+- Read-only browser smoke passed locally and on the public production URL: seven public routes, signed-out owner editor, Supabase publications HTTP 200, zero page errors, no horizontal overflow at 390px. Desktop/mobile screenshots and JSON evidence are local under `test-results/deploy-v1/`. Reproducible check: `tests/e2e/deploy-v1.mjs`.
+- Owner-authenticated editing/publication and email redirects were not retested. No destructive hosted tests run. Existing owner content and missing social-link placeholders were preserved.
+
+## V1 owner access and UI refinement - 2026-10-29 (Asia/Singapore)
+
+- Authorized follow-up on branch `fix/v1-owner-access`, based on v1 deployment commit `9ce9560`. V2 checkout and assets remain unchanged.
+- Removed the public Edit world link and Replay intro button. Five top-left JVD activations open email-first owner sign-in. The production owner email was verified by a read-only join of auth.users and portfolio_editors, and kept in ignored public build configuration rather than tracked owner content.
+- Added Forgot password, explicit recovery-token consumption/removal, invalid-link feedback, matching new-password confirmation, enrolled-owner validation and sign-out after reset. Password authentication and RLS remain the security boundary. Applied only the reviewed production site URL and redirect allowlist changes; no migration or content changes.
+- Model viewer toolbars are absent from inventory, skills and experience; existing renderer and drag behavior remain. Recipe cells now use constrained tracks inside a square frame and fit at 1440, 768 and 390px.
+- Passed: build/typecheck (existing bundle-size warning), 37 unit tests, 11 database/RLS tests, 13 emulator browser checks, 100 canonical asset hashes, targeted v1-owner browser checks and diff whitespace check. Existing emulator helper was updated for email-first sign-in and editor reloads without the intro.
+- Recovery browser tests intercept Auth responses and never send email or modify the production password. Actual mailbox delivery is not verified. No pixel-parity claim: toolbar removal and recipe containment deliberately differ from the original reference.
+- Evidence: `context/v1/evidence/v1-owner/`; test reproduction: `node tests/e2e/v1-owner.mjs` with production build preview on 4178 and ignored VITE_OWNER_EMAIL configured. Set CHECK_URL for a live read-only/intercepted-auth run.
+- Deployment completed: `dpl_EBambXPhEwPZH8khwsyE98CedGNP` READY at https://minecraft-portfolio-v1.vercel.app. Targeted owner/layout checks and all-route smoke passed again on production. No real Auth recovery request or password update was sent during these checks.
+- Final deployment `dpl_6FV6AkjRKENiEM2vzf1k19NkD9gs` also removes the remaining public About/Skills editor shortcuts, preserving logo entry. Build and both production browser checks passed again.
+- Follow-up 2026-10-29: removed the remaining top-right motion button at owner request. OS reduced-motion preference still applies. Build/typecheck and diff check passed; live browser confirmed absence, all seven nav links, and no overflow at 1440/390px. Deployed READY as `dpl_89ujDC7bzWbV94YKJSGVT1JtFzR7`; v2 untouched.
+- Follow-up 2026-10-29: changed the existing owner email through the Supabase Auth admin API to the newly requested Gmail. Verified the same user ID, password fingerprint and owner role before/after; no password or membership change. Updated ignored VITE_OWNER_EMAIL, rebuilt and deployed READY as `dpl_3xNLFXFKJFPnq2k7J7wJEJAXf5fr`. Live email-first/recovery-request browser checks passed with simulated Auth responses; no real email sent. V2 remains unchanged.

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { VoxelView, type Scene } from './renderer.js';
 interface Props { scene?:Scene; model:string; paused:boolean; character?:boolean; rotate?:boolean; controls?:boolean; id:string; label:string; containerClass?:string; stage?:boolean }
-export function ModelViewer({scene,model,paused,character=false,rotate=false,controls=true,id,label,containerClass,stage=false}:Props) {
+export function ModelViewer({scene,model,paused,character=false,rotate=false,controls=false,id,label,containerClass,stage=false}:Props) {
  const host=useRef<HTMLDivElement>(null), view=useRef<VoxelView | null>(null);
  const activeScene=useRef<Scene|undefined>(undefined);
  const pause=useRef(paused);pause.current=paused;

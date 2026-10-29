@@ -1,7 +1,32 @@
 # Deployment guide
 
 The portfolio is a static site: Vite builds it into `dist/`, and it talks to Supabase from the browser. There is no
-application server to run. It has not been deployed yet.
+application server to run. V1 is live at https://minecraft-portfolio-v1.vercel.app (2026-10-29, Asia/Singapore).
+
+## V1 production deployment
+
+Dedicated Vercel project: `dream-team-9071/minecraft-portfolio-v1`. Deployment ID:
+`dpl_9ptFMCuDVg4K4iEPkVSmGv4FpRhT`. Source runtime: `2e60137` on `origin/main`.
+V2 remains on `feat/v2-portfolio-previs`; its files were not changed. The production deployment uploads only
+the built static files, with the existing public Supabase configuration compiled into the bundle.
+No Git auto-deployment was configured, so v2 work does not replace this deployment.
+
+From the isolated `chore/deploy-v1` checkout, with the three public settings below in ignored `.env.local`:
+
+```powershell
+npm ci
+npm run build
+node scripts/prepare-vercel.mjs
+vercel link --yes --project minecraft-portfolio-v1 --scope dream-team-9071
+vercel deploy --prebuilt --prod --yes --scope dream-team-9071
+```
+
+Use a fresh checkout/output directory for each deployment. Do not deploy the repository folder as static content.
+Build Output API documentation: https://vercel.com/docs/build-output-api/configuration.
+Production smoke: set `CHECK_URL=https://minecraft-portfolio-v1.vercel.app`, then run
+`node tests/e2e/deploy-v1.mjs`. It only reads public content and checks the signed-out editor.
+Password sign-in remains supported by the existing app; no owner credentials were used during this deployment.
+Email redirect configuration and database policies were not changed.
 
 ## Build
 
@@ -70,3 +95,11 @@ email-based flows.
 - **Content:** before large edits, export the content JSON from the editor. Importing it later restores the draft,
   which you then publish again.
 - **Database:** schema changes need their own data-preserving plan (see `supabase/README.md`).
+
+## Owner entry and recovery update - 2026-10-29
+
+- Click the top-left JVD logo five times (no more than four seconds between clicks) to open the editor. Keyboard activation works too. The normal single-click home link remains. The public Edit world and Replay intro controls are removed.
+- Enter the enrolled owner Gmail, then the password. `VITE_OWNER_EMAIL` is an additional public build-time UI setting, not a secret or authorization boundary. Supabase password authentication and database membership/RLS remain authoritative.
+- Forgot password sends a Supabase recovery email. The link returns to v1, consumes its session tokens, removes them from the address, and asks for a confirmed new password of at least 12 characters. The verified recovery session must belong to the enrolled owner. Then sign in again with the new password.
+- Supabase config diff was reviewed and exactly two properties pushed: `auth.site_url` and `auth.additional_redirect_urls`. Production is now the site URL and an allowed redirect; localhost remains allowed. Eight undeclared remote properties were left unchanged. No migrations or RLS changes.
+- Reset requests and successful/expired reset flows were checked with intercepted Auth responses; no real reset email was sent and the real owner password was not changed. Actual email delivery still depends on Supabase's email service.
