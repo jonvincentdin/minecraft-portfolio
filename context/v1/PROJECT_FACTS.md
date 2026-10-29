@@ -61,3 +61,12 @@ All milestones (M00–M07) are complete. Next: deployment (host to be chosen by 
 1. Owner: sign in at #editor and import or enter real content, then publish.
 2. When deploying: set the VITE_ variables in hosting, then add the production origin to supabase/config.toml and run supabase config push.
 3. Physical touch-device check after deployment.
+
+## V1 production deployment - 2026-10-29 (Asia/Singapore)
+
+- Owner requested full v1 deployment while preserving v2. Used isolated branch `chore/deploy-v1` from fetched `origin/main` at `2e60137`; v2 checkout stays on `feat/v2-portfolio-previs` at `87b4a25`.
+- Published https://minecraft-portfolio-v1.vercel.app to dedicated Vercel project `dream-team-9071/minecraft-portfolio-v1`; deployment `dpl_9ptFMCuDVg4K4iEPkVSmGv4FpRhT` reported READY. No merge or Git auto-deployment configured.
+- Full existing React v1 runtime deployed unchanged, with the existing public Supabase configuration. Added static-only Vercel packaging and corrected the moved seed path in `.gitattributes` after a Windows line-ending integrity failure. No canonical asset/reference edits, migrations, content publication, auth configuration changes or private keys uploaded.
+- Passed production build/typecheck (existing >500 kB chunk warning), all 37 unit tests after fixing the seed checkout line endings, and all 100 original asset hashes.
+- Read-only browser smoke passed locally and on the public production URL: seven public routes, signed-out owner editor, Supabase publications HTTP 200, zero page errors, no horizontal overflow at 390px. Desktop/mobile screenshots and JSON evidence are local under `test-results/deploy-v1/`. Reproducible check: `tests/e2e/deploy-v1.mjs`.
+- Owner-authenticated editing/publication and email redirects were not retested. No destructive hosted tests run. Existing owner content and missing social-link placeholders were preserved.

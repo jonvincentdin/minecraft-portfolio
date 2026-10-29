@@ -23,3 +23,4 @@ public/downloads/
 
 # Supabase CLI link state
 supabase/.temp/
+.vercel/
